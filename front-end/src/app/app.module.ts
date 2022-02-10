@@ -6,13 +6,12 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FooterComponent } from './home-page/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalNavbarComponent } from './dashboard/vertical-navbar/vertical-navbar.component';
-import { ConfigurationComponentComponent } from './dashboard/configuration-component/configuration-component.component';
-import { DummyComponentComponent } from './dashboard/dummy-component/dummy-component.component';
+//import { ConfigurationComponentComponent } from './dashboard/configuration/configuration.component';
 
-const appRoutes:Route[] = [
-  {path:'',component:ConfigurationComponentComponent},
-  {path:'dummy',component:DummyComponentComponent}
-]
+import { ConfigurationComponent } from './dashboard/configuration/configuration.component';
+import { AppRoutingModule } from './app-routing.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,13 +19,13 @@ const appRoutes:Route[] = [
     FooterComponent,
     DashboardComponent,
     VerticalNavbarComponent,
-    ConfigurationComponentComponent,
-    DummyComponentComponent,
+    ConfigurationComponent,
+    
     //DummyComponentComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
