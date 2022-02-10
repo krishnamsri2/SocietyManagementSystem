@@ -11,6 +11,7 @@ import { VerticalNavbarComponent } from './dashboard/vertical-navbar/vertical-na
 import { ConfigurationComponent } from './dashboard/configuration/configuration.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SocietyComponent } from './dashboard/configuration/society/society.component';
+import { UserComponent } from './dashboard/configuration/user/user.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SocietyComponent } from './dashboard/configuration/society/society.comp
     VerticalNavbarComponent,
     ConfigurationComponent,
     SocietyComponent,
+    UserComponent,
     
     //DummyComponentComponent
   ],
