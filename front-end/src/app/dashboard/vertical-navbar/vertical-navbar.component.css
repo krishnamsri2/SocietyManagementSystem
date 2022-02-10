@@ -1,3 +1,8 @@
+a{
+    text-decoration:none;
+    color:#000;
+    font-weight:500;
+}
 .menu-wrapper{
     width:300px;
     background:#f1f1f1;
@@ -38,8 +43,12 @@
     transition: 0.3s all;
     padding: 1rem 2rem;
     font-weight:400;
+    background:#fff;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom:1px solid rgba(0,0,0,0.1); 
+    border-right:1px solid rgba(0,0,0,0.1);
 }
 .links:hover{
     background-color: rgb(42, 6, 42);
