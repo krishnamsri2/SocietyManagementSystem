@@ -6,13 +6,14 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FooterComponent } from './home-page/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalNavbarComponent } from './dashboard/vertical-navbar/vertical-navbar.component';
-//import { ConfigurationComponentComponent } from './dashboard/configuration/configuration.component';
+
 
 import { ConfigurationComponent } from './dashboard/configuration/configuration.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SocietyComponent } from './dashboard/configuration/society/society.component';
-import { UserComponent } from './dashboard/configuration/user/user.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserComponent } from './dashboard/configuration/user/user.component';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     VerticalNavbarComponent,
     ConfigurationComponent,
     SocietyComponent,
-    UserComponent,
+    UserComponent
     
     //DummyComponentComponent
   ],
