@@ -12,6 +12,7 @@ import { ConfigurationComponent } from './dashboard/configuration/configuration.
 import { AppRoutingModule } from './app-routing.module';
 import { SocietyComponent } from './dashboard/configuration/society/society.component';
 import { UserComponent } from './dashboard/configuration/user/user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,6 +30,8 @@ import { UserComponent } from './dashboard/configuration/user/user.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

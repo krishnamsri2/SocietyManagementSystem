@@ -1,125 +1,144 @@
+<form style="margin-top: 15px;" (ngSubmit)="onFormSubmit()" #f="ngForm">
 
-   
-      
-        <!-- <div class="col-12 col-lg-9 col-xl-7">
-          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-            <div class="card-body p-4 p-md-5">
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3> -->
-              <form style="margin-top: 15px;">
-  
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-  
-                    <div class="form-outline">
-                      <input type="text" id="firstName" class="form-control form-control-lg" />
-                      <label class="form-label" for="firstName">First Name</label>
-                    </div>
-  
-                  </div>
-                  <div class="col-md-6 mb-4">
-  
-                    <div class="form-outline">
-                      <input type="text" id="lastName" class="form-control form-control-lg" />
-                      <label class="form-label" for="lastName">Last Name</label>
-                    </div>
-  
-                  </div>
-                </div>
-  
-                <div class="row">
-                  <div class="col-md-6 mb-4 d-flex align-items-center">
-  
-                    <div class="form-outline datepicker w-100">
-                      <input
-                        type="text"
-                        class="form-control form-control-lg"
-                        id="birthdayDate"
-                      />
-                      <label for="birthdayDate" class="form-label">Birthday</label>
-                    </div>
-  
-                  </div>
-                  <div class="col-md-6 mb-4">
-  
-                    <h6 class="mb-2 pb-1">Gender: </h6>
-  
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="femaleGender"
-                        value="option1"
-                        checked
-                      />
-                      <label class="form-check-label" for="femaleGender">Female</label>
-                    </div>
-  
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="maleGender"
-                        value="option2"
-                      />
-                      <label class="form-check-label" for="maleGender">Male</label>
-                    </div>
-  
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="otherGender"
-                        value="option3"
-                      />
-                      <label class="form-check-label" for="otherGender">Other</label>
-                    </div>
-  
-                  </div>
-                </div>
-  
-                <div class="row">
-                  <div class="col-md-6 mb-4 pb-2">
-  
-                    <div class="form-outline">
-                      <input type="email" id="emailAddress" class="form-control form-control-lg" />
-                      <label class="form-label" for="emailAddress">Email</label>
-                    </div>
-  
-                  </div>
-                  <div class="col-md-6 mb-4 pb-2">
-  
-                    <div class="form-outline">
-                      <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
-                      <label class="form-label" for="phoneNumber">Phone Number</label>
-                    </div>
-  
-                  </div>
-                </div>
-  
-                <div class="row">
-                  <div class="col-12">
-  
-                    <select class="select form-control-lg">
-                      <option value="1" disabled>Choose option</option>
-                      <option value="2">Subject 1</option>
-                      <option value="3">Subject 2</option>
-                      <option value="4">Subject 3</option>
-                    </select>
-                    <label class="form-label select-label">Choose option</label>
-  
-                  </div>
-                </div>
-  
-                <div class="mt-4 pt-2">
-                  <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
-                </div>
-  
-              </form>
-            <!-- </div>
-          </div>
-        </div> -->
-      
-  
+  <div class="row">
+    <div class="col-md-6 mb-4">
+
+      <div class="form-outline">
+        <label class="form-label" for="firstName">First Name</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          class="form-control"
+          ngModel
+          name="firstName"
+          required/>
+      </div>
+
+    </div>
+    <div class="col-md-6 mb-4">
+      <label class="form-label" for="lastName">Last Name</label>
+      <div class="form-outline">
+        <input 
+          type="text" 
+          id="lastName" 
+          class="form-control"
+          name="lastName"
+          ngModel 
+        />
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+
+      <div class="form-outline">
+        <label for="tower_number" class="form-label">Tower Number</label>
+        <input 
+          type="text" 
+          id="tower_number" 
+          class="form-control"
+          ngModel
+          name="towerNumber"
+          
+          #towerNumber="ngModel">
+          <span class="help-block" *ngIf="!towerNumber.valid && towerNumber.touched">Please enter the tower number</span>
+      </div>
+
+    </div>
+    <div class="col-md-6 mb-4">
+
+      <div class="form-outline">
+        <label for="flat_number" class="form-label">Flat Number</label>
+        <input 
+          type="text" 
+          id="flat_number" 
+          class="form-control" 
+          ngModel
+          name="flatNumber"
+          
+          pattern="^(0|\+?[1-9]\d*)$"
+          #flatNumber="ngModel">
+          <span class="help-block" *ngIf="!flatNumber.valid && flatNumber.touched">Please Enter a valid flat number</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <h6 class="mb-2 pb-1">Gender: </h6>
+
+      <div class="form-check form-check-inline">
+        <label class="form-check-label" for="femaleGender">Female</label>
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender" value="option1"
+          checked />
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender" value="option2" />
+        <label class="form-check-label" for="maleGender">Male</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender" value="option3" />
+        <label class="form-check-label" for="otherGender">Other</label>
+      </div> -->
+
+  <div class="row">
+    <div class="col-md-6 mb-4 pb-2">
+
+      <div class="form-outline">
+        <label class="form-label" for="emailAddress">Email</label>
+        <input 
+          type="email" 
+          id="emailAddress" 
+          class="form-control" 
+          
+          name="email"
+          ngModel
+          email
+          #email="ngModel"/>
+          <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email address</span>
+      </div>
+
+    </div>
+    <div class="col-md-6 mb-4 pb-2">
+
+      <div class="form-outline">
+        <label class="form-label" for="phoneNumber">Phone Number</label>
+        <input 
+        type="tel" 
+        id="phoneNumber" 
+        class="form-control" 
+        required
+        ngModel
+        name="phoneNumber"
+        pattern="^(0|\+?[1-9]\d*)$"
+        #phoneNumber="ngModel"/>
+        <span class="help-block" *ngIf="!phoneNumber.valid && phoneNumber.touched">Please enter a valid phone number</span>
+      </div>
+
+    </div>
+
+    <div class="mt-4 pt-2">
+      <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+    </div>
+
+  </div>
+
+  <!-- <div class="row">
+
+    <div class="col-12">
+
+      <select class="select">
+        <option value="1" disabled>Choose option</option>
+        <option value="2">Subject 1</option>
+        <option value="3">Subject 2</option>
+        <option value="4">Subject 3</option>
+      </select>
+      <label class="form-label select-label">Choose option</label>
+
+    </div>
+  </div> -->
+
+</form>
