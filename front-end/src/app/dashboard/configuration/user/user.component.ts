@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
     this.user.flatNumber=this.signUpForm.value.flatNumber;
     this.user.phoneNumber=this.signUpForm.value.phoneNumber;
     console.log(this.user);
-    
+    this.signUpForm.reset();
   }
 
 }
