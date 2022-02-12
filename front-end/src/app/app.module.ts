@@ -11,8 +11,7 @@ import { VerticalNavbarComponent } from './dashboard/vertical-navbar/vertical-na
 import { ConfigurationComponent } from './dashboard/configuration/configuration.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SocietyComponent } from './dashboard/configuration/society/society.component';
-import { UserComponent } from './dashboard/configuration/user/user.component';
-import { SecurityComponent } from './dashboard/configuration/security/security.component';
+
 import { TowerComponent } from './dashboard/configuration/society/tower/tower.component';
 import { TowerListComponent } from './dashboard/configuration/society/tower-list/tower-list.component';
 import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat.component';
@@ -27,8 +26,6 @@ import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat
     VerticalNavbarComponent,
     ConfigurationComponent,
     SocietyComponent,
-    UserComponent,
-    SecurityComponent,
     TowerComponent,
     TowerListComponent,
     FlatComponent,
