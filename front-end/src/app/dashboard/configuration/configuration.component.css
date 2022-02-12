@@ -1,3 +1,17 @@
-.container{
+.configuration{
+    margin-top:16px;
+}
+.container {
     margin-left: 10px;
+}
+.container h2{
+    color:rgb(36, 16, 54);
+    font-weight:600;
+    font-family: 'Lucida Sans', 
+    'Lucida Sans Regular', 
+    'Lucida Grande', 
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+li.active>a{
+    color:red !important;
 }

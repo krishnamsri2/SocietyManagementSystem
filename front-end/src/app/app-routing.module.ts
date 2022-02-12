@@ -2,6 +2,9 @@ import { NgModule } from "@angular/core";
 import {Route, RouterModule} from "@angular/router";
 import { ConfigurationComponent } from "./dashboard/configuration/configuration.component";
 import { SocietyComponent } from "./dashboard/configuration/society/society.component";
+import { TowerListComponent } from "./dashboard/configuration/society/tower-list/tower-list.component";
+import { FlatComponent } from "./dashboard/configuration/society/tower/flat/flat.component";
+import { TowerComponent } from "./dashboard/configuration/society/tower/tower.component";
 import { UserComponent } from "./dashboard/configuration/user/user.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { HomePageComponent } from "./home-page/home-page.component";
@@ -14,8 +17,14 @@ const appRoutes:Route[] = [
         {
           path:'configuration',component:ConfigurationComponent,
           children:[
-            { path:'society',component:SocietyComponent },
-            { path: 'user', component: UserComponent}
+            { path: 'user', component: UserComponent},
+            {path:'society',component:SocietyComponent,children:[
+              {path:'towerlist',component:TowerListComponent},
+              {path:'towerlist/:id',component:TowerComponent,children:[
+                {path:'flat/:id',component:FlatComponent}
+              ]}
+            ]},
+            {path:'user',component:UserComponent},
           ]
         }
       ]

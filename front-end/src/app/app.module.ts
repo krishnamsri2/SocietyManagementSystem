@@ -14,6 +14,9 @@ import { SocietyComponent } from './dashboard/configuration/society/society.comp
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './dashboard/configuration/user/user.component';
+import { TowerComponent } from './dashboard/configuration/society/tower/tower.component';
+import { TowerListComponent } from './dashboard/configuration/society/tower-list/tower-list.component';
+import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { UserComponent } from './dashboard/configuration/user/user.component';
     VerticalNavbarComponent,
     ConfigurationComponent,
     SocietyComponent,
-    UserComponent
+    UserComponent,
+    TowerComponent,
+    TowerListComponent,
+    FlatComponent,
     
     //DummyComponentComponent
   ],
