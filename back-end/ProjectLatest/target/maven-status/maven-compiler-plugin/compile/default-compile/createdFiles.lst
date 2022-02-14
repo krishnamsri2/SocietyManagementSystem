@@ -1,0 +1,17 @@
+com/example/ProjectLatest/entity/MenuSecurity.class
+com/example/ProjectLatest/entity/Complaint.class
+com/example/ProjectLatest/entity/Tower.class
+com/example/ProjectLatest/entity/User.class
+com/example/ProjectLatest/entity/Menu.class
+com/example/ProjectLatest/entity/Attendance.class
+com/example/ProjectLatest/entity/FlatResidents.class
+com/example/ProjectLatest/entity/Role.class
+com/example/ProjectLatest/entity/Society.class
+com/example/ProjectLatest/entity/RoleType.class
+com/example/ProjectLatest/entity/Notice.class
+com/example/ProjectLatest/ProjectLatestApplication.class
+com/example/ProjectLatest/entity/ComplaintHistory.class
+com/example/ProjectLatest/entity/Announcement.class
+com/example/ProjectLatest/entity/Flat.class
+com/example/ProjectLatest/entity/Bill.class
+com/example/ProjectLatest/entity/UserDetails.class
