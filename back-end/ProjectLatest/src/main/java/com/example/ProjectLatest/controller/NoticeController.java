@@ -21,11 +21,6 @@ public class NoticeController {
         return service.saveNotice(notice.getRequestObject());
     }
 
-    @PostMapping("/addNotices")
-    public List<Notice> addNotices(@RequestBody List<Notice> notices){
-        return service.saveNotices(notices);
-    }
-
     @GetMapping("/notices")
     public List<Notice> findAllNotices(){
         return service.getNotices();
@@ -36,14 +31,9 @@ public class NoticeController {
         return service.getNoticeById(id);
     }
 
-    @GetMapping("/notice/{userId}")
-    public Notice findNoticeByUserId(@PathVariable long id) {
-        return service.getNoticeByUserId(id);
-    }
-
-    @PutMapping("/update")
-    public Notice updateNotice(@RequestBody Notice notice){
-        return service.updateNotice(notice);
+    @PutMapping("/update/{id}")
+    public Notice updateNotice(@PathVariable long id,@RequestBody RestRequest<NoticeTO> notice){
+        return service.updateNotice(id,notice.getRequestObject());
     }
 
     @DeleteMapping("/delete/{id}")

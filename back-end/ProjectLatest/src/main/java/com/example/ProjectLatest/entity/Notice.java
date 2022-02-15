@@ -6,15 +6,21 @@ import java.util.Date;
 
 
 @Entity
+@Table(name = "Notice")
 public class Notice {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "noticeId")
 	private long noticeId;
-	
+
+	@Column(name = "noticeDetail")
 	private String noticeDetail;
+	@Column(name = "userId")
 	private long userId;
+	@Column(name = "createdBy")
 	private long createdBy;
+	@Column(name = "modifyBy")
 	private long modifyBy;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -26,8 +32,9 @@ public class Notice {
     @Column(name = "UpdatedDate", nullable = false)
 	private Date updatedDate;
 	
-	
+	@Column(name = "isDeleted")
 	private boolean isDeleted;
+	@Column(name = "isActive")
 	private boolean isActive;
 
 	public Notice() {

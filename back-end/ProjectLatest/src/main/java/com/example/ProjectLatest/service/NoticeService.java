@@ -14,16 +14,15 @@ public class NoticeService {
     private NoticeRepository repository;
     //POST
     public Notice saveNotice(NoticeTO notice){
-        new Notice(notice.getNoticeDetail());
-        return repository.save(notice);
-    }
 
-    public List<Notice> saveNotices(List<Notice> notices){
-        return repository.saveAll(notices);
-    }
+            Notice tempNotice = new Notice(notice.getNoticeDetail(), 112L, notice.getUserId());
+            return repository.save(tempNotice);
 
-    public Notice updateNotice(Notice notice){
-        Notice existingNotice=repository.findById(notice.getNoticeId()).orElse(null);
+
+    }
+   //PUT
+    public Notice updateNotice(long id,NoticeTO notice){
+        Notice existingNotice=repository.findById(id).orElse(null);
         existingNotice.setNoticeDetail(notice.getNoticeDetail());
         existingNotice.setUserId(notice.getUserId());
 
@@ -37,10 +36,6 @@ public class NoticeService {
 
     public Notice getNoticeById(long id){
         return repository.findById(id).orElse(null);
-    }
-
-    public Notice getNoticeByUserId(long userId){
-        return repository.findByUserId(userId);
     }
 
     //DELETE
