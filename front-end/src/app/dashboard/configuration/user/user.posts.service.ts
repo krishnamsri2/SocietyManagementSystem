@@ -15,6 +15,7 @@ export class UserPostServices{
         email: string,
         towerNumber: string,
         flatNumber: number,
+        roleType:string,
         phoneNumber: number
     }){
         this.http.post<any>('https://ng-society-management-default-rtdb.firebaseio.com/users.json',newUser).

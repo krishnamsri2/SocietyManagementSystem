@@ -29,6 +29,7 @@ export class NewUserComponent implements OnInit,OnDestroy {
     firstName:'',
     lastName:'',
     email:'',
+    roleType : '',
     towerNumber:'',
     flatNumber: '',
     phoneNumber:''
@@ -41,6 +42,7 @@ export class NewUserComponent implements OnInit,OnDestroy {
     this.user.towerNumber=this.signUpForm.value.towerNumber;
     this.user.flatNumber=this.signUpForm.value.flatNumber;
     this.user.phoneNumber=this.signUpForm.value.phoneNumber;
+    this.user.roleType = this.signUpForm.value.roleType;
     console.log(this.user);
     this.userOperations.addUsers(this.signUpForm.value);
     this.signUpForm.reset();

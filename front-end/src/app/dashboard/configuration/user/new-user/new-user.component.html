@@ -113,14 +113,28 @@
           ngModel
           name="phoneNumber"
           pattern="^(0|\+?[1-9]\d*)$"
-          #phoneNumber="ngModel"/>
+          #phoneNumber="ngModel"
+          minlength="10"
+          maxlength="10"/>
           <span class="help-block" *ngIf="!phoneNumber.valid && phoneNumber.touched">Please enter a valid phone number</span>
         </div>
   
       </div>
+
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="roleType">Role Type</label>
+        <input 
+          type="text" 
+          class = "form-control" 
+          id="roleType" 
+          name="roleType" 
+          ngModel 
+          required 
+          placeholder="WORKER OR RESIDENT">
+      </div>
   
       <div class="mt-4 pt-2">
-        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="!f.valid">Submit</button>
       </div>
   
     </div>
