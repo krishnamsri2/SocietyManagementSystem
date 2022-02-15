@@ -17,6 +17,13 @@ import { UserComponent } from './dashboard/configuration/user/user.component';
 import { TowerComponent } from './dashboard/configuration/society/tower/tower.component';
 import { TowerListComponent } from './dashboard/configuration/society/tower-list/tower-list.component';
 import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './modals/modal/modal.component';
+import { AddSocietyComponent } from './modals/societymodal/add-society/add-society.component';
+import { AddTowerComponent } from './modals/towermodals/add-tower/add-tower.component';
+import { FlatmodalsComponent } from './modals/flatmodals/flatmodals.component';
+
+
 
 
 @NgModule({
@@ -32,6 +39,10 @@ import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat
     TowerComponent,
     TowerListComponent,
     FlatComponent,
+    ModalComponent,
+    AddSocietyComponent,
+    AddTowerComponent,
+    FlatmodalsComponent,
     
     //DummyComponentComponent
   ],
@@ -39,7 +50,8 @@ import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
