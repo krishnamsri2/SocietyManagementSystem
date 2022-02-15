@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,12 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  onClick(){
-    this.router.navigate(['dashboard']);
-  }
+  
+  
+
   constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
+
+  
+
+  onClick(){
+    this.router.navigate(['dashboard']);
+  }
+
 
 }
