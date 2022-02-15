@@ -1,38 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { UserModel } from 'src/app/shared/user.model';
+import { UserService } from 'src/app/user.service';
+import { UserPostServices } from './user.posts.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit,OnDestroy {
 
-  @ViewChild('f') signUpForm : NgForm;
+  users : UserModel[];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  userSubscription : Subscription;
+  
+  constructor(public activeRoute : ActivatedRoute,private userService : UserService, private userPostService : UserPostServices){
   }
 
-  user = {
-    firstName:'',
-    lastName:'',
-    email:'',
-    towerNumber:'',
-    flatNumber: '',
-    phoneNumber:''
-  };
+  ngOnInit(){
+    this.userSubscription = this.userPostService.fetchUsers().subscribe((userData)=>{
+      this.users=userData;
+      this.userService.setUsers(this.users);
+      //console.log(this.users);
+    });
+  }
 
-  onFormSubmit(){
-    this.user.firstName=this.signUpForm.value.firstName;
-    this.user.lastName=this.signUpForm.value.lastName;
-    this.user.email=this.signUpForm.value.email;
-    this.user.towerNumber=this.signUpForm.value.towerNumber;
-    this.user.flatNumber=this.signUpForm.value.flatNumber;
-    this.user.phoneNumber=this.signUpForm.value.phoneNumber;
-    console.log(this.user);
-    this.signUpForm.reset();
+  ngOnDestroy(){
+    this.userSubscription.unsubscribe();
   }
 
 }

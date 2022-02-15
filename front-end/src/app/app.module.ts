@@ -17,6 +17,10 @@ import { UserComponent } from './dashboard/configuration/user/user.component';
 import { TowerComponent } from './dashboard/configuration/society/tower/tower.component';
 import { TowerListComponent } from './dashboard/configuration/society/tower-list/tower-list.component';
 import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat.component';
+import { NewUserComponent } from './dashboard/configuration/user/new-user/new-user.component';
+import { UserService } from './user.service';
+import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -32,6 +36,7 @@ import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat
     TowerComponent,
     TowerListComponent,
     FlatComponent,
+    NewUserComponent
     
     //DummyComponentComponent
   ],
@@ -39,9 +44,10 @@ import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
