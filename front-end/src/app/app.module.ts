@@ -20,6 +20,12 @@ import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat
 import { NewUserComponent } from './dashboard/configuration/user/new-user/new-user.component';
 import { UserService } from './user.service';
 import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './modals/modal/modal.component';
+import { AddSocietyComponent } from './modals/societymodal/add-society/add-society.component';
+import { AddTowerComponent } from './modals/towermodals/add-tower/add-tower.component';
+import { FlatmodalsComponent } from './modals/flatmodals/flatmodals.component';
+
 
 
 
@@ -36,7 +42,11 @@ import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
     TowerComponent,
     TowerListComponent,
     FlatComponent,
-    NewUserComponent
+    NewUserComponent,
+    ModalComponent,
+    AddSocietyComponent,
+    AddTowerComponent,
+    FlatmodalsComponent,
     
     //DummyComponentComponent
   ],
@@ -45,7 +55,8 @@ import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

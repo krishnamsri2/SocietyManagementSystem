@@ -14,6 +14,10 @@
         <p class="card-text">Small Description of Society</p>
         <a [routerLink]="['towerlist']" class="card-link">Enter</a>
       </div>
-    </div>
+  </div>
+   <div class="btn-wrapper" *ngIf="route.children.length === 0">
+       <app-add-society></app-add-society>
+
+   </div> 
     <router-outlet ></router-outlet>
 </div>
