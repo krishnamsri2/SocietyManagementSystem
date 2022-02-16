@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/shared/user.model';
-import { UserService } from 'src/app/user.service';
+import { UserService } from 'src/app/service/user.service';
 import { UserPostServices } from './user.posts.service';
 
 @Component({

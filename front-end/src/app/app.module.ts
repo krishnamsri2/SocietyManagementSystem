@@ -18,7 +18,7 @@ import { TowerComponent } from './dashboard/configuration/society/tower/tower.co
 import { TowerListComponent } from './dashboard/configuration/society/tower-list/tower-list.component';
 import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat.component';
 import { NewUserComponent } from './dashboard/configuration/user/new-user/new-user.component';
-import { UserService } from './user.service';
+import { UserService } from './service/user.service';
 import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modals/modal/modal.component';
