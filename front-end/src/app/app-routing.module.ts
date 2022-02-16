@@ -1,6 +1,10 @@
 import { NgModule } from "@angular/core";
 import {Route, RouterModule} from "@angular/router";
 import { ConfigurationComponent } from "./dashboard/configuration/configuration.component";
+import { MenuSecurityComponent } from "./dashboard/configuration/menu-security/menu-security.component";
+import { MenuComponent } from "./dashboard/configuration/menu/menu.component";
+import { RoleComponent } from "./dashboard/configuration/role/role.component";
+
 import { SocietyComponent } from "./dashboard/configuration/society/society.component";
 import { TowerListComponent } from "./dashboard/configuration/society/tower-list/tower-list.component";
 import { FlatComponent } from "./dashboard/configuration/society/tower/flat/flat.component";
@@ -18,16 +22,20 @@ const appRoutes:Route[] = [
         {
           path:'configuration',component:ConfigurationComponent,
           children:[
-            { path: 'user', component: UserComponent},
+            { path: 'user', component: UserComponent,children : [
+              { path : 'new_user', component : NewUserComponent}
+            ]},
+
             {path:'society',component:SocietyComponent,children:[
               {path:'towerlist',component:TowerListComponent},
               {path:'towerlist/:id',component:TowerComponent,children:[
                 {path:'flat/:id',component:FlatComponent}
               ]}
             ]},
-            {path:'user',component:UserComponent, children : [
-              { path : 'new_user', component : NewUserComponent}
-            ]},
+            
+            { path: 'role', component:RoleComponent },
+            { path: 'menu', component: MenuComponent},
+            { path: 'menu_security', component: MenuSecurityComponent}
           ]
         }
       ]
