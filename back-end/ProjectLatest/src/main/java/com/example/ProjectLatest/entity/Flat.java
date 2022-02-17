@@ -11,34 +11,41 @@ public class Flat {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long flatid;
-	private String flatno;
+	@Column(name="flatId")
+	private long flatId;
+	@Column(name = "flatNo")
+	private String flatNo;
+	@Column(name="status")
 	private boolean status;
 	private int number_of_occupants;
-	private long createdby;
-	private long modifyby;
+	@Column(name = "createdBy")
+	private long createdBy;
+	@Column(name="modifyBy")
+	private long modifyBy;
+	@Column(name="isDeleted")
 	private boolean isDeleted;
+	@Column(name="isActive")
 	private boolean isActive;
 	
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdDate", nullable = false)
-    private Date created;
+    private Date createdDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updatedDate", nullable = false)
-    private Date updated;
+    private Date updatedDate;
     
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne
 	@JoinColumn(name="tower_id")
 	private Tower tow2;
 	
-	@OneToMany(mappedBy = "flat", cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
+	@OneToMany(mappedBy = "flat")
 	private Set<Bill> bills = new HashSet<Bill>();
 	
-	@OneToMany(mappedBy = "flat1", cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
+	@OneToMany(mappedBy = "flat1")
 	private Set<Complaint> complaints = new HashSet<Complaint>();
 	
-	@OneToMany(mappedBy = "flat", cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
+	@OneToMany(mappedBy = "flat" )
 	private Set<FlatResidents> residents = new HashSet<FlatResidents>();
 	
 	
@@ -48,47 +55,47 @@ public class Flat {
 	}
 	// constructor including all
 
-	public long getFlatid() {
-		return flatid;
+	public long getFlatId() {
+		return flatId;
 	}
-	public Flat(String flatno, boolean status, int number_of_occupants, long createdby,
+	public Flat(String flatNo, boolean status, int number_of_occupants, long createdBy,
 			boolean isDeleted, boolean isActive, Tower tow2) {
 		super();
-		this.flatno = flatno;
+		this.flatNo = flatNo;
 		this.status = status;
 		this.number_of_occupants = number_of_occupants;
-		this.createdby = createdby;
-		this.modifyby = createdby;
+		this.createdBy = createdBy;
+		this.modifyBy = createdBy;
 		this.isDeleted = isDeleted;
 		this.isActive = isActive;
-		this.created=new Date();
-		this.updated=new Date();
+		this.createdDate=new Date();
+		this.updatedDate=new Date();
 		this.tow2 = tow2;
 	}
 	
 	public Date getCreated() {
-		return created;
+		return createdDate;
 	}
 
 
-	public void setFlatid(long flatid) {
-		this.flatid = flatid;
+	public void setFlatId(long flatId) {
+		this.flatId = flatId;
 	}
 
 	public Date getUpdated() {
-		return updated;
+		return updatedDate;
 	}
 
 	public void setUpdated() {
 		
-		this.updated = new Date();
+		this.updatedDate = new Date();
 	}
-	public String getFlatno() {
-		return flatno;
+	public String getFlatNo() {
+		return flatNo;
 	}
-	public void setFlatno(String flatno) {
+	public void setFlatNo(String flatNo) {
 		setUpdated();
-		this.flatno = flatno;
+		this.flatNo = flatNo;
 	}
 	public boolean isStatus() {
 		return status;
@@ -104,16 +111,16 @@ public class Flat {
 		setUpdated();
 		this.number_of_occupants = number_of_occupants;
 	}
-	public long getCreatedby() {
-		return createdby;
+	public long getCreatedBy() {
+		return createdBy;
 	}
 
-	public long getModifyby() {
-		return modifyby;
+	public long getModifyBy() {
+		return modifyBy;
 	}
-	public void setModifyby(long modifyby) {
+	public void setModifyBy(long modifyBy) {
 		setUpdated();
-		this.modifyby = modifyby;
+		this.modifyBy = modifyBy;
 	}
 	public boolean isDeleted() {
 		return isDeleted;
