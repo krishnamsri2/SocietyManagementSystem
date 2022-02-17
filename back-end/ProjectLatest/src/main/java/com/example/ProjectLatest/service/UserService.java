@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -58,7 +59,10 @@ public class UserService {
     }
 
     public void updateAttendance(long id) {
-        Attendance tempAtten = attendanceRepository.findById(id).orElse(null);
+
+        Date date = new Date();
+
+        Attendance tempAtten = attendanceRepository.findByUserDetailId(id,date.toString().substring(0,10));
         tempAtten.setPunchOut();
         attendanceRepository.save(tempAtten);
     }
@@ -77,7 +81,7 @@ public class UserService {
         tempAttendances.addAll(tempUsers.getSetAttendance());
 
         List<AttendanceResponse> responses = tempAttendances.stream()
-                .map(Attendance -> new AttendanceResponse(Attendance.getAttendId(),Attendance.getPunchIn(),Attendance.getPunchOut()))
+                .map(Attendance -> new AttendanceResponse(Attendance.getAttendId(),Attendance.getCreateDate(),Attendance.getUpdateDate()))
                 .collect(Collectors.toList());
 
 
