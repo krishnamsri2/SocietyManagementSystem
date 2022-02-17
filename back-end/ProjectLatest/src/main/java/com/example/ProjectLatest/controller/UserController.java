@@ -1,8 +1,5 @@
 package com.example.ProjectLatest.controller;
 
-import com.example.ProjectLatest.entity.Attendance;
-import com.example.ProjectLatest.entity.User;
-import com.example.ProjectLatest.entity.UserDetails;
 import com.example.ProjectLatest.response.AttendanceResponse;
 import com.example.ProjectLatest.response.UserDetailsResponse;
 import com.example.ProjectLatest.service.UserService;
@@ -18,15 +15,15 @@ public class UserController {
 
     @Autowired
     private UserService service;
-    // Important to implement
+
     @PostMapping("/users/addUser")
-    public void addUser(@RequestBody RestRequest<UserTO> user){
-         service.saveUser(user.getRequestObject(),user.getToken());
+    public String addUser(@RequestBody RestRequest<UserTO> user){
+         return service.saveUser(user.getRequestObject(),user.getToken());
     }
 
     @PostMapping("/users/{id}/addAttendance")
-    public void addAttendance(@PathVariable long id){
-        service.saveAttendance(id);
+    public String addAttendance(@PathVariable long id){
+        return service.saveAttendance(id);
     }
 
     @GetMapping("/users/{id}")
@@ -40,14 +37,14 @@ public class UserController {
     }
 
     @PutMapping("/users/update/{id}")
-    public void updateUser(@PathVariable long id, @RequestBody RestRequest<UserTO> user){
-         service.updateUser(id,user.getRequestObject(),user.getToken());
-         service.getUserById(id);
+    public String updateUser(@PathVariable long id, @RequestBody RestRequest<UserTO> user){
+         return service.updateUser(id,user.getRequestObject(),user.getToken());
+
     }
 
     @PutMapping("/users/punchOut/{id}")
-    public void updateAttendance(@PathVariable long id){
-        service.updateAttendance(id);
+    public String updateAttendance(@PathVariable long id){
+        return service.updateAttendance(id);
     }
 
 

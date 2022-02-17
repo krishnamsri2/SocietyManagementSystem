@@ -30,84 +30,158 @@ public class UserService {
 
 
     //POST
-    public void saveUser(UserTO user, Token token){
-        User tempUser = new User(user.getPassword(),token.getUserId());
-        repoUser.save(tempUser);
-        UserDetails tempUd = new UserDetails(user.getFirstName(),user.getLastName(),
-                user.getPhoneNumber(),user.getEmailId(),token.getUserId(),tempUser);
-         repository.save(tempUd);
+    public String saveUser(UserTO user, Token token){
+        try{
+            User tempUser = new User(user.getPassword(),token.getUserId());
+            repoUser.save(tempUser);
+            UserDetails tempUd = new UserDetails(user.getFirstName(),user.getLastName(),
+                    user.getPhoneNumber(),user.getEmailId(),token.getUserId(),tempUser);
+            repository.save(tempUd);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return "New User is Added!";
+        }
+
     }
 
-    public void saveAttendance(long id) {
-        UserDetails existingUser=repository.findById(id).orElse(null);
-        Attendance tempAtten = new Attendance(existingUser);
-        attendanceRepository.save(tempAtten);
+    public String saveAttendance(long id) {
+        String acknow = null;
+        try {
+            UserDetails existingUser = repository.findById(id).orElse(null);
+            if(existingUser == null)
+                acknow =  "No User Found";
+            else {
+                Attendance tempAtten = new Attendance(existingUser);
+                attendanceRepository.save(tempAtten);
+                acknow =  "User Punched In";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return acknow;
+        }
     }
 
 
     //PUT
-    public void updateUser(long id,UserTO user,Token token){
-        UserDetails existingUser=repository.findById(id).orElse(null);
-        existingUser.setFirstName(user.getFirstName(), token.getUserId());
-        existingUser.setLastName(user.getLastName(), token.getUserId());
-        existingUser.setEmailId(user.getEmailId(), token.getUserId());
-        existingUser.setPhoneNumber(user.getPhoneNumber(), token.getUserId());
-        existingUser.getUser().setPassword(user.getPassword(), token.getUserId());
+    public String updateUser(long id,UserTO user,Token token){
+        String acknow = null;
+        try {
+            UserDetails existingUser = repository.findById(id).orElse(null);
 
-         repository.save(existingUser);
+            if(existingUser == null)
+                acknow =  "No User Found";
+            else {
+                existingUser.setFirstName(user.getFirstName(), token.getUserId());
+                existingUser.setLastName(user.getLastName(), token.getUserId());
+                existingUser.setEmailId(user.getEmailId(), token.getUserId());
+                existingUser.setPhoneNumber(user.getPhoneNumber(), token.getUserId());
+                existingUser.getUser().setPassword(user.getPassword(), token.getUserId());
+                repository.save(existingUser);
+
+                acknow = "User "+ id+" is Updated";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return acknow;
+        }
+
+
 
     }
 
-    public void updateAttendance(long id) {
-
-        Date date = new Date();
-
-        Attendance tempAtten = attendanceRepository.findByUserDetailId(id,date.toString().substring(0,10));
-        tempAtten.setPunchOut();
-        attendanceRepository.save(tempAtten);
+    public String updateAttendance(long userId) {
+        String acknow = null;
+        try {
+            Date date = new Date();
+            Attendance tempAtten = attendanceRepository.findByUserDetailId(userId, date.toString().substring(0, 10));
+            if(tempAtten == null)
+                acknow =  "No User Found";
+            else {
+                tempAtten.setPunchOut();
+                attendanceRepository.save(tempAtten);
+                acknow = "User "+ userId+" is Punched Out";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return acknow;
+        }
     }
 
 
     //GET
     public UserDetailsResponse getUserById(long id){
-        UserDetails tempUsers  = repository.findById(id).orElse(null);
-        UserDetailsResponse copy = new UserDetailsResponse(tempUsers.getFirstName(),tempUsers.getLastName(),tempUsers.getPhoneNumber(), tempUsers.getEmailId(),tempUsers.getUser().getPassword());
-        return copy;
+        UserDetailsResponse copy = null;
+
+        try {
+             UserDetails tempUsers = repository.findById(id).orElse(null);
+             if(tempUsers != null)
+             copy = new UserDetailsResponse(tempUsers.getFirstName(), tempUsers.getLastName(), tempUsers.getPhoneNumber(), tempUsers.getEmailId(), tempUsers.getUser().getPassword());
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return copy;
+        }
     }
 
     public List<AttendanceResponse> getUserAttendances(long id) {
-        UserDetails tempUsers  = repository.findById(id).orElse(null);
-        List<Attendance> tempAttendances = new ArrayList<Attendance>();
-        tempAttendances.addAll(tempUsers.getSetAttendance());
+        List<AttendanceResponse> responses = null;
+        try {
+            UserDetails tempUsers = repository.findById(id).orElse(null);
+            if(tempUsers != null) {
+                List<Attendance> tempAttendances = new ArrayList<Attendance>();
+                tempAttendances.addAll(tempUsers.getSetAttendance());
 
-        List<AttendanceResponse> responses = tempAttendances.stream()
-                .map(Attendance -> new AttendanceResponse(Attendance.getAttendId(),Attendance.getCreateDate(),Attendance.getUpdateDate()))
-                .collect(Collectors.toList());
+                responses = tempAttendances.stream()
+                        .map(Attendance -> new AttendanceResponse(Attendance.getAttendId(), Attendance.getCreateDate(), Attendance.getUpdateDate()))
+                        .collect(Collectors.toList());
 
+            }
 
-        return responses;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return responses;
+        }
+
     }
 
     //DELETE
     public String deleteUser(long id){
-        UserDetails tempUsers  = repository.findById(id).orElse(null);
-        tempUsers.setIsActive(false, tempUsers.getModifiedBy());
-        tempUsers.setIsDeleted(true, tempUsers.getModifiedBy());
-        tempUsers.getUser().setIsActive(false, tempUsers.getModifiedBy());
-        tempUsers.getUser().setIsDeleted(true);
+        try {
+            UserDetails tempUsers = repository.findById(id).orElse(null);
+            if(tempUsers != null) {
+                tempUsers.setIsActive(false, tempUsers.getModifiedBy());
+                tempUsers.setIsDeleted(true, tempUsers.getModifiedBy());
+                tempUsers.getUser().setIsActive(false, tempUsers.getModifiedBy());
+                tempUsers.getUser().setIsDeleted(true);
+                repository.save(tempUsers);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return "User removed !!" +id;
+        }
 
-        repository.save(tempUsers);
-
-        return "User removed !!" +id;
     }
 
 
     public String deleteUserAttendance(long id) {
-        Attendance tempAtten = attendanceRepository.findById(id).orElse(null);
-        tempAtten.setIsDeleted(true);
-        tempAtten.setIsActive(false);
-        attendanceRepository.save(tempAtten);
+        try {
+            Attendance tempAtten = attendanceRepository.findById(id).orElse(null);
+            if(tempAtten != null) {
+                tempAtten.setIsDeleted(true);
+                tempAtten.setIsActive(false);
+                attendanceRepository.save(tempAtten);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return "User's Attendance removed !!" +id;
+        }
 
-        return "User's Attendance removed !!" +id;
     }
 }
