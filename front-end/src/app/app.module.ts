@@ -25,6 +25,9 @@ import { ModalComponent } from './modals/modal/modal.component';
 import { AddSocietyComponent } from './modals/societymodal/add-society/add-society.component';
 import { AddTowerComponent } from './modals/towermodals/add-tower/add-tower.component';
 import { FlatmodalsComponent } from './modals/flatmodals/flatmodals.component';
+import { RoleComponent } from './dashboard/configuration/role/role.component';
+import { MenuComponent } from './dashboard/configuration/menu/menu.component';
+import { MenuSecurityComponent } from './dashboard/configuration/menu-security/menu-security.component';
 
 
 
@@ -47,6 +50,9 @@ import { FlatmodalsComponent } from './modals/flatmodals/flatmodals.component';
     AddSocietyComponent,
     AddTowerComponent,
     FlatmodalsComponent,
+    RoleComponent,
+    MenuComponent,
+    MenuSecurityComponent
     
     //DummyComponentComponent
   ],
