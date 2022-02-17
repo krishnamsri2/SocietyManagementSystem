@@ -27,15 +27,13 @@ public class User
 	private Boolean isDeleted;
 	private Boolean isActive;
 	
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
 	private UserDetails usd;
 	
 	public UserDetails getUsd() {
 		return usd;
 	}
-	
-	
-	
+
 	public User() {
 		
 	}

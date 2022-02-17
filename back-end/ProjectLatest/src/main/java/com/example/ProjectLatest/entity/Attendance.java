@@ -53,7 +53,8 @@ public class Attendance
 		this.updateDate = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
-		this.punchInFlag=false;
+		this.punchInFlag=true;
+		this.punchIn = new Date();
 		this.punchOutFlag=false;
 	}
 	
@@ -63,20 +64,13 @@ public class Attendance
 	public Date getPunchIn() {
 		return punchIn;
 	}
-	public void setPunchIn() 
-	{
-		if(punchInFlag==false)
-		{
-		this.punchIn = new Date();
-		punchInFlag=true;
-		}
 
-	}
 	public Date getPunchOut() {
 		return punchOut;
 	}
 	public void setPunchOut() 
 	{
+		setUpdateDate();
 		if(punchOutFlag==false&&punchInFlag==true)
 		{
 		this.punchOut = new Date();
