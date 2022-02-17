@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { SocietyPostService } from '../../../dashboard/configuration/society/society.post.service';
+import {v4 as uuid} from 'uuid';
 @Component({
   selector: 'app-add-society',
   templateUrl: './add-society.component.html',
@@ -11,10 +14,15 @@ export class AddSocietyComponent implements OnInit {
   ngOnInit(): void {
     
   }
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,private societyPostService:SocietyPostService) {}
+  society = {
+    societyId:'',
+    societyName:'',
+    societyAddress:''
+  }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, {size:'lg',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -30,5 +38,12 @@ export class AddSocietyComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
+  onSubmit(form:NgForm ){
+    let id:string = uuid();
+    this.society.societyId=id;
+    this.society.societyName=form.value.societyName;
+    this.society.societyAddress=form.value.societyAddress;
+    this.societyPostService.addSociety(this.society);
+    form.reset();
+  }
 }

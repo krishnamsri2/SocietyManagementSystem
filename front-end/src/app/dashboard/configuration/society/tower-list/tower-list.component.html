@@ -1,25 +1,28 @@
-<div class="container">
+<div class="container" *ngIf="route.children.length===0">
     <div class="towerlist-header">
         <div class="back-button">
             <a class="back-btn" [routerLink]="['/dashboard/configuration/society']">&larr;</a>
         </div>
         <div class="header-text">
-            <h3>Society</h3>
+            <h3>{{societyName}}</h3>
         </div>
     </div>
     <div class="towerlist row">
         <div class="tower-card-wrapper" *ngFor="let tower of towers">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                  <h5 class="card-title">{{tower.name}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{tower.Address}}</h6>
-                  <p class="card-text">{{tower.description}}</p>
-                  <a [routerLink]="['/dashboard/configuration/society/towerlist',tower.id]" class="card-link">Card link</a>
+                  <h5 class="card-title">{{tower.towerName}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{tower.towerAddress}}</h6>
+                  <p class="card-text">Some Very Different Name</p>
+                  <a [routerLink]="['tower','1']" class="card-link">Card link</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="btn-wrapper">
-        <app-add-tower></app-add-tower>
+        <app-add-tower ></app-add-tower>
     </div>
+</div>
+<div class="container">
+    <router-outlet></router-outlet>
 </div>

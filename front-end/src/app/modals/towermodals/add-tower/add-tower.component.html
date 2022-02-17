@@ -4,12 +4,35 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <form>
-        <p>Form goes here</p>
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div id="tower-data">
+          <div class="form-group">
+            <label for="tower-name">Enter the name of the Tower</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="tower-name"
+            ngModel
+            name="towerName"
+            >
+          </div>
+          <div class="form-group">
+            <label for="tower-address">Enter the Address</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="tower-address"
+            ngModel
+            name="towerAddress"
+            >
+          </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Create</button>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
     </div>
 </ng-template>
   
