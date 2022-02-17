@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-flatmodals',
@@ -12,9 +13,18 @@ export class FlatmodalsComponent implements OnInit {
     
   }
   constructor(private modalService: NgbModal) {}
-
+  newFlat = {
+    flat_Id:'',
+    parentId:'',
+    flatId:'',
+    flatName:'',
+    flatStatus:'',
+    flatAddress:'',
+    ownerName:'',
+    numberOfOccupants:''
+  }
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, {size:'lg',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -29,5 +39,13 @@ export class FlatmodalsComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+  onSubmit(form:NgForm){
+    let obj = form.value;
+    this.newFlat.flatName=obj.flatName;
+    this.newFlat.numberOfOccupants=obj.numberOfOccupants;
+    this.newFlat.ownerName=obj.ownerName;
+    this.newFlat.flatAddress = obj.flatAddress;
+    this.newFlat.flatStatus = obj.flatStatus;
   }
 }

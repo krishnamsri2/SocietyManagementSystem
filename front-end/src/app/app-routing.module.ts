@@ -20,10 +20,12 @@ const appRoutes:Route[] = [
           children:[
             { path: 'user', component: UserComponent},
             {path:'society',component:SocietyComponent,children:[
-              {path:'towerlist',component:TowerListComponent},
-              {path:'towerlist/:id',component:TowerComponent,children:[
-                {path:'flat/:id',component:FlatComponent}
-              ]}
+              {path:'towerlist/:id',component:TowerListComponent,children:[
+                {path:'tower/:id',component:TowerComponent}
+              ]},
+              // {path:'towerlist/:id',component:TowerComponent,children:[
+              //   {path:'flat/:id',component:FlatComponent}
+              // ]}
             ]},
             {path:'user',component:UserComponent, children : [
               { path : 'new_user', component : NewUserComponent}
