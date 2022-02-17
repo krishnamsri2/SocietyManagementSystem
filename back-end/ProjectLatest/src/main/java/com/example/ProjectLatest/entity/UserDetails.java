@@ -1,5 +1,8 @@
 package com.example.ProjectLatest.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -48,9 +51,11 @@ public class UserDetails
 	
 	@OneToOne
 	@JoinColumn(name="userID")  // ForeignKey from User table
+	@JsonManagedReference
 	private User user;
 	
 	@OneToOne(mappedBy="userDetails")
+	@JsonBackReference
 	private Role role;
 	
 	@OneToMany(mappedBy = "usd")
@@ -189,7 +194,7 @@ public class UserDetails
 		residents.add(resident);
 		resident.setUserDetail(this);
 	}
-	
-	
+
+
 
 }
