@@ -1,9 +1,13 @@
 package com.example.ProjectLatest.to;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TowerTO {
     private long towerId;
     private String towerName;
+    @JsonProperty
     boolean isDeleted;
+    @JsonProperty
     boolean isActive;
 
     public long getTowerId() {
