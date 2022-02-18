@@ -37,7 +37,7 @@ public class SocietyService {
 
             repository.findAll();
              copy = society.stream()
-                    .map(Society -> new SocietyResponse(Society.getSocietyNameame(), Society.getCreatedby(), Society.getCreated()))
+                    .map(Society -> new SocietyResponse(Society.getSocietyName(), Society.getCreatedby(), Society.getCreated()))
                     .collect(Collectors.toList());
         }
         catch (Exception e)
@@ -53,7 +53,7 @@ public class SocietyService {
         try {
             temp = repository.findById(id).orElse(null);
             if(temp!=null && !temp.isDeleted())
-            societyResponse = new SocietyResponse(temp.getSocietyNameame(), temp.getCreatedby(), temp.getCreated());
+            societyResponse = new SocietyResponse(temp.getSocietyName(), temp.getCreatedby(), temp.getCreated());
         }
         catch (Exception e)
         {
