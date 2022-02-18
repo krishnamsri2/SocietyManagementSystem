@@ -5,14 +5,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Entity
+@Table(name="Tower")
 public class Tower {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long towerid;
-	private String towername;
-	private long createdby;
-	private long modifyby;
+	@Column(name="tower_id")
+	private long towerId;
+	@Column(name="tower_name")
+	private String towerName;
+	@Column(name="created_by")
+	private long createdBy;
+	@Column(name="modify_by")
+	private long modifyBy;
+	@Column(name="is_deleted")
 	private boolean isDeleted;
+	@Column(name="is_active")
 	private boolean isActive;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -23,7 +30,8 @@ public class Tower {
     @Column(name = "updatedDate", nullable = false)
     private Date updated;
     
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	@ManyToOne
+	@JoinColumn(name="societyId")
 	private Society soc;
 	@OneToMany(mappedBy ="tow2",cascade = {CascadeType.PERSIST})
 	private List<Flat> flat=new ArrayList<Flat>();
@@ -32,11 +40,11 @@ public class Tower {
 		super();
 	}
 	
-	public Tower(String towername, long createdby,boolean isDeleted, boolean isActive, Society soc) {
+	public Tower(String towerName, long createdBy,boolean isDeleted, boolean isActive, Society soc) {
 		super();
-		this.towername = towername;
-		this.createdby = createdby;
-		this.modifyby = createdby;
+		this.towerName = towerName;
+		this.createdBy = createdBy;
+		this.modifyBy = createdBy;
 		this.isDeleted = isDeleted;
 		this.isActive = isActive;
 		this.soc = soc;
@@ -57,26 +65,26 @@ public class Tower {
 		this.updated = new Date();
 	}
 
-	public long getTowerid() {
-		return towerid;
+	public long getTowerId() {
+		return towerId;
 	}
-	public String getTowername() {
-		return towername;
+	public String getTowerName() {
+		return towerName;
 	}
-	public void setTowername(String towername) {
+	public void setTowerName(String towerName) {
 		setUpdated();
-		this.towername = towername;
+		this.towerName = towerName;
 	}
-	public long getCreatedby() {
-		return createdby;
+	public long getCreatedBy() {
+		return createdBy;
 	}
 
-	public long getModifyby() {
-		return modifyby;
+	public long getModifyBy() {
+		return modifyBy;
 	}
-	public void setModifyby(long modifyby) {
+	public void setModifyBy(long modifyBy) {
 		setUpdated();
-		this.modifyby = modifyby;
+		this.modifyBy = modifyBy;
 	}
 	public boolean isDeleted() {
 		return isDeleted;
