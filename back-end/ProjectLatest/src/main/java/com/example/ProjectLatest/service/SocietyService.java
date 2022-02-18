@@ -31,13 +31,22 @@ public class SocietyService {
     }
     // get request for all society
     public List<SocietyResponse> getSociety() {
-        List<Society> society = new ArrayList<>();
+
         List<SocietyResponse> copy=null;
         try {
-
-            repository.findAll();
-             copy = society.stream()
-                    .map(Society -> new SocietyResponse(Society.getSocietyNameame(), Society.getCreatedby(), Society.getCreated()))
+            List<Society> societies = repository.findAll();
+            List<Society> society=new ArrayList<>();
+            for(int i=0;i<societies.size();i++)
+            {
+                Society temp=societies.get(i);
+                if(!temp.isDeleted())
+                {
+                    society.add(temp);
+                }
+            }
+            if(society.size()!=0)
+           copy = society.stream()
+                    .map(Society -> new SocietyResponse(Society.getSocietyNameame(), Society.getCreatedby(), Society.getCreated(),Society.getSocietyid()))
                     .collect(Collectors.toList());
         }
         catch (Exception e)
@@ -53,7 +62,7 @@ public class SocietyService {
         try {
             temp = repository.findById(id).orElse(null);
             if(temp!=null && !temp.isDeleted())
-            societyResponse = new SocietyResponse(temp.getSocietyNameame(), temp.getCreatedby(), temp.getCreated());
+            societyResponse = new SocietyResponse(temp.getSocietyNameame(), temp.getCreatedby(), temp.getCreated(), temp.getSocietyid());
         }
         catch (Exception e)
         {
@@ -78,17 +87,20 @@ public class SocietyService {
     }
 
     public String deleteSociety(long id) {
+        String ack="not removed";
         try {
             Society temp = repository.findById(id).orElse(null);
-            temp.setDeleted(true);
+            if(temp!=null)
+            {
+                temp.setDeleted(true);
+                ack="removed";
+            }
+
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        finally {
-
-            return "Product Removed !!" + id;
-        }
+        return  ack;
     }
 }

@@ -45,7 +45,7 @@ public class SocietyController {
     }
 
     // delete
-    @RequestMapping(method = RequestMethod.DELETE,value = "/society/update/{id}")
+    @RequestMapping(method = RequestMethod.DELETE,value = "/society/delete/{id}")
     public String deleteSociety(@PathVariable long id)
     {
         return societyService.deleteSociety(id);
