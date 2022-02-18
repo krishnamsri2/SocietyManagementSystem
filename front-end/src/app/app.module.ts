@@ -28,6 +28,7 @@ import { FlatmodalsComponent } from './modals/flatmodals/flatmodals.component';
 import { RoleComponent } from './dashboard/configuration/role/role.component';
 import { MenuComponent } from './dashboard/configuration/menu/menu.component';
 import { MenuSecurityComponent } from './dashboard/configuration/menu-security/menu-security.component';
+import { NarrowLongCardsComponent } from './narrow-long-cards/narrow-long-cards.component';
 
 
 
@@ -52,7 +53,8 @@ import { MenuSecurityComponent } from './dashboard/configuration/menu-security/m
     FlatmodalsComponent,
     RoleComponent,
     MenuComponent,
-    MenuSecurityComponent
+    MenuSecurityComponent,
+    NarrowLongCardsComponent
     
     //DummyComponentComponent
   ],
