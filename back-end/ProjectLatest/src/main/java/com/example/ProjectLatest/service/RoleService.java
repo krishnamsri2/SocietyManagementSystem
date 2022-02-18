@@ -1,20 +1,19 @@
 package com.example.ProjectLatest.service;
 
-import com.example.ProjectLatest.entity.Notice;
 import com.example.ProjectLatest.entity.Role;
-import com.example.ProjectLatest.entity.User;
+
 import com.example.ProjectLatest.entity.UserDetails;
 import com.example.ProjectLatest.repository.RoleRepository;
-import com.example.ProjectLatest.repository.UserDetailsRepository;
+import com.example.ProjectLatest.repository.UserDetailRepository;
 import com.example.ProjectLatest.response.RoleResponse;
-import com.example.ProjectLatest.to.NoticeTO;
+
 import com.example.ProjectLatest.to.RoleTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.theme.CookieThemeResolver;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class RoleService
@@ -23,26 +22,44 @@ public class RoleService
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private UserDetailsRepository userDetailsRepository;
+    private UserDetailRepository userDetailsRepository;
 
     //POST request
     public void addRole(RoleTO role,Long userID)
     {
         UserDetails usd = userDetailsRepository.getById(userID);
-        Role temp = new Role(role.getRoleType(),role.getRoleDescription(),role.getRole(),userID,usd);
+        Role temp = new Role(role.getRoleType(),role.getRoleDescription(),role.getRole(),userID);
+        usd.getRoles().add(temp);
         roleRepository.save(temp);
     }
 
-    public RoleResponse findRoleByUserDetailsId(Long userId)
+    public Set<RoleResponse> findRolesByUserDetailsId(Long userId)
     {
-
-        Role role = roleRepository.findRoleByUserDetailsId(userId);
-        RoleResponse roleResponse = new RoleResponse(role.getRoleType(),role.getRole(),role.getRoleDescription());
-        return roleResponse;
+        UserDetails usd = userDetailsRepository.getById(userId);
+        Set<Role> roles = usd.getRoles();
+        Set<RoleResponse> roleResponses = new HashSet<RoleResponse>();
+        for(Role role:roles)
+        {
+            RoleResponse roleResponse = new RoleResponse(role.getRoleId(),role.getRoleType(),role.getRole(),role.getRoleDescription());
+            roleResponses.add(roleResponse);
+        }
+        return roleResponses;
     }
 
-    public void updateRole(RoleTO role, Long id)
+    public void updateRoleByRoleId(RoleTO newRole, Long id)
     {
-       // Role role = roleRepository.findRoleByUserId(id);
+       Role currentRole = roleRepository.getById(id);
+       currentRole.setRole(newRole.getRole());
+       currentRole.setRoleType(newRole.getRoleType());
+       currentRole.setRoleDescription(newRole.getRoleDescription());
+       currentRole.setModifyDate();
+       roleRepository.save(currentRole);
+    }
+
+    public void deleteRoleByRoleId(Long id)
+    {
+        Role role = roleRepository.getById(id);
+        role.setIsDeleted(true);
+        roleRepository.save(role);
     }
 }

@@ -8,6 +8,8 @@ import com.example.ProjectLatest.to.RoleTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 public class RoleController
 {
@@ -20,14 +22,20 @@ public class RoleController
         roleService.addRole(role.getRequestObject(),id);
     }
     @RequestMapping(method = RequestMethod.GET, value = "/role/{id}")
-    public RoleResponse getRoleByUserDetailsId(@PathVariable Long id)
+    public Set<RoleResponse> getRoleByUserDetailsId(@PathVariable Long id)
     {
-        return roleService.findRoleByUserDetailsId(id);
+        return roleService.findRolesByUserDetailsId(id);
     }
-    @RequestMapping(method = RequestMethod.PUT,value = "/userDetails/{id}/role")
-    public void updateRoleByUserId(@RequestBody RestRequest<RoleTO> role, @PathVariable Long id)
+    @RequestMapping(method = RequestMethod.PUT,value = "/role/{id}")
+    public void updateRoleByRoleId(@RequestBody RestRequest<RoleTO> role, @PathVariable Long id)
     {
-        roleService.updateRole(role.getRequestObject(),id);
+        roleService.updateRoleByRoleId(role.getRequestObject(),id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE,value="/role/{id}")
+    public void deleteRoleByRoleId(@PathVariable Long id)
+    {
+        roleService.deleteRoleByRoleId(id);
     }
 
 

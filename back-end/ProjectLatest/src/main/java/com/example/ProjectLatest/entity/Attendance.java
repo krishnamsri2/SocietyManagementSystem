@@ -120,7 +120,10 @@ public class Attendance
 		setUpdateDate();
 		this.isActive = isActive;
 	}
-	
-	
-	
+
+
+    public void setUsd(UserDetails userDetails)
+	{
+		this.usd = userDetails;
+    }
 }

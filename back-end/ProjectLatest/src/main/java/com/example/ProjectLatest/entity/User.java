@@ -1,8 +1,5 @@
 package com.example.ProjectLatest.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -31,7 +28,6 @@ public class User
 	private Boolean isActive;
 	
 	@OneToOne(mappedBy="user")
-	@JsonBackReference
 	private UserDetails usd;
 	
 	public UserDetails getUsd() {

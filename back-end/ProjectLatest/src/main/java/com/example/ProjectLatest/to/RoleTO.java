@@ -5,6 +5,7 @@ import com.example.ProjectLatest.entity.UserDetails;
 
 public class RoleTO
 {
+    private Long roleId;
     private RoleType roleType;
     private String roleDescription;
     private String role;

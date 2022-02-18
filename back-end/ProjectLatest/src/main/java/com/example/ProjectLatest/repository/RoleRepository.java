@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface RoleRepository extends JpaRepository<Role, Long>
 {
 
-    Role findRoleByUserDetailsId(Long userId);
 }

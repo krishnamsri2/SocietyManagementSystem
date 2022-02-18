@@ -1,7 +1,5 @@
 package com.example.ProjectLatest.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,33 +8,21 @@ import java.util.Set;
 
 @Entity
 @Table(name="UserDetails")
-public class UserDetails 
+public class UserDetails
 {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long userDetailsId;
 
-	public UserDetails() {
-	}
-
-	public long getUserDetailsId() {
-		return userDetailsId;
-	}
-
-	public void setUserDetailsId(long userDetailsId) {
-		this.userDetailsId = userDetailsId;
-	}
-
 	private String firstName;
 	private String LastName;
+	@Column(unique = true)
 	private long phoneNumber;
+	@Column(unique = true)
 	private String emailId;
 	
 	private long createdBy;
 	private long modifiedBy;
-	
-	@OneToMany(mappedBy = "userDetail", cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
-	private Set<FlatResidents> residents = new HashSet<FlatResidents>();
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="createdDate",nullable=false)
@@ -51,29 +37,26 @@ public class UserDetails
 	
 	@OneToOne
 	@JoinColumn(name="userID")  // ForeignKey from User table
-	@JsonManagedReference
 	private User user;
 	
-	@OneToOne(mappedBy="userDetails")
-	@JsonBackReference
-	private Role role;
-	
+	@ManyToMany
+	@JoinTable
+			(
+					name="userDetails_role",
+					joinColumns = {@JoinColumn(name="userDetailsId")},
+					inverseJoinColumns = {@JoinColumn(name="role_id")}
+			)
+	private Set<Role> roles = new HashSet<Role>();
+
+	@OneToMany(mappedBy = "userDetail", cascade={CascadeType.REMOVE} )
+	private Set<FlatResidents> residents = new HashSet<FlatResidents>();
+
 	@OneToMany(mappedBy = "usd")
     private Set<Attendance> setAttendance = new HashSet<Attendance>();
 
-	public Set<Attendance> getSetAttendance() {
-		return setAttendance;
-	}
 
-	public void setSetAttendance(Set<Attendance> setAttendance) {
-		this.setAttendance = setAttendance;
+	public UserDetails() {
 	}
-	
-	public void addAttendance(Attendance attendance)
-	{
-		setAttendance.add(attendance);
-	}
-
 
 	public UserDetails(String firstName, String lastName, long phoneNumber, String emailId,long createdBy,User user) {
 		super();
@@ -89,6 +72,17 @@ public class UserDetails
 		this.isActive = true;
 		this.user = user;
 	}
+
+
+	public long getUserDetailsId() {
+		return userDetailsId;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 
 	public String getFirstName() {
 		return firstName;
@@ -184,7 +178,12 @@ public class UserDetails
 		setModifiedBy(modifiedBy);
 		this.isActive = isActive;
 	}
-	
+
+	public Set<Role> getRoles()
+	{
+		return roles;
+	}
+
 	public Set<FlatResidents> getFlatResidents() {
 		return residents;
 	}
@@ -194,6 +193,20 @@ public class UserDetails
 		residents.add(resident);
 		resident.setUserDetail(this);
 	}
+
+
+	public Set<Attendance> getSetAttendance() {
+		return setAttendance;
+	}
+
+	public void addAttendance(Attendance attendance)
+	{
+		setUpdateDate();
+		setAttendance.add(attendance);
+		attendance.setUsd(this);
+	}
+
+
 
 
 

@@ -4,19 +4,25 @@ import com.example.ProjectLatest.entity.RoleType;
 
 public class RoleResponse
 {
+    private Long roleId;
     private RoleType roleType;
     private String role;
     private String roleDescription;
+
+    public Long getRoleId() {
+        return roleId;
+    }
 
     public RoleResponse()
     {
 
     }
-    public RoleResponse(RoleType roleType, String role, String roleDescription)
+    public RoleResponse(Long roleId,RoleType roleType, String role, String roleDescription)
     {
         this.roleType = roleType;
         this.role = role;
         this.roleDescription = roleDescription;
+        this.roleId = roleId;
     }
 
     public RoleType getRoleType() {

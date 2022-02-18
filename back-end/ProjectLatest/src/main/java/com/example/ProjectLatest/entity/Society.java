@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 @Entity
 public class Society {
-	private String towername;
+	private String societyName;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "Society_id")
@@ -20,11 +20,11 @@ public class Society {
 	
 	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdDate", nullable = false)
-    private Date created;
+    private Date createdDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updatedDate", nullable = false)
-    private Date updated;
+    private Date updatedDate;
 	
 	@OneToMany(mappedBy ="soc",cascade = {CascadeType.PERSIST})
 	private List<Tower> tow=new ArrayList<Tower>();
@@ -37,38 +37,38 @@ public class Society {
 
 	public Society(String towername, long createdby, boolean isDeleted, boolean isActive) {
 		super();
-		this.towername = towername;
+		this.societyName = towername;
 		this.createdby = createdby;
 		this.modifyby = createdby;
 		this.isDeleted = isDeleted;
 		this.isActive = isActive;
-		this.created=new Date();
-		this.updated=new Date();
+		this.createdDate=new Date();
+		this.updatedDate=new Date();
 	}
 	
 	
 	public Date getCreated() {
-		return created;
+		return createdDate;
 	}
 
 
 	public Date getUpdated() {
-		return updated;
+		return updatedDate;
 	}
 
 
 	public void setUpdated() {
-		this.updated = new Date();
+		this.updatedDate = new Date();
 	}
 
 
 
-	public String getTowername() {
-		return towername;
+	public String getSocietyNameame() {
+		return societyName;
 	}
-	public void setTowername(String towername) {
+	public void setSocietyName(String towername) {
 		setUpdated();
-		this.towername = towername;
+		this.societyName = towername;
 	}
 	public long getSocietyid() {
 		return societyid;
