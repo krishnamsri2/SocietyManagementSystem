@@ -39,9 +39,8 @@ public class UserService {
             repository.save(tempUd);
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return "New User is Added!";
         }
+            return "New User is Added!";
 
     }
 
@@ -58,9 +57,9 @@ public class UserService {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return acknow;
         }
+            return acknow;
+
     }
 
 
@@ -70,7 +69,7 @@ public class UserService {
         try {
             UserDetails existingUser = repository.findById(id).orElse(null);
 
-            if(existingUser == null)
+            if(existingUser == null|| existingUser.getIsDeleted() == true)
                 acknow =  "No User Found";
             else {
                 existingUser.setFirstName(user.getFirstName(), token.getUserId());
@@ -84,11 +83,8 @@ public class UserService {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return acknow;
         }
-
-
+            return acknow;
 
     }
 
@@ -97,7 +93,7 @@ public class UserService {
         try {
             Date date = new Date();
             Attendance tempAtten = attendanceRepository.findByUserDetailId(userId, date.toString().substring(0, 10));
-            if(tempAtten == null)
+            if(tempAtten == null || tempAtten.getIsDeleted() == true)
                 acknow =  "No User Found";
             else {
                 tempAtten.setPunchOut();
@@ -106,9 +102,9 @@ public class UserService {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return acknow;
         }
+            return acknow;
+
     }
 
 
@@ -117,23 +113,27 @@ public class UserService {
         UserDetailsResponse copy = null;
 
         try {
-            UserDetails tempUsers = repository.findById(id).orElse(null);
-            if(tempUsers != null)
-                copy = new UserDetailsResponse(tempUsers.getFirstName(), tempUsers.getLastName(), tempUsers.getPhoneNumber(), tempUsers.getEmailId(), tempUsers.getUser().getPassword());
+             UserDetails tempUsers = repository.findById(id).orElse(null);
+             if(tempUsers != null && tempUsers.getIsDeleted() == false)
+             copy = new UserDetailsResponse(tempUsers.getUserDetailsId(),tempUsers.getFirstName(), tempUsers.getLastName(), tempUsers.getPhoneNumber(), tempUsers.getEmailId(), tempUsers.getUser().getPassword());
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return copy;
         }
+            return copy;
+
     }
 
     public List<AttendanceResponse> getUserAttendances(long id) {
         List<AttendanceResponse> responses = null;
         try {
             UserDetails tempUsers = repository.findById(id).orElse(null);
-            if(tempUsers != null) {
+            if(tempUsers != null ) {
                 List<Attendance> tempAttendances = new ArrayList<Attendance>();
-                tempAttendances.addAll(tempUsers.getSetAttendance());
+
+                for(Attendance att : tempUsers.getSetAttendance()){
+                    if(att.getIsDeleted() == false)
+                    tempAttendances.add(att);
+                }
 
                 responses = tempAttendances.stream()
                         .map(Attendance -> new AttendanceResponse(Attendance.getAttendId(), Attendance.getCreateDate(), Attendance.getUpdateDate()))
@@ -143,9 +143,9 @@ public class UserService {
 
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return responses;
         }
+            return responses;
+
 
     }
 
@@ -153,7 +153,7 @@ public class UserService {
     public String deleteUser(long id){
         try {
             UserDetails tempUsers = repository.findById(id).orElse(null);
-            if(tempUsers != null) {
+            if(tempUsers != null && tempUsers.getIsDeleted() == false) {
                 tempUsers.setIsActive(false, tempUsers.getModifiedBy());
                 tempUsers.setIsDeleted(true, tempUsers.getModifiedBy());
                 tempUsers.getUser().setIsActive(false, tempUsers.getModifiedBy());
@@ -162,9 +162,9 @@ public class UserService {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return "User removed !!" +id;
         }
+            return "User removed !!" +id;
+
 
     }
 
@@ -172,16 +172,16 @@ public class UserService {
     public String deleteUserAttendance(long id) {
         try {
             Attendance tempAtten = attendanceRepository.findById(id).orElse(null);
-            if(tempAtten != null) {
+            if(tempAtten != null && tempAtten.getIsDeleted() == false) {
                 tempAtten.setIsDeleted(true);
                 tempAtten.setIsActive(false);
                 attendanceRepository.save(tempAtten);
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return "User's Attendance removed !!" +id;
         }
+            return "User's Attendance removed !!" +id;
+
 
     }
 }

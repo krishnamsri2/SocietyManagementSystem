@@ -29,12 +29,12 @@ public class FlatResidentsController {
         return service.getFlatResidentById(id);
     }
 
-    @GetMapping("/flatResidents/{flatId}")
+    @GetMapping("/flat/{flatId}/flatResidents")
     public List<FlatResidentResponse> findFlatResidentsByFlatId(@PathVariable long flatId){
         return service.getFlatResidentsByFlatId(flatId);
     }
 
-    @GetMapping("/flatResidents/{userdetailId}")
+    @GetMapping("/user/{userDetailId}/flatResidents")
     public List<FlatResidentResponse> findFlatResidentsByUserDetailId(@PathVariable long userDetailId){
         return service.getFlatResidentsByUserDetailId(userDetailId);
     }

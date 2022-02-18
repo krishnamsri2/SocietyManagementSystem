@@ -24,64 +24,109 @@ public class FlatResidentsService {
     @Autowired
     private FlatResidentsRepository frRepo;
 
-    public void saveFlatResident(FlatResidentTO requestObject, Token token) {
-        UserDetails tempUD = udRepo.getById(requestObject.getUserDetailId());
-        Flat tempFlat = flatRepo.getById(requestObject.getFlatId());
+    public String saveFlatResident(FlatResidentTO requestObject, Token token) {
+        try {
+            UserDetails tempUD = udRepo.getById(requestObject.getUserDetailId());
+            Flat tempFlat = flatRepo.getById(requestObject.getFlatId());
 
-        FlatResidents temp = new FlatResidents(requestObject.isOwner(),requestObject.isTenant(),
-                token.getUserId(), tempFlat,tempUD);
-        frRepo.save(temp);
+            FlatResidents temp = new FlatResidents(requestObject.getIsOwner(), requestObject.getIsTenant(),
+                    token.getUserId(), tempFlat, tempUD);
+            frRepo.save(temp);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "New FlatResident is Added!";
 
     }
 
-    public void updateFlatResident(long id, FlatResidentTO requestObject, Token token) {
-        FlatResidents temp = frRepo.findById(id).orElse(null);
-        temp.setTenant(requestObject.isTenant());
-        temp.setOwner(requestObject.isOwner());
-        temp.setFlat(flatRepo.getById(requestObject.getFlatId()));
-        temp.setUserDetail(udRepo.getById(requestObject.getUserDetailId()));
+    public String updateFlatResident(long id, FlatResidentTO requestObject, Token token) {
+        String acknow = null;
+        try {
+            FlatResidents temp = frRepo.findById(id).orElse(null);
+            if(temp != null && temp.getIsDeleted() == false) {
+                temp.setTenant(requestObject.getIsTenant());
+                //System.out.println(requestObject.getIsOwner());
+                temp.setOwner(requestObject.getIsOwner());
+                temp.setFlat(flatRepo.getById(requestObject.getFlatId()));
+                temp.setUserDetail(udRepo.getById(requestObject.getUserDetailId()));
+                frRepo.save(temp);
+                acknow = "Flat Resident is Updated";
+            }else{
+                acknow = "Not found FlatResident";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return acknow;
     }
 
     public String deleteFlatResident(long id) {
-        FlatResidents tempUsers  = frRepo.findById(id).orElse(null);
-        tempUsers.setIsActive(false);
-        tempUsers.setIsDeleted(true);
+        try {
+            FlatResidents tempUsers = frRepo.findById(id).orElse(null);
 
-        frRepo.save(tempUsers);
+            if(tempUsers != null && tempUsers.getIsDeleted() == false) {
+                tempUsers.setIsActive(false);
+                tempUsers.setIsDeleted(true);
 
+                frRepo.save(tempUsers);
+            }
+        }catch (Exception E){
+            E.printStackTrace();
+        }
         return "User removed !!" +id;
     }
 
     public FlatResidentResponse getFlatResidentById(long id) {
-        FlatResidents tempUsers  = frRepo.findById(id).orElse(null);
-        FlatResidentResponse copy = new FlatResidentResponse(tempUsers.isOwner(), tempUsers.isTenant(), tempUsers.getFlat().getFlatid(),
-                tempUsers.getUserDetail().getUserDetailsId(),tempUsers.getUserDetail().getFirstName(),tempUsers.getUserDetail().getLastName(),
-                tempUsers.getUserDetail().getPhoneNumber(),tempUsers.getUserDetail().getEmailId());
+        FlatResidentResponse copy = null;
+        try {
+            FlatResidents tempUsers = frRepo.findById(id).orElse(null);
+            if(tempUsers != null && tempUsers.getIsDeleted() == false) {
+                copy = new FlatResidentResponse(tempUsers.isOwner(), tempUsers.isTenant(), tempUsers.getFlat().getFlatId(),
+                        tempUsers.getUserDetail().getUserDetailsId(), tempUsers.getUserDetail().getFirstName(), tempUsers.getUserDetail().getLastName(),
+                        tempUsers.getUserDetail().getPhoneNumber(), tempUsers.getUserDetail().getEmailId());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return copy;
     }
 
     public List<FlatResidentResponse> getFlatResidentsByFlatId(long flatId) {
-       List<FlatResidents> temp =  frRepo.findAllByFlatId(flatId);
+        List<FlatResidentResponse> copy = null;
+        try {
 
-       List<FlatResidentResponse> copy = temp.stream()
-               .map(FlatResidents -> new FlatResidentResponse(FlatResidents.isOwner(), FlatResidents.isTenant(), FlatResidents.getFlat().getFlatid(),
-                       FlatResidents.getUserDetail().getUserDetailsId(),FlatResidents.getUserDetail().getFirstName(),FlatResidents.getUserDetail().getLastName(),
-                       FlatResidents.getUserDetail().getPhoneNumber(),FlatResidents.getUserDetail().getEmailId()))
-               .collect(Collectors.toList());
-
+            List<FlatResidents> temp = frRepo.findAllByFlatId(flatId);
+            if(temp != null) {
+                copy = temp.stream()
+                        .map(FlatResidents -> new FlatResidentResponse(FlatResidents.isOwner(), FlatResidents.isTenant(), FlatResidents.getFlat().getFlatId(),
+                                FlatResidents.getUserDetail().getUserDetailsId(), FlatResidents.getUserDetail().getFirstName(), FlatResidents.getUserDetail().getLastName(),
+                                FlatResidents.getUserDetail().getPhoneNumber(), FlatResidents.getUserDetail().getEmailId()))
+                        .collect(Collectors.toList());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
        return copy;
 
     }
 
     public List<FlatResidentResponse> getFlatResidentsByUserDetailId(long userDetailId) {
-        List<FlatResidents> temp =  frRepo.findAllByUserDetailId(userDetailId);
+        List<FlatResidentResponse> copy = null;
 
-        List<FlatResidentResponse> copy = temp.stream()
-                .map(FlatResidents -> new FlatResidentResponse(FlatResidents.isOwner(), FlatResidents.isTenant(), FlatResidents.getFlat().getFlatid(),
-                        FlatResidents.getUserDetail().getUserDetailsId(),FlatResidents.getUserDetail().getFirstName(),FlatResidents.getUserDetail().getLastName(),
-                        FlatResidents.getUserDetail().getPhoneNumber(),FlatResidents.getUserDetail().getEmailId()))
-                .collect(Collectors.toList());
-
+        try {
+            List<FlatResidents> temp = frRepo.findAllByUserDetailId(userDetailId);
+            if(temp != null) {
+                copy = temp.stream()
+                        .map(FlatResidents -> new FlatResidentResponse(FlatResidents.isOwner(), FlatResidents.isTenant(), FlatResidents.getFlat().getFlatId(),
+                                FlatResidents.getUserDetail().getUserDetailsId(), FlatResidents.getUserDetail().getFirstName(), FlatResidents.getUserDetail().getLastName(),
+                                FlatResidents.getUserDetail().getPhoneNumber(), FlatResidents.getUserDetail().getEmailId()))
+                        .collect(Collectors.toList());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return copy;
     }
 }

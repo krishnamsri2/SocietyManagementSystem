@@ -1,18 +1,28 @@
 package com.example.ProjectLatest.response;
 
 public class UserDetailsResponse {
+    private long userDetailId;
     private String firstName;
     private String LastName;
     private long phoneNumber;
     private String emailId;
     private String password;
 
-    public UserDetailsResponse(String firstName, String lastName, long phoneNumber, String emailId, String password) {
+    public UserDetailsResponse(long userDetailId, String firstName, String lastName, long phoneNumber, String emailId, String password) {
+        this.userDetailId = userDetailId;
         this.firstName = firstName;
         this.LastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
         this.password = password;
+    }
+
+    public long getUserDetailId() {
+        return userDetailId;
+    }
+
+    public void setUserDetailId(long userDetailId) {
+        this.userDetailId = userDetailId;
     }
 
     public String getFirstName() {

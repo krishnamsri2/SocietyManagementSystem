@@ -18,7 +18,7 @@ public class UserController {
 
     @PostMapping("/users/addUser")
     public String addUser(@RequestBody RestRequest<UserTO> user){
-        return service.saveUser(user.getRequestObject(),user.getToken());
+         return service.saveUser(user.getRequestObject(),user.getToken());
     }
 
     @PostMapping("/users/{id}/addAttendance")
@@ -38,7 +38,7 @@ public class UserController {
 
     @PutMapping("/users/update/{id}")
     public String updateUser(@PathVariable long id, @RequestBody RestRequest<UserTO> user){
-        return service.updateUser(id,user.getRequestObject(),user.getToken());
+         return service.updateUser(id,user.getRequestObject(),user.getToken());
 
     }
 
@@ -61,5 +61,3 @@ public class UserController {
 
 
 }
-
-
