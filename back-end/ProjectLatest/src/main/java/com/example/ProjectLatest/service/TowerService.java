@@ -23,60 +23,76 @@ public class TowerService {
 
 
     public void addTower(long id, TowerTO requestObject, Token token) {
-        Society temp=repository1.findById(id).orElse(null);
-        Tower tow=new Tower(requestObject.getTowerName(), token.getUserId(), requestObject.isDeleted(), requestObject.isActive(), temp);
-        repository.save(tow);
+        try {
+            Society temp = repository1.findById(id).orElse(null);
+            if(temp!=null && !temp.isDeleted()) {
+                Tower tow = new Tower(requestObject.getTowerName(), token.getUserId(), requestObject.isDeleted(), requestObject.isActive(), temp);
+                repository.save(tow);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public List<TowerResponse> findAllById(long id) {
-        Society temp=repository1.findById(id).orElse(null);
-        List<Tower> tower=temp.getTow();
-        List<TowerResponse> copy = tower.stream()
-                .map(Tower-> new TowerResponse(Tower.getTowerName(),Tower.getCreatedBy(),Tower.getCreated()))
-                .collect(Collectors.toList());
+        List<TowerResponse> copy=null;
+        try {
+            Society temp = repository1.findById(id).orElse(null);
+            if(temp!=null && !temp.isDeleted()) {
+                List<Tower> tower = temp.getTow();
+                copy = tower.stream()
+                        .map(Tower -> new TowerResponse(Tower.getTowerName(), Tower.getCreatedBy(), Tower.getCreated()))
+                        .collect(Collectors.toList());
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return  copy;
     }
 
-    public void updateTower(long id, TowerTO requestObject, String tower_name) {
-        Society temp=repository1.findById(id).orElse(null);
-        List<Tower> tow=temp.getTow();
-        for(int i=0;i<tow.size();i++)
-        {
-            Tower tp =tow.get(i);
-            if(tp.getTowerName().equals(tower_name))
-            {
-                tp.setTowerName(requestObject.getTowerName());
-            }
+    public void updateTower(long id, TowerTO requestObject) {
+        try {
+            Tower tower = repository.findById(requestObject.getTowerId()).orElse(null);
+            if(tower!=null && !tower.isDeleted())
+            tower.setTowerName(requestObject.getTowerName());
         }
-        return;
-    }
-    public void deleteTower(long id, String tower_name) {
-        Society temp=repository1.findById(id).orElse(null);
-        List<Tower> tow=temp.getTow();
-        for(int i=0;i<tow.size();i++) {
-            Tower tp = tow.get(i);
-            if (tp.getTowerName().equals(tower_name)) {
-                tp.setDeleted(true);
-            }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return;
     }
 
     public TowerResponse findById(long id, long tower_id) {
-        Society temp=repository1.findById(id).orElse(null);
-        List<Tower> tow=temp.getTow();
-        Tower tower=null;
-        for(int i=0;i<tow.size();i++)
-        {
-            Tower tp=tow.get(i);
-            if(tp.getTowerId()==tower_id)
-            {
-                tower=tp;
-                break;
-            }
+        TowerResponse towerResponse=null;
+        try {
+            Tower tower = repository.findById(tower_id).orElse(null);
+            if (tower != null && !tower.isDeleted())
+                towerResponse = new TowerResponse(tower.getTowerName(), tower.getCreatedBy(), tower.getCreated());
         }
-        TowerResponse towerResponse=new TowerResponse(tower.getTowerName(), tower.getCreatedBy(),tower.getCreated());
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return towerResponse;
+    }
+
+    public void deleteTower(TowerTO tower) {
+        try {
+            Tower tow = repository.findById(tower.getTowerId()).orElse(null);
+            if(tow!=null)
+            tow.setDeleted(true);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return;
+
     }
 
 
