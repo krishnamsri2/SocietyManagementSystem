@@ -38,7 +38,7 @@ public class FlatService {
         Tower tower=towerRepository.findById(tower_id).orElse(null);
         List<Flat> flat=tower.getFlat();
         List<FlatResponse> copy = flat.stream()
-                .map(Flat-> new FlatResponse(Flat.getFlatNo(),Flat.isStatus(),Flat.getNumber_of_occupants()))
+                .map(Flat-> new FlatResponse(Flat.getFlatNo(),Flat.isStatus(),Flat.getNumber_of_occupants(),Flat.getFlatId()))
                 .collect(Collectors.toList());
         return copy;
 
@@ -47,24 +47,27 @@ public class FlatService {
 
     public FlatResponse getById(long flat_id) {
         Flat flat= flatRepository.findById(flat_id).orElse(null);
-        FlatResponse flatResponse=new FlatResponse(flat.getFlatNo(),flat.isStatus(),flat.getNumber_of_occupants());
+        FlatResponse flatResponse=new FlatResponse(flat.getFlatNo(),flat.isStatus(),flat.getNumber_of_occupants(),flat.getFlatId());
         return  flatResponse;
     }
 
     public void updateStatus(long flat_id, FlatTO requestObject) {
         Flat flat=flatRepository.findById(flat_id).orElse(null);
         flat.setStatus(requestObject.isStatus());
+        flatRepository.save(flat);
         return;
     }
     public void updateOccupant(long flat_id, FlatTO requestObject) {
         Flat flat=flatRepository.findById(flat_id).orElse(null);
         flat.setNumber_of_occupants(requestObject.getNumberOfOccupant());
+        flatRepository.save(flat);
         return;
     }
 
     public void removeFlat(long flat_id) {
         Flat flat=flatRepository.findById(flat_id).orElse(null);
         flat.setDeleted(true);
+        flatRepository.save(flat);
         return;
     }
 
@@ -81,7 +84,7 @@ public class FlatService {
             }
         }
         List<FlatResponse> copy = flat.stream()
-                .map(Flat-> new FlatResponse(Flat.getFlatNo(),Flat.isStatus(),Flat.getNumber_of_occupants()))
+                .map(Flat-> new FlatResponse(Flat.getFlatNo(),Flat.isStatus(),Flat.getNumber_of_occupants(),Flat.getFlatId()))
                 .collect(Collectors.toList());
         return copy;
     }
