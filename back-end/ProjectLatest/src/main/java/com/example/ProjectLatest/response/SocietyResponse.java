@@ -3,14 +3,18 @@ package com.example.ProjectLatest.response;
 import java.util.Date;
 
 public class SocietyResponse {
+    private long societyId;
     private String societyName;
     private long createdBy;
     private Date createdDate;
 
-    public SocietyResponse(String societyName, long createdBy, Date createdDate) {
+
+
+    public SocietyResponse(String societyName, long createdBy, Date createdDate,long societyId) {
         this.societyName = societyName;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
+        this.societyId=societyId;
     }
 
     public String getSocietyName() {
@@ -35,5 +39,12 @@ public class SocietyResponse {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+    public long getSocietyId() {
+        return societyId;
+    }
+
+    public void setSocietyId(long societyId) {
+        this.societyId = societyId;
     }
 }
