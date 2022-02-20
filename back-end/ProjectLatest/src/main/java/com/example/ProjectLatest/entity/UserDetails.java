@@ -15,7 +15,7 @@ public class UserDetails
 	private long userDetailsId;
 
 	private String firstName;
-	private String LastName;
+	private String lastName;
 	@Column(unique = true)
 	private long phoneNumber;
 	@Column(unique = true)
@@ -59,7 +59,7 @@ public class UserDetails
 	public UserDetails(String firstName, String lastName, long phoneNumber, String emailId,long createdBy,User user) {
 		super();
 		this.firstName = firstName;
-		LastName = lastName;
+		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.emailId = emailId;
 		this.createdBy = createdBy;
@@ -90,13 +90,13 @@ public class UserDetails
 	}
 	
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 	
 	public void setLastName(String lastName,long modifiedBy) {
 		setUpdateDate();
 		setModifiedBy(modifiedBy);
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public User getUser() {

@@ -1,5 +1,7 @@
 package com.example.ProjectLatest.service;
 
+import com.example.ProjectLatest.builder.UserDetailBuilder;
+import com.example.ProjectLatest.builder.UserDetailsResBuilder;
 import com.example.ProjectLatest.entity.Attendance;
 import com.example.ProjectLatest.entity.FlatResidents;
 import com.example.ProjectLatest.entity.User;
@@ -39,8 +41,15 @@ public class UserService {
         try{
             User tempUser = new User("Default@123",token.getUserId());
             repoUser.save(tempUser);
-            UserDetails tempUd = new UserDetails(user.getFirstName(),user.getLastName(),
-                    user.getPhoneNumber(),user.getEmailId(),token.getUserId(),tempUser);
+
+            UserDetails tempUd = new UserDetailBuilder()
+                    .setFirstName(user.getFirstName())
+                    .setLastName(user.getLastName())
+                    .setEmailId(user.getEmailId())
+                    .setPhoneNumber(user.getPhoneNumber())
+                    .setCreatedBy(token.getUserId())
+                    .setUser(tempUser)
+                    .getResponse();
             repository.save(tempUd);
 
             if(user.getFlatNo() != null && user.getTowerName() != null) {
@@ -176,7 +185,15 @@ public class UserService {
                         }
                     }
 
-                    copy.add(new UserDetailsResponse(x.getUserDetailsId(),x.getFirstName(),x.getLastName(),x.getPhoneNumber(),x.getEmailId(),towerName,flatNo));
+                    copy.add(new UserDetailsResBuilder()
+                            .setUserDetailId(x.getUserDetailsId())
+                            .setFirstName(x.getFirstName())
+                            .setLastName(x.getLastName())
+                            .setPhoneNumber(x.getPhoneNumber())
+                            .setEmailId(x.getEmailId())
+                            .setTowerName(towerName)
+                            .setFlatNo(flatNo)
+                            .getResponse());
 
                 }
             }
