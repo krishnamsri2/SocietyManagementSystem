@@ -4,21 +4,41 @@ public class FlatResidentResponse {
     private boolean isOwner;
     private boolean isTenant;
     private long flatId;
+    private String flatNo;
+    private String towerName;
     private long userDetailId;
     private String firstName;
     private String LastName;
     private long phoneNumber;
     private String emailId;
 
-    public FlatResidentResponse(boolean isOwner, boolean isTenant, long flatId, long userDetailId, String firstName, String lastName, long phoneNumber, String emailId) {
+    public FlatResidentResponse(boolean isOwner, boolean isTenant,String towerName, long flatId,String flatNo, long userDetailId, String firstName, String lastName, long phoneNumber, String emailId) {
         this.isOwner = isOwner;
         this.isTenant = isTenant;
+        this.towerName = towerName;
         this.flatId = flatId;
+        this.flatNo = flatNo;
         this.userDetailId = userDetailId;
         this.firstName = firstName;
         LastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
+    }
+
+    public String getTowerName() {
+        return towerName;
+    }
+
+    public void setTowerName(String towerName) {
+        this.towerName = towerName;
+    }
+
+    public String getFlatNo() {
+        return flatNo;
+    }
+
+    public void setFlatNo(String flatNo) {
+        this.flatNo = flatNo;
     }
 
     public boolean isOwner() {

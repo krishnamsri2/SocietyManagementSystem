@@ -83,7 +83,7 @@ public class FlatResidentsService {
         try {
             FlatResidents tempUsers = frRepo.findById(id).orElse(null);
             if(tempUsers != null && tempUsers.getIsDeleted() == false) {
-                copy = new FlatResidentResponse(tempUsers.isOwner(), tempUsers.isTenant(), tempUsers.getFlat().getFlatId(),
+                copy = new FlatResidentResponse(tempUsers.isOwner(), tempUsers.isTenant(),tempUsers.getFlat().getTow2().getTowerName(), tempUsers.getFlat().getFlatId(),tempUsers.getFlat().getFlatNo(),
                         tempUsers.getUserDetail().getUserDetailsId(), tempUsers.getUserDetail().getFirstName(), tempUsers.getUserDetail().getLastName(),
                         tempUsers.getUserDetail().getPhoneNumber(), tempUsers.getUserDetail().getEmailId());
             }
@@ -100,8 +100,8 @@ public class FlatResidentsService {
             List<FlatResidents> temp = frRepo.findAllByFlatId(flatId);
             if(temp != null) {
                 copy = temp.stream()
-                        .map(FlatResidents -> new FlatResidentResponse(FlatResidents.isOwner(), FlatResidents.isTenant(), FlatResidents.getFlat().getFlatId(),
-                                FlatResidents.getUserDetail().getUserDetailsId(), FlatResidents.getUserDetail().getFirstName(), FlatResidents.getUserDetail().getLastName(),
+                        .map(FlatResidents -> new FlatResidentResponse(FlatResidents.isOwner(), FlatResidents.isTenant(),FlatResidents.getFlat().getTow2().getTowerName(), FlatResidents.getFlat().getFlatId(),
+                                FlatResidents.getFlat().getFlatNo(),FlatResidents.getUserDetail().getUserDetailsId(), FlatResidents.getUserDetail().getFirstName(), FlatResidents.getUserDetail().getLastName(),
                                 FlatResidents.getUserDetail().getPhoneNumber(), FlatResidents.getUserDetail().getEmailId()))
                         .collect(Collectors.toList());
             }
@@ -119,7 +119,7 @@ public class FlatResidentsService {
             List<FlatResidents> temp = frRepo.findAllByUserDetailId(userDetailId);
             if(temp != null) {
                 copy = temp.stream()
-                        .map(FlatResidents -> new FlatResidentResponse(FlatResidents.isOwner(), FlatResidents.isTenant(), FlatResidents.getFlat().getFlatId(),
+                        .map(FlatResidents -> new FlatResidentResponse(FlatResidents.isOwner(), FlatResidents.isTenant(),FlatResidents.getFlat().getTow2().getTowerName(),FlatResidents.getFlat().getFlatId(),FlatResidents.getFlat().getFlatNo(),
                                 FlatResidents.getUserDetail().getUserDetailsId(), FlatResidents.getUserDetail().getFirstName(), FlatResidents.getUserDetail().getLastName(),
                                 FlatResidents.getUserDetail().getPhoneNumber(), FlatResidents.getUserDetail().getEmailId()))
                         .collect(Collectors.toList());

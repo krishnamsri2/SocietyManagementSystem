@@ -1,11 +1,7 @@
 package com.example.ProjectLatest.service;
 
-import com.example.ProjectLatest.entity.Attendance;
-import com.example.ProjectLatest.entity.User;
-import com.example.ProjectLatest.entity.UserDetails;
-import com.example.ProjectLatest.repository.AttendanceRepository;
-import com.example.ProjectLatest.repository.UserDetailRepository;
-import com.example.ProjectLatest.repository.UserRepository;
+import com.example.ProjectLatest.entity.*;
+import com.example.ProjectLatest.repository.*;
 import com.example.ProjectLatest.response.AttendanceResponse;
 import com.example.ProjectLatest.response.UserDetailsResponse;
 import com.example.ProjectLatest.to.Token;
@@ -27,6 +23,12 @@ public class UserService {
     private UserRepository repoUser;
     @Autowired
     private AttendanceRepository attendanceRepository;
+    @Autowired
+    private FlatResidentsRepository frRepo;
+    @Autowired
+    private TowerRepository towerRepository;
+    @Autowired
+    private FlatRepository flatRepository;
 
 
     //POST
@@ -37,6 +39,9 @@ public class UserService {
             UserDetails tempUd = new UserDetails(user.getFirstName(),user.getLastName(),
                     user.getPhoneNumber(),user.getEmailId(),token.getUserId(),tempUser);
             repository.save(tempUd);
+
+            FlatResidents tempFR = new FlatResidents(false,false, token.getUserId(),flatRepository.getByFlatNo(user.getFlatNo(),towerRepository.getByTowerName(user.getTowerName(), token.getSocietyId()).getTowerId()),tempUd);
+            frRepo.save(tempFR);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -7,13 +7,31 @@ public class UserTO {
     private long phoneNumber;
     private String emailId;
     private String password;
+    private String towerName;
+    private String flatNo;
 
-    public String getUserId() {
+    public String getTowerName() {
+        return towerName;
+    }
+
+    public void setTowerName(String towerName) {
+        this.towerName = towerName;
+    }
+
+    public String getFlatNo() {
+        return flatNo;
+    }
+
+    public void setFlatNo(String flatNo) {
+        this.flatNo = flatNo;
+    }
+
+    public String getUserDetailId() {
         return userDetailId;
     }
 
-    public void setUserId(String userId) {
-        userDetailId = userId;
+    public void setUserDetailId(String userDetailId) {
+        this.userDetailId = userDetailId;
     }
 
     public String getPassword() {
