@@ -6,9 +6,17 @@ public class UserTO {
     private String LastName;
     private long phoneNumber;
     private String emailId;
-    private String password;
+    //private String password;
     private String towerName;
     private String flatNo;
+
+    public String getUserDetailId() {
+        return userDetailId;
+    }
+
+    public void setUserDetailId(String userDetailId) {
+        this.userDetailId = userDetailId;
+    }
 
     public String getTowerName() {
         return towerName;
@@ -26,21 +34,14 @@ public class UserTO {
         this.flatNo = flatNo;
     }
 
-    public String getUserDetailId() {
-        return userDetailId;
-    }
 
-    public void setUserDetailId(String userDetailId) {
-        this.userDetailId = userDetailId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getFirstName() {
         return firstName;
