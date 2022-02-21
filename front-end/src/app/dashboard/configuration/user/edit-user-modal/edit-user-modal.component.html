@@ -40,7 +40,7 @@
 
                     <div class="form-outline">
                         <label class="form-label" for="phoneNumber">Phone Number</label>
-                        <input type="tel" id="phoneNumber" class="form-control" required ngModel name="phoneNumber"
+                        <input type="text" id="phoneNumber" class="form-control" required ngModel name="phoneNumber"
                             pattern="^(0|\+?[1-9]\d*)$" #phoneNumber="ngModel" minlength="10" maxlength="10" />
                         <span class="help-block" *ngIf="!phoneNumber.valid && phoneNumber.touched">Please enter a valid
                             phone number</span>

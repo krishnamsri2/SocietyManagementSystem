@@ -11,7 +11,7 @@ import { UserPostServices } from '../user.posts.service';
 })
 export class EditUserModalComponent implements OnInit {
 
-  @ViewChild('f',{static:false}) updateForm : NgForm;
+  //@ViewChild('f',{static:false}) updateForm : NgForm;
   @Input('userId') userDetailId : number;
 
   closeResult = '';
@@ -53,18 +53,18 @@ export class EditUserModalComponent implements OnInit {
   }
 
   onFormSubmit(updateForm : NgForm){
-    // console.log(this.updateForm);
-    this.updatedUser.emailId=updateForm.value.emailId;
-    this.updatedUser.phoneNumber=updateForm.value.phoneNumber;
-    this.updatedUser.firstName=updateForm.value.firstName;
-    this.updatedUser.lastName=updateForm.value.lastName;
-    this.updatedUser.flatNumber=null;
-    this.updatedUser.towerNumber=null;
-    this.updatedUser.userDetailId=this.userDetailId;
-
-    this.userService.updateUser(this.updatedUser,this.userDetailId);
+    //console.log(updateForm.value.emailId);
+    let emailId=updateForm.value.emailId;
+    let phoneNumber=updateForm.value.phoneNumber;
+    let firstName=updateForm.value.firstName;
+    let lastName=updateForm.value.lastName;
+    let userDetailId=this.userDetailId;
+    this.updatedUser=new UserModel(userDetailId,firstName,lastName,phoneNumber,emailId);
+    console.log(this.updatedUser);
     
-    updateForm.reset();  
+    this.userService.updateUser(this.updatedUser,this.userDetailId);
+
+    //updateForm.reset();  
   }
 
 }

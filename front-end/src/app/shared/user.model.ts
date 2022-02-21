@@ -8,15 +8,17 @@ export class UserModel{
     public towerNumber? : string;
     public flatNumber? : string;
 
-    constructor(userDetailId : number, firstName : string, lastName : string, phoneNumber : number, emailId : string,roleType : string, role : string,
+    constructor(userDetailId : number, firstName : string, lastName : string, phoneNumber : string, emailId : string,
     towerNumber? : string, flatNumber? : string)
     {
         this.userDetailId=userDetailId;
         this.firstName=firstName;
         this.lastName=lastName;
-        this.phoneNumber=phoneNumber;
+        this.phoneNumber=+phoneNumber;
         this.emailId=emailId;
         this.towerNumber=towerNumber;
         this.flatNumber=flatNumber;
     }
+
+    
 }
