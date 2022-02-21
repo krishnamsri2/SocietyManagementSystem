@@ -11,9 +11,9 @@ public class Announcement {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long AnnoucementId;
-	private String AnnouncementDetail;
-	private long UserId;
+	private long annoucementId;
+	private String announcementDetail;
+	private long userId;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST})
 	@JoinColumn(name="flatResId")
@@ -40,7 +40,7 @@ public class Announcement {
 
 	public Announcement(String announcementDetail, long createdBy) {
 		
-		this.AnnouncementDetail = announcementDetail;
+		this.announcementDetail = announcementDetail;
 		this.createdBy = createdBy;
 		this.modifyBy = createdBy;
 		this.createdDate = new Date();
@@ -53,27 +53,28 @@ public class Announcement {
         modifyDate = new Date();
     }
 	
-	public long getAnnoucementId() {
-		return AnnoucementId;
+	public long getannoucementId() {
+		return annoucementId;
 	}
 	
 	
 	public long getUserId() {
-		return UserId;
+		return userId;
 	}
 	
 	public void setUserId(long userId) {
 		onUpdate();
-		UserId = userId;
+		userId = userId;
 	}
 	
 	public String getAnnouncementDetail() {
-		return AnnouncementDetail;
+		return announcementDetail;
 	}
 	
 	public void setAnnouncementDetail(String announcementDetail) {
-		onUpdate();
-		AnnouncementDetail = announcementDetail;
+       onUpdate();
+		this.announcementDetail = announcementDetail;
+
 	}
 	
 	public long getCreatedBy() {
@@ -126,10 +127,6 @@ public class Announcement {
 		onUpdate();
 		this.flatResidents = flatResidents;
 	}
-
-
-	
-	
 
 	
 }

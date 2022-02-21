@@ -33,17 +33,8 @@ public class MenuSecurity {
 		super();
 	}
 	
-	public Role getRole() {
-		return role;
-	}
 
-	public Menu getMenu() {
-		return menu;
-	}
-
-	
-
-	public MenuSecurity(long createdBy,Role role,Menu menu) {
+	public MenuSecurity(Role role,Menu menu,long createdBy) {
 		super();
 		this.role = role;
 		this.menu = menu;
@@ -54,6 +45,22 @@ public class MenuSecurity {
 		this.isActive=true;
 		this.isDeleted=true;
 	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+
+		this.menu = menu;
+	}
+
 	
 	public long getMenuSecurityID()
 	{

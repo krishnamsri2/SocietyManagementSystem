@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProjectLatestApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(ProjectLatestApplication.class, args);
 	}
 
