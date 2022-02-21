@@ -28,8 +28,9 @@ public class RoleService
     public void addRole(RoleTO role,Long userID)
     {
         UserDetails usd = userDetailsRepository.getById(userID);
-        Role temp = new Role(role.getRoleType(),role.getRoleDescription(),role.getRole(),userID);
+        Role temp = new Role(role.getRoleType(),role.getRoleDescription(),role.getRole(),usd.getUserDetailsId());
         usd.getRoles().add(temp);
+        temp.getUserDetails().add(usd);
         roleRepository.save(temp);
     }
 

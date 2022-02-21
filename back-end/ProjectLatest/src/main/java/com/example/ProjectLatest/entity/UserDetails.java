@@ -75,9 +75,7 @@ public class UserDetails
 		return userDetailsId;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
+
 
 	public String getFirstName() {
 		return firstName;
@@ -171,8 +169,7 @@ public class UserDetails
 		this.isActive = isActive;
 	}
 
-	public Set<Role> getRoles()
-	{
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
