@@ -1,8 +1,5 @@
 package com.example.ProjectLatest.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,34 +8,21 @@ import java.util.Set;
 
 @Entity
 @Table(name="UserDetails")
-public class UserDetails implements Serializable
+public class UserDetails
 {
-	// private static final long serialVersionUID = 49274929479279279L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long userDetailsId;
 
-	public UserDetails() {
-	}
-
-	public long getUserDetailsId() {
-		return userDetailsId;
-	}
-
-	public void setUserDetailsId(long userDetailsId) {
-		this.userDetailsId = userDetailsId;
-	}
-
 	private String firstName;
-	private String LastName;
+	private String lastName;
+	@Column(unique = true)
 	private long phoneNumber;
+	@Column(unique = true)
 	private String emailId;
 	
 	private long createdBy;
 	private long modifiedBy;
-	
-	@OneToMany(mappedBy = "userDetail", cascade={CascadeType.REMOVE} )
-	private Set<FlatResidents> residents = new HashSet<FlatResidents>();
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="createdDate",nullable=false)
@@ -53,34 +37,29 @@ public class UserDetails implements Serializable
 	
 	@OneToOne
 	@JoinColumn(name="userID")  // ForeignKey from User table
-	@JsonManagedReference
 	private User user;
 	
-	@OneToOne(mappedBy="userDetails")
-	@JsonBackReference
-	private Role role;
-	
+	@ManyToMany
+	@JoinTable(
+			name = "userDetails_role",
+			joinColumns = {@JoinColumn(name = "userDetailsId")},
+			inverseJoinColumns = {@JoinColumn(name="role_id")}
+	)
+	private Set<Role> roles = new HashSet<Role>();
+
+	@OneToMany(mappedBy = "userDetail", cascade={CascadeType.REMOVE} )
+	private Set<FlatResidents> residents = new HashSet<FlatResidents>();
+
 	@OneToMany(mappedBy = "usd")
     private Set<Attendance> setAttendance = new HashSet<Attendance>();
 
-	public Set<Attendance> getSetAttendance() {
-		return setAttendance;
+	public UserDetails() {
 	}
-
-	public void setSetAttendance(Set<Attendance> setAttendance) {
-		this.setAttendance = setAttendance;
-	}
-	
-	public void addAttendance(Attendance attendance)
-	{
-		setAttendance.add(attendance);
-	}
-
 
 	public UserDetails(String firstName, String lastName, long phoneNumber, String emailId,long createdBy,User user) {
 		super();
 		this.firstName = firstName;
-		LastName = lastName;
+		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.emailId = emailId;
 		this.createdBy = createdBy;
@@ -90,6 +69,14 @@ public class UserDetails implements Serializable
 		this.isDeleted = false;
 		this.isActive = true;
 		this.user = user;
+	}
+
+	public long getUserDetailsId() {
+		return userDetailsId;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
 	public String getFirstName() {
@@ -103,13 +90,13 @@ public class UserDetails implements Serializable
 	}
 	
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 	
 	public void setLastName(String lastName,long modifiedBy) {
 		setUpdateDate();
 		setModifiedBy(modifiedBy);
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public User getUser() {
@@ -194,5 +181,13 @@ public class UserDetails implements Serializable
 		resident.setUserDetail(this);
 	}
 
+	public Set<Attendance> getSetAttendance() {
+		return setAttendance;
+	}
 
+	public void addAttendance(Attendance attendance) {
+		setUpdateDate();
+		setAttendance.add(attendance);
+		attendance.setUsd(this);
+	}
 }

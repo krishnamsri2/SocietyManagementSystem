@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/shared/user.model';
 import { UserPostServices } from '../user.posts.service';
 
@@ -9,13 +10,16 @@ import { UserPostServices } from '../user.posts.service';
   templateUrl: './edit-user-modal.component.html',
   styleUrls: ['./edit-user-modal.component.css']
 })
-export class EditUserModalComponent implements OnInit {
+export class EditUserModalComponent implements OnInit,OnDestroy {
 
-  //@ViewChild('f',{static:false}) updateForm : NgForm;
+  //@ViewChild('f',{static:true}) updateForm : NgForm;
   @Input('userId') userDetailId : number;
 
-  closeResult = '';
+  closeResult = ''; 
+
   public defaultUser;
+
+  private defaultUserSubscription: Subscription;
 
   private updatedUser : UserModel;
 
@@ -23,14 +27,13 @@ export class EditUserModalComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.defaultUser=this.userService.getUserById(this.userDetailId);
-    console.log(this.defaultUser);
-    //  setTimeout(()=>{
-    //   this.updateForm.setValue(this.defaultUser);
+    this.defaultUserSubscription = this.userService.getUserById(this.userDetailId).subscribe((responseData)=>{
+      this.defaultUser=responseData;
       
-    //  });
+    },error=>{
+      console.log("Error in user updation",error);
+    });
     
-    //console.log("hello");
     
   }
 
@@ -53,18 +56,17 @@ export class EditUserModalComponent implements OnInit {
   }
 
   onFormSubmit(updateForm : NgForm){
-    //console.log(updateForm.value.emailId);
     let emailId=updateForm.value.emailId;
     let phoneNumber=updateForm.value.phoneNumber;
     let firstName=updateForm.value.firstName;
     let lastName=updateForm.value.lastName;
     let userDetailId=this.userDetailId;
     this.updatedUser=new UserModel(userDetailId,firstName,lastName,phoneNumber,emailId);
-    console.log(this.updatedUser);
-    
     this.userService.updateUser(this.updatedUser,this.userDetailId);
+  }
 
-    //updateForm.reset();  
+  ngOnDestroy(){
+    this.defaultUserSubscription.unsubscribe();
   }
 
 }

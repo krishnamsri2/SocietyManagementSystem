@@ -1,25 +1,29 @@
 package com.example.ProjectLatest.to;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class FlatResidentTO {
+    @JsonProperty
     private boolean isOwner;
+    @JsonProperty
     private boolean isTenant;
     private long flatId;
     private long userDetailId;
 
-    public boolean isOwner() {
+    public boolean getIsOwner() {
         return isOwner;
     }
 
-    public void setOwner(boolean owner) {
-        isOwner = owner;
+    public void setIsOwner(boolean owner) {
+        this.isOwner = owner;
     }
 
-    public boolean isTenant() {
+    public boolean getIsTenant() {
         return isTenant;
     }
 
-    public void setTenant(boolean tenant) {
-        isTenant = tenant;
+    public void setIsTenant(boolean tenant) {
+        this.isTenant = tenant;
     }
 
     public long getFlatId() {

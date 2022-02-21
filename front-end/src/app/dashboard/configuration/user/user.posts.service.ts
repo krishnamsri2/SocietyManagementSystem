@@ -4,6 +4,7 @@ import { UserModel } from "src/app/shared/user.model";
 import { HttpClient } from '@angular/common/http';
 import {catchError, map} from "rxjs/operators";
 import { Subject,throwError } from "rxjs";
+import { RequestObject } from "src/app/service/request.service";
 
 @Injectable({providedIn : 'root'})
 export class UserPostServices{
@@ -21,12 +22,13 @@ export class UserPostServices{
         }));
     }
     
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient,private requestObj : RequestObject){}
     errorMessage = new Subject<String>();
 
     setUserInactive(userId: number) {
         this.http.delete(`http://localhost:9191/users/delete/${userId}`).subscribe((userId)=>{
-            console.log("User removed successfully with userId ",userId);
+            alert("User deleted successfully");
+            //console.log("User removed successfully with userId ",userId);
         },error=>{
             console.log("User deletion not successful",error);
         });    
@@ -39,7 +41,15 @@ export class UserPostServices{
     }
 
     updateUser(updatedUser: UserModel, userDetailId: number) {
-        return this.http.put('',updatedUser).subscribe((userDetailId)=>{
+
+        this.requestObj.putRequestObject(updatedUser);
+        let updatedUserRequestObj;
+        updatedUserRequestObj=this.requestObj.getRequestObject();
+
+        //console.log("Hello",updatedUserRequestObj);
+        
+
+        this.http.put(`http://localhost:9191/users/update/${userDetailId}`,updatedUserRequestObj).subscribe((userDetailId)=>{
             alert('User updated successfully');
         },error=>{
             alert('User not updated!!');

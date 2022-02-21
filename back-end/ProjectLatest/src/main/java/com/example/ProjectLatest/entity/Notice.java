@@ -10,7 +10,7 @@ import java.util.Date;
 public class Notice {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "noticeId")
 	private long noticeId;
 

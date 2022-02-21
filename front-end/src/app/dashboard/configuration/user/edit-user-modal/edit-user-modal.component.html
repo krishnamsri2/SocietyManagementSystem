@@ -11,14 +11,14 @@
 
                     <div class="form-outline">
                         <label class="form-label" for="firstName">First Name</label>
-                        <input type="text" id="firstName" class="form-control" ngModel name="firstName" required />
+                        <input type="text" id="firstName" class="form-control" [(ngModel)]="defaultUser.firstName" name="firstName" required />
                     </div>
 
                 </div>
                 <div class="col-md-6 mb-4">
                     <label class="form-label" for="lastName">Last Name</label>
                     <div class="form-outline">
-                        <input type="text" id="lastName" class="form-control" name="lastName" ngModel />
+                        <input type="text" id="lastName" class="form-control" [(ngModel)]="defaultUser.lastName" name="lastName" ngModel />
                     </div>
 
                 </div>
@@ -30,7 +30,7 @@
                     <div class="form-outline">
                         <label class="form-label" for="emailAddress">Email-ID</label>
                         <input type="email" id="emailAddress" class="form-control" name="emailId" ngModel email
-                            #emailId="ngModel" />
+                            #emailId="ngModel" [(ngModel)]="defaultUser.emailId"/>
                         <span class="help-block" *ngIf="!emailId.valid && emailId.touched">Please enter a valid email
                             address</span>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="form-outline">
                         <label class="form-label" for="phoneNumber">Phone Number</label>
                         <input type="text" id="phoneNumber" class="form-control" required ngModel name="phoneNumber"
-                            pattern="^(0|\+?[1-9]\d*)$" #phoneNumber="ngModel" minlength="10" maxlength="10" />
+                            pattern="^(0|\+?[1-9]\d*)$" #phoneNumber="ngModel" minlength="10" maxlength="10" [(ngModel)]="defaultUser.phoneNumber"/>
                         <span class="help-block" *ngIf="!phoneNumber.valid && phoneNumber.touched">Please enter a valid
                             phone number</span>
                     </div>

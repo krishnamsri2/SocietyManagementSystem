@@ -81,6 +81,11 @@ public class Attendance
 	public UserDetails getUser() {
 		return usd;
 	}
+
+	public void setUsd(UserDetails usd) {
+		this.usd = usd;
+	}
+
 	public long getCreatedBy() {
 		return createdBy;
 	}

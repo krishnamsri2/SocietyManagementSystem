@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -43,8 +44,10 @@ public class UserController {
 
     }
 
+
     @DeleteMapping("/users/delete/{id}")
     public void deleteUser(@PathVariable long id){
          service.deleteUser(id);
     }
 
+}

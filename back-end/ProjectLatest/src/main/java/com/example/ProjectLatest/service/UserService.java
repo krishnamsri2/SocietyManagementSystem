@@ -36,10 +36,17 @@ public class UserService {
     //POST
     public void saveUser(UserTO user, Token token){
         try{
-            User tempUser = new User(user.getPassword(),token.getUserId());
+            User tempUser = new User("Default@123",token.getUserId());
             repoUser.save(tempUser);
-            UserDetails tempUd = new UserDetails(user.getFirstName(),user.getLastName(),
-                    user.getPhoneNumber(),user.getEmailId(),token.getUserId(),tempUser);
+
+            UserDetails tempUd = new UserDetailBuilder()
+                    .setFirstName(user.getFirstName())
+                    .setLastName(user.getLastName())
+                    .setEmailId(user.getEmailId())
+                    .setPhoneNumber(user.getPhoneNumber())
+                    .setCreatedBy(token.getUserId())
+                    .setUser(tempUser)
+                    .getResponse();
             repository.save(tempUd);
 
             long towerId =  towerRepository.getByTowerName(user.getTowerName(), token.getSocietyId()).getTowerId();
@@ -79,8 +86,6 @@ public class UserService {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return acknow;
         }
 
     }
@@ -125,12 +130,11 @@ public class UserService {
                 }
             }
 
-        }catch (Exception e){
+        }catch(Exception e){
             e.printStackTrace();
-        }finally {
-            return responses;
         }
 
+        return copy;
     }
 
     public List<UserFlatResponse> getFlatDetails(long id){
@@ -153,29 +157,19 @@ public class UserService {
     public void deleteUser(long id){
         try {
             UserDetails tempUsers = repository.findById(id).orElse(null);
-            if(tempUsers != null) {
+            if(tempUsers != null && tempUsers.getIsDeleted() == false) {
                 tempUsers.setIsActive(false, tempUsers.getModifiedBy());
                 tempUsers.setIsDeleted(true, tempUsers.getModifiedBy());
                 tempUsers.getUser().setIsActive(false, tempUsers.getModifiedBy());
                 tempUsers.getUser().setIsDeleted(true);
+                for(FlatResidents x:tempUsers.getFlatResidents()){
+                    x.setIsDeleted(true);
+                    x.setIsActive(false);
+                }
                 repository.save(tempUsers);
             }
         }catch (Exception e){
             e.printStackTrace();
-        }
-
-    public String deleteUserAttendance(long id) {
-        try {
-            Attendance tempAtten = attendanceRepository.findById(id).orElse(null);
-            if(tempAtten != null) {
-                tempAtten.setIsDeleted(true);
-                tempAtten.setIsActive(false);
-                attendanceRepository.save(tempAtten);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            return "User's Attendance removed !!" +id;
         }
 
     }
