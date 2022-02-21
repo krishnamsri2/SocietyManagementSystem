@@ -12,8 +12,8 @@ import { RoleService } from 'src/app/dashboard/configuration/role/role.service';
 })
 export class NewRoleModalComponent implements OnInit, OnDestroy {
 
-  @Input('userIdForRoleAddition') hello : string;
-  userId = '-Mw5jTs2jQ0XrBBgwc0B';
+  @Input('userIdForRoleAddition') userDetailId : number;
+  
   private newUserSubscription : Subscription;
   closeResult = '';
 
@@ -46,8 +46,7 @@ export class NewRoleModalComponent implements OnInit, OnDestroy {
     let newRoleType = roleCreateForm.value.roleType;
     let newRoleDesc = roleCreateForm.value.roleDescription;
     
-    
-    this.newUserSubscription=this.roleService.addRole(new RoleModel(newRoleType,newRole,newRoleDesc,this.userId)).
+    this.newUserSubscription=this.roleService.addRole(new RoleModel(newRoleType,newRole,newRoleDesc),this.userDetailId).
     subscribe(()=>{
       console.log("Role for a particular user added");
     },err=>{

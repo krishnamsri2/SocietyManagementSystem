@@ -15,7 +15,7 @@ import { UserPostServices } from './user.posts.service';
 })
 export class UserComponent implements OnInit,OnDestroy {
 
-  private userId : number;
+  private userDetailId : number;
   users : UserModel[];
 
   userSubscription : Subscription;
@@ -36,7 +36,7 @@ export class UserComponent implements OnInit,OnDestroy {
   }
 
   saveUserId(userId : number){
-    //this.roleService.setUserId(userId);
+    this.roleService.setUserId(userId);
   }
 
   setUserInactive(userId : number){

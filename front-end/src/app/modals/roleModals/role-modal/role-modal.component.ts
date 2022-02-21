@@ -12,8 +12,8 @@ import { RoleService } from 'src/app/dashboard/configuration/role/role.service';
 })
 export class RoleModalComponent implements OnInit, OnDestroy {
 
-  @Input('id') userId : string;
-  @Input('roleIdForEdit') roleId : string;
+  @Input('id') userDetailId : number;
+  @Input('roleIdForEdit') roleId : number;
   
   private updateRoleSubscription : Subscription;
   public roles : RoleModel;   
@@ -47,7 +47,7 @@ export class RoleModalComponent implements OnInit, OnDestroy {
     let newRoleType=roleUpdateForm.value.roleType;
     let newRole=roleUpdateForm.value.role;
     let newRoleDesc=roleUpdateForm.value.roleDescription;
-    this.updateRoleSubscription=this.roleService.updateRoleDetailsByRoleId(new RoleModel(newRoleType,newRole,newRoleDesc,this.userId,this.roleId)).
+    this.updateRoleSubscription=this.roleService.updateRoleDetailsByRoleId(new RoleModel(newRoleType,newRole,newRoleDesc,this.userDetailId,this.roleId)).
     subscribe(()=>{
       console.log("Roles updated for a particular user");
     },err=>{

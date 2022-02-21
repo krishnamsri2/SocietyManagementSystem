@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 import {throwError} from 'rxjs';
 import { RoleModel } from "./role.model";
 import {catchError, map} from 'rxjs/operators';
+import { RequestRoleObject } from "src/app/request-objects/requestRole.service";
 
 
 @Injectable({
@@ -11,21 +12,20 @@ import {catchError, map} from 'rxjs/operators';
 })
 export class RoleService{
     
-    
-    private userId = '-Mw5jTs2jQ0XrBBgwc0B';
+    private userDetailId : number;
 
-    constructor( private http : HttpClient ){}
+    constructor( private http : HttpClient, private roleObj : RequestRoleObject){}
 
-    setUserId(userId: string) {
-      this.userId=userId;
+    setUserId(userDetailId: number) {
+      this.userDetailId=userDetailId;
     }
 
-    getUserID(): string {
-        return this.userId;
+    getUserID() {
+        return this.userDetailId;
     }
 
-    getAllRolesOfAUser(userId : string){
-    //   return this.http.get<any>(`https://ng-society-management-default-rtdb.firebaseio.com/users/${userId}/roles.json`,
+    getAllRolesOfAUser(userDetailId : string){
+    //   return this.http.get<any>(`https://ng-society-management-default-rtdb.firebaseio.com/users/${userDetailId}/roles.json`,
     //   {
     //       responseType:'json'
     //   }).
@@ -44,18 +44,24 @@ export class RoleService{
     }
 
     getRoleDetailsByRoleId(roleId: string) {
-        //return this.http.get(`https://ng-society-management-default-rtdb.firebaseio.com/users/${this.userId}/roles.json`);
+        //return this.http.get(`https://ng-society-management-default-rtdb.firebaseio.com/users/${this.userDetailId}/roles.json`);
     }
 
-    addRole(newRole:RoleModel){
-        return this.http.post<any>(`https://ng-society-management-default-rtdb.firebaseio.com/users/${this.userId}/roles.json`,newRole);
+    addRole(newRole:RoleModel,userDetailId : number){
+        this.roleObj.setRoleRequestObject(newRole);
+        let roleRequestObj = this.roleObj.getRoleRequestObject();
+
+        console.log(roleRequestObj,userDetailId);
+        
+
+        return this.http.post<any>(`http://localhost:9191/userDetails/${userDetailId}/role`,roleRequestObj);
     }
 
     deleteRole(roleId : string){
-            return this.http.delete(`https://ng-society-management-default-rtdb.firebaseio.com/users/${this.userId}/roles/${roleId}.json`);
+            return this.http.delete(`https://ng-society-management-default-rtdb.firebaseio.com/users/${this.userDetailId}/roles/${roleId}.json`);
     }
 
     updateRoleDetailsByRoleId(updatedRoles: RoleModel) {
-        return this.http.put(`https://ng-society-management-default-rtdb.firebaseio.com/users/${this.userId}/roles.json`,updatedRoles);
+        return this.http.put(`https://ng-society-management-default-rtdb.firebaseio.com/users/${this.userDetailId}/roles.json`,updatedRoles);
     }
 }

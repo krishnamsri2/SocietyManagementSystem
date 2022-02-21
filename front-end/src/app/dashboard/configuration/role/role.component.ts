@@ -15,7 +15,7 @@ export class RoleComponent implements OnInit,OnDestroy {
 
   public roleArray : RoleModel[] = [];
 
-  public userId:string;
+  public userDetailId:number;
 
   private errorSubscription : Subscription;
   private deleteSubscription : Subscription;
@@ -23,7 +23,7 @@ export class RoleComponent implements OnInit,OnDestroy {
   constructor(private roleService : RoleService) { }
 
   ngOnInit(): void {
-    this.userId=this.roleService.getUserID();
+    this.userDetailId=this.roleService.getUserID();
     //this.roleArray=this.roleService.getAllRolesOfAUser(this.userId);
   }
 
