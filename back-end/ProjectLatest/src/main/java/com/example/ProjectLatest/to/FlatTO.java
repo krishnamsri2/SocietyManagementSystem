@@ -1,8 +1,11 @@
 package com.example.ProjectLatest.to;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class FlatTO {
     private long flatId;
     private String flatNo;
+    @JsonProperty
     private boolean status;
     private int numberOfOccupant;
 

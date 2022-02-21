@@ -1,13 +1,16 @@
 export class SocietyModel{
-    private Id:string;
-    private societyId:string;
+    private serialNo:string;
+    private societyId:number;
     private societyName:string;
-    private societyAddress:string;
+    private createdBy:number;
+    private createdDate:string;
 
-    constructor(Id:string,societyId:string,societyName:string,societyAddress:string){
-        this.Id=Id;
+    constructor(serialNo:string,societyId:number,societyName:string,createdBy:number,createdDate:string){
+        this.serialNo=serialNo;
         this.societyId=societyId;
         this.societyName=societyName;
-        this.societyAddress=societyAddress;
+        this.createdBy=createdBy;
+        this.createdDate=createdDate;
+        
     }
 }

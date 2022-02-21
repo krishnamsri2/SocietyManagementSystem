@@ -1,15 +1,13 @@
 export class TowerModel{
-    private tower_Id:string;
-    private towerId:string;
-    private parentId:string;
+    private serialNo:string;
+    private towerId:number;
+    private soc:number;
     private towerName:string;
-    private towerAddress:string;
 
-    constructor(tower_Id:string,towerId:string,towerName:string,towerAddress:string,parentId:string){
-        this.towerId=tower_Id;
-        this.towerId = towerId;
-        this.parentId = parentId;
+    constructor(towerId:number,serialNo:string,towerName:string,soc:number){
+        this.towerId=towerId;
+        this.serialNo = serialNo;
+        this.soc = soc;
         this.towerName = towerName;
-        this.towerAddress = towerAddress;
     }
 }

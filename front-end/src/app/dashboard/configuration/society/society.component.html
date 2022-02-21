@@ -13,10 +13,9 @@
             <h5 class="card-title">{{society.societyName}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{society.societyAddress}}</h6>
             <p class="card-text">Small Description of Society</p>
-            <a [routerLink]="['towerlist',society.Id]" class="card-link">Enter</a>
             <div class="card-btns">
-                <button class="btn btn-danger" (click)="onDelete(society.Id)">Delete</button>
-                <button class="btn btn-primary">Edit</button>
+                <a [routerLink]="['towerlist',society.Id]" class="card-link">Enter</a>
+                <app-edit-society [societyId]="society.societyId"></app-edit-society>
             </div>
         </div>
     </div>

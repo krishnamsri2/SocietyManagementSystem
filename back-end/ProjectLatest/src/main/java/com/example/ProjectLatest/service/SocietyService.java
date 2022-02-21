@@ -93,6 +93,7 @@ public class SocietyService {
             if(temp!=null)
             {
                 temp.setDeleted(true);
+                repository.save(temp);
                 ack="removed";
                 repository.save(temp);
             }

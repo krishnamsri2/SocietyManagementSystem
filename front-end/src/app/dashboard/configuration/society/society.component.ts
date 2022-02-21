@@ -26,15 +26,12 @@ export class SocietyComponent implements OnInit,OnDestroy {
     this.societySubscription = this.societyPostService.fetchSocieties().subscribe((societyData)=>{
       this.societies = societyData;
       this.societyService.setSocieties(this.societies);
-      console.log(this.societies);
+      // console.log(this.societies);
+      console.log(societyData);
     })
   }
   ngOnDestroy(): void {
     this.societySubscription.unsubscribe();
   }
-  onDelete(Id:string){
-    this.societyPostService.deleteSociety(Id).subscribe(()=>{
-      console.log(this.societies);
-    });
-  }
+  
 }

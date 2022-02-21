@@ -15,11 +15,15 @@ export class AddSocietyComponent implements OnInit {
     
   }
   constructor(private modalService: NgbModal,private societyPostService:SocietyPostService) {}
-  society = {
-    societyId:'',
-    societyName:'',
-    societyAddress:''
-  }
+  societyReqObj = {
+    token:{
+    societyId:11,
+    userId:12
+    },
+    requestObject:{
+    societyName:''
+    }
+    }
 
   open(content) {
     this.modalService.open(content, {size:'lg',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -39,11 +43,8 @@ export class AddSocietyComponent implements OnInit {
     }
   }
   onSubmit(form:NgForm ){
-    let id:string = uuid();
-    this.society.societyId=id;
-    this.society.societyName=form.value.societyName;
-    this.society.societyAddress=form.value.societyAddress;
-    this.societyPostService.addSociety(this.society);
+    this.societyReqObj.requestObject.societyName=form.value.societyName;
+    this.societyPostService.addSociety(this.societyReqObj);
     form.reset();
   }
 }

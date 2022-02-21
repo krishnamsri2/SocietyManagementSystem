@@ -21,10 +21,7 @@ export class TowerListComponent implements OnInit {
       this.towers=towerData;
       console.log(this.towers);
     });
-    this.http.get<string>(`https://societymanagementsystem-8a82b-default-rtdb.firebaseio.com/society/${this.route.snapshot.params.id}/societyName.json`)
-    .subscribe((data)=>{
-      this.societyName = data;
-    })
+    
   }
   
 }

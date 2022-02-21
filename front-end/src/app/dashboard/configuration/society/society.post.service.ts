@@ -10,19 +10,18 @@ export class SocietyPostService{
     constructor(private http:HttpClient,private towerListPostService:TowerListPostService){
 
     }
-    addSociety(newSociety:{
-        societyId:string,
-        societyName:String,
-        societyAddress:string
-    })
+    addSociety(newSociety)
     {
-        this.http.post('https://societymanagementsystem-8a82b-default-rtdb.firebaseio.com/society.json',newSociety)
+
+        this.http.post('http://localhost:9191/addSociety',newSociety)
         .subscribe((newUser)=>{
             alert('ADDED Society');
+        },error=>{
+            console.log("This runs");
         })
     }
     fetchSocieties(){
-        return this.http.get<{[ key : string ] : SocietyModel}>('https://societymanagementsystem-8a82b-default-rtdb.firebaseio.com/society.json',
+        return this.http.get<{[ key : string ] : SocietyModel}>('http://localhost:9191/societies',
         {
             responseType:'json'
         }).
@@ -31,14 +30,16 @@ export class SocietyPostService{
 
             for(const key in responseData){
                 if(responseData.hasOwnProperty(key)){
-                    societies.push({...responseData[key], Id : key});
+                    societies.push({...responseData[key], serialNo : key});
                 }
             }
             return societies;
         }));
     }
-    deleteSociety(Id:string){
-        let link:string = `https://societymanagementsystem-8a82b-default-rtdb.firebaseio.com/society/${Id}.json`;
-        return this.http.delete(link);
+    updateSocietyName(Id:number,newName:any){
+        this.http.put(`http://localhost:9191/society/updates/${Id}`,newName)
+        .subscribe(()=>{
+            alert('Name changed');
+        })
     }
 }

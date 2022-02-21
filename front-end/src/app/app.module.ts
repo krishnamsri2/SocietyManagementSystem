@@ -29,6 +29,7 @@ import { RoleComponent } from './dashboard/configuration/role/role.component';
 import { MenuComponent } from './dashboard/configuration/menu/menu.component';
 import { MenuSecurityComponent } from './dashboard/configuration/menu-security/menu-security.component';
 import { NarrowLongCardsComponent } from './narrow-long-cards/narrow-long-cards.component';
+import { EditSocietyComponent } from './modals/societymodal/edit-society/edit-society.component';
 
 
 
@@ -54,7 +55,8 @@ import { NarrowLongCardsComponent } from './narrow-long-cards/narrow-long-cards.
     RoleComponent,
     MenuComponent,
     MenuSecurityComponent,
-    NarrowLongCardsComponent
+    NarrowLongCardsComponent,
+    EditSocietyComponent
     
     //DummyComponentComponent
   ],

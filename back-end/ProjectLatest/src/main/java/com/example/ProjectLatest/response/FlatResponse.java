@@ -1,14 +1,25 @@
 package com.example.ProjectLatest.response;
 
 public class FlatResponse {
+    private long flatId;
     private String flatNo;
     private boolean Status;
     private int numberOfOccupants;
 
-    public FlatResponse(String flatNo, boolean status, int numberOfOccupants) {
+    public FlatResponse(String flatNo, boolean status, int numberOfOccupants,long flatId) {
+
         this.flatNo = flatNo;
         Status = status;
         this.numberOfOccupants = numberOfOccupants;
+        this.flatId=flatId;
+    }
+
+    public long getFlatId() {
+        return flatId;
+    }
+
+    public void setFlatId(long flatId) {
+        this.flatId = flatId;
     }
 
     public String getFlatNo() {

@@ -22,7 +22,7 @@ export class TowerListPostService{
         })
     };
     fetchTowers(parentId:string){
-        return this.http.get<{[ key : string ] : TowerModel}>(`https://societymanagementsystem-8a82b-default-rtdb.firebaseio.com/society/${parentId}/tower.json`,
+        return this.http.get<{[ key : string ] : TowerModel}>(`http://localhost:9191/society/updates/${parentId}`,
         {
             responseType:'json'
         }).
@@ -31,7 +31,7 @@ export class TowerListPostService{
 
             for(const key in responseData){
                 if(responseData.hasOwnProperty(key)){
-                    tower.push({...responseData[key], tower_Id : key});
+                    tower.push({...responseData[key], serialNo : key});
                 }
             }
             return tower;
