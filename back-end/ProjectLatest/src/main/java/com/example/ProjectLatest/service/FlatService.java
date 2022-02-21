@@ -5,7 +5,6 @@ import com.example.ProjectLatest.repository.FlatRepository;
 import com.example.ProjectLatest.repository.SocietyRepository;
 import com.example.ProjectLatest.repository.TowerRepository;
 import com.example.ProjectLatest.response.FlatResponse;
-import com.example.ProjectLatest.response.SocietyResponse;
 import com.example.ProjectLatest.to.FlatTO;
 import com.example.ProjectLatest.to.Token;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class FlatService {
     public void addFlat(FlatTO requestObject, long tower_id, Token token) {
         try {
             Tower tower = towerRepository.findById(tower_id).orElse(null);
-            if(tower!=null) {
+            if(tower!=null && !tower.isDeleted()) {
                 Flat flat = new Flat(requestObject.getFlatNo(), requestObject.isStatus(), requestObject.getNumberOfOccupant(), token.getUserId(), false, true, tower);
                 flatRepository.save(flat);
             }
