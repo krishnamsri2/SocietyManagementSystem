@@ -1,5 +1,6 @@
 package com.example.ProjectLatest.service;
 
+import com.example.ProjectLatest.builder.FlatResidentBuilder;
 import com.example.ProjectLatest.builder.UserDetailBuilder;
 import com.example.ProjectLatest.builder.UserDetailsResBuilder;
 import com.example.ProjectLatest.entity.Attendance;
@@ -53,7 +54,13 @@ public class UserService {
             repository.save(tempUd);
 
             if(user.getFlatNo() != null && user.getTowerName() != null) {
-                FlatResidents tempFR = new FlatResidents(false, false, token.getUserId(), flatRepository.getByFlatNo(user.getFlatNo(), towerRepository.getByTowerName(user.getTowerName(), token.getSocietyId()).getTowerId()), tempUd);
+                FlatResidents tempFR = new FlatResidentBuilder()
+                        .setOwner(false)
+                        .setTenant(false)
+                        .setCreatedBy(token.getUserId())
+                        .setFlat( flatRepository.getByFlatNo(user.getFlatNo(), towerRepository.getByTowerName(user.getTowerName(), token.getSocietyId()).getTowerId()))
+                        .setUserDetail(tempUd)
+                        .getResponse();
                 flatResidentsRepository.save(tempFR);
             }
 
@@ -63,26 +70,26 @@ public class UserService {
             return "New User is Added!";
 
     }
-//
-//    public String saveAttendance(long id) {
-//        String acknow = null;
-//        try {
-//            UserDetails existingUser = repository.findById(id).orElse(null);
-//            if(existingUser == null)
-//                acknow =  "No User Found";
-//            else {
-//                Attendance tempAtten = new Attendance(existingUser);
-//                attendanceRepository.save(tempAtten);
-//                acknow =  "User Punched In";
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//            return acknow;
-//
-//    }
-//
-//
+
+    public String saveAttendance(long id) {
+        String acknow = null;
+        try {
+            UserDetails existingUser = repository.findById(id).orElse(null);
+            if(existingUser == null)
+                acknow =  "No User Found";
+            else {
+                Attendance tempAtten = new Attendance(existingUser);
+                attendanceRepository.save(tempAtten);
+                acknow =  "User Punched In";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+            return acknow;
+
+    }
+
+
 //    //PUT
 //    public String updateUser(long id,UserTO user,Token token){
 //        String acknow = null;

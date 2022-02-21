@@ -20,12 +20,12 @@ public class UserController {
     public String addUser(@RequestBody RestRequest<UserTO> user){
          return service.saveUser(user.getRequestObject(),user.getToken());
     }
-//
-//    @PostMapping("/users/{id}/addAttendance")
-//    public String addAttendance(@PathVariable long id){
-//        return service.saveAttendance(id);
-//    }
-//
+
+    @PostMapping("/users/{id}/addAttendance")
+    public String addAttendance(@PathVariable long id){
+        return service.saveAttendance(id);
+    }
+
 //    @GetMapping("/users/{id}")
 //    public UserDetailsResponse findUserById(@PathVariable long id) {
 //        return service.getUserById(id);
