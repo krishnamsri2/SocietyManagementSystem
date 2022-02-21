@@ -138,15 +138,17 @@ public class UserService {
     }
 
     public List<UserFlatResponse> getFlatDetails(long id){
-
-        List<UserFlatResponse> tempL = new ArrayList<UserFlatResponse>();
-
-        for(FlatResidents y : repository.getById(id).getFlatResidents()){
-                        if(y.getIsDeleted() == false){
-                            tempL.add(new UserFlatResponse(y.getFlat().getTow2().getTowerName(),y.getFlat().getFlatNo()));
-                        }
-                    }
-
+        List<UserFlatResponse> tempL = new ArrayList<>();
+        try {
+             tempL = new ArrayList<UserFlatResponse>();
+            for (FlatResidents y : repository.getById(id).getFlatResidents()) {
+                if (y.getIsDeleted() == false) {
+                    tempL.add(new UserFlatResponse(y.getFlat().getTow2().getTowerName(), y.getFlat().getFlatNo()));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return tempL;
     }
 

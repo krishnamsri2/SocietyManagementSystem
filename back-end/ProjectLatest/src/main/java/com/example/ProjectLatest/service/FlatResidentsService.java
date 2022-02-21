@@ -24,7 +24,8 @@ public class FlatResidentsService {
     @Autowired
     private FlatResidentsRepository frRepo;
 
-    public String saveFlatResident(FlatResidentTO requestObject, Token token) {
+    //POST
+    public void saveFlatResident(FlatResidentTO requestObject, Token token) {
         try {
             UserDetails tempUD = udRepo.getById(requestObject.getUserDetailId());
             Flat tempFlat = flatRepo.getById(requestObject.getFlatId());
@@ -35,9 +36,6 @@ public class FlatResidentsService {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-        return "New FlatResident is Added!";
-
     }
 
     public String updateFlatResident(long id, FlatResidentTO requestObject, Token token) {
