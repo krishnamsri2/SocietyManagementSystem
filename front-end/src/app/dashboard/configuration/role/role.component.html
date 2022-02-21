@@ -1,0 +1,38 @@
+<table class="table" style="margin-top: 15px;">
+
+    <thead>
+        <tr>
+            <th scope="col">Role Id</th>
+            <th scope="col">Role Type</th>
+            <th scope="col">Role</th>
+            <th scope="col">Role Description</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let role of roleArray ; let i=index">
+
+            <th scope="row">{{role.roleId}}</th>
+            <td>{{role.roleType}}</td>
+            <td>{{role.role}}</td>
+            <td>{{role.roleDescription}}</td>
+            <td>
+                <app-role-modal [roleIdForEdit]="role.roleId" [id]="userId"></app-role-modal>
+            </td>
+            <td>
+                <button class="btn btn-danger btn-sm" (click)="deleteRoleOnClick(role.roleId)">Delete Role</button>
+            </td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+<div class="row">
+    <div class="col-md-2 offset-11">
+        <app-new-role-modal [userIdForRoleAddition]="userId"></app-new-role-modal>
+    </div>
+</div>

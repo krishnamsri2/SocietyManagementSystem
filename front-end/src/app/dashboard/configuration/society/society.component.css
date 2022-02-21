@@ -1,0 +1,47 @@
+a{
+    text-decoration: none;
+    cursor: pointer;
+    font-weight:600;
+}
+a.back-btn{
+    color:black;
+    font-weight:500;
+    font-size: 32px;
+    cursor:pointer;
+}
+.society-header{
+    width:100%;
+    display:flex;
+    align-items:center;
+}
+.header-text{
+    position: relative;
+    margin:0 auto;
+    margin-top:8px;
+}
+.society{
+    margin-top:10px;
+    width:100%;
+}
+a.card-link{
+    color:#fff;
+    background:black;
+    padding:6px 10px;
+}
+a:hover{
+    opacity: 0.8;
+}
+li.active>a{
+    color:red !important;
+}
+.card{
+    margin-top:1.5rem;
+}
+.btn-wrapper{
+    position:fixed;
+    top:50%;
+    right:10px;
+    transform: translateY(-50%);
+    display:flex;
+    flex-direction:column;
+}

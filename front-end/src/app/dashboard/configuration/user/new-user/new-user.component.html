@@ -1,0 +1,129 @@
+<form style="margin-top: 15px;" (ngSubmit)="onFormSubmit(f)" #f="ngForm">
+
+    <div class="row">
+      <div class="col-md-6 mb-4">
+  
+        <div class="form-outline">
+          <label class="form-label" for="firstName">First Name</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            class="form-control"
+            ngModel
+            name="firstName"
+            required/>
+        </div>
+  
+      </div>
+      <div class="col-md-6 mb-4">
+        <label class="form-label" for="lastName">Last Name</label>
+        <div class="form-outline">
+          <input 
+            type="text" 
+            id="lastName" 
+            class="form-control"
+            name="lastName"
+            ngModel 
+          />
+        </div>
+  
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6 mb-4">
+  
+        <div class="form-outline">
+          <label for="tower_number" class="form-label">Tower Name</label>
+          <input 
+            type="text" 
+            id="tower_number" 
+            class="form-control"
+            ngModel
+            name="towerNumber"
+            
+            #towerNumber="ngModel">
+            <span class="help-block" *ngIf="!towerNumber.valid && towerNumber.touched">Please enter the tower number</span>
+        </div>
+  
+      </div>
+      <div class="col-md-6 mb-4">
+  
+        <div class="form-outline">
+          <label for="flat_number" class="form-label">Flat Number</label>
+          <input 
+            type="text" 
+            id="flat_number" 
+            class="form-control" 
+            ngModel
+            name="flatNumber"
+            
+            pattern="^(0|\+?[1-9]\d*)$"
+            #flatNumber="ngModel">
+            <span class="help-block" *ngIf="!flatNumber.valid && flatNumber.touched">Please Enter a valid flat number</span>
+        </div>
+  
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6 mb-4 pb-2">
+  
+        <div class="form-outline">
+          <label class="form-label" for="emailAddress">Email</label>
+          <input 
+            type="email" 
+            id="emailAddress" 
+            class="form-control" 
+            name="email"
+            ngModel
+            email
+            #email="ngModel"/>
+            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email address</span>
+        </div>
+  
+      </div>
+      <div class="col-md-6 mb-4 pb-2">
+  
+        <div class="form-outline">
+          <label class="form-label" for="phoneNumber">Phone Number</label>
+          <input 
+          type="tel" 
+          id="phoneNumber" 
+          class="form-control" 
+          required
+          ngModel
+          name="phoneNumber"
+          pattern="^(0|\+?[1-9]\d*)$"
+          #phoneNumber="ngModel"
+          minlength="10"
+          maxlength="10"/>
+          <span class="help-block" *ngIf="!phoneNumber.valid && phoneNumber.touched">Please enter a valid phone number</span>
+        </div>
+  
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-4">
+  
+          <div class="form-outline">
+            <label class="form-label" for="firstName">Society-Id</label>
+            <input 
+              type="text" 
+              id="societyId" 
+              class="form-control"
+              ngModel
+              name="societyId"
+              required/>
+          </div>
+    
+        </div>
+      </div>
+
+      <div class="mt-4 pt-2">
+        <button type="submit" class="btn btn-danger" [disabled]="!f.valid">Register user</button>
+      </div>
+  
+    </div>
+    
+  </form>

@@ -6,10 +6,32 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FooterComponent } from './home-page/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalNavbarComponent } from './dashboard/vertical-navbar/vertical-navbar.component';
-//import { ConfigurationComponentComponent } from './dashboard/configuration/configuration.component';
+
 
 import { ConfigurationComponent } from './dashboard/configuration/configuration.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SocietyComponent } from './dashboard/configuration/society/society.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserComponent } from './dashboard/configuration/user/user.component';
+import { TowerComponent } from './dashboard/configuration/society/tower/tower.component';
+import { TowerListComponent } from './dashboard/configuration/society/tower-list/tower-list.component';
+import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat.component';
+import { NewUserComponent } from './dashboard/configuration/user/new-user/new-user.component';
+import { UserService } from './user.service';
+import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './modals/modal/modal.component';
+import { AddSocietyComponent } from './modals/societymodal/add-society/add-society.component';
+import { AddTowerComponent } from './modals/towermodals/add-tower/add-tower.component';
+import { FlatmodalsComponent } from './modals/flatmodals/flatmodals.component';
+import { RoleComponent } from './dashboard/configuration/role/role.component';
+import { MenuComponent } from './dashboard/configuration/menu/menu.component';
+import { MenuSecurityComponent } from './dashboard/configuration/menu-security/menu-security.component';
+import { EditRoleComponent } from './dashboard/configuration/user/edit-role/edit-role.component';
+import { RoleModalComponent } from './modals/roleModals/role-modal/role-modal.component';
+import { NewRoleModalComponent } from './modals/roleModals/new-role-modal/new-role-modal.component';
+import { EditUserModalComponent } from './dashboard/configuration/user/edit-user-modal/edit-user-modal.component';
 
 
 @NgModule({
@@ -20,14 +42,34 @@ import { AppRoutingModule } from './app-routing.module';
     DashboardComponent,
     VerticalNavbarComponent,
     ConfigurationComponent,
-    
+    SocietyComponent,
+    UserComponent,
+    TowerComponent,
+    TowerListComponent,
+    FlatComponent,
+    NewUserComponent,
+    ModalComponent,
+    AddSocietyComponent,
+    AddTowerComponent,
+    FlatmodalsComponent,
+    RoleComponent,
+    MenuComponent,
+    MenuSecurityComponent,
+    EditRoleComponent,
+    RoleModalComponent,
+    NewRoleModalComponent,
+    EditUserModalComponent
     //DummyComponentComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

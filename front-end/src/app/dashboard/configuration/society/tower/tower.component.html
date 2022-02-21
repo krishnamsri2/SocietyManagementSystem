@@ -1,0 +1,25 @@
+<div class="container tower-wrapper" *ngIf="route.children.length===0">
+    <div class="tower-header">
+        <div class="back-button">
+            <a class="back-btn" [routerLink]="['/dashboard/configuration/society/towerlist']">&larr;</a>
+        </div>
+        <div class="header-text">
+            <h3>Tower</h3>
+        </div>
+    </div>
+    <div class="flat-list">
+        <ul class="list-group">
+            <li class="list-group-item flat" (click)="onFlatClick()">Flat 1</li>
+            <li class="list-group-item flat" (click)="onFlatClick()">Flat 2</li>
+            <li class="list-group-item flat" (click)="onFlatClick()">Flat 3</li>
+            <li class="list-group-item flat" (click)="onFlatClick()">Flat 4</li>
+            <li class="list-group-item flat" (click)="onFlatClick()">Flat 5</li>
+        </ul>
+    </div>
+    <div class="btn-wrapper">
+        <app-flatmodals></app-flatmodals>
+    </div>
+</div>
+<div class="flat-section container">
+    <router-outlet></router-outlet>
+</div>
