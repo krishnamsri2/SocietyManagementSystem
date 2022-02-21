@@ -10,7 +10,7 @@ export class UserPostServices{
     
 
     getUserById(userDetailId: number)  {
-        return this.http.get<any>('',
+        return this.http.get<any>(`http://localhost:9191/users/${userDetailId}`,
         {
             responseType:'json'
         }).

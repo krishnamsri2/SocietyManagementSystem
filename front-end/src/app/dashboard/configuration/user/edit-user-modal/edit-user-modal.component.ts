@@ -24,7 +24,7 @@ export class EditUserModalComponent implements OnInit {
   ngOnInit(): void {
 
     this.defaultUser=this.userService.getUserById(this.userDetailId);
-    // console.log(this.defaultUser);
+    console.log(this.defaultUser);
     //  setTimeout(()=>{
     //   this.updateForm.setValue(this.defaultUser);
       
