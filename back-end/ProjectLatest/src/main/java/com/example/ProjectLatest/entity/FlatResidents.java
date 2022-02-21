@@ -69,7 +69,6 @@ public class FlatResidents {
 	public void setOwner(boolean isOwner) {
 		setUpdated();
 		this.isOwner = isOwner;
-		//System.out.println(isOwner);
 	}
 
 	public boolean isTenant() {

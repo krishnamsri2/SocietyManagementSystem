@@ -49,6 +49,6 @@ public class UserDetailsResBuilder {
     }
 
     public UserDetailsResponse getResponse(){
-        return new UserDetailsResponse(userDetailId,firstName,lastName,phoneNumber,emailId,towerName,flatNo);
+        return new UserDetailsResponse(userDetailId,firstName,lastName,phoneNumber,emailId/*,towerName,flatNo*/);
     }
 }

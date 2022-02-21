@@ -1,43 +1,40 @@
 package com.example.ProjectLatest.response;
 
-import java.util.List;
-
 public class UserDetailsResponse {
-    private long userDetailId;
     private String firstName;
-    private String lastName;
+    private String LastName;
     private long phoneNumber;
     private String emailId;
     //private String password;
-    private List<String> towerName;
-    private List<String> flatNo;
+//    private List<String> towerName;
+//    private List<String> flatNo;
 
-    public UserDetailsResponse(long userDetailId, String firstName, String lastName, long phoneNumber, String emailId,List<String> towerName,List<String> flatNo) {
+    public UserDetailsResponse(long userDetailId, String firstName, String lastName, long phoneNumber, String emailId /*,List<String> towerName,List<String> flatNo */) {
         this.userDetailId = userDetailId;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.LastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
         //this.password = password;
-        this.flatNo = flatNo;
-        this.towerName = towerName;
+//        this.flatNo = flatNo;
+//        this.towerName = towerName;
     }
 
-    public List<String> getTowerName() {
-        return towerName;
-    }
-
-    public void setTowerName(List<String> towerName) {
-        this.towerName = towerName;
-    }
-
-    public List<String> getFlatNo() {
-        return flatNo;
-    }
-
-    public void setFlatNo(List<String> flatNo) {
-        this.flatNo = flatNo;
-    }
+//    public List<String> getTowerName() {
+//        return towerName;
+//    }
+//
+//    public void setTowerName(List<String> towerName) {
+//        this.towerName = towerName;
+//    }
+//
+//    public List<String> getFlatNo() {
+//        return flatNo;
+//    }
+//
+//    public void setFlatNo(List<String> flatNo) {
+//        this.flatNo = flatNo;
+//    }
 
     public long getUserDetailId() {
         return userDetailId;
@@ -56,11 +53,11 @@ public class UserDetailsResponse {
     }
 
     public String getLastName() {
-        return lastName;
+        return LastName;
     }
 
     public void setLastName(String lastName) {
-        lastName = lastName;
+        LastName = lastName;
     }
 
     public long getPhoneNumber() {
@@ -79,11 +76,11 @@ public class UserDetailsResponse {
         this.emailId = emailId;
     }
 
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

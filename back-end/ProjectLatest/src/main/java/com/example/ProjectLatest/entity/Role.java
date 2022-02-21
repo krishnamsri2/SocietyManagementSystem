@@ -1,5 +1,7 @@
 package com.example.ProjectLatest.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -7,6 +9,7 @@ import java.util.Date;
 @Table(name="Role")
 public class Role 
 {
+	@Enumerated(EnumType.STRING)
 	private RoleType roleType;
 	
 	@Id
@@ -14,7 +17,10 @@ public class Role
 	private int roleId;
 	
 	private String role;
-	
+	private String roleDescription;
+
+
+
 	private long createdBy;
 	private long modifiedBy;
 	
@@ -31,6 +37,7 @@ public class Role
 	
 	@OneToOne
 	@JoinColumn(name="userDetailsID")	// ForeignKey
+	@JsonManagedReference
 	private UserDetails userDetails;  
 	
 	@OneToOne(mappedBy="role")
@@ -40,9 +47,10 @@ public class Role
 	public Role() {
 	}
 
-	public Role(RoleType roleType, String role, long createdBy, UserDetails userDetails) {
+	public Role(RoleType roleType,String roleDescription, String role, long createdBy, UserDetails userDetails) {
 		super();
 		this.roleType = roleType;
+		this.roleDescription = roleDescription;
 		this.role = role;
 		this.createdBy = createdBy;
 		this.modifiedBy = createdBy;
@@ -51,6 +59,14 @@ public class Role
 		this.isDeleted = false;
 		this.isActive = true;
 		this.userDetails = userDetails;
+	}
+
+	public String getRoleDescription() {
+		return roleDescription;
+	}
+
+	public void setRoleDescription(String roleDescription) {
+		this.roleDescription = roleDescription;
 	}
 
 	public RoleType getRoleType() {
