@@ -1,47 +1,22 @@
 package com.example.ProjectLatest.to;
 
+
 public class UserTO {
-    private String userDetailId;
     private String firstName;
     private String LastName;
     private long phoneNumber;
     private String emailId;
-    //private String password;
-    private String towerName;
-    private String flatNo;
 
-    public String getUserDetailId() {
-        return userDetailId;
+    private String password;
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserDetailId(String userDetailId) {
-        this.userDetailId = userDetailId;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getTowerName() {
-        return towerName;
-    }
-
-    public void setTowerName(String towerName) {
-        this.towerName = towerName;
-    }
-
-    public String getFlatNo() {
-        return flatNo;
-    }
-
-    public void setFlatNo(String flatNo) {
-        this.flatNo = flatNo;
-    }
-
-
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
 
     public String getFirstName() {
         return firstName;
@@ -74,4 +49,5 @@ public class UserTO {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
 }

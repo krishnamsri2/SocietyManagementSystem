@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface FlatResidentsRepository extends JpaRepository<FlatResidents,Long> {
-    @Query(value = "SELECT * FROM flat_residents f WHERE f.flat_id = ?1 AND f.is_deleted = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM flat_residents f WHERE f.flat_id = ?1", nativeQuery = true)
     List<FlatResidents> findAllByFlatId(long id);
 
-    @Query(value = "SELECT * FROM flat_residents f WHERE f.user_detail_id = ?1 AND f.is_deleted = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM flat_residents f WHERE f.user_detail_id = ?1", nativeQuery = true)
     List<FlatResidents> findAllByUserDetailId(long userDetailId);
 }
