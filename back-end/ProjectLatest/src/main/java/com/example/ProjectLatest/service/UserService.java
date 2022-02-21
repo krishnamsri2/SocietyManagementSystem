@@ -1,13 +1,13 @@
 package com.example.ProjectLatest.service;
 
-import com.example.ProjectLatest.entity.Attendance;
-import com.example.ProjectLatest.entity.User;
-import com.example.ProjectLatest.entity.UserDetails;
-import com.example.ProjectLatest.repository.AttendanceRepository;
-import com.example.ProjectLatest.repository.UserDetailRepository;
-import com.example.ProjectLatest.repository.UserRepository;
+import com.example.ProjectLatest.builder.FlatResidentBuilder;
+import com.example.ProjectLatest.builder.UserDetailBuilder;
+import com.example.ProjectLatest.builder.UserDetailsResBuilder;
+import com.example.ProjectLatest.entity.*;
+import com.example.ProjectLatest.repository.*;
 import com.example.ProjectLatest.response.AttendanceResponse;
 import com.example.ProjectLatest.response.UserDetailsResponse;
+import com.example.ProjectLatest.response.UserFlatResponse;
 import com.example.ProjectLatest.to.Token;
 import com.example.ProjectLatest.to.UserTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,61 +26,56 @@ public class UserService {
     @Autowired
     private UserRepository repoUser;
     @Autowired
-    private AttendanceRepository attendanceRepository;
+    private FlatRepository flatRepository;
+    @Autowired
+    private TowerRepository towerRepository;
+    @Autowired
+    private FlatResidentsRepository flatResidentsRepository;
 
 
     //POST
-    public String saveUser(UserTO user, Token token){
+    public void saveUser(UserTO user, Token token){
         try{
             User tempUser = new User(user.getPassword(),token.getUserId());
             repoUser.save(tempUser);
             UserDetails tempUd = new UserDetails(user.getFirstName(),user.getLastName(),
                     user.getPhoneNumber(),user.getEmailId(),token.getUserId(),tempUser);
             repository.save(tempUd);
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            return "New User is Added!";
-        }
 
-    }
+            long towerId =  towerRepository.getByTowerName(user.getTowerName(), token.getSocietyId()).getTowerId();
+            Flat flat =   flatRepository.getByFlatNo(user.getFlatNo(),towerId );
 
-    public String saveAttendance(long id) {
-        String acknow = null;
-        try {
-            UserDetails existingUser = repository.findById(id).orElse(null);
-            if(existingUser == null)
-                acknow =  "No User Found";
-            else {
-                Attendance tempAtten = new Attendance(existingUser);
-                attendanceRepository.save(tempAtten);
-                acknow =  "User Punched In";
+            if(flat != null) {
+                FlatResidents tempFR = new FlatResidentBuilder()
+                        .setOwner(false)
+                        .setTenant(false)
+                        .setCreatedBy(token.getUserId())
+                        .setFlat(flat )
+                        .setUserDetail(tempUd)
+                        .getResponse();
+                flatResidentsRepository.save(tempFR);
             }
+
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return acknow;
         }
+
     }
 
 
     //PUT
-    public String updateUser(long id,UserTO user,Token token){
-        String acknow = null;
+    public void updateUser(long id,UserTO user,Token token){
+
         try {
             UserDetails existingUser = repository.findById(id).orElse(null);
 
-            if(existingUser == null)
-                acknow =  "No User Found";
-            else {
+            if(existingUser != null && existingUser.getIsDeleted() == false) {
                 existingUser.setFirstName(user.getFirstName(), token.getUserId());
                 existingUser.setLastName(user.getLastName(), token.getUserId());
                 existingUser.setEmailId(user.getEmailId(), token.getUserId());
                 existingUser.setPhoneNumber(user.getPhoneNumber(), token.getUserId());
-                existingUser.getUser().setPassword(user.getPassword(), token.getUserId());
                 repository.save(existingUser);
 
-                acknow = "User "+ id+" is Updated";
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -88,57 +83,46 @@ public class UserService {
             return acknow;
         }
 
-
-
     }
 
-    public String updateAttendance(long userId) {
-        String acknow = null;
-        try {
-            Date date = new Date();
-            Attendance tempAtten = attendanceRepository.findByUserDetailId(userId, date.toString().substring(0, 10));
-            if(tempAtten == null)
-                acknow =  "No User Found";
-            else {
-                tempAtten.setPunchOut();
-                attendanceRepository.save(tempAtten);
-                acknow = "User "+ userId+" is Punched Out";
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            return acknow;
-        }
-    }
+   //GET
 
-
-    //GET
     public UserDetailsResponse getUserById(long id){
         UserDetailsResponse copy = null;
 
         try {
-            UserDetails tempUsers = repository.findById(id).orElse(null);
-            if(tempUsers != null)
-                copy = new UserDetailsResponse(tempUsers.getFirstName(), tempUsers.getLastName(), tempUsers.getPhoneNumber(), tempUsers.getEmailId(), tempUsers.getUser().getPassword());
+             UserDetails tempUsers = repository.findById(id).orElse(null);
+             if(tempUsers != null && tempUsers.getIsDeleted() == false)
+             //copy = new UserDetailsResponse(tempUsers.getUserDetailsId(),tempUsers.getFirstName(), tempUsers.getLastName(), tempUsers.getPhoneNumber(), tempUsers.getEmailId(), tempUsers.getUser().getPassword());
+             copy = new UserDetailsResBuilder()
+                     .setFirstName(tempUsers.getFirstName())
+                     .setLastName(tempUsers.getLastName())
+                     .setPhoneNumber(tempUsers.getPhoneNumber())
+                     .setEmailId(tempUsers.getEmailId())
+                     .setUserDetailId(tempUsers.getUserDetailsId())
+                     .getResponse();
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return copy;
         }
+            return copy;
+
     }
 
-    public List<AttendanceResponse> getUserAttendances(long id) {
-        List<AttendanceResponse> responses = null;
+        public List<UserDetailsResponse> getAllUser(){
+        List<UserDetailsResponse> copy = new ArrayList<>();
+
         try {
-            UserDetails tempUsers = repository.findById(id).orElse(null);
-            if(tempUsers != null) {
-                List<Attendance> tempAttendances = new ArrayList<Attendance>();
-                tempAttendances.addAll(tempUsers.getSetAttendance());
+            for(UserDetails x : repository.findAll()){
+                if(x.getIsDeleted() == false){
+                    copy.add(new UserDetailsResBuilder()
+                            .setUserDetailId(x.getUserDetailsId())
+                            .setFirstName(x.getFirstName())
+                            .setLastName(x.getLastName())
+                            .setPhoneNumber(x.getPhoneNumber())
+                            .setEmailId(x.getEmailId())
+                            .getResponse());
 
-                responses = tempAttendances.stream()
-                        .map(Attendance -> new AttendanceResponse(Attendance.getAttendId(), Attendance.getCreateDate(), Attendance.getUpdateDate()))
-                        .collect(Collectors.toList());
-
+                }
             }
 
         }catch (Exception e){
@@ -149,8 +133,24 @@ public class UserService {
 
     }
 
+    public List<UserFlatResponse> getFlatDetails(long id){
+        List<UserFlatResponse> tempL = new ArrayList<>();
+        try {
+             tempL = new ArrayList<UserFlatResponse>();
+            for (FlatResidents y : repository.getById(id).getFlatResidents()) {
+                if (y.getIsDeleted() == false) {
+                    tempL.add(new UserFlatResponse(y.getFlat().getTow2().getTowerName(), y.getFlat().getFlatNo()));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return tempL;
+    }
+
+
     //DELETE
-    public String deleteUser(long id){
+    public void deleteUser(long id){
         try {
             UserDetails tempUsers = repository.findById(id).orElse(null);
             if(tempUsers != null) {
@@ -162,12 +162,7 @@ public class UserService {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            return "User removed !!" +id;
         }
-
-    }
-
 
     public String deleteUserAttendance(long id) {
         try {

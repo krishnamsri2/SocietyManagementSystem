@@ -45,8 +45,8 @@ public class FlatResidentsController {
     }
 
     @DeleteMapping("/flatResidents/delete/{id}")
-    public String deleteFlatResident(@PathVariable long id){
-        return service.deleteFlatResident(id);
+    public void deleteFlatResident(@PathVariable long id){
+         service.deleteFlatResident(id);
     }
 
 }

@@ -5,14 +5,43 @@ public class UserDetailsResponse {
     private String LastName;
     private long phoneNumber;
     private String emailId;
-    private String password;
+    //private String password;
+//    private List<String> towerName;
+//    private List<String> flatNo;
 
-    public UserDetailsResponse(String firstName, String lastName, long phoneNumber, String emailId, String password) {
+    public UserDetailsResponse(long userDetailId, String firstName, String lastName, long phoneNumber, String emailId /*,List<String> towerName,List<String> flatNo */) {
+        this.userDetailId = userDetailId;
         this.firstName = firstName;
         this.LastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
-        this.password = password;
+        //this.password = password;
+//        this.flatNo = flatNo;
+//        this.towerName = towerName;
+    }
+
+//    public List<String> getTowerName() {
+//        return towerName;
+//    }
+//
+//    public void setTowerName(List<String> towerName) {
+//        this.towerName = towerName;
+//    }
+//
+//    public List<String> getFlatNo() {
+//        return flatNo;
+//    }
+//
+//    public void setFlatNo(List<String> flatNo) {
+//        this.flatNo = flatNo;
+//    }
+
+    public long getUserDetailId() {
+        return userDetailId;
+    }
+
+    public void setUserDetailId(long userDetailId) {
+        this.userDetailId = userDetailId;
     }
 
     public String getFirstName() {

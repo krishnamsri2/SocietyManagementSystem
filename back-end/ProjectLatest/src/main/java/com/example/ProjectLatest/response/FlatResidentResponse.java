@@ -6,7 +6,7 @@ public class FlatResidentResponse {
     private long flatId;
     private long userDetailId;
     private String firstName;
-    private String LastName;
+    private String lastName;
     private long phoneNumber;
     private String emailId;
 
@@ -16,7 +16,7 @@ public class FlatResidentResponse {
         this.flatId = flatId;
         this.userDetailId = userDetailId;
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
     }
@@ -62,11 +62,11 @@ public class FlatResidentResponse {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public long getPhoneNumber() {
