@@ -92,19 +92,26 @@ public class UserService {
 
    //GET
 
-//    public UserDetailsResponse getUserById(long id){
-//        UserDetailsResponse copy = null;
-//
-//        try {
-//             UserDetails tempUsers = repository.findById(id).orElse(null);
-//             if(tempUsers != null && tempUsers.getIsDeleted() == false)
-//             copy = new UserDetailsResponse(tempUsers.getUserDetailsId(),tempUsers.getFirstName(), tempUsers.getLastName(), tempUsers.getPhoneNumber(), tempUsers.getEmailId(), tempUsers.getUser().getPassword());
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//            return copy;
-//
-//    }
+    public UserDetailsResponse getUserById(long id){
+        UserDetailsResponse copy = null;
+
+        try {
+             UserDetails tempUsers = repository.findById(id).orElse(null);
+             if(tempUsers != null && tempUsers.getIsDeleted() == false)
+             //copy = new UserDetailsResponse(tempUsers.getUserDetailsId(),tempUsers.getFirstName(), tempUsers.getLastName(), tempUsers.getPhoneNumber(), tempUsers.getEmailId(), tempUsers.getUser().getPassword());
+             copy = new UserDetailsResBuilder()
+                     .setFirstName(tempUsers.getFirstName())
+                     .setLastName(tempUsers.getLastName())
+                     .setPhoneNumber(tempUsers.getPhoneNumber())
+                     .setEmailId(tempUsers.getEmailId())
+                     .setUserDetailId(tempUsers.getUserDetailsId())
+                     .getResponse();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+            return copy;
+
+    }
 
         public List<UserDetailsResponse> getAllUser(){
         List<UserDetailsResponse> copy = new ArrayList<>();
