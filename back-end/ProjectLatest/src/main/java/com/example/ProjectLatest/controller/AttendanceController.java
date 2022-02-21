@@ -15,8 +15,8 @@ public class AttendanceController {
     private AttendanceService service;
 
     @PostMapping("/users/{id}/addAttendance")
-    public String addAttendance(@PathVariable long id){
-        return service.saveAttendance(id);
+    public void addAttendance(@PathVariable long id){
+         service.saveAttendance(id);
     }
 
     @GetMapping("/users/attendance/{id}")
@@ -25,13 +25,13 @@ public class AttendanceController {
     }
 
     @PutMapping("/users/punchOut/{id}")
-    public String updateAttendance(@PathVariable long id){
-        return service.updateAttendance(id);
+    public void updateAttendance(@PathVariable long id){
+         service.updateAttendance(id);
     }
 
     @DeleteMapping("/users/delete/attendance/{id}")
-    public String deleteUserAttendance(@PathVariable long id){
-        return service.deleteUserAttendance(id);
+    public void deleteUserAttendance(@PathVariable long id){
+         service.deleteUserAttendance(id);
     }
 
 
