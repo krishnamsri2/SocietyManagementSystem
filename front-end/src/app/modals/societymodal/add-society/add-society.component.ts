@@ -23,7 +23,7 @@ export class AddSocietyComponent implements OnInit {
     requestObject:{
     societyName:''
     }
-    }
+  }
 
   open(content) {
     this.modalService.open(content, {size:'lg',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

@@ -1,13 +1,13 @@
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h3 class="modal-title" id="modal-basic-title">Add a New Tower</h3>
+      <h3 class="modal-title" id="modal-basic-title">Edit Tower Details</h3>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
       <form (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div id="tower-data">
           <div class="form-group">
-            <label for="tower-name">Enter the name of the Tower</label>
+            <label for="tower-name">Enter then new name of the Tower</label>
             <input 
             type="text" 
             class="form-control" 
@@ -18,7 +18,7 @@
           </div>
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
       </form>
     </div>
     <div class="modal-footer">
@@ -26,4 +26,4 @@
     </div>
 </ng-template>
   
-<button class="btn btn-success" (click)="open(content)">Add Tower</button>
+<button class="btn btn-success" (click)="open(content)">Edit</button>

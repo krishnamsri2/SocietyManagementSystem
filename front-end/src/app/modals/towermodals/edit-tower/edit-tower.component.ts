@@ -3,25 +3,26 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { TowerListPostService } from '../../../dashboard/configuration/society/tower-list/tower-list.post-services';
-import {v4 as uuid} from 'uuid';
 @Component({
-  selector: 'app-add-tower',
-  templateUrl: './add-tower.component.html',
-  styleUrls: ['./add-tower.component.css']
+  selector: 'app-edit-tower',
+  templateUrl: './edit-tower.component.html',
+  styleUrls: ['./edit-tower.component.css']
 })
-export class AddTowerComponent implements OnInit {
+export class EditTowerComponent implements OnInit {
+  @Input() towerId:number ;
   closeResult = '';
   ngOnInit(): void {
   }
   constructor(private modalService: NgbModal,private route:ActivatedRoute,private towerListPostService:TowerListPostService) {
 
   }
-  towerReqObj = {
+  editTowerReqObj = {
     token:{
     societyId:11,
     userId:12
     },
     requestObject:{
+    towerId:0,
     towerName:''
     }
   }
@@ -43,9 +44,11 @@ export class AddTowerComponent implements OnInit {
     }
   }
   onSubmit(form:NgForm){
-    this.towerReqObj.requestObject.towerName=form.value.towerName;
-    this.towerListPostService.addTower(this.towerReqObj,this.route.snapshot.params.id);
+    this.editTowerReqObj.requestObject.towerName = form.value.towerName;
+    this.editTowerReqObj.requestObject.towerId = this.towerId;
+    this.towerListPostService.updateTowerDetails(this.towerId,this.editTowerReqObj);
     form.reset();
   }
+
 
 }

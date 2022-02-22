@@ -30,6 +30,8 @@ import { MenuComponent } from './dashboard/configuration/menu/menu.component';
 import { MenuSecurityComponent } from './dashboard/configuration/menu-security/menu-security.component';
 import { NarrowLongCardsComponent } from './narrow-long-cards/narrow-long-cards.component';
 import { EditSocietyComponent } from './modals/societymodal/edit-society/edit-society.component';
+import { EditTowerComponent } from './modals/towermodals/edit-tower/edit-tower.component';
+import { EditFlatModalComponent } from './modals/flatmodals/edit-flat-modal/edit-flat-modal.component';
 
 
 
@@ -56,7 +58,9 @@ import { EditSocietyComponent } from './modals/societymodal/edit-society/edit-so
     MenuComponent,
     MenuSecurityComponent,
     NarrowLongCardsComponent,
-    EditSocietyComponent
+    EditSocietyComponent,
+    EditTowerComponent,
+    EditFlatModalComponent
     
     //DummyComponentComponent
   ],

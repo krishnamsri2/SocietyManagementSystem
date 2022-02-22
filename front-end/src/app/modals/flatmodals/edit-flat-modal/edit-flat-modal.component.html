@@ -8,11 +8,11 @@
         <div id="flat-info">
           <div class="form-group">
             <label for="flat-number">Enter the Flat Number</label>
-            <input type="text" class="form-control" id="flat-number" name="flatNo" ngModel>
+            <input type="text" class="form-control" id="flat-number" name="flatNo" [(ngModel)]="flatObj.flatNo">
           </div>
           <div class="form-group">
             <label for="for-status">Select Status</label>
-            <select name="status" id="for-status" class="form-control" ngModel>
+            <select name="formStatus" id="for-status" class="form-control" [(ngModel)]="flatObj.flatStatus">
               <option value="occupied">Occupied</option>
               <option value="unoccupied">Unoccupied</option>
             </select>
@@ -21,11 +21,11 @@
         <div id="other-info">
           <div class="form-group">
             <label for="number-occupants">Enter Number of Occupants</label>
-            <input type="text" class="form-control" id="number-occupants" name="numberOfOccupant" ngModel >
+            <input type="text" class="form-control" id="number-occupants" name="numberOfOccupant" [(ngModel)]="flatObj.numberOfOccupants" >
           </div>
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
       </form>
     </div>
     <div class="modal-footer">
@@ -33,4 +33,4 @@
     </div>
 </ng-template>
   
-<button class="btn btn-success" (click)="open(content)">Add Flat</button>
+<span class="btn btn-primary" (click)="open(content)">Edit</span>

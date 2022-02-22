@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="*")
 public class SocietyController {
     @Autowired
     private SocietyService societyService;
 
     // Post request to add society
-    @CrossOrigin(origins = "http://localhost:4200/")
+
     @RequestMapping(method = RequestMethod.POST,value = "/addSociety")
     public void addSociety(@RequestBody RestRequest<SocietyTO> restRequest)
     {
@@ -24,7 +25,7 @@ public class SocietyController {
     }
 
     // get all notice
-    @CrossOrigin(origins = "http://localhost:4200/")
+
     @RequestMapping(method = RequestMethod.GET,value="/societies")
     public List<SocietyResponse> findAllSociety()
     {
@@ -32,14 +33,14 @@ public class SocietyController {
     }
 
     // get society by id
-    @CrossOrigin(origins = "http://localhost:4200/")
+
     @RequestMapping(method = RequestMethod.GET,value="/society/{id}")
     public SocietyResponse findById(@PathVariable long id)
     {
         return societyService.getSocietyId(id);
     }
     // update
-    @CrossOrigin(origins = "http://localhost:4200/")
+
     @RequestMapping(method = RequestMethod.PUT,value = "/society/updates/{id}")
     public void updateSociety(@PathVariable long id, @RequestBody RestRequest<SocietyTO> society)
     {

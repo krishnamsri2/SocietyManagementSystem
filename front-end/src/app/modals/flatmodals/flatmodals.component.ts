@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FlatService } from '../../service/flat.service';
+import { RequestObjectService } from '../../service/requestObject.service';
 @Component({
   selector: 'app-flatmodals',
   templateUrl: './flatmodals.component.html',
@@ -12,16 +15,13 @@ export class FlatmodalsComponent implements OnInit {
   ngOnInit(): void {
     
   }
-  constructor(private modalService: NgbModal) {}
-  newFlat = {
-    flat_Id:'',
-    parentId:'',
-    flatId:'',
-    flatName:'',
-    flatStatus:'',
-    flatAddress:'',
-    ownerName:'',
-    numberOfOccupants:''
+  flatData = {
+    flatNo:'',
+    status:false,
+    numberOfOccupant:''
+  }
+
+  constructor(private modalService: NgbModal,private requestObjectService:RequestObjectService,private flatService:FlatService,private route:ActivatedRoute) {
   }
   open(content) {
     this.modalService.open(content, {size:'lg',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -41,11 +41,12 @@ export class FlatmodalsComponent implements OnInit {
     }
   }
   onSubmit(form:NgForm){
-    let obj = form.value;
-    this.newFlat.flatName=obj.flatName;
-    this.newFlat.numberOfOccupants=obj.numberOfOccupants;
-    this.newFlat.ownerName=obj.ownerName;
-    this.newFlat.flatAddress = obj.flatAddress;
-    this.newFlat.flatStatus = obj.flatStatus;
+    this.flatData.flatNo = form.value.flatNo;
+    //console.log(form.value.status);
+    if(form.value.status === "occupied")this.flatData.status=true;
+    this.flatData.numberOfOccupant = form.value.numberOfOccupant;
+    this.requestObjectService.putRequestObject(this.flatData);
+    this.flatService.addFlat(this.requestObjectService.getRequestObject(),this.route.snapshot.params.id);
+    form.reset();
   }
 }
