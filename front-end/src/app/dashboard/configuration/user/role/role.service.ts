@@ -4,7 +4,8 @@ import { Subject } from "rxjs";
 import {throwError} from 'rxjs';
 import { RoleModel } from "./role.model";
 import {catchError, map} from 'rxjs/operators';
-import { RequestRoleObject } from "src/app/request-objects/requestRole.service";
+//import { RequestrequestObject } from "src/app/request-objects/requestRole.service";
+import { RequestObject } from "src/app/service/request.service";
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class RoleService{
     
     private userDetailId : number;
 
-    constructor( private http : HttpClient, private roleObj : RequestRoleObject){}
+    constructor( private http : HttpClient, private requestObj : RequestObject){}
 
     setUserId(userDetailId: number) {
       this.userDetailId=userDetailId;
@@ -54,8 +55,8 @@ export class RoleService{
     }
 
     addRole(newRole:RoleModel,userDetailId : number){
-        this.roleObj.setRoleRequestObject(newRole);
-        let roleRequestObj = this.roleObj.getRoleRequestObject();
+        this.requestObj.putRequestObject(newRole);
+        let roleRequestObj = this.requestObj.getRequestObject();
 
         console.log(roleRequestObj,userDetailId);
         
@@ -69,8 +70,8 @@ export class RoleService{
 
     updateRoleDetailsByRoleId(updatedRoles: RoleModel,roleId : number) {
 
-        this.roleObj.setRoleRequestObject(updatedRoles);
-        let updatedRole = this.roleObj.getRoleRequestObject();
+        this.requestObj.putRequestObject(updatedRoles);
+        let updatedRole = this.requestObj.getRequestObject();
 
         return this.http.put(`http://localhost:9191/role/${roleId}`,updatedRole);
     }
