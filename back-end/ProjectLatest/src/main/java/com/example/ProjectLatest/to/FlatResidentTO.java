@@ -3,6 +3,7 @@ package com.example.ProjectLatest.to;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FlatResidentTO {
+    private long flatResId;
     @JsonProperty
     private boolean isOwner;
     @JsonProperty
@@ -10,6 +11,14 @@ public class FlatResidentTO {
     private String flatNo;
     private String towerName;
     private long userDetailId;
+
+    public long getFlatResId() {
+        return flatResId;
+    }
+
+    public void setFlatResId(long flatResId) {
+        this.flatResId = flatResId;
+    }
 
     public boolean getIsOwner() {
         return isOwner;

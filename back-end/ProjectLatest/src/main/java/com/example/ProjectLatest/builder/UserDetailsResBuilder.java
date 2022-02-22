@@ -10,8 +10,7 @@ public class UserDetailsResBuilder {
     private String lastName;
     private long phoneNumber;
     private String emailId;
-    private List<String> towerName;
-    private List<String> flatNo;
+    private Boolean isDeleted;
 
     public UserDetailsResBuilder setUserDetailId(long userDetailId) {
         this.userDetailId = userDetailId;
@@ -38,17 +37,12 @@ public class UserDetailsResBuilder {
         return this;
     }
 
-    public UserDetailsResBuilder setTowerName(List<String> towerName) {
-        this.towerName = towerName;
-        return this;
-    }
-
-    public UserDetailsResBuilder setFlatNo(List<String> flatNo) {
-        this.flatNo = flatNo;
+    public UserDetailsResBuilder setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
         return this;
     }
 
     public UserDetailsResponse getResponse(){
-        return new UserDetailsResponse(userDetailId,firstName,lastName,phoneNumber,emailId/*,towerName,flatNo*/);
+        return new UserDetailsResponse(userDetailId,firstName,lastName,phoneNumber,emailId,isDeleted);
     }
 }

@@ -53,9 +53,9 @@ public class FlatResidentsService {
     }
 
     //PUT
-    public void updateFlatResident(long id, FlatResidentTO requestObject, Token token) {
+    public void updateFlatResident(FlatResidentTO requestObject, Token token) {
         try {
-            FlatResidents temp = frRepo.findById(id).orElse(null);
+            FlatResidents temp = frRepo.findById(requestObject.getFlatResId()).orElse(null);
 
             long towerId =  towerRepository.getByTowerName(requestObject.getTowerName(), token.getSocietyId()).getTowerId();
             Flat tempFlat =   flatRepo.getByFlatNo(requestObject.getFlatNo(),towerId );
@@ -75,9 +75,14 @@ public class FlatResidentsService {
     public void deleteFlatResident(long id) {
         try {
             FlatResidents tempUsers = frRepo.findById(id).orElse(null);
-            if(tempUsers != null && tempUsers.getIsDeleted() == false) {
+            if(tempUsers != null ){
+                if(tempUsers.getIsDeleted() == false) {
                 tempUsers.setIsActive(false);
                 tempUsers.setIsDeleted(true);
+            }else{
+                    tempUsers.setIsActive(true);
+                    tempUsers.setIsDeleted(false);
+                }
                 frRepo.save(tempUsers);
             }
         }catch (Exception E){
@@ -92,13 +97,14 @@ public class FlatResidentsService {
         FlatResidentResponse copy = null;
         try {
             FlatResidents tempUsers = frRepo.findById(id).orElse(null);
-            if(tempUsers != null && tempUsers.getIsDeleted() == false) {
+            if(tempUsers != null) {
                 copy = new FlatResidentResBuilder()
                         .setFlatResId(tempUsers.getFlatResId())
                         .setFlatNo(tempUsers.getFlat().getFlatNo())
                         .setIsOwner(tempUsers.isOwner())
                         .setIsTenant(tempUsers.isTenant())
                         .setTowerName(tempUsers.getFlat().getTow2().getTowerName())
+                        .setIsDeleted(tempUsers.getIsDeleted())
                         .getResponse();
             }
         }catch (Exception e){
@@ -120,6 +126,7 @@ public class FlatResidentsService {
                                 .setIsOwner(FlatResidents.isOwner())
                                 .setIsTenant(FlatResidents.isTenant())
                                 .setTowerName(FlatResidents.getFlat().getTow2().getTowerName())
+                                .setIsDeleted(FlatResidents.getIsDeleted())
                                 .getResponse())
                         .collect(Collectors.toList());
             }
@@ -143,6 +150,7 @@ public class FlatResidentsService {
                                 .setIsOwner(FlatResidents.isOwner())
                                 .setIsTenant(FlatResidents.isTenant())
                                 .setTowerName(FlatResidents.getFlat().getTow2().getTowerName())
+                                .setIsDeleted(FlatResidents.getIsDeleted())
                                 .getResponse())
                         .collect(Collectors.toList());
             }
