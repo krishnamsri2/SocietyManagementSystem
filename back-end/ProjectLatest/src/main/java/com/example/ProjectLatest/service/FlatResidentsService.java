@@ -7,6 +7,7 @@ import com.example.ProjectLatest.entity.FlatResidents;
 import com.example.ProjectLatest.entity.UserDetails;
 import com.example.ProjectLatest.repository.FlatRepository;
 import com.example.ProjectLatest.repository.FlatResidentsRepository;
+import com.example.ProjectLatest.repository.TowerRepository;
 import com.example.ProjectLatest.repository.UserDetailRepository;
 import com.example.ProjectLatest.response.FlatResidentResponse;
 import com.example.ProjectLatest.to.FlatResidentTO;
@@ -25,15 +26,16 @@ public class FlatResidentsService {
     private FlatRepository flatRepo;
     @Autowired
     private FlatResidentsRepository frRepo;
+    @Autowired
+    private TowerRepository towerRepository;
 
     //POST
     public void saveFlatResident(FlatResidentTO requestObject, Token token) {
         try {
             UserDetails tempUD = udRepo.findById(requestObject.getUserDetailId()).orElse(null);
-            Flat tempFlat = flatRepo.findById(requestObject.getFlatId()).orElse(null);
 
-//            FlatResidents temp = new FlatResidents(requestObject.getIsOwner(), requestObject.getIsTenant(),
-//                    token.getUserId(), tempFlat, tempUD);
+            long towerId =  towerRepository.getByTowerName(requestObject.getTowerName(), token.getSocietyId()).getTowerId();
+            Flat tempFlat =   flatRepo.getByFlatNo(requestObject.getFlatNo(),towerId );
 
             if(tempUD != null && tempFlat != null) {
                 FlatResidents temp = new FlatResidentBuilder()
@@ -54,11 +56,14 @@ public class FlatResidentsService {
     public void updateFlatResident(long id, FlatResidentTO requestObject, Token token) {
         try {
             FlatResidents temp = frRepo.findById(id).orElse(null);
-            if(temp != null && temp.getIsDeleted() == false) {
+
+            long towerId =  towerRepository.getByTowerName(requestObject.getTowerName(), token.getSocietyId()).getTowerId();
+            Flat tempFlat =   flatRepo.getByFlatNo(requestObject.getFlatNo(),towerId );
+
+            if(temp != null && temp.getIsDeleted() == false && tempFlat != null) {
                 temp.setTenant(requestObject.getIsTenant());
                 temp.setOwner(requestObject.getIsOwner());
-                temp.setFlat(flatRepo.getById(requestObject.getFlatId()));
-                temp.setUserDetail(udRepo.getById(requestObject.getUserDetailId()));
+                temp.setFlat(tempFlat);
                 frRepo.save(temp);
             }
         }catch (Exception e){
@@ -81,20 +86,17 @@ public class FlatResidentsService {
     }
 
     //GET
+
+
     public FlatResidentResponse getFlatResidentById(long id) {
         FlatResidentResponse copy = null;
         try {
             FlatResidents tempUsers = frRepo.findById(id).orElse(null);
             if(tempUsers != null && tempUsers.getIsDeleted() == false) {
                 copy = new FlatResidentResBuilder()
-                        .setFirstName(tempUsers.getUserDetail().getFirstName())
-                        .setEmailId(tempUsers.getUserDetail().getEmailId())
-                        .setFlatId(tempUsers.getFlat().getFlatId())
+                        .setFlatResId(tempUsers.getFlatResId())
                         .setFlatNo(tempUsers.getFlat().getFlatNo())
                         .setIsOwner(tempUsers.isOwner())
-                        .setLastName(tempUsers.getUserDetail().getLastName())
-                        .setPhoneNumber(tempUsers.getUserDetail().getPhoneNumber())
-                        .setUserDetailId(tempUsers.getUserDetail().getUserDetailsId())
                         .setIsTenant(tempUsers.isTenant())
                         .setTowerName(tempUsers.getFlat().getTow2().getTowerName())
                         .getResponse();
@@ -113,14 +115,9 @@ public class FlatResidentsService {
             if(temp != null) {
                 copy = temp.stream()
                         .map(FlatResidents -> new FlatResidentResBuilder()
-                                .setFirstName(FlatResidents.getUserDetail().getFirstName())
-                                .setEmailId(FlatResidents.getUserDetail().getEmailId())
-                                .setFlatId(FlatResidents.getFlat().getFlatId())
+                                .setFlatResId(FlatResidents.getFlatResId())
                                 .setFlatNo(FlatResidents.getFlat().getFlatNo())
                                 .setIsOwner(FlatResidents.isOwner())
-                                .setLastName(FlatResidents.getUserDetail().getLastName())
-                                .setPhoneNumber(FlatResidents.getUserDetail().getPhoneNumber())
-                                .setUserDetailId(FlatResidents.getUserDetail().getUserDetailsId())
                                 .setIsTenant(FlatResidents.isTenant())
                                 .setTowerName(FlatResidents.getFlat().getTow2().getTowerName())
                                 .getResponse())
@@ -141,14 +138,9 @@ public class FlatResidentsService {
             if(temp != null) {
                 copy = temp.stream()
                         .map(FlatResidents -> new FlatResidentResBuilder()
-                                .setFirstName(FlatResidents.getUserDetail().getFirstName())
-                                .setEmailId(FlatResidents.getUserDetail().getEmailId())
-                                .setFlatId(FlatResidents.getFlat().getFlatId())
+                                .setFlatResId(FlatResidents.getFlatResId())
                                 .setFlatNo(FlatResidents.getFlat().getFlatNo())
                                 .setIsOwner(FlatResidents.isOwner())
-                                .setLastName(FlatResidents.getUserDetail().getLastName())
-                                .setPhoneNumber(FlatResidents.getUserDetail().getPhoneNumber())
-                                .setUserDetailId(FlatResidents.getUserDetail().getUserDetailsId())
                                 .setIsTenant(FlatResidents.isTenant())
                                 .setTowerName(FlatResidents.getFlat().getTow2().getTowerName())
                                 .getResponse())
