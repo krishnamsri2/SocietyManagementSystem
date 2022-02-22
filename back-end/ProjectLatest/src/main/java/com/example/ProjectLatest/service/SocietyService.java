@@ -46,7 +46,7 @@ public class SocietyService {
             }
             if(society.size()!=0)
            copy = society.stream()
-                    .map(Society -> new SocietyResponse(Society.getSocietyName(), Society.getCreatedby(), Society.getCreated(),Society.getSocietyid()))
+                    .map(Society -> new SocietyResponse(Society.getSocietyNameame(), Society.getCreatedby(), Society.getCreated(),Society.getSocietyid()))
                     .collect(Collectors.toList());
         }
         catch (Exception e)
@@ -62,7 +62,7 @@ public class SocietyService {
         try {
             temp = repository.findById(id).orElse(null);
             if(temp!=null && !temp.isDeleted())
-            societyResponse = new SocietyResponse(temp.getSocietyName(), temp.getCreatedby(), temp.getCreated(), temp.getSocietyid());
+            societyResponse = new SocietyResponse(temp.getSocietyNameame(), temp.getCreatedby(), temp.getCreated(), temp.getSocietyid());
         }
         catch (Exception e)
         {
@@ -95,7 +95,6 @@ public class SocietyService {
                 temp.setDeleted(true);
                 repository.save(temp);
                 ack="removed";
-                repository.save(temp);
             }
 
         }

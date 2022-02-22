@@ -1,8 +1,5 @@
 package com.example.ProjectLatest.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -30,16 +27,15 @@ public class User
 	private Boolean isDeleted;
 	private Boolean isActive;
 	
-
-
-	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
-
+	@OneToOne(mappedBy="user")
 	private UserDetails usd;
 	
 	public UserDetails getUsd() {
 		return usd;
 	}
-
+	
+	
+	
 	public User() {
 		
 	}

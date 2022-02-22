@@ -25,7 +25,6 @@ public class SocietyController {
     }
 
     // get all notice
-
     @RequestMapping(method = RequestMethod.GET,value="/societies")
     public List<SocietyResponse> findAllSociety()
     {
@@ -40,7 +39,6 @@ public class SocietyController {
         return societyService.getSocietyId(id);
     }
     // update
-
     @RequestMapping(method = RequestMethod.PUT,value = "/society/updates/{id}")
     public void updateSociety(@PathVariable long id, @RequestBody RestRequest<SocietyTO> society)
     {

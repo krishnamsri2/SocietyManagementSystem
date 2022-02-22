@@ -35,9 +35,9 @@ public class Society {
 	
 	
 
-	public Society(String societyName, long createdby, boolean isDeleted, boolean isActive) {
+	public Society(String towername, long createdby, boolean isDeleted, boolean isActive) {
 		super();
-		this.societyName = societyName;
+		this.societyName = towername;
 		this.createdby = createdby;
 		this.modifyby = createdby;
 		this.isDeleted = isDeleted;
@@ -63,12 +63,12 @@ public class Society {
 
 
 
-	public String getSocietyName() {
+	public String getSocietyNameame() {
 		return societyName;
 	}
-	public void setSocietyName(String societyName) {
+	public void setSocietyName(String towername) {
 		setUpdated();
-		this.societyName = societyName;
+		this.societyName = towername;
 	}
 	public long getSocietyid() {
 		return societyid;

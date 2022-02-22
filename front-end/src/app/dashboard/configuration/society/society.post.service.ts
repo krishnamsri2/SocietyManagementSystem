@@ -15,9 +15,6 @@ export class SocietyPostService {
     this.http.post('http://localhost:9191/addSociety', newSociety).subscribe(
       (newUser) => {
         alert('ADDED Society');
-      },
-      (error) => {
-        console.log('');
       }
     );
   }

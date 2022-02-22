@@ -1,19 +1,14 @@
 package com.example.ProjectLatest.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="UserDetails")
-public class UserDetails implements Serializable
+public class UserDetails 
 {
-	// private static final long serialVersionUID = 49274929479279279L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long userDetailsId;
@@ -37,7 +32,7 @@ public class UserDetails implements Serializable
 	private long createdBy;
 	private long modifiedBy;
 	
-	@OneToMany(mappedBy = "userDetail", cascade={CascadeType.REMOVE} )
+	@OneToMany(mappedBy = "userDetail", cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
 	private Set<FlatResidents> residents = new HashSet<FlatResidents>();
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -53,11 +48,9 @@ public class UserDetails implements Serializable
 	
 	@OneToOne
 	@JoinColumn(name="userID")  // ForeignKey from User table
-	@JsonManagedReference
 	private User user;
 	
 	@OneToOne(mappedBy="userDetails")
-	@JsonBackReference
 	private Role role;
 	
 	@OneToMany(mappedBy = "usd")
@@ -111,7 +104,10 @@ public class UserDetails implements Serializable
 		setModifiedBy(modifiedBy);
 		LastName = lastName;
 	}
-
+	
+	
+	
+	
 	public User getUser() {
 		return user;
 	}
@@ -193,6 +189,7 @@ public class UserDetails implements Serializable
 		residents.add(resident);
 		resident.setUserDetail(this);
 	}
-
+	
+	
 
 }
