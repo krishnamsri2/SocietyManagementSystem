@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+//import { Observable } from 'src/app/dashboard/configuration/user/role/node_modules/rxjs';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/shared/user.model';
 import { UserService } from 'src/app/user.service';
-import { RoleService } from '../role/role.service';
+import { RoleService } from './role/role.service';
 import { UserPostServices } from './user.posts.service';
 
 @Component({

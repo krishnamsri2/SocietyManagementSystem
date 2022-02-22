@@ -8,8 +8,6 @@
       <th scope="col">Last Name</th>
       <th scope="col">Phone Number</th>
       <th scope="col">Email-ID</th>
-      <!-- <th scope="col">Tower Name</th>
-      <th scope="col">Flat Number</th> -->
       <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col"></th>
@@ -26,10 +24,10 @@
       <td>{{user.lastName}}</td>
       <td >{{user.phoneNumber}}</td>
       <td>{{user.emailId ? user.emailId : "-"}}</td>
-      <td><a class="link-danger" [routerLink]="[]">Flat Details</a></td>
-      <td><a [routerLink]="['../','role']" class="link-danger" (click)="saveUserId(user.userDetailId)">Role</a></td>
+      <td><a class="link-danger" [routerLink]="['flat_details']">Flat Details</a></td>
+      <td><a [routerLink]="['role']" class="link-danger" (click)="saveUserId(user.userDetailId)">Role</a></td>
       <td><app-edit-user-modal [userId]="user.userDetailId"></app-edit-user-modal></td>
-      <td><a class="link-danger" (click)="setUserInactive(user.userDetailId)" [routerLink]="[]">Delete</a></td>
+      <td><a class="link-danger" (click)="setUserInactive(user.userDetailId)" [routerLink]="[]">Delete User</a></td>
       
     </tr>
 

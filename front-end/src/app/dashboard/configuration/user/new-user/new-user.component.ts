@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, ViewChild, EventEmitter, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { RoleService } from '../../role/role.service';
+import { RoleService } from '../role/role.service';
 import { UserPostServices } from '../user.posts.service';
 
 @Component({

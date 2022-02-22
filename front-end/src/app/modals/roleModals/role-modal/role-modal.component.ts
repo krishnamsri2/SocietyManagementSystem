@@ -4,8 +4,8 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Subscription } from 'rxjs';
 
-import { RoleModel } from 'src/app/dashboard/configuration/role/role.model';
-import { RoleService } from 'src/app/dashboard/configuration/role/role.service';
+import { RoleModel } from 'src/app/dashboard/configuration/user/role/role.model';
+import { RoleService } from 'src/app/dashboard/configuration/user/role/role.service';
 
 @Component({
   selector: 'app-role-modal',
@@ -17,7 +17,7 @@ export class RoleModalComponent implements OnInit, OnDestroy {
   @Input('id') userDetailId : number;
   @Input('roleIdForEdit') roleId : number;
 
-  public roleTypeArray = ['WORKER','ADMIN','RESIDENT'];
+  public roleTypeArray = ['WORKER','ADMIN','RESIDENT']
   
   private updateRoleSubscription : Subscription;
   private roleWithARoleIdSubs : Subscription;

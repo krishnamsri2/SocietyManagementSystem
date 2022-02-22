@@ -2,8 +2,8 @@ import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { RoleModel } from 'src/app/dashboard/configuration/role/role.model';
-import { RoleService } from 'src/app/dashboard/configuration/role/role.service';
+import { RoleModel } from 'src/app/dashboard/configuration/user/role/role.model';
+import { RoleService } from 'src/app/dashboard/configuration/user/role/role.service';
 
 @Component({
   selector: 'app-new-role-modal',

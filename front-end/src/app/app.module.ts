@@ -25,13 +25,14 @@ import { ModalComponent } from './modals/modal/modal.component';
 import { AddSocietyComponent } from './modals/societymodal/add-society/add-society.component';
 import { AddTowerComponent } from './modals/towermodals/add-tower/add-tower.component';
 import { FlatmodalsComponent } from './modals/flatmodals/flatmodals.component';
-import { RoleComponent } from './dashboard/configuration/role/role.component';
+import { RoleComponent } from './dashboard/configuration/user/role/role.component';
 import { MenuComponent } from './dashboard/configuration/menu/menu.component';
 import { MenuSecurityComponent } from './dashboard/configuration/menu-security/menu-security.component';
-import { EditRoleComponent } from './dashboard/configuration/user/edit-role/edit-role.component';
+//import { EditRoleComponent } from './dashboard/configuration/user/edit-role/edit-role.component';
 import { RoleModalComponent } from './modals/roleModals/role-modal/role-modal.component';
 import { NewRoleModalComponent } from './modals/roleModals/new-role-modal/new-role-modal.component';
 import { EditUserModalComponent } from './dashboard/configuration/user/edit-user-modal/edit-user-modal.component';
+import { FlatDetailsComponent } from './dashboard/configuration/user/flat-details/flat-details.component';
 
 
 @NgModule({
@@ -55,10 +56,11 @@ import { EditUserModalComponent } from './dashboard/configuration/user/edit-user
     RoleComponent,
     MenuComponent,
     MenuSecurityComponent,
-    EditRoleComponent,
+    
     RoleModalComponent,
     NewRoleModalComponent,
-    EditUserModalComponent
+    EditUserModalComponent,
+    FlatDetailsComponent
     //DummyComponentComponent
   ],
   imports: [
