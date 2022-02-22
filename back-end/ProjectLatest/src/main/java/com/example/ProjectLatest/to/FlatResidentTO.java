@@ -7,7 +7,8 @@ public class FlatResidentTO {
     private boolean isOwner;
     @JsonProperty
     private boolean isTenant;
-    private long flatId;
+    private String flatNo;
+    private String towerName;
     private long userDetailId;
 
     public boolean getIsOwner() {
@@ -26,12 +27,20 @@ public class FlatResidentTO {
         this.isTenant = tenant;
     }
 
-    public long getFlatId() {
-        return flatId;
+    public String getFlatNo() {
+        return flatNo;
     }
 
-    public void setFlatId(long flatId) {
-        this.flatId = flatId;
+    public void setFlatNo(String flatNo) {
+        this.flatNo = flatNo;
+    }
+
+    public String getTowerName() {
+        return towerName;
+    }
+
+    public void setTowerName(String towerName) {
+        this.towerName = towerName;
     }
 
     public long getUserDetailId() {
