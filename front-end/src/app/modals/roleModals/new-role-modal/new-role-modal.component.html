@@ -8,7 +8,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="roleType" class="form-label">Role Type</label>
-                    <input type="text" id="roleType" class="form-control" ngModel name="roleType">
+                    <select class="form-select" aria-label="Default select example" ngModel name="roleType">
+                        <option [value]="element" *ngFor="let element of roleTypeArray">{{element}}</option>
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <label for="role" class="form-label">Role</label>
@@ -23,7 +25,7 @@
             </div>
             <div class="row" style="float: right; margin-top: 10px;">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-danger">Add</button>
+                    <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Add</button>
                 </div>
             </div>
         </form>

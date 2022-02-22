@@ -13,23 +13,28 @@ import { RoleService } from './role.service';
 })
 export class RoleComponent implements OnInit,OnDestroy {
 
-  public roleArray : RoleModel[] = [];
+  public roleArray;
 
   public userDetailId:number;
 
-  private errorSubscription : Subscription;
+  private rolesOfAUserSubs : Subscription;
   private deleteSubscription : Subscription;
 
   constructor(private roleService : RoleService) { }
 
   ngOnInit(): void {
     this.userDetailId=this.roleService.getUserID();
-    //this.roleArray=this.roleService.getAllRolesOfAUser(this.userId);
+    this.rolesOfAUserSubs = this.roleService.getAllRolesOfAUser(this.userDetailId).subscribe((responseData)=>{
+      this.roleArray=responseData;
+    },error=>{
+      console.log("Error in retrieving roles of a user with user id ",this.userDetailId,error);
+    });
   }
 
   deleteRoleOnClick(roleId:string){
     this.deleteSubscription=this.roleService.deleteRole(roleId).subscribe(()=>{
       console.log("Deletion successful");
+      alert("Role deleted");
     },err=>{
       console.log("Error in deleting a role of a particular user",err);
     });

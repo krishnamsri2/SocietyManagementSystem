@@ -20,7 +20,7 @@
             <td>{{role.role}}</td>
             <td>{{role.roleDescription}}</td>
             <td>
-                <app-role-modal [roleIdForEdit]="role.roleId" [id]="userId"></app-role-modal>
+                <app-role-modal [roleIdForEdit]="role.roleId" [id]="userDetailId"></app-role-modal>
             </td>
             <td>
                 <a [routerLink]="[]" class="link-danger" (click)="deleteRoleOnClick(role.roleId)">Delete Role</a>

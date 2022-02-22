@@ -8,22 +8,24 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="roleType" class="form-label">Role Type</label>
-                    <input type="text" id="roleType" class="form-control" ngModel name="roleType">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="oldRole.roleType" name="roleType">
+                        <option [value]="element" *ngFor="let element of roleTypeArray">{{element}}</option>
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <label for="role" class="form-label">Role</label>
-                    <input type="text" id="role" class="form-control" ngModel name="role">
+                    <input type="text" id="role" class="form-control" [(ngModel)]="oldRole.role" name="role">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <label for="roleDescription" class="form-label">Role Description</label>
-                    <input type="text" id="roleDescription" class="form-control" ngModel name="roleDescription">
+                    <input type="text" id="roleDescription" class="form-control" [(ngModel)]="oldRole.roleDescription" name="roleDescription">
                 </div>
             </div>
             <div class="row" style="float: right; margin-top: 10px;">
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-danger">Update</button>
+                    <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Update</button>
                 </div>
             </div>
         </form>

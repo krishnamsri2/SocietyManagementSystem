@@ -27,7 +27,7 @@
       <td >{{user.phoneNumber}}</td>
       <td>{{user.emailId ? user.emailId : "-"}}</td>
       <td><a class="link-danger" [routerLink]="[]">Flat Details</a></td>
-      <td><a [routerLink]="['../','role']" class="link-danger" (click)="saveUserId(user.userDetailId)">Edit Role</a></td>
+      <td><a [routerLink]="['../','role']" class="link-danger" (click)="saveUserId(user.userDetailId)">Role</a></td>
       <td><app-edit-user-modal [userId]="user.userDetailId"></app-edit-user-modal></td>
       <td><a class="link-danger" (click)="setUserInactive(user.userDetailId)" [routerLink]="[]">Delete</a></td>
       

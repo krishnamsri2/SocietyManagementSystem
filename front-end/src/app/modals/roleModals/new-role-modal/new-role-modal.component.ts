@@ -12,6 +12,8 @@ import { RoleService } from 'src/app/dashboard/configuration/role/role.service';
 })
 export class NewRoleModalComponent implements OnInit, OnDestroy {
 
+  public roleTypeArray = ['WORKER','RESIDENT','ADMIN'];
+
   @Input('userIdForRoleAddition') userDetailId : number;
   
   private newUserSubscription : Subscription;
@@ -45,10 +47,13 @@ export class NewRoleModalComponent implements OnInit, OnDestroy {
     let newRole = roleCreateForm.value.role;
     let newRoleType = roleCreateForm.value.roleType;
     let newRoleDesc = roleCreateForm.value.roleDescription;
+
+    console.log(newRole);
     
     this.newUserSubscription=this.roleService.addRole(new RoleModel(newRoleType,newRole,newRoleDesc),this.userDetailId).
     subscribe(()=>{
       console.log("Role for a particular user added");
+      alert("Role added");
     },err=>{
       console.log("Error in adding a role for a particular user",err);
     });

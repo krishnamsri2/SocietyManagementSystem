@@ -41,10 +41,19 @@ public class RoleService
         Set<RoleResponse> roleResponses = new HashSet<RoleResponse>();
         for(Role role:roles)
         {
-            RoleResponse roleResponse = new RoleResponse(role.getRoleId(),role.getRoleType(),role.getRole(),role.getRoleDescription());
-            roleResponses.add(roleResponse);
+            if(role.getIsDeleted()==false) {
+                RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription());
+                roleResponses.add(roleResponse);
+            }
         }
         return roleResponses;
+    }
+
+    public RoleResponse findRoleByRoleId(Long id)
+    {
+        Role currentRole = roleRepository.getById(id);
+        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription());
+        return response;
     }
 
     public void updateRoleByRoleId(RoleTO newRole, Long id)
