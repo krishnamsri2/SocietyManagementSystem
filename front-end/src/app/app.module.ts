@@ -33,6 +33,7 @@ import { RoleModalComponent } from './modals/roleModals/role-modal/role-modal.co
 import { NewRoleModalComponent } from './modals/roleModals/new-role-modal/new-role-modal.component';
 import { EditUserModalComponent } from './dashboard/configuration/user/edit-user-modal/edit-user-modal.component';
 import { FlatDetailsComponent } from './dashboard/configuration/user/flat-details/flat-details.component';
+import { NewFlatModalComponent } from './dashboard/configuration/user/flat-details/new-flat-modal/new-flat-modal.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { FlatDetailsComponent } from './dashboard/configuration/user/flat-detail
     RoleModalComponent,
     NewRoleModalComponent,
     EditUserModalComponent,
-    FlatDetailsComponent
+    FlatDetailsComponent,
+    NewFlatModalComponent
     //DummyComponentComponent
   ],
   imports: [

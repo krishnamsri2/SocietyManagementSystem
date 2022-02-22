@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/shared/user.model';
 import { UserService } from 'src/app/user.service';
+import { FlatDetailsService } from './flat-details/flat-details.service';
 import { RoleService } from './role/role.service';
 import { UserPostServices } from './user.posts.service';
 
@@ -21,7 +22,7 @@ export class UserComponent implements OnInit,OnDestroy {
   userSubscription : Subscription;
   
   constructor(public activeRoute : ActivatedRoute,private userService : UserService, private userPostService : UserPostServices,
-    private roleService : RoleService){
+    private roleService : RoleService, private flatsDetailsService : FlatDetailsService){
   }
 
   ngOnInit(){
@@ -41,6 +42,10 @@ export class UserComponent implements OnInit,OnDestroy {
 
   setUserInactive(userId : number){
     this.userPostService.setUserInactive(userId);
+  }
+
+  setUserId(userDetailId : number){
+    this.flatsDetailsService.setUserDetailId(userDetailId);
   }
 
   ngOnDestroy(){
