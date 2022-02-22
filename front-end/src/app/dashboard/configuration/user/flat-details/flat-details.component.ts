@@ -24,5 +24,9 @@ export class FlatDetailsComponent implements OnInit {
     });
   }
 
+  deleteFlatOnClick(flatResId : number){
+    this.flatDetailsService.deleteFlatOfAUser(flatResId);
+  }
+
 
 }

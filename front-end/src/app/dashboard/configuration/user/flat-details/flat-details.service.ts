@@ -22,6 +22,7 @@ export class FlatDetailsService{
         return this.userDetailId;
     }
 
+    //GET
     getFlatsOfAUser(){
         return this.http.get('',{
             responseType:'json'
@@ -32,6 +33,7 @@ export class FlatDetailsService{
         }));
     }
 
+    //POST
     addFlatForAUser(newFlat: FlatDetailsModel) {
         this.flatObj.setFlatDetailsRequestObject(newFlat);
         let flatPostObject=this.flatObj.getFlatDetailsRequestObject();
@@ -42,4 +44,15 @@ export class FlatDetailsService{
             console.log("Error in adding flat for a user with userDetailId ",this.userDetailId,error);
         });
     }
+
+    //DELETE
+    deleteFlatOfAUser(flatResId: number) {
+        this.http.delete('').subscribe(()=>{
+            alert("Flat Deleted successfully");
+        },error=>{
+            console.log("Flat not deleted, flatResId is ",flatResId,error);
+        });    
+    }
+
+    //PUT
 }
