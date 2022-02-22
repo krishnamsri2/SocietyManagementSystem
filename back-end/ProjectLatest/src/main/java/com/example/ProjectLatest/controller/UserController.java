@@ -1,8 +1,6 @@
 package com.example.ProjectLatest.controller;
 
-import com.example.ProjectLatest.response.AttendanceResponse;
 import com.example.ProjectLatest.response.UserDetailsResponse;
-import com.example.ProjectLatest.response.UserFlatResponse;
 import com.example.ProjectLatest.service.UserService;
 import com.example.ProjectLatest.to.RestRequest;
 import com.example.ProjectLatest.to.UserTO;
@@ -32,10 +30,6 @@ public class UserController {
         return service.getAllUser();
     }
 
-    @GetMapping("/users/{id}/flatDetails")
-    public List<UserFlatResponse> findFlatDetails(@PathVariable long id) {
-        return service.getFlatDetails(id);
-    }
 
     @PutMapping("/users/update/{id}")
     public void updateUser(@PathVariable long id, @RequestBody RestRequest<UserTO> user){

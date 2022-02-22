@@ -5,19 +5,14 @@ import com.example.ProjectLatest.builder.UserDetailBuilder;
 import com.example.ProjectLatest.builder.UserDetailsResBuilder;
 import com.example.ProjectLatest.entity.*;
 import com.example.ProjectLatest.repository.*;
-import com.example.ProjectLatest.response.AttendanceResponse;
 import com.example.ProjectLatest.response.UserDetailsResponse;
-import com.example.ProjectLatest.response.UserFlatResponse;
 import com.example.ProjectLatest.to.Token;
 import com.example.ProjectLatest.to.UserTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -131,21 +126,6 @@ public class UserService {
             return responses;
         }
 
-    }
-
-    public List<UserFlatResponse> getFlatDetails(long id){
-        List<UserFlatResponse> tempL = new ArrayList<>();
-        try {
-             tempL = new ArrayList<UserFlatResponse>();
-            for (FlatResidents y : repository.getById(id).getFlatResidents()) {
-                if (y.getIsDeleted() == false) {
-                    tempL.add(new UserFlatResponse(y.getFlat().getTow2().getTowerName(), y.getFlat().getFlatNo()));
-                }
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return tempL;
     }
 
 

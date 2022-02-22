@@ -1,6 +1,7 @@
 package com.example.ProjectLatest.controller;
 
 import com.example.ProjectLatest.entity.Notice;
+import com.example.ProjectLatest.response.NoticeResponse;
 import com.example.ProjectLatest.service.NoticeService;
 import com.example.ProjectLatest.to.NoticeTO;
 import com.example.ProjectLatest.to.RestRequest;
@@ -15,30 +16,30 @@ public class  NoticeController {
 
     @Autowired
     private NoticeService service;
-// Important to implement
+
     @PostMapping("/addNotice")
-    public Notice addNotice(@RequestBody RestRequest<NoticeTO> notice){
-        return service.saveNotice(notice.getRequestObject());
+    public void addNotice(@RequestBody RestRequest<NoticeTO> notice){
+        service.saveNotice(notice.getRequestObject(),notice.getToken());
     }
 
     @GetMapping("/notices")
-    public List<Notice> findAllNotices(){
+    public List<NoticeResponse> findAllNotices(){
         return service.getNotices();
     }
 
     @GetMapping("/notices/{id}")
-    public Notice findNoticeById(@PathVariable long id) {
+    public NoticeResponse findNoticeById(@PathVariable long id) {
         return service.getNoticeById(id);
     }
 
     @PutMapping("/update/{id}")
-    public Notice updateNotice(@PathVariable long id,@RequestBody RestRequest<NoticeTO> notice){
-        return service.updateNotice(id,notice.getRequestObject());
+    public void updateNotice(@PathVariable long id,@RequestBody RestRequest<NoticeTO> notice){
+         service.updateNotice(id,notice.getRequestObject());
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteNotice(@PathVariable long id){
-        return service.deleteNotice(id);
+    public void deleteNotice(@PathVariable long id){
+         service.deleteNotice(id);
     }
 
 }

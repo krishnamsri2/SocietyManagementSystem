@@ -1,87 +1,57 @@
 package com.example.ProjectLatest.response;
 
 public class FlatResidentResponse {
+    private long flatResId;
     private boolean isOwner;
     private boolean isTenant;
-    private long flatId;
-    private long userDetailId;
-    private String firstName;
-    private String lastName;
-    private long phoneNumber;
-    private String emailId;
+    private String flatNo;
+    private String towerName;
 
-    public FlatResidentResponse(boolean isOwner, boolean isTenant, long flatId, long userDetailId, String firstName, String lastName, long phoneNumber, String emailId) {
+    public FlatResidentResponse(long flatResId ,boolean isOwner, boolean isTenant, String flatNo, String towerName) {
+        this.flatResId = flatResId;
         this.isOwner = isOwner;
         this.isTenant = isTenant;
-        this.flatId = flatId;
-        this.userDetailId = userDetailId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.emailId = emailId;
+        this.flatNo = flatNo;
+        this.towerName = towerName;
     }
 
-    public boolean isOwner() {
+    public long getFlatResId() {
+        return flatResId;
+    }
+
+    public void setFlatResId(long flatResId) {
+        this.flatResId = flatResId;
+    }
+
+    public boolean getIsOwner() {
         return isOwner;
     }
 
-    public void setOwner(boolean owner) {
-        isOwner = owner;
+    public void setIsOwner(boolean isOwner) {
+        this.isOwner = isOwner;
     }
 
-    public boolean isTenant() {
+    public boolean getIsTenant() {
         return isTenant;
     }
 
-    public void setTenant(boolean tenant) {
-        isTenant = tenant;
+    public void setIsTenant(boolean tenant) {
+        this.isTenant = tenant;
     }
 
-    public long getFlatId() {
-        return flatId;
+    public String getFlatNo() {
+        return flatNo;
     }
 
-    public void setFlatId(long flatId) {
-        this.flatId = flatId;
+    public void setFlatNo(String flatNo) {
+        this.flatNo = flatNo;
     }
 
-    public long getUserDetailId() {
-        return userDetailId;
+    public String getTowerName() {
+        return towerName;
     }
 
-    public void setUserDetailId(long userDetailId) {
-        this.userDetailId = userDetailId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setTowerName(String towerName) {
+        this.towerName = towerName;
     }
 }

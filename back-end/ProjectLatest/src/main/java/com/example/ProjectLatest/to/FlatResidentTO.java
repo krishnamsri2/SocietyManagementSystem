@@ -3,7 +3,8 @@ package com.example.ProjectLatest.to;
 public class FlatResidentTO {
     private boolean isOwner;
     private boolean isTenant;
-    private long flatId;
+    private String flatNo;
+    private String towerName;
     private long userDetailId;
 
     public boolean isOwner() {
@@ -22,12 +23,20 @@ public class FlatResidentTO {
         isTenant = tenant;
     }
 
-    public long getFlatId() {
-        return flatId;
+    public String getFlatNo() {
+        return flatNo;
     }
 
-    public void setFlatId(long flatId) {
-        this.flatId = flatId;
+    public void setFlatNo(String flatNo) {
+        this.flatNo = flatNo;
+    }
+
+    public String getTowerName() {
+        return towerName;
+    }
+
+    public void setTowerName(String towerName) {
+        this.towerName = towerName;
     }
 
     public long getUserDetailId() {
