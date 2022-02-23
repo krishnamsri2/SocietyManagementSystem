@@ -26,45 +26,6 @@ public class RoleService
     //POST request
     public void addRole(RoleTO role,Long userID)
     {
-<<<<<<< HEAD
-        UserDetails usd = userDetailsRepository.getById(userID);
-        Role temp = new Role(role.getRoleType(),role.getRoleDescription(),role.getRole(),usd.getUserDetailsId());
-        usd.getRoles().add(temp);
-        temp.getUserDetails().add(usd);
-        roleRepository.save(temp);
-    }
-
-    public Set<RoleResponse> findRolesByUserDetailsId(Long userId)
-    {
-        UserDetails usd = userDetailsRepository.getById(userId);
-        Set<Role> roles = usd.getRoles();
-        Set<RoleResponse> roleResponses = new HashSet<RoleResponse>();
-        for(Role role:roles)
-        {
-            if(role.getIsDeleted()==false) {
-                RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription());
-                roleResponses.add(roleResponse);
-            }
-        }
-        return roleResponses;
-    }
-
-    public RoleResponse findRoleByRoleId(Long id)
-    {
-        Role currentRole = roleRepository.getById(id);
-        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription());
-        return response;
-    }
-
-    public void updateRoleByRoleId(RoleTO newRole, Long id)
-    {
-       Role currentRole = roleRepository.getById(id);
-       currentRole.setRole(newRole.getRole());
-       currentRole.setRoleType(newRole.getRoleType());
-       currentRole.setRoleDescription(newRole.getRoleDescription());
-       currentRole.setModifyDate();
-       roleRepository.save(currentRole);
-=======
         try {
             UserDetails usd = userDetailsRepository.getById(userID);
             Role temp = new Role(role.getRoleType(), role.getRoleDescription(), role.getRole(), userID);
@@ -117,16 +78,10 @@ public class RoleService
         {
             e.printStackTrace();
         }
->>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
     }
 
     public void deleteRoleByRoleId(Long id)
     {
-<<<<<<< HEAD
-        Role role = roleRepository.getById(id);
-        role.setIsDeleted(true);
-        roleRepository.save(role);
-=======
         try {
             Role role = roleRepository.getById(id);
             role.setIsDeleted(true);
@@ -136,7 +91,6 @@ public class RoleService
         {
             e.printStackTrace();
         }
->>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
     }
 
     public void activateRoleByRoleId(Long id)
