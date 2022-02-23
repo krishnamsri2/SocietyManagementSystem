@@ -21,11 +21,18 @@ public class RoleController
     {
         roleService.addRole(role.getRequestObject(),id);
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/role/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/roles/{id}")
     public Set<RoleResponse> getRoleByUserDetailsId(@PathVariable Long id)
     {
         return roleService.findRolesByUserDetailsId(id);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/role/{id}")
+    public RoleResponse getRoleByRoleId(@PathVariable Long id)
+    {
+        return roleService.findRoleByRoleId(id);
+    }
+
     @RequestMapping(method = RequestMethod.PUT,value = "/role/{id}")
     public void updateRoleByRoleId(@RequestBody RestRequest<RoleTO> role, @PathVariable Long id)
     {

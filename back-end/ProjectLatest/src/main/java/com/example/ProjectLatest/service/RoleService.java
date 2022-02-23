@@ -18,7 +18,6 @@ import java.util.Set;
 @Service
 public class RoleService
 {
-    //private List<Role> roles = Arrays.asList(new Role(RoleType.ADMIN,"Administrator of the society","ADMIN",112L,new UserDetails("Pushkar","Prashant",9199840155L,"pushkar.prashant@peoplestrong.com",112L,new User("mypassword",112L))),new Role(RoleType.ADMIN,"Administrator of the society","ADMIN",112L,new UserDetails("Pushkar","Prashant",9199840155L,"pushkar.prashant@peoplestrong.com",112L,new User("mypassword",112L))));
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
@@ -27,39 +26,73 @@ public class RoleService
     //POST request
     public void addRole(RoleTO role,Long userID)
     {
-        UserDetails usd = userDetailsRepository.getById(userID);
-        Role temp = new Role(role.getRoleType(),role.getRoleDescription(),role.getRole(),userID);
-        usd.getRoles().add(temp);
-        roleRepository.save(temp);
+        try {
+            UserDetails usd = userDetailsRepository.getById(userID);
+            Role temp = new Role(role.getRoleType(), role.getRoleDescription(), role.getRole(), userID);
+            usd.getRoles().add(temp);
+            temp.getUserDetails().add(usd);
+            roleRepository.save(temp);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     public Set<RoleResponse> findRolesByUserDetailsId(Long userId)
     {
+        Set<RoleResponse> roleResponses = new HashSet<RoleResponse>();
+        try{
         UserDetails usd = userDetailsRepository.getById(userId);
         Set<Role> roles = usd.getRoles();
-        Set<RoleResponse> roleResponses = new HashSet<RoleResponse>();
         for(Role role:roles)
         {
-            RoleResponse roleResponse = new RoleResponse(role.getRoleId(),role.getRoleType(),role.getRole(),role.getRoleDescription());
-            roleResponses.add(roleResponse);
+            if(role.getIsDeleted()==false) {
+                RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription());
+                roleResponses.add(roleResponse);
+            }
+        }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
         }
         return roleResponses;
     }
-
+    public RoleResponse findRoleByRoleId(Long id)
+    {
+        Role currentRole = roleRepository.getById(id);
+        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription());
+        return response;
+    }
     public void updateRoleByRoleId(RoleTO newRole, Long id)
     {
-       Role currentRole = roleRepository.getById(id);
-       currentRole.setRole(newRole.getRole());
-       currentRole.setRoleType(newRole.getRoleType());
-       currentRole.setRoleDescription(newRole.getRoleDescription());
-       currentRole.setModifyDate();
-       roleRepository.save(currentRole);
+        try {
+            Role currentRole = roleRepository.getById(id);
+            currentRole.setRole(newRole.getRole());
+            currentRole.setRoleType(newRole.getRoleType());
+            currentRole.setRoleDescription(newRole.getRoleDescription());
+            currentRole.setModifyDate();
+            roleRepository.save(currentRole);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void deleteRoleByRoleId(Long id)
     {
-        Role role = roleRepository.getById(id);
-        role.setIsDeleted(true);
-        roleRepository.save(role);
+        try {
+            Role role = roleRepository.getById(id);
+            role.setIsDeleted(true);
+            roleRepository.save(role);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
+
+
 }
