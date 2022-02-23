@@ -1,6 +1,14 @@
 <div class="container menu">
-    <div class="menu-header">
-        <h2>Menu</h2>
-    </div>
-    <div class="menu-cards"></div>
+  <div class="menu-header">
+    <h2>Menu</h2>
+  </div>
+  <div class="menu-cards">
+    <app-narrow-long-cards
+      *ngFor="let menu of menus"
+      [data]="menu"
+    ></app-narrow-long-cards>
+  </div>
+  <div class="add-btn">
+    <app-add-menu-modal></app-add-menu-modal>
+  </div>
 </div>

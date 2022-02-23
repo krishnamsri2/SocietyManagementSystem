@@ -1,0 +1,12 @@
+.edit-btn{
+    background:blue;
+    color:white;
+    padding:4px 8px;
+    width:100px;
+    height:40px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:8px;
+    box-shadow: 2px 3px lightblue,1px 1px darkblue;
+}

@@ -10,8 +10,8 @@ public class Menu
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long menuId;
-	
-	private String url;
+	//
+	private String Url;
 	
 	private long createdBy;
 	
@@ -37,7 +37,7 @@ public class Menu
 
 	public Menu(String url, long createdBy) {
 		super();
-		this.url = url;
+		this.Url = url;
 		this.createdBy = createdBy;
 		this.createDate = new Date();
 		this.modifiedDate = new Date();
@@ -51,11 +51,12 @@ public class Menu
 	
 	public String getUrl() {
 		
-		return url;
+		return Url;
 	}
 	public void setUrl(String url) {
 		setModifiedDate();
-		this.url = url;
+		this.Url= url;
+
 	}
 	
 	public long getCreatedBy() {
@@ -92,6 +93,6 @@ public class Menu
 		this.isActive = isActive;
 	}
 
-	
-	
+
+
 }

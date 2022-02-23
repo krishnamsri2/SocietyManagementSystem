@@ -1,0 +1,27 @@
+.long-card {
+  max-width: 700px;
+  margin: 10px auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+  transition:all 0.3s;
+  background:rgb(200, 200, 231,0.3);
+}
+.long-card:hover{
+    cursor: pointer;
+    box-shadow:1px 1px rgba(0,0,0,0.1);
+}
+.long-card-body {
+  padding: 0.5rem 1rem;
+  display:flex;
+  justify-content: space-between;
+}
+.long-card-body > p {
+  color: rgb(45, 3, 85);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  
+}
+

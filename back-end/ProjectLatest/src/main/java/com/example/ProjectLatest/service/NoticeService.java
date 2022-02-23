@@ -18,7 +18,6 @@ public class NoticeService {
             Notice tempNotice = new Notice(notice.getNoticeDetail(), 112L, notice.getUserId());
             return repository.save(tempNotice);
 
-
     }
    //PUT
     public Notice updateNotice(long id,NoticeTO notice){

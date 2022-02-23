@@ -7,7 +7,7 @@ import { FooterComponent } from './home-page/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerticalNavbarComponent } from './dashboard/vertical-navbar/vertical-navbar.component';
 
-
+//import {MatIconModule} from '@angular/material/icon';
 import { ConfigurationComponent } from './dashboard/configuration/configuration.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SocietyComponent } from './dashboard/configuration/society/society.component';
@@ -32,6 +32,9 @@ import { NarrowLongCardsComponent } from './narrow-long-cards/narrow-long-cards.
 import { EditSocietyComponent } from './modals/societymodal/edit-society/edit-society.component';
 import { EditTowerComponent } from './modals/towermodals/edit-tower/edit-tower.component';
 import { EditFlatModalComponent } from './modals/flatmodals/edit-flat-modal/edit-flat-modal.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AddMenuModalComponent } from './modals/menumodals/add-menu-modal/add-menu-modal.component';
+import { EditMenuModalComponent } from './modals/menumodals/edit-menu-modal/edit-menu-modal.component';
 
 
 
@@ -60,7 +63,9 @@ import { EditFlatModalComponent } from './modals/flatmodals/edit-flat-modal/edit
     NarrowLongCardsComponent,
     EditSocietyComponent,
     EditTowerComponent,
-    EditFlatModalComponent
+    EditFlatModalComponent,
+    AddMenuModalComponent,
+    EditMenuModalComponent
     
     //DummyComponentComponent
   ],
@@ -70,7 +75,9 @@ import { EditFlatModalComponent } from './modals/flatmodals/edit-flat-modal/edit
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    NoopAnimationsModule,
+
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

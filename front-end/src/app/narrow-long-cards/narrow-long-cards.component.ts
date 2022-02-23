@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MenuModel } from '../shared/menu.model';
 
 @Component({
   selector: 'app-narrow-long-cards',
@@ -8,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class NarrowLongCardsComponent implements OnInit {
 
   constructor() { }
-
+  @Input() data:MenuModel;
   ngOnInit(): void {
+    console.log(this.data);
   }
 
 }
