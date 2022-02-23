@@ -1,7 +1,7 @@
 package com.example.ProjectLatest.entity;
 
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +15,7 @@ public class UserDetails
 	private long userDetailsId;
 
 	private String firstName;
-	private String LastName;
+	private String lastName;
 	@Column(unique = true)
 	private long phoneNumber;
 	@Column(unique = true)
@@ -40,12 +40,11 @@ public class UserDetails
 	private User user;
 	
 	@ManyToMany
-	@JoinTable
-			(
-					name="userDetails_role",
-					joinColumns = {@JoinColumn(name="userDetailsId")},
-					inverseJoinColumns = {@JoinColumn(name="role_id")}
-			)
+	@JoinTable(
+			name = "userDetails_role",
+			joinColumns = {@JoinColumn(name = "userDetailsId")},
+			inverseJoinColumns = {@JoinColumn(name="role_id")}
+	)
 	private Set<Role> roles = new HashSet<Role>();
 
 	@OneToMany(mappedBy = "userDetail", cascade={CascadeType.REMOVE} )
@@ -54,14 +53,13 @@ public class UserDetails
 	@OneToMany(mappedBy = "usd")
     private Set<Attendance> setAttendance = new HashSet<Attendance>();
 
-
 	public UserDetails() {
 	}
 
 	public UserDetails(String firstName, String lastName, long phoneNumber, String emailId,long createdBy,User user) {
 		super();
 		this.firstName = firstName;
-		LastName = lastName;
+		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.emailId = emailId;
 		this.createdBy = createdBy;
@@ -73,16 +71,13 @@ public class UserDetails
 		this.user = user;
 	}
 
-
 	public long getUserDetailsId() {
 		return userDetailsId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public Set<Role> getRoles() {
+		return roles;
 	}
-
-
 
 	public String getFirstName() {
 		return firstName;
@@ -95,18 +90,15 @@ public class UserDetails
 	}
 	
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 	
 	public void setLastName(String lastName,long modifiedBy) {
 		setUpdateDate();
 		setModifiedBy(modifiedBy);
-		LastName = lastName;
+		this.lastName = lastName;
 	}
-	
-	
-	
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -179,10 +171,7 @@ public class UserDetails
 		this.isActive = isActive;
 	}
 
-	public Set<Role> getRoles()
-	{
-		return roles;
-	}
+
 
 	public Set<FlatResidents> getFlatResidents() {
 		return residents;
@@ -194,20 +183,13 @@ public class UserDetails
 		resident.setUserDetail(this);
 	}
 
-
 	public Set<Attendance> getSetAttendance() {
 		return setAttendance;
 	}
 
-	public void addAttendance(Attendance attendance)
-	{
+	public void addAttendance(Attendance attendance) {
 		setUpdateDate();
 		setAttendance.add(attendance);
 		attendance.setUsd(this);
 	}
-
-
-
-
-
 }

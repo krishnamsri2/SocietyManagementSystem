@@ -4,6 +4,15 @@ public class MenuTO {
 
     private String url;
     private long menuId;
+    private String menuName;
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
 
     public String getUrl() {
         return url;

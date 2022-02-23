@@ -1,28 +1,47 @@
 package com.example.ProjectLatest.to;
 
 public class UserTO {
-    private String userDetailId;
+    private long userDetailId;
     private String firstName;
-    private String LastName;
+    private String lastName;
     private long phoneNumber;
     private String emailId;
-    private String password;
+    //private String password;
+//    private String towerName;
+//    private String flatNo;
 
-    public String getUserId() {
+    public long getUserDetailId() {
         return userDetailId;
     }
 
-    public void setUserId(String userId) {
-        userDetailId = userId;
+    public void setUserDetailId(long userDetailId) {
+        this.userDetailId = userDetailId;
     }
 
-    public String getPassword() {
-        return password;
-    }
+//    public String getTowerName() {
+//        return towerName;
+//    }
+//
+//    public void setTowerName(String towerName) {
+//        this.towerName = towerName;
+//    }
+//
+//    public String getFlatNo() {
+//        return flatNo;
+//    }
+//
+//    public void setFlatNo(String flatNo) {
+//        this.flatNo = flatNo;
+//    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getFirstName() {
         return firstName;
@@ -33,11 +52,11 @@ public class UserTO {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public long getPhoneNumber() {
@@ -55,4 +74,5 @@ public class UserTO {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
 }

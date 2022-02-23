@@ -10,7 +10,7 @@ import java.util.Date;
 public class Notice {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "noticeId")
 	private long noticeId;
 
@@ -25,7 +25,7 @@ public class Notice {
 	
 	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CreatedDate", nullable = false)
-	private Date CreatedDate;
+	private Date createdDate;
 	
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -45,7 +45,7 @@ public class Notice {
 		this.noticeDetail = noticeDetail;
 		this.createdBy = createdBy;
 		this.modifyBy = createdBy;
-		this.CreatedDate = new Date();
+		this.createdDate = new Date();
 		this.updatedDate = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
@@ -88,7 +88,7 @@ public class Notice {
 	}
 
 	public Date getCreatedDate() {
-		return CreatedDate;
+		return createdDate;
 	}
 
 	public Date getUpdatedDate() {

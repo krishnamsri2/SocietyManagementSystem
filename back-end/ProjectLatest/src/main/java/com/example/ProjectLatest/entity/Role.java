@@ -11,18 +11,18 @@ import java.util.Set;
 @Table(name="Role")
 public class Role 
 {
+	private  String roleDescription;
 	@Enumerated(EnumType.STRING)
 	private RoleType roleType;
-	
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long roleId;
 	
 	private String role;
-	private String roleDescription;
-
-
-
+	
 	private long createdBy;
 	private long modifiedBy;
 	
@@ -51,8 +51,8 @@ public class Role
 	public Role(RoleType roleType,String roleDescription, String role, long createdBy) {
 		super();
 		this.roleType = roleType;
-		this.roleDescription = roleDescription;
 		this.role = role;
+		this.roleDescription = roleDescription;
 		this.createdBy = createdBy;
 		this.modifiedBy = createdBy;
 		this.createDate = new Date();

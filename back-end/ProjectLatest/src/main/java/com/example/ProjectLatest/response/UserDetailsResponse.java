@@ -1,20 +1,30 @@
 package com.example.ProjectLatest.response;
 
+import java.util.List;
+
 public class UserDetailsResponse {
     private long userDetailId;
     private String firstName;
-    private String LastName;
+    private String lastName;
     private long phoneNumber;
     private String emailId;
-    private String password;
+    private Boolean isDeleted;
 
-    public UserDetailsResponse(long userDetailId, String firstName, String lastName, long phoneNumber, String emailId, String password) {
+    public UserDetailsResponse(long userDetailId, String firstName, String lastName, long phoneNumber, String emailId ,Boolean isDeleted) {
         this.userDetailId = userDetailId;
         this.firstName = firstName;
-        this.LastName = lastName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
-        this.password = password;
+        this.isDeleted = isDeleted;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean deleted) {
+        this.isDeleted = deleted;
     }
 
     public long getUserDetailId() {
@@ -34,11 +44,11 @@ public class UserDetailsResponse {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        lastName = lastName;
     }
 
     public long getPhoneNumber() {
@@ -57,11 +67,11 @@ public class UserDetailsResponse {
         this.emailId = emailId;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 }

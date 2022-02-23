@@ -1,6 +1,5 @@
 package com.example.ProjectLatest.controller;
 
-import com.example.ProjectLatest.response.AttendanceResponse;
 import com.example.ProjectLatest.response.UserDetailsResponse;
 import com.example.ProjectLatest.service.UserService;
 import com.example.ProjectLatest.to.RestRequest;
@@ -17,13 +16,8 @@ public class UserController {
     private UserService service;
 
     @PostMapping("/users/addUser")
-    public String addUser(@RequestBody RestRequest<UserTO> user){
-         return service.saveUser(user.getRequestObject(),user.getToken());
-    }
-
-    @PostMapping("/users/{id}/addAttendance")
-    public String addAttendance(@PathVariable long id){
-        return service.saveAttendance(id);
+    public void addUser(@RequestBody RestRequest<UserTO> user){
+          service.saveUser(user.getRequestObject(),user.getToken());
     }
 
     @GetMapping("/users/{id}")
@@ -31,33 +25,21 @@ public class UserController {
         return service.getUserById(id);
     }
 
-    @GetMapping("/users/attendance/{id}")
-    public List<AttendanceResponse> findAttendancesById(@PathVariable long id) {
-        return service.getUserAttendances(id);
+    @GetMapping("/users")
+    public List<UserDetailsResponse> findAllUser() {
+        return service.getAllUser();
     }
 
-    @PutMapping("/users/update/{id}")
-    public String updateUser(@PathVariable long id, @RequestBody RestRequest<UserTO> user){
-         return service.updateUser(id,user.getRequestObject(),user.getToken());
+
+    @PutMapping("/users/update")
+    public void updateUser(@RequestBody RestRequest<UserTO> user){
+          service.updateUser(user.getRequestObject(),user.getToken());
 
     }
-
-    @PutMapping("/users/punchOut/{id}")
-    public String updateAttendance(@PathVariable long id){
-        return service.updateAttendance(id);
-    }
-
 
     @DeleteMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable long id){
-        return service.deleteUser(id);
+    public void deleteUser(@PathVariable long id){
+         service.deleteUser(id);
     }
-
-    @DeleteMapping("/users/delete/attendance/{id}")
-    public String deleteUserAttendance(@PathVariable long id){
-        return service.deleteUserAttendance(id);
-    }
-
-
 
 }

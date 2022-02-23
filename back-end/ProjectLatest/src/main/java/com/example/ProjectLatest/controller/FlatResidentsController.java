@@ -19,12 +19,12 @@ public class FlatResidentsController {
     @Autowired
     private FlatResidentsService service;
 
-    @PostMapping("/flatResidents/addFlatResidents")
+    @PostMapping("/users/flatResidents/addFlatResidents")
     public void addFlatResident(@RequestBody RestRequest<FlatResidentTO> user){
         service.saveFlatResident(user.getRequestObject(),user.getToken());
     }
 
-    @GetMapping("/flatResidents/{id}")
+    @GetMapping("/users/flatResidents/{id}")
     public FlatResidentResponse findFlatResidentById(@PathVariable long id) {
         return service.getFlatResidentById(id);
     }
@@ -34,19 +34,19 @@ public class FlatResidentsController {
         return service.getFlatResidentsByFlatId(flatId);
     }
 
-    @GetMapping("/user/{userDetailId}/flatResidents")
+    @GetMapping("/users/{userDetailId}/flatResidents")
     public List<FlatResidentResponse> findFlatResidentsByUserDetailId(@PathVariable long userDetailId){
         return service.getFlatResidentsByUserDetailId(userDetailId);
     }
 
-    @PutMapping("/flatResidents/update/{id}")
-    public void updateFlatResident(@PathVariable long id, @RequestBody RestRequest<FlatResidentTO> user){
-        service.updateFlatResident(id,user.getRequestObject(),user.getToken());
+    @PutMapping("users/flatResidents/update")
+    public void updateFlatResident(@RequestBody RestRequest<FlatResidentTO> user){
+        service.updateFlatResident(user.getRequestObject(),user.getToken());
     }
 
-    @DeleteMapping("/flatResidents/delete/{id}")
-    public String deleteFlatResident(@PathVariable long id){
-        return service.deleteFlatResident(id);
+    @DeleteMapping("users/flatResidents/delete/{id}")
+    public void deleteFlatResident(@PathVariable long id){
+         service.deleteFlatResident(id);
     }
 
 }

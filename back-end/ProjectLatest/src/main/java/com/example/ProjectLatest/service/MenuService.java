@@ -22,8 +22,8 @@ public class MenuService {
     public MenuResponse saveMenu(MenuTO menu){
 
 
-        Menu tempMenu = new Menu(menu.getUrl(), 765);
-        MenuResponse menuResponse = new MenuResponse(tempMenu.getUrl(),tempMenu.getMenuId());
+        Menu tempMenu = new Menu(menu.getUrl(), 765, menu.getMenuName());
+        MenuResponse menuResponse = new MenuResponse(tempMenu.getUrl(),tempMenu.getMenuId(),tempMenu.getMenuName());
        repository.save(tempMenu);
         return menuResponse;
 
@@ -32,7 +32,8 @@ public class MenuService {
     public MenuResponse updateMenu(long id,MenuTO menu){
         Menu existingMenu=repository.findById(id).orElse(null);
         existingMenu.setUrl(menu.getUrl());
-        MenuResponse menuResponse = new MenuResponse(existingMenu.getUrl(),existingMenu.getMenuId());
+        existingMenu.setMenuName(menu.getMenuName());
+        MenuResponse menuResponse = new MenuResponse(existingMenu.getUrl(),existingMenu.getMenuId(),existingMenu.getMenuName());
          repository.save(existingMenu);
          return menuResponse;
     }
@@ -42,14 +43,14 @@ public class MenuService {
         List<MenuResponse> responseList = new ArrayList<>();
         List<Menu> menuList =   repository.findAll();
         for(Menu menu: menuList){
-            responseList.add(new MenuResponse(menu.getUrl(), menu.getMenuId()));
+            responseList.add(new MenuResponse(menu.getUrl(), menu.getMenuId(), menu.getMenuName()));
         }
         return responseList;
     }
 
     public MenuResponse getMenuById(long id){
         Menu existingMenu = repository.findById(id).orElse(null);
-        MenuResponse menuResponse = new MenuResponse(existingMenu.getUrl(), existingMenu.getMenuId());
+        MenuResponse menuResponse = new MenuResponse(existingMenu.getUrl(), existingMenu.getMenuId(), existingMenu.getMenuName());
         return menuResponse;
     }
 
