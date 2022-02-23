@@ -11,10 +11,7 @@ import java.util.Set;
 @Table(name="Role")
 public class Role 
 {
-<<<<<<< HEAD
-=======
-	private  String roleDescription;
->>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
+	//private  String roleDescription;
 	@Enumerated(EnumType.STRING)
 	private RoleType roleType;
 
@@ -56,11 +53,7 @@ public class Role
 		super();
 		this.roleType = roleType;
 		this.role = role;
-<<<<<<< HEAD
-		this.roleDescription=roleDescription;
-=======
 		this.roleDescription = roleDescription;
->>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
 		this.createdBy = createdBy;
 		this.modifiedBy = createdBy;
 		this.createDate = new Date();
@@ -69,13 +62,7 @@ public class Role
 		this.isActive = true;
 	}
 
-	public String getRoleDescription() {
-		return roleDescription;
-	}
-
-	public void setRoleDescription(String roleDescription) {
-		this.roleDescription = roleDescription;
-	}
+	
 
 	public RoleType getRoleType() {
 		return roleType;
