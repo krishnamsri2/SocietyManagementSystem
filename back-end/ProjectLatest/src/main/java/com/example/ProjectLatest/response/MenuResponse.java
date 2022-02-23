@@ -1,7 +1,7 @@
 package com.example.ProjectLatest.response;
 
 public class MenuResponse {
-    private String menuDetail;
+    private String menuDetail;//url
     private long  menuId;
 
 

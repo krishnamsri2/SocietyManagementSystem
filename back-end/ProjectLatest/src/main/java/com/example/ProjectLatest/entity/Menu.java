@@ -93,6 +93,4 @@ public class Menu
 		this.isActive = isActive;
 	}
 
-
-
 }

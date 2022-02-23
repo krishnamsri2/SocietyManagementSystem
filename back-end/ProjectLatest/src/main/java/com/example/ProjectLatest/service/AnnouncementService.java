@@ -57,9 +57,9 @@ public class AnnouncementService {
         if(announcement!=null){
             announcement.setIsDeleted(true);
 
-            return "product removed !!" +id;
+            return "Product removed !!" +id;
         }
-        return " No announceemnt found with this !!" +id;
+        return " No Announceemnt found with this !!" +id;
     }
 
 
