@@ -8,36 +8,24 @@ public class UserDetailsResponse {
     private String lastName;
     private long phoneNumber;
     private String emailId;
-    //private String password;
-//    private List<String> towerName;
-//    private List<String> flatNo;
+    private Boolean isDeleted;
 
-    public UserDetailsResponse(long userDetailId, String firstName, String lastName, long phoneNumber, String emailId /*,List<String> towerName,List<String> flatNo */) {
+    public UserDetailsResponse(long userDetailId, String firstName, String lastName, long phoneNumber, String emailId ,Boolean isDeleted) {
         this.userDetailId = userDetailId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
-        //this.password = password;
-//        this.flatNo = flatNo;
-//        this.towerName = towerName;
+        this.isDeleted = isDeleted;
     }
 
-//    public List<String> getTowerName() {
-//        return towerName;
-//    }
-//
-//    public void setTowerName(List<String> towerName) {
-//        this.towerName = towerName;
-//    }
-//
-//    public List<String> getFlatNo() {
-//        return flatNo;
-//    }
-//
-//    public void setFlatNo(List<String> flatNo) {
-//        this.flatNo = flatNo;
-//    }
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean deleted) {
+        this.isDeleted = deleted;
+    }
 
     public long getUserDetailId() {
         return userDetailId;

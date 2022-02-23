@@ -32,9 +32,9 @@ public class UserController {
     }
 
 
-    @PutMapping("/users/update/{id}")
-    public void updateUser(@PathVariable long id, @RequestBody RestRequest<UserTO> user){
-          service.updateUser(id,user.getRequestObject(),user.getToken());
+    @PutMapping("/users/update")
+    public void updateUser(@RequestBody RestRequest<UserTO> user){
+          service.updateUser(user.getRequestObject(),user.getToken());
 
     }
 

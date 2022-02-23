@@ -6,13 +6,23 @@ public class FlatResidentResponse {
     private boolean isTenant;
     private String flatNo;
     private String towerName;
+    private Boolean isDeleted;
 
-    public FlatResidentResponse(long flatResId ,boolean isOwner, boolean isTenant, String flatNo, String towerName) {
+    public FlatResidentResponse(long flatResId ,boolean isOwner, boolean isTenant, String flatNo, String towerName,Boolean isDeleted) {
         this.flatResId = flatResId;
         this.isOwner = isOwner;
         this.isTenant = isTenant;
         this.flatNo = flatNo;
         this.towerName = towerName;
+        this.isDeleted = isDeleted;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean deleted) {
+        this.isDeleted = deleted;
     }
 
     public long getFlatResId() {

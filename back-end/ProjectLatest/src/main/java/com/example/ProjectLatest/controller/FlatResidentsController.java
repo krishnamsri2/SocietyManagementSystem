@@ -39,9 +39,9 @@ public class FlatResidentsController {
         return service.getFlatResidentsByUserDetailId(userDetailId);
     }
 
-    @PutMapping("users/flatResidents/update/{id}")
-    public void updateFlatResident(@PathVariable long id, @RequestBody RestRequest<FlatResidentTO> user){
-        service.updateFlatResident(id,user.getRequestObject(),user.getToken());
+    @PutMapping("users/flatResidents/update")
+    public void updateFlatResident(@RequestBody RestRequest<FlatResidentTO> user){
+        service.updateFlatResident(user.getRequestObject(),user.getToken());
     }
 
     @DeleteMapping("users/flatResidents/delete/{id}")
