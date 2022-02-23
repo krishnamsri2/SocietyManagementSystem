@@ -30,12 +30,14 @@ export class UserPostServices{
     }
 
     addUsers(newUser){
-        return this.http.post('http://localhost:9191/users/addUser',newUser,{
+        this.requestObj.putRequestObject(newUser);
+        let userObjWithToken=this.requestObj.getRequestObject();
+        return this.http.post('http://localhost:9191/users/addUser',userObjWithToken,{
             responseType : 'json'
         });
     }
 
-    updateUser(updatedUser: UserModel, userDetailId: number) {
+    updateUser(updatedUser: UserModel) {
 
         this.requestObj.putRequestObject(updatedUser);
         let updatedUserRequestObj;
@@ -44,7 +46,7 @@ export class UserPostServices{
         //console.log("Hello",updatedUserRequestObj);
         
 
-        return this.http.put(`http://localhost:9191/users/update/${userDetailId}`,updatedUserRequestObj);
+        return this.http.put(`http://localhost:9191/users/update`,updatedUserRequestObj);
     }
 
     fetchUsers(){

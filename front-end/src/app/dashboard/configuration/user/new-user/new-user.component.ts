@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, ViewChild, EventEmitter, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { UserModel } from 'src/app/shared/user.model';
 import { RoleService } from '../role/role.service';
 import { UserPostServices } from '../user.posts.service';
 
@@ -11,7 +12,7 @@ import { UserPostServices } from '../user.posts.service';
 })
 export class NewUserComponent implements OnInit,OnDestroy {
 
-  
+  private user : UserModel;  
 
   constructor(private userOperations : UserPostServices, private roleService : RoleService) { }
 
@@ -25,33 +26,35 @@ export class NewUserComponent implements OnInit,OnDestroy {
     
   }
 
-  private user = {
+  
 
-    token: {
-      societyId: '',
-      userId: '',
-    },
+  // private user = {
+
+  //   token: {
+  //     societyId: '',
+  //     userId: '',
+  //   },
     
-    requestObject: {
+  //   requestObject: {
 
-      firstName : '',
-      userDetailId: '',
-      lastName : '',
-      emailId : '',
-      phoneNumber: '',
+  //     firstName : '',
+  //     userDetailId: '',
+  //     lastName : '',
+  //     emailId : '',
+  //     phoneNumber: '',
       
     
-    }
+  //   }
     
-  }
+  
 
   onFormSubmit(signUpForm : NgForm){
     
-    this.user.requestObject.firstName=signUpForm.value.firstName;
-    this.user.requestObject.lastName=signUpForm.value.lastName;
-    this.user.requestObject.emailId=signUpForm.value.email;
-    this.user.requestObject.phoneNumber=signUpForm.value.phoneNumber;
-    console.log(this.user);
+    let firstName = signUpForm.value.firstName;
+    let lastName=signUpForm.value.lastName;
+    let emailId=signUpForm.value.email;
+    let phoneNumber=signUpForm.value.phoneNumber;
+    this.user= new UserModel(firstName,lastName,phoneNumber,emailId);
     this.errorMessage=this.userOperations.addUsers(this.user).subscribe(()=>{
       alert('User registered');
     });

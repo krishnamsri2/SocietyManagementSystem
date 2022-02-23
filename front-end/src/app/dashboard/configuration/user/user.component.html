@@ -27,7 +27,7 @@
       <td><a class="link-danger" [routerLink]="['flat_details']" (click)="setUserId(user.userDetailId)">Flat Details</a></td>
       <td><a [routerLink]="['role']" class="link-danger" (click)="saveUserId(user.userDetailId)">Role</a></td>
       <td><app-edit-user-modal [userId]="user.userDetailId" (reloadPage)="onUpdateUser($event)"></app-edit-user-modal></td>
-      <td><a class="link-danger" (click)="setUserInactive(user.userDetailId)" [routerLink]="[]">Delete</a></td>
+      <td><a class="link-danger" (click)="setUserInactive(user.userDetailId)" [routerLink]="[]">{{user.isDeleted ? 'Set Active' : 'Set Inactive'}}</a></td>
       
     </tr>
 
