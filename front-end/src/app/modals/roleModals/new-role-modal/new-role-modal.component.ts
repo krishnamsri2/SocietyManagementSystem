@@ -1,9 +1,10 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { RoleModel } from 'src/app/dashboard/configuration/user/role/role.model';
 import { RoleService } from 'src/app/dashboard/configuration/user/role/role.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-new-role-modal',
@@ -14,13 +15,18 @@ export class NewRoleModalComponent implements OnInit, OnDestroy {
 
   public roleTypeArray = ['WORKER','RESIDENT','ADMIN'];
 
+  public newRole=new RoleModel('','','');
+
   @Input('userIdForRoleAddition') userDetailId : number;
+  @Output() reloadPage = new EventEmitter<boolean>();
   
   private newUserSubscription : Subscription;
   closeResult = '';
 
   ngOnInit(): void {
     
+    //this.reloadPage.emit(true);
+    //console.log(this.userDetailId);
   }
   constructor(private modalService: NgbModal,private roleService : RoleService) {}
 
@@ -42,25 +48,30 @@ export class NewRoleModalComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFormSubmit(roleCreateForm : NgForm){
+  onSubmit(){
 
-    let newRole = roleCreateForm.value.role;
-    let newRoleType = roleCreateForm.value.roleType;
-    let newRoleDesc = roleCreateForm.value.roleDescription;
+    //this.newRole.userDetailId=this.userDetailId;
 
-    console.log(newRole);
+    console.log(this.newRole,this.userDetailId);
+
     
-    this.newUserSubscription=this.roleService.addRole(new RoleModel(newRoleType,newRole,newRoleDesc),this.userDetailId).
+    this.newUserSubscription=this.roleService.addRole(this.newRole,this.userDetailId).
     subscribe(()=>{
       console.log("Role for a particular user added");
-      alert("Role added");
+      this.reloadPage.emit(true);
+      setTimeout(()=>{
+        this.newRole=new RoleModel('','','');
+      })
+      
     },err=>{
       console.log("Error in adding a role for a particular user",err);
     });
+    
   }
 
   ngOnDestroy(){
-    this.newUserSubscription.unsubscribe();
+    //this.newUserSubscription.unsubscribe();
+    
   }
 
 }

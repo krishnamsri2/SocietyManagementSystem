@@ -1,8 +1,10 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+
 import { UserModel } from 'src/app/shared/user.model';
+import { EventEmitter } from '@angular/core';
 import { UserPostServices } from '../user.posts.service';
 
 @Component({
@@ -10,35 +12,33 @@ import { UserPostServices } from '../user.posts.service';
   templateUrl: './edit-user-modal.component.html',
   styleUrls: ['./edit-user-modal.component.css']
 })
-export class EditUserModalComponent implements OnInit,OnDestroy {
+export class EditUserModalComponent implements OnInit, OnDestroy {
 
-  //@ViewChild('f',{static:true}) updateForm : NgForm;
-  @Input('userId') userDetailId : number;
+  @Input('userId') userDetailId: number;
+  @Output() reloadPage = new EventEmitter<boolean>();
 
-  closeResult = ''; 
+  closeResult = '';
 
   public defaultUser;
 
-  private defaultUserSubscription: Subscription;
+  private defaultUserSubscription: Subscription; 
+  private updatedUserSubs : Subscription;
 
-  private updatedUser : UserModel;
+  private updatedUser: UserModel;
 
-  constructor(private modalService: NgbModal, private userService : UserPostServices) {}
+  constructor(private modalService: NgbModal, private userService: UserPostServices) { }
 
   ngOnInit(): void {
 
-    this.defaultUserSubscription = this.userService.getUserById(this.userDetailId).subscribe((responseData)=>{
-      this.defaultUser=responseData;
-      
-    },error=>{
-      console.log("Error in user updation",error);
+    this.defaultUserSubscription = this.userService.getUserById(this.userDetailId).subscribe((responseData) => {
+      this.defaultUser = responseData;
+    }, error => {
+      console.log("Error in user updation", error);
     });
-    
-    
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -55,18 +55,18 @@ export class EditUserModalComponent implements OnInit,OnDestroy {
     }
   }
 
-  onFormSubmit(updateForm : NgForm){
-    let emailId=updateForm.value.emailId;
-    let phoneNumber=updateForm.value.phoneNumber;
-    let firstName=updateForm.value.firstName;
-    let lastName=updateForm.value.lastName;
-    let userDetailId=this.userDetailId;
-    this.updatedUser=new UserModel(userDetailId,firstName,lastName,phoneNumber,emailId);
-    this.userService.updateUser(this.updatedUser,this.userDetailId);
+  onClick() {
+    //console.log(this.defaultUser);
+    this.defaultUserSubscription=this.userService.updateUser(this.defaultUser, this.userDetailId).subscribe(() => {
+      this.reloadPage.emit(true);
+    }, error => {
+      alert('User not updated!!');
+      console.log("Error in updating the user with id", this.userDetailId, error);
+    });;
   }
 
-  ngOnDestroy(){
-    this.defaultUserSubscription.unsubscribe();
+  ngOnDestroy() {
+    
   }
 
 }

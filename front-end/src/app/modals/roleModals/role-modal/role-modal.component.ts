@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { RoleModel } from 'src/app/dashboard/configuration/user/role/role.model';
 import { RoleService } from 'src/app/dashboard/configuration/user/role/role.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-role-modal',
@@ -16,6 +17,7 @@ export class RoleModalComponent implements OnInit, OnDestroy {
 
   @Input('id') userDetailId : number;
   @Input('roleIdForEdit') roleId : number;
+  @Output() reloadPage1 = new EventEmitter<boolean>();
 
   public roleTypeArray = ['WORKER','ADMIN','RESIDENT']
   
@@ -26,13 +28,16 @@ export class RoleModalComponent implements OnInit, OnDestroy {
   closeResult = '';
   ngOnInit(): void {
 
+    console.log(this.roleId);
+    
+
     this.roleWithARoleIdSubs=this.roleService.getRoleDetailsByRoleId(this.roleId).subscribe((responseData)=>{
       this.oldRole=responseData;
     },error=>{
       console.log("Error in retrieving role with rold-id ",this.roleId,error);
     });
     //console.log("Hello");
-    console.log(this.oldRole);
+    //console.log(this.oldRole);
   }
 
   constructor(private modalService: NgbModal, private roleService : RoleService) {}
@@ -62,7 +67,7 @@ export class RoleModalComponent implements OnInit, OnDestroy {
     this.updateRoleSubscription=this.roleService.updateRoleDetailsByRoleId(new RoleModel(newRoleType,newRole,newRoleDesc),this.roleId).
     subscribe(()=>{
       console.log("Roles updated for a particular user");
-      alert("Role updated");
+      this.reloadPage1.emit(true);
     },err=>{
       console.log("Error in updating roles for a particular role",err);
     });

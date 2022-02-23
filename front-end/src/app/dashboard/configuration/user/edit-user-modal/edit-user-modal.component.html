@@ -4,7 +4,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form style="margin-top: 15px;" (ngSubmit)="onFormSubmit(f)" #f="ngForm">
+        <!-- <form style="margin-top: 15px;" (ngSubmit)="onFormSubmit(f)" #f="ngForm"> -->
 
             <div class="row">
                 <div class="col-md-6 mb-4">
@@ -29,7 +29,7 @@
 
                     <div class="form-outline">
                         <label class="form-label" for="emailAddress">Email-ID</label>
-                        <input type="email" id="emailAddress" class="form-control" name="emailId" ngModel email
+                        <input type="email" id="emailAddress" class="form-control" name="emailId" email
                             #emailId="ngModel" [(ngModel)]="defaultUser.emailId"/>
                         <span class="help-block" *ngIf="!emailId.valid && emailId.touched">Please enter a valid email
                             address</span>
@@ -49,12 +49,12 @@
                 </div>
 
                 <div class="mt-4 pt-2">
-                    <button type="submit" class="btn btn-danger" [disabled]="!f.valid">Update user</button>
+                    <button type="button" class="btn btn-danger" [disabled]="!defaultUser" (click)="onClick()" (click)="modal.dismiss('Cross click')">Update user</button>
                 </div>
 
             </div>
 
-        </form>
+        <!-- </form> -->
     </div>    
 </ng-template>
 

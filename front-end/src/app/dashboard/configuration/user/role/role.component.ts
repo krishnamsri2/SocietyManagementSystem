@@ -1,8 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-
 import { Subscription } from 'rxjs';
-
-import { RoleModel } from './role.model';
 import { RoleService } from './role.service';
 
 
@@ -15,6 +12,8 @@ export class RoleComponent implements OnInit,OnDestroy {
 
   public roleArray;
 
+  public displayRoles=false;
+
   public userDetailId:number;
 
   private rolesOfAUserSubs : Subscription;
@@ -22,26 +21,38 @@ export class RoleComponent implements OnInit,OnDestroy {
 
   constructor(private roleService : RoleService) { }
 
-  ngOnInit(): void {
+  getRoles(){
     this.userDetailId=this.roleService.getUserID();
     this.rolesOfAUserSubs = this.roleService.getAllRolesOfAUser(this.userDetailId).subscribe((responseData)=>{
       this.roleArray=responseData;
+      //location.reload();
     },error=>{
       console.log("Error in retrieving roles of a user with user id ",this.userDetailId,error);
     });
   }
 
+  ngOnInit(): void {
+    this.getRoles();
+    console.log(this.userDetailId);
+  }
+
   deleteRoleOnClick(roleId:string){
     this.deleteSubscription=this.roleService.deleteRole(roleId).subscribe(()=>{
       console.log("Deletion successful");
-      alert("Role deleted");
+      this.getRoles();
     },err=>{
       console.log("Error in deleting a role of a particular user",err);
     });
   }
 
+  reloadThePage(reloadPage : boolean){
+    this.getRoles();
+    //location.reload();
+  }
+
   ngOnDestroy(){
-    //this.errorSubscription.unsubscribe();
+    
+    this.rolesOfAUserSubs.unsubscribe();
     this.deleteSubscription.unsubscribe();
   }
   

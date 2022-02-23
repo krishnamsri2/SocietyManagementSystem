@@ -7,7 +7,7 @@ export class RequestObject {
 
     public request = {
         token: {
-            societyId: 20,
+            societyId: 30,
             userId: 12
         },
         requestObject: {

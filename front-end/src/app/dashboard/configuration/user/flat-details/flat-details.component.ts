@@ -10,21 +10,25 @@ import { FlatDetailsService } from './flat-details.service';
 export class FlatDetailsComponent implements OnInit {
 
   public flatsOfAUser;
-  public userDetailId : number;
-  private flatsOfAUserSubs : Subscription;
+  public userDetailId: number;
+  private flatsOfAUserSubs: Subscription;
 
-  constructor(private flatDetailsService : FlatDetailsService) { }
+  constructor(private flatDetailsService: FlatDetailsService) { }
 
-  ngOnInit(): void {
-    this.userDetailId=this.flatDetailsService.getUserDetailId();
-    this.flatsOfAUserSubs=this.flatDetailsService.getFlatsOfAUser().subscribe((responseData)=>{
-      this.flatsOfAUser=responseData;
-    },error=>{
-      console.log("Error in retrieving flats of a user with user-id ",this.userDetailId,error);
+  flatDetails() {
+    this.flatsOfAUserSubs = this.flatDetailsService.getFlatsOfAUser().subscribe((responseData) => {
+      this.flatsOfAUser = responseData;
+    }, error => {
+      console.log("Error in retrieving flats of a user with user-id ", this.userDetailId, error);
     });
   }
 
-  deleteFlatOnClick(flatResId : number){
+  ngOnInit(): void {
+    this.userDetailId = this.flatDetailsService.getUserDetailId();
+    this.flatDetails();
+  }
+
+  deleteFlatOnClick(flatResId: number) {
     this.flatDetailsService.deleteFlatOfAUser(flatResId);
   }
 

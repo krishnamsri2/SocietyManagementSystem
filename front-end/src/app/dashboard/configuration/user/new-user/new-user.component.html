@@ -24,43 +24,7 @@
             class="form-control"
             name="lastName"
             ngModel 
-          />
-        </div>
-  
-      </div>
-    </div>
-  
-    <div class="row">
-      <div class="col-md-6 mb-4">
-  
-        <div class="form-outline">
-          <label for="tower_number" class="form-label">Tower Name</label>
-          <input 
-            type="text" 
-            id="tower_number" 
-            class="form-control"
-            ngModel
-            name="towerNumber"
-            
-            #towerNumber="ngModel">
-            <span class="help-block" *ngIf="!towerNumber.valid && towerNumber.touched">Please enter the tower number</span>
-        </div>
-  
-      </div>
-      <div class="col-md-6 mb-4">
-  
-        <div class="form-outline">
-          <label for="flat_number" class="form-label">Flat Number</label>
-          <input 
-            type="text" 
-            id="flat_number" 
-            class="form-control" 
-            ngModel
-            name="flatNumber"
-            
-            pattern="^(0|\+?[1-9]\d*)$"
-            #flatNumber="ngModel">
-            <span class="help-block" *ngIf="!flatNumber.valid && flatNumber.touched">Please Enter a valid flat number</span>
+            required/>
         </div>
   
       </div>
@@ -103,22 +67,7 @@
   
       </div>
 
-      <div class="row">
-        <div class="col-md-6 mb-4">
-  
-          <div class="form-outline">
-            <label class="form-label" for="firstName">Society-Id</label>
-            <input 
-              type="text" 
-              id="societyId" 
-              class="form-control"
-              ngModel
-              name="societyId"
-              required/>
-          </div>
-    
-        </div>
-      </div>
+      
 
       <div class="mt-4 pt-2">
         <button type="submit" class="btn btn-danger" [disabled]="!f.valid">Register user</button>

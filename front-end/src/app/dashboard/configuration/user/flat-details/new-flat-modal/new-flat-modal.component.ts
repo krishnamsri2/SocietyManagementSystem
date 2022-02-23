@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EventEmitter } from '@angular/core';
 import { FlatDetailsModel } from '../flat-details.model';
 import { FlatDetailsService } from '../flat-details.service';
 
@@ -12,14 +13,18 @@ import { FlatDetailsService } from '../flat-details.service';
 export class NewFlatModalComponent implements OnInit {
 
   closeResult = '';
-  @Input('userId') userDetailId : number;
+  @Input('userId') userDetailId: number;
+  @Output() reloadPage = new EventEmitter<boolean>();
+
+  public flatModel;
+
   ngOnInit(): void {
-    
+    this.flatModel=new FlatDetailsModel(null,'','',false,false);
   }
-  constructor(private modalService: NgbModal,private flatDetailsService: FlatDetailsService) {}
+  constructor(private modalService: NgbModal, private flatDetailsService: FlatDetailsService) { }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -36,21 +41,18 @@ export class NewFlatModalComponent implements OnInit {
     }
   }
 
-  onFormSubmit(flatForm: NgForm){
-    let newTowerName = flatForm.value.towerName;
-    let newFlatNo=flatForm.value.flatNo;
-    let newIsOwner=false , newIsTenant=false;
-
-    if(flatForm.value.isOwner===""){
-        newIsTenant=true;
-
-    }
-
-    else if(flatForm.value.isTenant===""){
-        newIsOwner=true;
-    }
+  onClick() {
     
-    this.flatDetailsService.addFlatForAUser(new FlatDetailsModel(this.userDetailId,newTowerName,newFlatNo,newIsOwner,newIsTenant));
+    this.flatDetailsService.addFlatForAUser(this.flatModel)
+      .subscribe(() => {
+        alert("Flat added successfully");
+        this.reloadPage.emit(true);
+        setTimeout(()=>{
+          this.flatModel=new FlatDetailsModel(null,'','',false,false);
+        })
+      }, error => {
+        console.log("Error in adding flat for a user with userDetailId ", this.userDetailId, error);
+      });;
 
   }
 

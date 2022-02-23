@@ -8,23 +8,25 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="towerName" class="form-label">Tower Name</label>
-                    <input type="text" class="form-control" id="towerName" ngModel name="towerName" required>
+                    <input type="text" class="form-control" id="towerName" [(ngModel)]="flatModel.towerName" required #towerName="ngModel">
+                    <span class="help-block" *ngIf="!towerName.valid && towerName.touched">Please enter the tower name</span>
                 </div>
                 <div class="col-md-6">
                     <label for="flatNo" class="form-label">Flat Number</label>
-                    <input type="text" id="flatNo" class="form-control" ngModel name="flatNo">
+                    <input type="text" id="flatNo" class="form-control" [(ngModel)]="flatModel.flatNo" pattern="^(0|\+?[1-9]\d*)$" #flatNo="ngModel">
+                    <span class="help-block" *ngIf="!flatNo.valid && flatNo.touched">Please Enter a valid flat number</span>
                 </div>
             </div>
             <div class="row" style="margin-top: 5px;">
                 <div class="col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="isOwner" ngModel id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" [(ngModel)]="flatModel.isOwner" id="flexRadioDefault1">
                         <label class="form-check-label" for="flexRadioDefault1">
                           Owner
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="isTenant" ngModel id="flexRadioDefault2">
+                        <input class="form-check-input" type="radio" [(ngModel)]="flatModel.isTenant" id="flexRadioDefault2">
                         <label class="form-check-label" for="flexRadioDefault2">
                           Tenant
                         </label>
@@ -33,7 +35,7 @@
             </div>
             <div class="row" style="float: right; margin-top: 10px;">
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Add</button>
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')" (click)="onClick()">Add</button>
                 </div>
                 
             </div>

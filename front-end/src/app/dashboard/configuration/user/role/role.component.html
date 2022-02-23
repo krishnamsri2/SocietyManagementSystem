@@ -2,7 +2,7 @@
 
     <thead>
         <tr>
-            <th scope="col">Role Id</th>
+            <th scope="col">Serial No.</th>
             <th scope="col">Role Type</th>
             <th scope="col">Role</th>
             <th scope="col">Role Description</th>
@@ -15,12 +15,12 @@
 
         <tr *ngFor="let role of roleArray ; let i=index">
 
-            <th scope="row">{{role.roleId}}</th>
+            <th scope="row">{{i+1}}</th>
             <td>{{role.roleType}}</td>
             <td>{{role.role}}</td>
             <td>{{role.roleDescription}}</td>
             <td>
-                <app-role-modal [roleIdForEdit]="role.roleId" [id]="userDetailId"></app-role-modal>
+                <app-role-modal [roleIdForEdit]="role.roleId" [id]="userDetailId" (reloadPage1)="reloadThePage($event)"></app-role-modal>
             </td>
             <td>
                 <a [routerLink]="[]" class="link-danger" (click)="deleteRoleOnClick(role.roleId)">Delete Role</a>
@@ -33,6 +33,6 @@
 
 <div class="row">
     <div class="col-md-2 offset-11">
-        <app-new-role-modal [userIdForRoleAddition]="userDetailId"></app-new-role-modal>
+        <app-new-role-modal [userIdForRoleAddition]="userDetailId" (reloadPage)="reloadThePage($event)"></app-new-role-modal>
     </div>
 </div>

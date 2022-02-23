@@ -26,12 +26,7 @@ export class UserPostServices{
     errorMessage = new Subject<String>();
 
     setUserInactive(userId: number) {
-        this.http.delete(`http://localhost:9191/users/delete/${userId}`).subscribe((userId)=>{
-            alert("User deleted successfully");
-            //console.log("User removed successfully with userId ",userId);
-        },error=>{
-            console.log("User deletion not successful",error);
-        });    
+        return this.http.delete(`http://localhost:9191/users/delete/${userId}`);
     }
 
     addUsers(newUser){
@@ -49,12 +44,7 @@ export class UserPostServices{
         //console.log("Hello",updatedUserRequestObj);
         
 
-        this.http.put(`http://localhost:9191/users/update/${userDetailId}`,updatedUserRequestObj).subscribe((userDetailId)=>{
-            alert('User updated successfully');
-        },error=>{
-            alert('User not updated!!');
-            console.log("Error in updating the user with id",userDetailId,error);
-        });
+        return this.http.put(`http://localhost:9191/users/update/${userDetailId}`,updatedUserRequestObj);
     }
 
     fetchUsers(){

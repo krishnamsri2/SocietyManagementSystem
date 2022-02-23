@@ -26,7 +26,7 @@ export class FlatDetailsService{
 
     //GET
     getFlatsOfAUser(){
-        return this.http.get('',{
+        return this.http.get(`http://localhost:9191/users/${this.userDetailId}/flatResidents`,{
             responseType:'json'
         }).pipe(map((responseData:any)=>{
             return responseData;
@@ -40,16 +40,12 @@ export class FlatDetailsService{
         this.requestObj.putRequestObject(newFlat);
         let flatPostObject=this.requestObj.getRequestObject();
 
-        this.http.post(``,flatPostObject).subscribe(()=>{
-            alert("Flat added successfully");
-        },error=>{
-            console.log("Error in adding flat for a user with userDetailId ",this.userDetailId,error);
-        });
+        return this.http.post(`http://localhost:9191/users/flatResidents/addFlatResidents`,flatPostObject);
     }
 
     //DELETE
     deleteFlatOfAUser(flatResId: number) {
-        this.http.delete('').subscribe(()=>{
+        this.http.delete(`http://localhost:9191/users/flatResidents/delete/${flatResId}`).subscribe(()=>{
             alert("Flat Deleted successfully");
         },error=>{
             console.log("Flat not deleted, flatResId is ",flatResId,error);
