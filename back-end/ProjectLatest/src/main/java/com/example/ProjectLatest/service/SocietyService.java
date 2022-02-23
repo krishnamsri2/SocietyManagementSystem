@@ -32,7 +32,7 @@ public class SocietyService {
     // get request for all society
     public List<SocietyResponse> getSociety() {
 
-        List<SocietyResponse> copy=null;
+        List<SocietyResponse> copy=new ArrayList<>();
         try {
             List<Society> societies = repository.findAll();
             List<Society> society=new ArrayList<>();
