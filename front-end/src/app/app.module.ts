@@ -35,6 +35,8 @@ import { EditUserModalComponent } from './dashboard/configuration/user/edit-user
 import { FlatDetailsComponent } from './dashboard/configuration/user/flat-details/flat-details.component';
 import { NewFlatModalComponent } from './dashboard/configuration/user/flat-details/new-flat-modal/new-flat-modal.component';
 import { FlatEditModalComponent } from './dashboard/configuration/user/flat-details/flat-edit-modal/flat-edit-modal.component';
+import { MatSliderModule } from '@angular/material/slider';
+//import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
 @NgModule({
@@ -73,7 +75,9 @@ import { FlatEditModalComponent } from './dashboard/configuration/user/flat-deta
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    MatSliderModule
+    //AngularSvgIconModule.forRoot()
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

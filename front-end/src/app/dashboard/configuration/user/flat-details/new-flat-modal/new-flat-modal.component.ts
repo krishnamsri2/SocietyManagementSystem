@@ -62,7 +62,7 @@ export class NewFlatModalComponent implements OnInit {
     
     this.flatDetailsService.addFlatForAUser(this.flatModel)
       .subscribe(() => {
-        alert("Flat added successfully");
+        //alert("Flat added successfully");
         this.reloadPage.emit(true);
         setTimeout(()=>{
           this.flatModel=new FlatDetailsModel(null,'','',false,false);

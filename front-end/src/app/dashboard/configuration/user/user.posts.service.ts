@@ -56,7 +56,7 @@ export class UserPostServices{
 
             for(var element in responseData){
                 users.push({...responseData[element]});
-                console.log(responseData[element]);
+                //console.log(responseData[element]);
             }
             return users;
         }),catchError((errResponse)=>{

@@ -32,11 +32,9 @@ export class UserComponent implements OnInit,OnDestroy {
     this.userSubscription = this.userPostService.fetchUsers().subscribe((userData)=>{
       this.users=userData;
       //this.userService.setUsers(this.users);
-      console.log(this.users);
+      //console.log(this.users);
       },error =>{
       console.log("Error in retrieving users",error);
-    },()=>{
-      console.log("Retrieval Succesful");
     });
   }
 
