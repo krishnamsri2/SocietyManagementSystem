@@ -10,8 +10,9 @@ public class Menu
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long menuId;
-	
-	private String url;
+	//
+	private String Url;
+	private String menuName;
 	
 	private long createdBy;
 	
@@ -35,14 +36,23 @@ public class Menu
 	public Menu() {
 	}
 
-	public Menu(String url, long createdBy) {
+	public Menu(String url, long createdBy, String menuName) {
 		super();
-		this.url = url;
+		this.Url = url;
+		this.menuName = menuName;
 		this.createdBy = createdBy;
 		this.createDate = new Date();
 		this.modifiedDate = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
 	}
 
 	public long getMenuId() {
@@ -51,11 +61,12 @@ public class Menu
 	
 	public String getUrl() {
 		
-		return url;
+		return Url;
 	}
 	public void setUrl(String url) {
 		setModifiedDate();
-		this.url = url;
+		this.Url= url;
+
 	}
 	
 	public long getCreatedBy() {
@@ -92,6 +103,4 @@ public class Menu
 		this.isActive = isActive;
 	}
 
-	
-	
 }

@@ -1,17 +1,25 @@
 package com.example.ProjectLatest.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Role")
 public class Role 
 {
+	private  String roleDescription;
+	@Enumerated(EnumType.STRING)
 	private RoleType roleType;
-	
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int roleId;
+	private Long roleId;
 	
 	private String role;
 	
@@ -29,9 +37,9 @@ public class Role
 	private Boolean isDeleted;
 	private Boolean isActive;
 	
-	@OneToOne
-	@JoinColumn(name="userDetailsID")	// ForeignKey
-	private UserDetails userDetails;  
+	@ManyToMany(mappedBy = "roles")
+	@JsonBackReference
+	private Set<UserDetails> userDetails = new HashSet<UserDetails>();
 	
 	@OneToOne(mappedBy="role")
 	private MenuSecurity menuSecurity;
@@ -40,17 +48,25 @@ public class Role
 	public Role() {
 	}
 
-	public Role(RoleType roleType, String role, long createdBy, UserDetails userDetails) {
+	public Role(RoleType roleType,String roleDescription, String role, long createdBy) {
 		super();
 		this.roleType = roleType;
 		this.role = role;
+		this.roleDescription = roleDescription;
 		this.createdBy = createdBy;
 		this.modifiedBy = createdBy;
 		this.createDate = new Date();
 		this.modifyDate = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
-		this.userDetails = userDetails;
+	}
+
+	public String getRoleDescription() {
+		return roleDescription;
+	}
+
+	public void setRoleDescription(String roleDescription) {
+		this.roleDescription = roleDescription;
 	}
 
 	public RoleType getRoleType() {
@@ -62,7 +78,7 @@ public class Role
 		this.roleType = roleType;
 	}
 
-	public int getRoleId() {
+	public Long getRoleId() {
 		return roleId;
 	}
 	
@@ -78,14 +94,9 @@ public class Role
 	}
 	
 	
-	public UserDetails getUser() {
+	public Set<UserDetails> getUserDetails() {
 		
 		return userDetails;
-	}
-
-	public void setUser(UserDetails user) {
-		setModifyDate();
-		this.userDetails = user;
 	}
 
 	public long getCreatedBy() {
@@ -115,9 +126,9 @@ public class Role
 		return isDeleted;
 	}
 	
-	public void setIsDeleted(Boolean isDeleted) {
+	public void setIsDeleted(Boolean value) {
 		setModifyDate();
-		this.isDeleted = isDeleted;
+		this.isDeleted = value;
 	}
 	
 	public Boolean getIsActive() {

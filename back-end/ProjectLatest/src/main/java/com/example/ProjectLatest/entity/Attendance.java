@@ -12,8 +12,8 @@ public class Attendance
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long attendId;
 	
-	private Date punchIn;
-	private Date punchOut;
+	private String punchIn;
+	private String punchOut;
 	
 	
 	private long createdBy;
@@ -47,45 +47,45 @@ public class Attendance
 	public Attendance(UserDetails usd) {
 		super();
 		this.usd = usd;
-		this.createdBy = usd.getUser().getUserId();
-		this.modifiedBy = usd.getUser().getUserId();
+		this.createdBy = usd.getUserDetailsId();
+		this.modifiedBy = usd.getUserDetailsId();
 		this.createDate = new Date();
 		this.updateDate = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
-		this.punchInFlag=false;
+		this.punchInFlag=true;
+		this.punchIn = createDate.toString();
 		this.punchOutFlag=false;
 	}
 	
 	public long getAttendId() {
 		return attendId;
 	}
-	public Date getPunchIn() {
+	public String getPunchIn() {
 		return punchIn;
 	}
-	public void setPunchIn() 
-	{
-		if(punchInFlag==false)
-		{
-		this.punchIn = new Date();
-		punchInFlag=true;
-		}
 
-	}
-	public Date getPunchOut() {
+	public String getPunchOut() {
 		return punchOut;
 	}
 	public void setPunchOut() 
 	{
+		setUpdateDate();
 		if(punchOutFlag==false&&punchInFlag==true)
 		{
-		this.punchOut = new Date();
+			Date date = new Date();
+		this.punchOut = date.toString();
 		punchOutFlag = true;
 		}
 	}
 	public UserDetails getUser() {
 		return usd;
 	}
+
+	public void setUsd(UserDetails usd) {
+		this.usd = usd;
+	}
+
 	public long getCreatedBy() {
 		return createdBy;
 	}
@@ -120,7 +120,7 @@ public class Attendance
 		setUpdateDate();
 		this.isActive = isActive;
 	}
-	
-	
-	
+
+
+ 
 }

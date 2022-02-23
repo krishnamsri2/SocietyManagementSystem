@@ -10,10 +10,10 @@ public class Complaint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long complaintId;
+    private long complaintId;
     private String type; // Plumber , Electrician , carpenter
     private int status; // 0 =filed , 1 =inprogress , 2 =solved
-    private Long userId;
+    private long userId;
 
     //private Flat flatId; for foreignkey relationship
     
@@ -24,8 +24,8 @@ public class Complaint {
 	@JoinColumn(name="FlatId")
 	private Flat flat1;
 
-    private Long createdBy;
-    private Long modifyBy;
+    private long createdBy;
+    private long modifyBy;
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdDate", nullable = false)
@@ -42,7 +42,7 @@ public class Complaint {
     public Complaint() {
     }
 
-    public Complaint(String type, Long createdBy) {
+    public Complaint(String type, long createdBy) {
         this.type = type;
         this.status = 0;
         this.updated = new Date();
@@ -51,10 +51,10 @@ public class Complaint {
         this.modifyBy = createdBy;
         this.isActive = true;
         this.isDeleted = false;
-        this.userId = null;
+        //this.userId = null;
     }
 
-	public Long getComplaintId() {
+	public long getComplaintId() {
 		return complaintId;
 	}
 
@@ -62,7 +62,7 @@ public class Complaint {
 		return type;
 	}
 
-	public Long getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
@@ -81,11 +81,11 @@ public class Complaint {
     	complaintHistory.setComplaint(this);
 	}
 
-	public Long getCreatedBy() {
+	public long getCreatedBy() {
 		return createdBy;
 	}
 
-	public Long getModifyBy() {
+	public long getModifyBy() {
 		return modifyBy;
 	}
 
@@ -144,9 +144,15 @@ public class Complaint {
 	public void setFlat1(Flat flat1) {
 		this.flat1 = flat1;
 	}
-	
-	
 
+
+	public long getcomplaintId() {
+		return complaintId;
+	}
+
+	public void setType(String type) {
+		this.type=type;
+	}
 }
 
 
