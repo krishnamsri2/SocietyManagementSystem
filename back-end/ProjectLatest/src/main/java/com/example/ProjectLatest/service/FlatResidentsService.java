@@ -57,13 +57,13 @@ public class FlatResidentsService {
         try {
             FlatResidents temp = frRepo.findById(requestObject.getFlatResId()).orElse(null);
 
-            long towerId =  towerRepository.getByTowerName(requestObject.getTowerName(), token.getSocietyId()).getTowerId();
-            Flat tempFlat =   flatRepo.getByFlatNo(requestObject.getFlatNo(),towerId );
+            //long towerId =  towerRepository.getByTowerName(requestObject.getTowerName(), token.getSocietyId()).getTowerId();
+            //Flat tempFlat =   flatRepo.getByFlatNo(requestObject.getFlatNo(),towerId );
 
-            if(temp != null && temp.getIsDeleted() == false && tempFlat != null) {
+            if(temp != null && temp.getIsDeleted() == false /*&& tempFlat != null*/) {
                 temp.setTenant(requestObject.getIsTenant());
                 temp.setOwner(requestObject.getIsOwner());
-                temp.setFlat(tempFlat);
+                //temp.setFlat(tempFlat);
                 frRepo.save(temp);
             }
         }catch (Exception e){
@@ -141,7 +141,9 @@ public class FlatResidentsService {
         List<FlatResidentResponse> copy = null;
 
         try {
+
             List<FlatResidents> temp = frRepo.findAllByUserDetailId(userDetailId);
+
             if(temp != null) {
                 copy = temp.stream()
                         .map(FlatResidents -> new FlatResidentResBuilder()
@@ -157,6 +159,7 @@ public class FlatResidentsService {
         }catch (Exception e){
             e.printStackTrace();
         }
+
         return copy;
     }
 }

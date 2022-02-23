@@ -43,9 +43,6 @@ export class UserPostServices{
         let updatedUserRequestObj;
         updatedUserRequestObj=this.requestObj.getRequestObject();
 
-        //console.log("Hello",updatedUserRequestObj);
-        
-
         return this.http.put(`http://localhost:9191/users/update`,updatedUserRequestObj);
     }
 

@@ -22,10 +22,10 @@
             <td>{{details.isOwner ? 'Yes' : 'No'}}</td>
             <td>{{details.isTenant ? 'Yes' : 'No'}}</td>
             <td>
-                <app-flat-edit-modal [flatResId]="details.flatResId"></app-flat-edit-modal>
+                <app-flat-edit-modal [flatResId]="details.flatResId" (reloadPage1)="flatDetails()"></app-flat-edit-modal>
             </td>
             <td>
-                <a [routerLink]="[]" class="link-danger" (click)="deleteFlatOnClick(details.flatResId)">Delete Flat</a>
+                <a [routerLink]="[]" class="link-danger" (click)="deleteFlatOnClick(details.flatResId)">{{details.isDeleted ? 'Set Active' : 'Set Inactive'}}</a>
             </td>
         </tr>
 

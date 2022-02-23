@@ -42,6 +42,23 @@ export class NewFlatModalComponent implements OnInit {
   }
 
   onClick() {
+
+    this.flatModel.userDetailId=this.userDetailId;
+
+    if(this.flatModel.isTenant==="tenant")
+    {
+      this.flatModel.isTenant=true;
+      this.flatModel.isOwner=false;
+    }  
+
+    else if(this.flatModel.isOwner==="owner")
+    {
+      this.flatModel.isOwner=true;
+      this.flatModel.isTenant=false;
+    }
+    
+
+    console.log(this.flatModel);
     
     this.flatDetailsService.addFlatForAUser(this.flatModel)
       .subscribe(() => {
@@ -52,7 +69,7 @@ export class NewFlatModalComponent implements OnInit {
         })
       }, error => {
         console.log("Error in adding flat for a user with userDetailId ", this.userDetailId, error);
-      });;
+      });
 
   }
 

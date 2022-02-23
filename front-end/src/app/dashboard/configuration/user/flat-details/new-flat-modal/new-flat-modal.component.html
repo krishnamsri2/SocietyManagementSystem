@@ -4,7 +4,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form (ngSubmit)="onFormSubmit(f)" #f="ngForm">
+        <!-- <form (ngSubmit)="onFormSubmit(f)" #f="ngForm"> -->
             <div class="row">
                 <div class="col-md-6">
                     <label for="towerName" class="form-label">Tower Name</label>
@@ -20,13 +20,13 @@
             <div class="row" style="margin-top: 5px;">
                 <div class="col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" [(ngModel)]="flatModel.isOwner" id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" value="owner" [(ngModel)]="flatModel.isOwner" id="flexRadioDefault1">
                         <label class="form-check-label" for="flexRadioDefault1">
                           Owner
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" [(ngModel)]="flatModel.isTenant" id="flexRadioDefault2">
+                        <input class="form-check-input" type="radio" value="tenant" [(ngModel)]="flatModel.isTenant" id="flexRadioDefault2">
                         <label class="form-check-label" for="flexRadioDefault2">
                           Tenant
                         </label>
@@ -40,7 +40,7 @@
                 
             </div>
             
-        </form>
+        <!-- </form> -->
     </div>
     
   </ng-template>

@@ -26,9 +26,8 @@ export class FlatDetailsService{
 
     //GET
     getFlatsOfAUser(){
-        return this.http.get(`http://localhost:9191/users/${this.userDetailId}/flatResidents`,{
-            responseType:'json'
-        }).pipe(map((responseData:any)=>{
+    
+        return this.http.get(`http://localhost:9191/users/${this.userDetailId}/flatResidents`).pipe(map((responseData:any)=>{
             return responseData;
         }),catchError((errResponse)=>{
             return throwError(errResponse);
@@ -40,29 +39,26 @@ export class FlatDetailsService{
         this.requestObj.putRequestObject(newFlat);
         let flatPostObject=this.requestObj.getRequestObject();
 
+        console.log(flatPostObject);
+        
+
         return this.http.post(`http://localhost:9191/users/flatResidents/addFlatResidents`,flatPostObject);
     }
 
     //DELETE
     deleteFlatOfAUser(flatResId: number) {
-        this.http.delete(`http://localhost:9191/users/flatResidents/delete/${flatResId}`).subscribe(()=>{
-            alert("Flat Deleted successfully");
-        },error=>{
-            console.log("Flat not deleted, flatResId is ",flatResId,error);
-        });    
+        return this.http.delete(`http://localhost:9191/users/flatResidents/delete/${flatResId}`);
     }
 
     //PUT
-    updateFlat(updatedFlat : FlatEditModel){
+    updateFlat(updatedFlat : FlatDetailsModel){
 
         this.requestObj.putRequestObject(updatedFlat);
         let flatObjWithToken=this.requestObj.getRequestObject();
 
-        this.http.put(``,flatObjWithToken).subscribe(()=>{
-            alert("Flat details updated successfully");
-        },error=>{
-            console.log("Error in updating flat details of a flat with flatResId and userDetailId",updatedFlat.flatResId,this.userDetailId,
-            " respectively",error);
-        });
+        console.log(flatObjWithToken);
+        
+
+        return this.http.put(`http://localhost:9191/users/flatResidents/update`,flatObjWithToken);
     }
 }

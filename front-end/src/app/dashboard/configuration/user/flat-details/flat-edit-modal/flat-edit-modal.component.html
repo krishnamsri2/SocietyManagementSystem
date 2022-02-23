@@ -1,14 +1,14 @@
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Add Flat</h4>
+      <h4 class="modal-title" id="modal-basic-title">Edit Flat</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form (ngSubmit)="onFormSubmit(f)" #f="ngForm">
+        <!-- <form (ngSubmit)="onFormSubmit(f)" #f="ngForm"> -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="isOwner" ngModel id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" name="radioButton" value="owner" [(ngModel)]="isOwner" id="flexRadioDefault1">
                         <label class="form-check-label" for="flexRadioDefault1">
                           Owner
                         </label>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="isTenant" ngModel id="flexRadioDefault2">
+                        <input class="form-check-input" type="radio" name="radioButton" value="tenant" [(ngModel)]="isTenant" id="flexRadioDefault2">
                         <label class="form-check-label" for="flexRadioDefault2">
                           Tenant
                         </label>
@@ -25,11 +25,11 @@
             </div>
             <div class="row" style="float: right; margin-top: 10px;">
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Update</button>
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')" (click)="onClick()">Update</button>
                 </div>
             </div>
             
-        </form>
+        <!-- </form> -->
     </div>
     
   </ng-template>
