@@ -39,6 +39,18 @@ public class RoleController
         roleService.updateRoleByRoleId(role.getRequestObject(),id);
     }
 
+    @RequestMapping(method = RequestMethod.PUT,value = "/role/activate/{id}")
+    public void activateRoleStatus(@RequestBody RestRequest<RoleTO> role,@PathVariable Long id)
+    {
+        roleService.activateRoleByRoleId(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT,value = "role/deactivate/{id}")
+    public void deactivateRoleStatus(@RequestBody RestRequest<RoleTO> role,@PathVariable Long id)
+    {
+        roleService.deactivateRoleByRoleId(id);
+    }
+
     @RequestMapping(method = RequestMethod.DELETE,value="/role/{id}")
     public void deleteRoleByRoleId(@PathVariable Long id)
     {

@@ -1,6 +1,8 @@
 package com.example.ProjectLatest.controller;
 
 import com.example.ProjectLatest.entity.MenuSecurity;
+import com.example.ProjectLatest.response.MenuResponse;
+import com.example.ProjectLatest.response.MenuSecurityResponse;
 import com.example.ProjectLatest.service.MenuSecurityService;
 import com.example.ProjectLatest.to.MenuSecurityTO;
 import com.example.ProjectLatest.to.RestRequest;
@@ -13,7 +15,7 @@ import java.util.List;
 @RestController
 public class MenuSecurityController {
 
-    @Autowired
+    /*@Autowired
     private MenuSecurityService service;
     // Important to implement
     @PostMapping("/addMenuSecurity")
@@ -39,6 +41,16 @@ public class MenuSecurityController {
     @DeleteMapping("/deleteMenuSecurity/{id}")
     public String deleteMenuSecurity(@PathVariable long id){
         return service.deleteMenuSecurity(id);
+    }*/
+
+    @Autowired
+    private MenuSecurityService service;
+
+    @GetMapping("/userDetails/role/menuSecurity")
+    public List<MenuSecurityResponse> getMenuByRoleID(@RequestBody RestRequest<MenuSecurityTO> menuSecurity){
+        return service.getMenuList(menuSecurity.getRequestObject());
     }
+
+
 
 }

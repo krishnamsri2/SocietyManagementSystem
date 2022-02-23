@@ -48,10 +48,9 @@ public class RoleService
         Set<Role> roles = usd.getRoles();
         for(Role role:roles)
         {
-            if(role.getIsDeleted()==false) {
-                RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription());
-                roleResponses.add(roleResponse);
-            }
+
+            RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription(),role.getIsActive(),role.getIsDeleted());
+            roleResponses.add(roleResponse);
         }
         }
         catch(Exception e) {
@@ -62,7 +61,7 @@ public class RoleService
     public RoleResponse findRoleByRoleId(Long id)
     {
         Role currentRole = roleRepository.getById(id);
-        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription());
+        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription(),currentRole.getIsActive(),currentRole.getIsDeleted());
         return response;
     }
     public void updateRoleByRoleId(RoleTO newRole, Long id)
@@ -89,6 +88,31 @@ public class RoleService
             roleRepository.save(role);
         }
         catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void activateRoleByRoleId(Long id)
+    {
+        try{
+            Role role = roleRepository.getById(id);
+            role.setIsActive(true);
+            roleRepository.save(role);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void deactivateRoleByRoleId(Long id)
+    {
+        try{
+            Role role = roleRepository.getById(id);
+            role.setIsActive(false);
+            roleRepository.save(role);
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

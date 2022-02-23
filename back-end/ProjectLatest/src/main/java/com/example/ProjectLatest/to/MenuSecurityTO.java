@@ -5,32 +5,16 @@ import com.example.ProjectLatest.entity.Role;
 
 public class MenuSecurityTO {
 
-    private Role role;
-    private Menu menu;
+    private long roleId;
+    private long userDetailsId;
 
-    public Role getRole() {
-        return role;
+    public long getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public long getUserDetailsId() {
+        return userDetailsId;
     }
 
 
-
-    public Menu getMenu() {
-        return menu;
-    }
-    public void setMenu(Menu menu) {
-
-        this.menu = menu;
-    }
-
-//    public long getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(long userId) {
-//        this.userId = userId;
-//    }
 }
