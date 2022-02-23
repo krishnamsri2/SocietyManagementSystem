@@ -37,17 +37,17 @@ public class TowerController {
     }
 
     // update
-    @RequestMapping(method = RequestMethod.PUT,value="/society/{id}/updateTower")
-    public void updateTower(@PathVariable long id,@RequestBody RestRequest<TowerTO> tower)
+    @RequestMapping(method = RequestMethod.PUT,value="/society/{id}/updateTower/{tower_name}")
+    public void updateTower(@PathVariable long id,@RequestBody RestRequest<TowerTO> tower,@PathVariable String tower_name)
     {
-         services.updateTower(id,tower.getRequestObject());
+         services.updateTower(id,tower.getRequestObject(),tower_name);
     }
 
     //delete
-    @RequestMapping(method = RequestMethod.DELETE,value="/society/{id}/deleteTower")
-    public void deleteTower(@RequestBody RestRequest<TowerTO> tower)
+    @RequestMapping(method = RequestMethod.DELETE,value="/society/{id}/deleteTower/{tower_name}")
+    public void deleteTower(@PathVariable long id,@PathVariable String tower_name)
     {
-        services.deleteTower(tower.getRequestObject());
+        services.deleteTower(id,tower_name);
     }
 
 }

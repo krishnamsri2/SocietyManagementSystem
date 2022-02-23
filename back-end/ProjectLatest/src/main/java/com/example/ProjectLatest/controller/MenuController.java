@@ -12,15 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins="*")
 public class MenuController {
 
     @Autowired
     private MenuService service;
     // Important to implement
     @PostMapping("/addMenu")
-    public void addMenu(@RequestBody RestRequest<MenuTO> menu){
-        service.saveMenu(menu.getRequestObject());
+    public MenuResponse addMenu(@RequestBody RestRequest<MenuTO> menu){
+        return service.saveMenu(menu.getRequestObject());
     }
 
     @GetMapping("/menus")

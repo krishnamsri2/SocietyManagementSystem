@@ -1,21 +1,22 @@
 package com.example.ProjectLatest.response;
 
 public class MenuResponse {
-    private String menuDetail;
+    private String url;
     private long  menuId;
+    private String menuName;
 
-
-    public MenuResponse(String menuDetail, long menuId) {
-        this.menuDetail = menuDetail;
+    public MenuResponse(String url, long menuId, String menuName) {
+        this.url = url;
         this.menuId = menuId;
+        this.menuName = menuName;
     }
 
-    public String getMenuDetail() {
-        return menuDetail;
+    public String getUrl() {
+        return url;
     }
 
-    public void setMenuDetail(String menuDetail) {
-        this.menuDetail = menuDetail;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public long getMenuId() {
@@ -24,5 +25,13 @@ public class MenuResponse {
 
     public void setMenuId(long menuId) {
         this.menuId = menuId;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 }

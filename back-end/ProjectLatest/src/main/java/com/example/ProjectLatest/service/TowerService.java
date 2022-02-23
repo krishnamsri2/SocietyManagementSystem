@@ -11,7 +11,6 @@ import com.example.ProjectLatest.to.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,89 +23,60 @@ public class TowerService {
 
 
     public void addTower(long id, TowerTO requestObject, Token token) {
-        try {
-            Society temp = repository1.findById(id).orElse(null);
-            if(temp!=null && !temp.isDeleted()) {
-                Tower tow = new Tower(requestObject.getTowerName(), token.getUserId(), requestObject.isDeleted(), requestObject.isActive(), temp);
-                repository.save(tow);
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        Society temp=repository1.findById(id).orElse(null);
+        Tower tow=new Tower(requestObject.getTowerName(), token.getUserId(), requestObject.isDeleted(), requestObject.isActive(), temp);
+        repository.save(tow);
     }
 
     public List<TowerResponse> findAllById(long id) {
-        List<TowerResponse> copy=null;
-        try {
-            Society temp = repository1.findById(id).orElse(null);
-            if(temp!=null && !temp.isDeleted()) {
-                List<Tower> towers = temp.getTow();
-                List<Tower> tower=new ArrayList<>();
-                for(int i=0;i<towers.size();i++)
-                {
-                    Tower tp=towers.get(i);
-                    if(!tp.isDeleted())
-                    {
-                        tower.add(tp);
-                    }
-                }
-                if(tower.size()!=0)
-                copy = tower.stream()
-                        .map(Tower -> new TowerResponse(Tower.getTowerName(), Tower.getCreatedBy(), Tower.getCreated(),Tower.getTowerId()))
-                        .collect(Collectors.toList());
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        Society temp=repository1.findById(id).orElse(null);
+        List<Tower> tower=temp.getTow();
+        List<TowerResponse> copy = tower.stream()
+                .map(Tower-> new TowerResponse(Tower.getTowerName(),Tower.getCreatedBy(),Tower.getCreated()))
+                .collect(Collectors.toList());
         return  copy;
     }
 
-    public void updateTower(long id, TowerTO requestObject) {
-        try {
-            Tower tower = repository.findById(requestObject.getTowerId()).orElse(null);
-            if(tower!=null && !tower.isDeleted()) {
-                tower.setTowerName(requestObject.getTowerName());
-                repository.save(tower);
+    public void updateTower(long id, TowerTO requestObject, String tower_name) {
+        Society temp=repository1.findById(id).orElse(null);
+        List<Tower> tow=temp.getTow();
+        for(int i=0;i<tow.size();i++)
+        {
+            Tower tp =tow.get(i);
+            if(tp.getTowerName().equals(tower_name))
+            {
+                tp.setTowerName(requestObject.getTowerName());
             }
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        return;
+    }
+    public void deleteTower(long id, String tower_name) {
+        Society temp=repository1.findById(id).orElse(null);
+        List<Tower> tow=temp.getTow();
+        for(int i=0;i<tow.size();i++) {
+            Tower tp = tow.get(i);
+            if (tp.getTowerName().equals(tower_name)) {
+                tp.setDeleted(true);
+            }
         }
         return;
     }
 
     public TowerResponse findById(long id, long tower_id) {
-        TowerResponse towerResponse=null;
-        try {
-            Tower tower = repository.findById(tower_id).orElse(null);
-            if (tower != null && !tower.isDeleted())
-                towerResponse = new TowerResponse(tower.getTowerName(), tower.getCreatedBy(), tower.getCreated(),tower.getTowerId());
-        }
-        catch (Exception e)
+        Society temp=repository1.findById(id).orElse(null);
+        List<Tower> tow=temp.getTow();
+        Tower tower=null;
+        for(int i=0;i<tow.size();i++)
         {
-            e.printStackTrace();
+            Tower tp=tow.get(i);
+            if(tp.getTowerId()==tower_id)
+            {
+                tower=tp;
+                break;
+            }
         }
+        TowerResponse towerResponse=new TowerResponse(tower.getTowerName(), tower.getCreatedBy(),tower.getCreated());
         return towerResponse;
-    }
-
-    public void deleteTower(TowerTO tower) {
-        try {
-            Tower tow = repository.findById(tower.getTowerId()).orElse(null);
-            if(tow!=null)
-            tow.setDeleted(true);
-            repository.save(tow);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return;
-
     }
 
 
