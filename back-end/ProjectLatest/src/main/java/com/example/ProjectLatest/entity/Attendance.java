@@ -122,8 +122,5 @@ public class Attendance
 	}
 
 
-    public void setUsd(UserDetails userDetails)
-	{
-		this.usd = userDetails;
-    }
+ 
 }

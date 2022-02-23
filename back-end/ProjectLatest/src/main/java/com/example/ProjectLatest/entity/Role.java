@@ -11,8 +11,12 @@ import java.util.Set;
 @Table(name="Role")
 public class Role 
 {
+	private  String roleDescription;
+	@Enumerated(EnumType.STRING)
 	private RoleType roleType;
-	
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long roleId;
@@ -48,12 +52,21 @@ public class Role
 		super();
 		this.roleType = roleType;
 		this.role = role;
+		this.roleDescription = roleDescription;
 		this.createdBy = createdBy;
 		this.modifiedBy = createdBy;
 		this.createDate = new Date();
 		this.modifyDate = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
+	}
+
+	public String getRoleDescription() {
+		return roleDescription;
+	}
+
+	public void setRoleDescription(String roleDescription) {
+		this.roleDescription = roleDescription;
 	}
 
 	public RoleType getRoleType() {

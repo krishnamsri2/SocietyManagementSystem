@@ -171,10 +171,7 @@ public class UserDetails
 		this.isActive = isActive;
 	}
 
-	public Set<Role> getRoles()
-	{
-		return roles;
-	}
+
 
 	public Set<FlatResidents> getFlatResidents() {
 		return residents;

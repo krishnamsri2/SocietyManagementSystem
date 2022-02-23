@@ -30,23 +30,6 @@ public class UserController {
         return service.getAllUser();
     }
 
-    @PutMapping("/users/punchOut/{id}")
-    public String updateAttendance(@PathVariable long id){
-        return service.updateAttendance(id);
-    }
-
-
-    @DeleteMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable long id){
-        return service.deleteUser(id);
-    }
-
-    @DeleteMapping("/users/delete/attendance/{id}")
-    public String deleteUserAttendance(@PathVariable long id){
-        return service.deleteUserAttendance(id);
-    }
-
-
 
     @PutMapping("/users/update")
     public void updateUser(@RequestBody RestRequest<UserTO> user){
