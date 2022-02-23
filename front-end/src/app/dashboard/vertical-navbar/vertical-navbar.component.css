@@ -59,3 +59,10 @@ a{
     background-color: rgb(42, 6, 42);
     color: white;
 }
+.mybtn{
+    height:50px;
+    margin-top:10px;
+    display: flex;
+    align-items: center;
+    margin-left:2rem;
+}

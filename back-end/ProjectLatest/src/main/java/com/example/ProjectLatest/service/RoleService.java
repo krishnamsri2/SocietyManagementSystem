@@ -18,7 +18,6 @@ import java.util.Set;
 @Service
 public class RoleService
 {
-    //private List<Role> roles = Arrays.asList(new Role(RoleType.ADMIN,"Administrator of the society","ADMIN",112L,new UserDetails("Pushkar","Prashant",9199840155L,"pushkar.prashant@peoplestrong.com",112L,new User("mypassword",112L))),new Role(RoleType.ADMIN,"Administrator of the society","ADMIN",112L,new UserDetails("Pushkar","Prashant",9199840155L,"pushkar.prashant@peoplestrong.com",112L,new User("mypassword",112L))));
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
@@ -27,6 +26,7 @@ public class RoleService
     //POST request
     public void addRole(RoleTO role,Long userID)
     {
+<<<<<<< HEAD
         UserDetails usd = userDetailsRepository.getById(userID);
         Role temp = new Role(role.getRoleType(),role.getRoleDescription(),role.getRole(),usd.getUserDetailsId());
         usd.getRoles().add(temp);
@@ -64,12 +64,105 @@ public class RoleService
        currentRole.setRoleDescription(newRole.getRoleDescription());
        currentRole.setModifyDate();
        roleRepository.save(currentRole);
+=======
+        try {
+            UserDetails usd = userDetailsRepository.getById(userID);
+            Role temp = new Role(role.getRoleType(), role.getRoleDescription(), role.getRole(), userID);
+            usd.getRoles().add(temp);
+            temp.getUserDetails().add(usd);
+            roleRepository.save(temp);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Set<RoleResponse> findRolesByUserDetailsId(Long userId)
+    {
+        Set<RoleResponse> roleResponses = new HashSet<RoleResponse>();
+        try{
+        UserDetails usd = userDetailsRepository.getById(userId);
+        Set<Role> roles = usd.getRoles();
+        for(Role role:roles)
+        {
+
+            RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription(),role.getIsActive(),role.getIsDeleted());
+            roleResponses.add(roleResponse);
+        }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return roleResponses;
+    }
+    public RoleResponse findRoleByRoleId(Long id)
+    {
+        Role currentRole = roleRepository.getById(id);
+        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription(),currentRole.getIsActive(),currentRole.getIsDeleted());
+        return response;
+    }
+    public void updateRoleByRoleId(RoleTO newRole, Long id)
+    {
+        try {
+            Role currentRole = roleRepository.getById(id);
+            currentRole.setRole(newRole.getRole());
+            currentRole.setRoleType(newRole.getRoleType());
+            currentRole.setRoleDescription(newRole.getRoleDescription());
+            currentRole.setModifyDate();
+            roleRepository.save(currentRole);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+>>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
     }
 
     public void deleteRoleByRoleId(Long id)
     {
+<<<<<<< HEAD
         Role role = roleRepository.getById(id);
         role.setIsDeleted(true);
         roleRepository.save(role);
+=======
+        try {
+            Role role = roleRepository.getById(id);
+            role.setIsDeleted(true);
+            roleRepository.save(role);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+>>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
     }
+
+    public void activateRoleByRoleId(Long id)
+    {
+        try{
+            Role role = roleRepository.getById(id);
+            role.setIsActive(true);
+            roleRepository.save(role);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void deactivateRoleByRoleId(Long id)
+    {
+        try{
+            Role role = roleRepository.getById(id);
+            role.setIsActive(false);
+            roleRepository.save(role);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
 }

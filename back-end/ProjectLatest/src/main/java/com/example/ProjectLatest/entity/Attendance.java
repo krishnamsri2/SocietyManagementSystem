@@ -54,7 +54,7 @@ public class Attendance
 		this.isDeleted = false;
 		this.isActive = true;
 		this.punchInFlag=true;
-		this.punchIn = createDate.toString().substring(0,10);
+		this.punchIn = createDate.toString();
 		this.punchOutFlag=false;
 	}
 	
@@ -74,7 +74,7 @@ public class Attendance
 		if(punchOutFlag==false&&punchInFlag==true)
 		{
 			Date date = new Date();
-		this.punchOut = date.toString().substring(0,10);
+		this.punchOut = date.toString();
 		punchOutFlag = true;
 		}
 	}
@@ -122,8 +122,5 @@ public class Attendance
 	}
 
 
-    public void setUsd(UserDetails userDetails)
-	{
-		this.usd = userDetails;
-    }
+ 
 }

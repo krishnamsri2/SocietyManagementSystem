@@ -75,7 +75,13 @@ public class UserDetails
 		return userDetailsId;
 	}
 
+<<<<<<< HEAD
 
+=======
+	public Set<Role> getRoles() {
+		return roles;
+	}
+>>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
 
 	public String getFirstName() {
 		return firstName;
@@ -169,9 +175,13 @@ public class UserDetails
 		this.isActive = isActive;
 	}
 
+<<<<<<< HEAD
 	public Set<Role> getRoles() {
 		return roles;
 	}
+=======
+
+>>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
 
 	public Set<FlatResidents> getFlatResidents() {
 		return residents;

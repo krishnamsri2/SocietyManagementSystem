@@ -74,4 +74,8 @@ public class UserTO {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6b816359d0104da0ba74f438b7e1778ff0a99757
 }

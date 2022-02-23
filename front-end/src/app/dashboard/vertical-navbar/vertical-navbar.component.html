@@ -1,15 +1,25 @@
-
 <div class="menu-wrapper">
     <ul class="list-group">
         <div class="header list-group-item">
             <div class="logo">
-                <a href="#">
-                    <p>Hello</p>
-                </a>
+                
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger dropdown-toggle mybtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Action
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                      </div>
+                
             </div>
-            <div class="header-text">
+            <!-- <div class="header-text">
                 <p class="logo-text">Welcome</p>
-            </div>
+            </div> -->
         </div>
 
         <a *ngFor="let component of components | slice:startIndex:sizeOfComponents" [routerLink]="[component.relativeUrl]">
