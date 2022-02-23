@@ -5,10 +5,10 @@ import java.util.Date;
 public class AttendanceResponse {
 
     private long attendId;
-    private Date punchIn;
-    private Date punchOut;
+    private String punchIn;
+    private String punchOut;
 
-    public AttendanceResponse(long attendId, Date punchIn, Date punchOut) {
+    public AttendanceResponse(long attendId, String punchIn, String punchOut) {
         this.attendId = attendId;
         this.punchIn = punchIn;
         this.punchOut = punchOut;
@@ -22,19 +22,19 @@ public class AttendanceResponse {
         this.attendId = attendId;
     }
 
-    public Date getPunchIn() {
+    public String getPunchIn() {
         return punchIn;
     }
 
-    public void setPunchIn(Date punchIn) {
+    public void setPunchIn(String punchIn) {
         this.punchIn = punchIn;
     }
 
-    public Date getPunchOut() {
+    public String getPunchOut() {
         return punchOut;
     }
 
-    public void setPunchOut(Date punchOut) {
+    public void setPunchOut(String punchOut) {
         this.punchOut = punchOut;
     }
 }

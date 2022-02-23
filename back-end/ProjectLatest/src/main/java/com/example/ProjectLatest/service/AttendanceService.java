@@ -5,6 +5,7 @@ import com.example.ProjectLatest.entity.UserDetails;
 import com.example.ProjectLatest.repository.AttendanceRepository;
 import com.example.ProjectLatest.repository.UserDetailRepository;
 import com.example.ProjectLatest.response.AttendanceResponse;
+import com.example.ProjectLatest.to.AttendanceTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,14 @@ public class AttendanceService {
     @Autowired
     private UserDetailRepository repository;
     //POST
-    public void saveAttendance(long id) {
+    public void saveAttendance(AttendanceTO attendance) {
         try {
-            UserDetails existingUser = repository.findById(id).orElse(null);
-            if(existingUser != null && existingUser.getIsDeleted() == false) {
+            Date date = new Date();
+            UserDetails existingUser = repository.findById(attendance.getUserDetailId()).orElse(null);
+
+            Attendance tempAttendance = attendanceRepository.findByUserDetailId(attendance.getUserDetailId(),date.toString().substring(0,10));
+
+            if(existingUser != null && existingUser.getIsDeleted() == false && tempAttendance == null) {
                 Attendance tempAtten = new Attendance(existingUser);
                 attendanceRepository.save(tempAtten);
             }
@@ -33,11 +38,10 @@ public class AttendanceService {
         }
     }
 
-    //POST
-    public void updateAttendance(long userId) {
+    //PUT
+    public void updateAttendance(AttendanceTO attendance) {
         try {
-            Date date = new Date();
-            Attendance tempAtten = attendanceRepository.findByUserDetailId(userId, date.toString().substring(0, 10));
+            Attendance tempAtten = attendanceRepository.getById(attendance.getAttendId());
             if(tempAtten != null || tempAtten.getIsDeleted() == false) {
                 tempAtten.setPunchOut();
                 attendanceRepository.save(tempAtten);
@@ -59,7 +63,7 @@ public class AttendanceService {
                     tempAttendances.add(att);
                 }
                 responses = tempAttendances.stream()
-                        .map(Attendance -> new AttendanceResponse(Attendance.getAttendId(), Attendance.getCreateDate(), Attendance.getUpdateDate()))
+                        .map(Attendance -> new AttendanceResponse(Attendance.getAttendId(), Attendance.getPunchIn(), Attendance.getPunchOut()))
                         .collect(Collectors.toList());
             }
 
