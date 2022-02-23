@@ -40,7 +40,6 @@ export class UserComponent implements OnInit,OnDestroy {
 
   ngOnInit(){
     this.currentUsers();
-    //this.currentUsers();
   }
 
   saveUserId(userId : number){
@@ -64,11 +63,10 @@ export class UserComponent implements OnInit,OnDestroy {
 
   onUpdateUser(reloadPage:boolean){
     this.currentUsers();
-    //location.reload();
   }
 
   ngOnDestroy(){
-    //this.userSubscription.unsubscribe();
+    
   }
 
 }

@@ -19,11 +19,12 @@
             <td>{{role.roleType}}</td>
             <td>{{role.role}}</td>
             <td>{{role.roleDescription}}</td>
+            
             <td>
                 <app-role-modal [roleIdForEdit]="role.roleId" [id]="userDetailId" (reloadPage1)="reloadThePage($event)"></app-role-modal>
             </td>
             <td>
-                <a [routerLink]="[]" class="link-danger" (click)="deleteRoleOnClick(role.roleId)">Delete Role</a>
+                <a [routerLink]="[]" class="link-danger" (click)="changeStatusOnClick(role.roleId)">{{role.active? 'Set Inactive':'Set Active'}}</a>
             </td>
         </tr>
 
