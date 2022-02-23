@@ -1,5 +1,6 @@
 package com.example.ProjectLatest.service;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.ProjectLatest.entity.Role;
 
 import com.example.ProjectLatest.entity.UserDetails;
@@ -44,18 +45,19 @@ public class RoleService
     {
         Set<RoleResponse> roleResponses = new HashSet<RoleResponse>();
         try{
-        UserDetails usd = userDetailsRepository.getById(userId);
-        Set<Role> roles = usd.getRoles();
-        for(Role role:roles)
-        {
+            UserDetails usd = userDetailsRepository.getById(userId);
+            Set<Role> roles = usd.getRoles();
+            for(Role role:roles)
+            {
 
-            RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription(),role.getIsActive(),role.getIsDeleted());
-            roleResponses.add(roleResponse);
-        }
+                RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription(),role.getIsActive(),role.getIsDeleted());
+                roleResponses.add(roleResponse);
+            }
         }
         catch(Exception e) {
             e.printStackTrace();
         }
+
         return roleResponses;
     }
     public RoleResponse findRoleByRoleId(Long id)
@@ -93,23 +95,12 @@ public class RoleService
         }
     }
 
-    public void activateRoleByRoleId(Long id)
+    public void deactivateActivateRoleByRoleId(Long id)
     {
         try{
             Role role = roleRepository.getById(id);
-            role.setIsActive(true);
-            roleRepository.save(role);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-    public void deactivateRoleByRoleId(Long id)
-    {
-        try{
-            Role role = roleRepository.getById(id);
-            role.setIsActive(false);
+            boolean isActive=!role.getIsActive();
+            role.setIsActive(isActive);
             roleRepository.save(role);
         }
         catch (Exception e)
