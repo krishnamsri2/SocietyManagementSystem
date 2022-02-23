@@ -152,4 +152,19 @@ public class FlatService {
         }
         return copy;
     }
+
+    public void updateName(long flat_id, FlatTO requestObject) {
+        try {
+            Flat flat = flatRepository.findById(flat_id).orElse(null);
+            if(flat!=null && !flat.isDeleted()) {
+                flat.setFlatNo(requestObject.getFlatNo());
+                flatRepository.save(flat);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return;
+    }
 }
