@@ -12,6 +12,8 @@ public class User
 	private long userId;
 	private String password;
 	private Boolean status; // Active or Inactive
+	@Column(unique = true,nullable = false)
+	private String emailId;
 	
 	private Long createdBy;
 	private Long modifiedBy;
@@ -38,7 +40,7 @@ public class User
 		
 	}
 
-	public User(String password,long createdBy) {
+	public User(String password,String emailId,long createdBy) {
 		super();
 		this.password = password;
 		this.status = false;
@@ -48,6 +50,15 @@ public class User
 		this.updated = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
+		this.emailId = emailId;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
 	public long getUserId() {
