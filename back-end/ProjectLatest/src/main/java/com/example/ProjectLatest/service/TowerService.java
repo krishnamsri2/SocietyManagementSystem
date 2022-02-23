@@ -11,6 +11,7 @@ import com.example.ProjectLatest.to.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,9 +42,19 @@ public class TowerService {
         try {
             Society temp = repository1.findById(id).orElse(null);
             if(temp!=null && !temp.isDeleted()) {
-                List<Tower> tower = temp.getTow();
+                List<Tower> towers = temp.getTow();
+                List<Tower> tower=new ArrayList<>();
+                for(int i=0;i<towers.size();i++)
+                {
+                    Tower tp=towers.get(i);
+                    if(!tp.isDeleted())
+                    {
+                        tower.add(tp);
+                    }
+                }
+                if(tower.size()!=0)
                 copy = tower.stream()
-                        .map(Tower -> new TowerResponse(Tower.getTowerName(), Tower.getCreatedBy(), Tower.getCreated()))
+                        .map(Tower -> new TowerResponse(Tower.getTowerName(), Tower.getCreatedBy(), Tower.getCreated(),Tower.getTowerId()))
                         .collect(Collectors.toList());
             }
         }
@@ -57,8 +68,10 @@ public class TowerService {
     public void updateTower(long id, TowerTO requestObject) {
         try {
             Tower tower = repository.findById(requestObject.getTowerId()).orElse(null);
-            if(tower!=null && !tower.isDeleted())
-            tower.setTowerName(requestObject.getTowerName());
+            if(tower!=null && !tower.isDeleted()) {
+                tower.setTowerName(requestObject.getTowerName());
+                repository.save(tower);
+            }
         }
         catch (Exception e)
         {
@@ -72,7 +85,7 @@ public class TowerService {
         try {
             Tower tower = repository.findById(tower_id).orElse(null);
             if (tower != null && !tower.isDeleted())
-                towerResponse = new TowerResponse(tower.getTowerName(), tower.getCreatedBy(), tower.getCreated());
+                towerResponse = new TowerResponse(tower.getTowerName(), tower.getCreatedBy(), tower.getCreated(),tower.getTowerId());
         }
         catch (Exception e)
         {
@@ -86,6 +99,7 @@ public class TowerService {
             Tower tow = repository.findById(tower.getTowerId()).orElse(null);
             if(tow!=null)
             tow.setDeleted(true);
+            repository.save(tow);
         }
         catch (Exception e)
         {

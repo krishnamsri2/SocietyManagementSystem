@@ -5,7 +5,6 @@ import com.example.ProjectLatest.repository.FlatRepository;
 import com.example.ProjectLatest.repository.SocietyRepository;
 import com.example.ProjectLatest.repository.TowerRepository;
 import com.example.ProjectLatest.response.FlatResponse;
-import com.example.ProjectLatest.response.SocietyResponse;
 import com.example.ProjectLatest.to.FlatTO;
 import com.example.ProjectLatest.to.Token;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,61 +27,144 @@ public class FlatService {
 
 // post to add flat
     public void addFlat(FlatTO requestObject, long tower_id, Token token) {
-        Tower tower=towerRepository.findById(tower_id).orElse(null);
-        Flat flat=new Flat(requestObject.getFlatNo(),requestObject.isStatus(),requestObject.getNumberOfOccupant(), token.getUserId(),false,true,tower);
-        flatRepository.save(flat);
+        try {
+            Tower tower = towerRepository.findById(tower_id).orElse(null);
+            if(tower!=null && !tower.isDeleted()) {
+                Flat flat = new Flat(requestObject.getFlatNo(), requestObject.isStatus(), requestObject.getNumberOfOccupant(), token.getUserId(), false, true, tower);
+                flatRepository.save(flat);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return;
     }
 
     public List<FlatResponse> getAll(long tower_id) {
-        Tower tower=towerRepository.findById(tower_id).orElse(null);
-        List<Flat> flat=tower.getFlat();
-        List<FlatResponse> copy = flat.stream()
-                .map(Flat-> new FlatResponse(Flat.getFlatNo(),Flat.isStatus(),Flat.getNumber_of_occupants()))
-                .collect(Collectors.toList());
+        List<FlatResponse> copy=new ArrayList<>();
+        try {
+            Tower tower = towerRepository.findById(tower_id).orElse(null);
+            if(tower!=null && !tower.isDeleted()) {
+                List<Flat> flats = tower.getFlat();
+                List<Flat> flat=new ArrayList<>();
+                for(int i=0;i<flats.size();i++)
+                {
+                    Flat tp=flats.get(i);
+                    if(!tp.isDeleted())
+                    {
+                        flat.add(tp);
+                    }
+                }
+                if(flat.size()!=0)
+                copy = flat.stream()
+                        .map(Flat -> new FlatResponse(Flat.getFlatNo(), Flat.isStatus(), Flat.getNumber_of_occupants(), Flat.getFlatId()))
+                        .collect(Collectors.toList());
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return copy;
 
     }
     // get all available flat
 
     public FlatResponse getById(long flat_id) {
-        Flat flat= flatRepository.findById(flat_id).orElse(null);
-        FlatResponse flatResponse=new FlatResponse(flat.getFlatNo(),flat.isStatus(),flat.getNumber_of_occupants());
+        FlatResponse flatResponse=null;
+        try {
+            Flat flat = flatRepository.findById(flat_id).orElse(null);
+            if(flat!=null && !flat.isDeleted())
+            flatResponse = new FlatResponse(flat.getFlatNo(), flat.isStatus(), flat.getNumber_of_occupants(), flat.getFlatId());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return  flatResponse;
     }
 
     public void updateStatus(long flat_id, FlatTO requestObject) {
-        Flat flat=flatRepository.findById(flat_id).orElse(null);
-        flat.setStatus(requestObject.isStatus());
+        try {
+            Flat flat = flatRepository.findById(flat_id).orElse(null);
+            if(flat!=null && !flat.isDeleted()) {
+                flat.setStatus(requestObject.isStatus());
+                flatRepository.save(flat);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return;
     }
     public void updateOccupant(long flat_id, FlatTO requestObject) {
-        Flat flat=flatRepository.findById(flat_id).orElse(null);
-        flat.setNumber_of_occupants(requestObject.getNumberOfOccupant());
+        try {
+            Flat flat = flatRepository.findById(flat_id).orElse(null);
+            if(flat!=null && !flat.isDeleted()) {
+                flat.setNumber_of_occupants(requestObject.getNumberOfOccupant());
+                flatRepository.save(flat);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return;
     }
 
     public void removeFlat(long flat_id) {
-        Flat flat=flatRepository.findById(flat_id).orElse(null);
-        flat.setDeleted(true);
+        try {
+            Flat flat = flatRepository.findById(flat_id).orElse(null);
+            if(flat!=null) {
+                flat.setDeleted(true);
+                flatRepository.save(flat);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return;
     }
 
     public List<FlatResponse> getAllAvailable(long tower_id) {
-        Tower tower=towerRepository.findById(tower_id).orElse(null);
-        List<Flat> flats=tower.getFlat();
-        List<Flat> flat=new ArrayList<>();
-        for(int i=0;i<flats.size();i++)
+        List<FlatResponse> copy=new ArrayList<>();
+        try {
+            Tower tower = towerRepository.findById(tower_id).orElse(null);
+            List<Flat> flats = tower.getFlat();
+            List<Flat> flat = new ArrayList<>();
+            for (int i = 0; i < flats.size(); i++) {
+                Flat temp = flats.get(i);
+                if (temp.isStatus() && !temp.isDeleted()) {
+                    flat.add(temp);
+                }
+            }
+            if(flat.size()!=0)
+            copy = flat.stream()
+                    .map(Flat -> new FlatResponse(Flat.getFlatNo(), Flat.isStatus(), Flat.getNumber_of_occupants(), Flat.getFlatId()))
+                    .collect(Collectors.toList());
+        }
+        catch (Exception e)
         {
-            Flat temp=flats.get(i);
-            if(!temp.isStatus())
-            {
-                flat.add(temp);
+            e.printStackTrace();
+        }
+        return copy;
+    }
+
+    public void updateName(long flat_id, FlatTO requestObject) {
+        try {
+            Flat flat = flatRepository.findById(flat_id).orElse(null);
+            if(flat!=null && !flat.isDeleted()) {
+                flat.setFlatNo(requestObject.getFlatNo());
+                flatRepository.save(flat);
             }
         }
-        List<FlatResponse> copy = flat.stream()
-                .map(Flat-> new FlatResponse(Flat.getFlatNo(),Flat.isStatus(),Flat.getNumber_of_occupants()))
-                .collect(Collectors.toList());
-        return copy;
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return;
     }
 }

@@ -61,5 +61,12 @@ public class FlatController {
     {
         flatService.removeFlat(flat_id);
     }
+    // update to change name
+
+    @RequestMapping(method =RequestMethod.PUT,value="/society/{id}/tower/{tower_id}/flat/{flat_id}/updateName")
+    public void updateName(@PathVariable long flat_id,@RequestBody RestRequest<FlatTO> flatTo)
+    {
+        flatService.updateName(flat_id,flatTo.getRequestObject());
+    }
 
 }
