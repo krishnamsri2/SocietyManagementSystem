@@ -13,7 +13,9 @@ import com.example.ProjectLatest.to.RoleTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -105,6 +107,17 @@ public class RoleService
         {
             e.printStackTrace();
         }
+    }
+
+    public List<RoleResponse> getAllRoles(){
+        List<Role> roles =  roleRepository.findAll();
+        List<RoleResponse> roleResponses= new ArrayList<RoleResponse>();
+        for(Role role:roles){
+            RoleResponse response = new RoleResponse(role.getRoleType(),role.getRole(),role.getRoleDescription(),role.getIsActive());
+            roleResponses.add(response);
+        }
+        return roleResponses;
+
     }
 
 
