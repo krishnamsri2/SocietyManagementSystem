@@ -26,7 +26,6 @@ public class NoticeService {
             e.printStackTrace();
         }
 
-
     }
    //PUT
     public void updateNotice(long id,NoticeTO notice){

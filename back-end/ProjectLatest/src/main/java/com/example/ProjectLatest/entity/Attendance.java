@@ -120,7 +120,7 @@ public class Attendance
 		setUpdateDate();
 		this.isActive = isActive;
 	}
-	
-	
-	
+
+
+ 
 }

@@ -170,7 +170,9 @@ public class UserDetails
 		setModifiedBy(modifiedBy);
 		this.isActive = isActive;
 	}
-	
+
+
+
 	public Set<FlatResidents> getFlatResidents() {
 		return residents;
 	}
