@@ -18,7 +18,7 @@ import { TowerComponent } from './dashboard/configuration/society/tower/tower.co
 import { TowerListComponent } from './dashboard/configuration/society/tower-list/tower-list.component';
 import { FlatComponent } from './dashboard/configuration/society/tower/flat/flat.component';
 import { NewUserComponent } from './dashboard/configuration/user/new-user/new-user.component';
-import { UserService } from './user.service';
+
 import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modals/modal/modal.component';
@@ -33,11 +33,12 @@ import { RoleModalComponent } from './modals/roleModals/role-modal/role-modal.co
 import { NewRoleModalComponent } from './modals/roleModals/new-role-modal/new-role-modal.component';
 import { EditUserModalComponent } from './dashboard/configuration/user/edit-user-modal/edit-user-modal.component';
 import { FlatDetailsComponent } from './dashboard/configuration/user/flat-details/flat-details.component';
-import { NewFlatModalComponent } from './dashboard/configuration/user/flat-details/new-flat-modal/new-flat-modal.component';
-import { FlatEditModalComponent } from './dashboard/configuration/user/flat-details/flat-edit-modal/flat-edit-modal.component';
+import { NewFlatModalComponent } from './modals/flatmodals/new-flat-modal/new-flat-modal.component';
+import { FlatEditModalComponent } from './modals/flatmodals/flat-edit-modal/flat-edit-modal.component';
 import {MatIconModule} from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
-//import { AngularSvgIconModule } from 'angular-svg-icon';
+//import { PutTokenService } from 'src/credential-validation.service';
+
 
 
 @NgModule({
@@ -61,14 +62,13 @@ import { MatSliderModule } from '@angular/material/slider';
     RoleComponent,
     MenuComponent,
     MenuSecurityComponent,
-    
     RoleModalComponent,
     NewRoleModalComponent,
     EditUserModalComponent,
     FlatDetailsComponent,
     NewFlatModalComponent,
     FlatEditModalComponent
-    //DummyComponentComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -78,9 +78,11 @@ import { MatSliderModule } from '@angular/material/slider';
     HttpClientModule,
     NgbModule,
     MatIconModule
-    //AngularSvgIconModule.forRoot()
+    
   ],
-  providers: [UserService],
+  providers:[
+     //{ provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

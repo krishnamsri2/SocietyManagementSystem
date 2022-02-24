@@ -2,8 +2,8 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventEmitter } from '@angular/core';
-import { FlatDetailsModel } from '../flat-details.model';
-import { FlatDetailsService } from '../flat-details.service';
+import { FlatDetailsModel } from '../../../dashboard/configuration/user/flat-details/flat-details.model';
+import { FlatDetailsService } from '../../../dashboard/configuration/user/flat-details/flat-details.service';
 
 @Component({
   selector: 'app-new-flat-modal',

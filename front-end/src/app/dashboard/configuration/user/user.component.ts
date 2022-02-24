@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import * as $ from 'jquery';
 
 import { UserModel } from 'src/app/shared/user.model';
-import { UserService } from 'src/app/user.service';
+
 import { FlatDetailsService } from './flat-details/flat-details.service';
 import { RoleService } from './role/role.service';
 import { UserPostServices } from './user.posts.service';
@@ -24,7 +24,7 @@ export class UserComponent implements OnInit,OnDestroy {
   userSubscription : Subscription;
   userDeletionSubs : Subscription;
 
-  constructor(public activeRoute : ActivatedRoute,private userService : UserService, private userPostService : UserPostServices,
+  constructor(public activeRoute : ActivatedRoute,private userPostService : UserPostServices,
     private roleService : RoleService, private flatsDetailsService : FlatDetailsService){
   }
 

@@ -2,10 +2,10 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventEmitter } from '@angular/core';
-import { FlatDetailsService } from '../flat-details.service';
+import { FlatDetailsService } from '../../../dashboard/configuration/user/flat-details/flat-details.service';
 import { FlatEditModel } from './flat-edit.model';
 import { Subscription } from 'rxjs';
-import { FlatDetailsModel } from '../flat-details.model';
+import { FlatDetailsModel } from '../../../dashboard/configuration/user/flat-details/flat-details.model';
 
 @Component({
   selector: 'app-flat-edit-modal',

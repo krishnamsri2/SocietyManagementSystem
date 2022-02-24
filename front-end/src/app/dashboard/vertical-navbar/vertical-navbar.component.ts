@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentModel } from './component.model';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-vertical-navbar',

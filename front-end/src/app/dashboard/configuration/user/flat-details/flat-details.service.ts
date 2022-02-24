@@ -4,7 +4,7 @@ import {catchError, map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import { FlatDetailsModel } from "./flat-details.model";
 //import { FlatDetailsObject } from "src/app/request-objects/FlatDetailsRequestObj.service";
-import { FlatEditModel } from "./flat-edit-modal/flat-edit.model";
+import { FlatEditModel } from "../../../../modals/flatmodals/flat-edit-modal/flat-edit.model";
 import { RequestObject } from "src/app/service/request.service";
 
 @Injectable({
