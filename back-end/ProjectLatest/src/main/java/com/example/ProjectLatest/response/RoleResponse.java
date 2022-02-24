@@ -4,47 +4,16 @@ import com.example.ProjectLatest.entity.RoleType;
 
 public class RoleResponse
 {
-    private Long roleId;
     private RoleType roleType;
     private String role;
     private String roleDescription;
     private Boolean isActive;
-    private Boolean isDeleted;
 
-
-
-    public RoleResponse()
-    {
-
-    }
-    public RoleResponse(Long roleId,RoleType roleType, String role, String roleDescription,Boolean isActive,Boolean isDeleted)
-    {
+    public RoleResponse(RoleType roleType, String role, String roleDescription, Boolean isActive) {
         this.roleType = roleType;
         this.role = role;
         this.roleDescription = roleDescription;
-        this.roleId = roleId;
-        this.isActive=isActive;
-        this.isDeleted=isDeleted;
-    }
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public Long getRoleId() {
-        return roleId;
+        this.isActive = isActive;
     }
 
     public RoleType getRoleType() {
@@ -69,5 +38,14 @@ public class RoleResponse
 
     public void setRoleDescription(String roleDescription) {
         this.roleDescription = roleDescription;
+    }
+
+
+    public Boolean getIsActive() {
+        return this.isActive;
+    }
+
+    public void setIsActive(Boolean activeRole) {
+        this.isActive = isActive;
     }
 }

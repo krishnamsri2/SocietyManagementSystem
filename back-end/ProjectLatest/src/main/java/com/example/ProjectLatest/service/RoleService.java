@@ -2,6 +2,7 @@ package com.example.ProjectLatest.service;
 
 import com.example.ProjectLatest.entity.Role;
 
+import com.example.ProjectLatest.entity.RoleType;
 import com.example.ProjectLatest.entity.UserDetails;
 import com.example.ProjectLatest.repository.RoleRepository;
 import com.example.ProjectLatest.repository.UserDetailRepository;
@@ -46,11 +47,10 @@ public class RoleService
         try{
         UserDetails usd = userDetailsRepository.getById(userId);
         Set<Role> roles = usd.getRoles();
-        for(Role role:roles)
+        for(Role currentRole:roles)
         {
-
-            RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription(),role.getIsActive(),role.getIsDeleted());
-            roleResponses.add(roleResponse);
+            RoleResponse response = new RoleResponse(currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive());
+            roleResponses.add(response);
         }
         }
         catch(Exception e) {
@@ -61,7 +61,7 @@ public class RoleService
     public RoleResponse findRoleByRoleId(Long id)
     {
         Role currentRole = roleRepository.getById(id);
-        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription(),currentRole.getIsActive(),currentRole.getIsDeleted());
+        RoleResponse response = new RoleResponse(currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive());
         return response;
     }
     public void updateRoleByRoleId(RoleTO newRole, Long id)
@@ -93,23 +93,12 @@ public class RoleService
         }
     }
 
-    public void activateRoleByRoleId(Long id)
+    public void deactivateActivateRoleByRoleId(Long id)
     {
         try{
             Role role = roleRepository.getById(id);
-            role.setIsActive(true);
-            roleRepository.save(role);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-    public void deactivateRoleByRoleId(Long id)
-    {
-        try{
-            Role role = roleRepository.getById(id);
-            role.setIsActive(false);
+            Boolean isActive = role.getIsActive();
+            role.setIsActive(isActive);
             roleRepository.save(role);
         }
         catch (Exception e)

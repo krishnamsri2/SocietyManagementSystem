@@ -21,6 +21,7 @@ public class RoleController
     {
         roleService.addRole(role.getRequestObject(),id);
     }
+
     @RequestMapping(method = RequestMethod.GET, value = "/roles/{id}")
     public Set<RoleResponse> getRoleByUserDetailsId(@PathVariable Long id)
     {
@@ -39,16 +40,10 @@ public class RoleController
         roleService.updateRoleByRoleId(role.getRequestObject(),id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT,value = "/role/activate/{id}")
-    public void activateRoleStatus(@RequestBody RestRequest<RoleTO> role,@PathVariable Long id)
+    @RequestMapping(method = RequestMethod.DELETE,value = "role/deactivate_activate/{id}")
+    public void deactivateActivateRoleStatus(@PathVariable Long id)
     {
-        roleService.activateRoleByRoleId(id);
-    }
-
-    @RequestMapping(method = RequestMethod.PUT,value = "role/deactivate/{id}")
-    public void deactivateRoleStatus(@RequestBody RestRequest<RoleTO> role,@PathVariable Long id)
-    {
-        roleService.deactivateRoleByRoleId(id);
+        roleService.deactivateActivateRoleByRoleId(id);
     }
 
     @RequestMapping(method = RequestMethod.DELETE,value="/role/{id}")

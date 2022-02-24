@@ -3,9 +3,7 @@ package com.example.ProjectLatest.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name="Role")
@@ -40,10 +38,22 @@ public class Role
 	@ManyToMany(mappedBy = "roles")
 	@JsonBackReference
 	private Set<UserDetails> userDetails = new HashSet<UserDetails>();
-	
-	@OneToOne(mappedBy="role")
-	private MenuSecurity menuSecurity;
 
+	@ManyToMany
+	@JoinTable(
+			name = "MenuSecurity",
+			joinColumns = {@JoinColumn(name = "roleId")},
+			inverseJoinColumns = {@JoinColumn(name="menuId")}
+	)
+	private List<Menu> menus = new ArrayList<Menu>();
+
+	public List<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
 
 	public Role() {
 	}

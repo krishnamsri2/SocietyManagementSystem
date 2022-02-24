@@ -1,7 +1,9 @@
 package com.example.ProjectLatest.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name="Menu")
@@ -27,10 +29,18 @@ public class Menu
 	private Boolean isDeleted;
 	
 	private Boolean isActive;
-	
-	@OneToOne(mappedBy="menu")
-	private MenuSecurity menuSecurity;
-	
+
+	@ManyToMany(mappedBy = "menus")
+	@JsonBackReference
+	private List<Role> roles = new ArrayList<Role>();
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 	//private MenuSecurity ms;  from MenuSecurity table
 
 	public Menu() {

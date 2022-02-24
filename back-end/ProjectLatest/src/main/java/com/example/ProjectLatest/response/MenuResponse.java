@@ -5,6 +5,7 @@ public class MenuResponse {
     private long  menuId;
     private String menuName;
 
+
     public MenuResponse(String url, long menuId, String menuName) {
         this.url = url;
         this.menuId = menuId;
