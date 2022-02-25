@@ -34,26 +34,13 @@ public class Role
 	
 	private Boolean isDeleted;
 	private Boolean isActive;
+	private Boolean isMenuAssigned;
+
 	
 	@ManyToMany(mappedBy = "roles")
 	@JsonBackReference
 	private Set<UserDetails> userDetails = new HashSet<UserDetails>();
 
-	@ManyToMany
-	@JoinTable(
-			name = "MenuSecurity",
-			joinColumns = {@JoinColumn(name = "roleId")},
-			inverseJoinColumns = {@JoinColumn(name="menuId")}
-	)
-	private List<Menu> menus = new ArrayList<Menu>();
-
-	public List<Menu> getMenus() {
-		return menus;
-	}
-
-	public void setMenus(List<Menu> menus) {
-		this.menus = menus;
-	}
 
 	public Role() {
 	}
@@ -69,6 +56,7 @@ public class Role
 		this.modifyDate = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
+		this.isMenuAssigned=false;
 	}
 
 	public String getRoleDescription() {
@@ -149,6 +137,14 @@ public class Role
 		setModifyDate();
 		this.isActive = isActive;
 	}
-	
-	
+
+
+	public Boolean getIsMenuAssigned() {
+		return isMenuAssigned;
+	}
+
+	public void setIsMenuAssigned(Boolean menuAssigned) {
+		setModifyDate();
+		isMenuAssigned = menuAssigned;
+	}
 }

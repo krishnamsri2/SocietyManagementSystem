@@ -1,16 +1,14 @@
 package com.example.ProjectLatest.controller;
 
-import com.example.ProjectLatest.response.MenuResponse;
+import com.example.ProjectLatest.entity.MenuSecurity;
 import com.example.ProjectLatest.response.MenuSecurityResponse;
 import com.example.ProjectLatest.service.MenuSecurityService;
-import com.example.ProjectLatest.service.MenuService;
 import com.example.ProjectLatest.to.MenuSecurityTO;
-import com.example.ProjectLatest.to.MenuTO;
 import com.example.ProjectLatest.to.RestRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,14 +18,23 @@ public class MenuSecurityController
     private MenuSecurityService service;
 
     //POST
-    @PostMapping("/assignMenu")
-    public MenuSecurityResponse assignMenu(@RequestBody RestRequest<MenuSecurityTO> menuSecurity){
-        return service.assignMenu(menuSecurity.getRequestObject());
+    @RequestMapping(method = RequestMethod.POST,value = "/assignMenu")
+    public void assignMenu(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
+    {
+        service.assignMenu(menuSecurityTORestRequest.getRequestObject());
     }
 
-    @GetMapping("/assignedMenus")
-    public MenuSecurityResponse getAssignedMenusByRoleId(@RequestBody RestRequest<MenuSecurityTO> menuSecurity)
+    //GET
+    @RequestMapping(method = RequestMethod.GET,value="/AssignedRoles")
+    public MenuSecurityResponse assignedRoles(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
     {
-        return service.getAssignedMenusByRoleId(menuSecurity.getRequestObject());
+        return service.getAllRolesAssigned(menuSecurityTORestRequest.getRequestObject());
+    }
+
+    //DELETE
+    @RequestMapping(method = RequestMethod.DELETE,value="/DeassignMenu")
+    public void deassignMenu(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
+    {
+        service.deassignMenu(menuSecurityTORestRequest.getRequestObject());
     }
 }

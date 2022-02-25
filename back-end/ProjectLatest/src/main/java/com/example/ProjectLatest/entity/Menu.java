@@ -30,18 +30,7 @@ public class Menu
 	
 	private Boolean isActive;
 
-	@ManyToMany(mappedBy = "menus")
-	@JsonBackReference
-	private List<Role> roles = new ArrayList<Role>();
 
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-	//private MenuSecurity ms;  from MenuSecurity table
 
 	public Menu() {
 	}
@@ -54,7 +43,7 @@ public class Menu
 		this.createDate = new Date();
 		this.modifiedDate = new Date();
 		this.isDeleted = false;
-		this.isActive = true;
+		this.isActive = false;
 	}
 
 	public String getMenuName() {
@@ -112,5 +101,7 @@ public class Menu
 		setModifiedDate();
 		this.isActive = isActive;
 	}
+
+
 
 }

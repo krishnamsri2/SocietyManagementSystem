@@ -51,7 +51,7 @@ public class RoleService
         Set<Role> roles = usd.getRoles();
         for(Role currentRole:roles)
         {
-            RoleResponse response = new RoleResponse(currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive());
+            RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive(),currentRole.getIsMenuAssigned());
             roleResponses.add(response);
         }
         }
@@ -63,7 +63,7 @@ public class RoleService
     public RoleResponse findRoleByRoleId(Long id)
     {
         Role currentRole = roleRepository.getById(id);
-        RoleResponse response = new RoleResponse(currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive());
+        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive(),currentRole.getIsMenuAssigned());
         return response;
     }
     public void updateRoleByRoleId(RoleTO newRole, Long id)
@@ -113,7 +113,7 @@ public class RoleService
         List<Role> roles =  roleRepository.findAll();
         List<RoleResponse> roleResponses= new ArrayList<RoleResponse>();
         for(Role role:roles){
-            RoleResponse response = new RoleResponse(role.getRoleType(),role.getRole(),role.getRoleDescription(),role.getIsActive());
+            RoleResponse response = new RoleResponse(role.getRoleId(),role.getRoleType(),role.getRole(),role.getRoleDescription(),role.getIsActive(),role.getIsMenuAssigned());
             roleResponses.add(response);
         }
         return roleResponses;

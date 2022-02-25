@@ -1,29 +1,30 @@
 package com.example.ProjectLatest.response;
 
-import com.example.ProjectLatest.entity.Menu;
-
 import java.util.List;
-import java.util.Set;
 
 public class MenuSecurityResponse
 {
-    private long roleId;
-    List<MenuResponse> menuList;
+    private long menuId;
+    List<RoleResponse> roleResponses;
 
-
-    public MenuSecurityResponse(long roleId, List<MenuResponse> menuList) {
-        this.roleId = roleId;
-        this.menuList = menuList;
+    public MenuSecurityResponse(long menuId, List<RoleResponse> roleResponses) {
+        this.menuId = menuId;
+        this.roleResponses = roleResponses;
     }
 
-    public long getRoleId() {
-        return roleId;
+    public long getMenuId() {
+        return menuId;
     }
 
-
-    public List<MenuResponse> getMenuList() {
-        return menuList;
+    public void setMenuId(long menuId) {
+        this.menuId = menuId;
     }
 
+    public List<RoleResponse> getRoleResponses() {
+        return roleResponses;
+    }
 
+    public void setRoleResponses(List<RoleResponse> roleResponses) {
+        this.roleResponses = roleResponses;
+    }
 }
