@@ -16,8 +16,9 @@ public class LoginController {
     private LoginService service;
 
     @PostMapping("/login")
-    public void verifyUser(@RequestBody RestRequest<LoginTO> login){
-        service.verifyUser(login.getRequestObject(),login.getToken());
+    public void verifyUser(){
+        //service.verifyUser(login.getRequestObject(),login.getToken());
+        System.out.println("controller");
     }
 
 }
