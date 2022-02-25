@@ -1,11 +1,11 @@
 export class MenuModel{
     private url:string;
-    private flatId:number;
+    private menuId:number;
     private serialNo:string;
-    public menuDetail:string;
-    constructor(url:string,flatId:string,menuDetail:string){
-        this.menuDetail = menuDetail;
+    public menuName:string;
+    constructor(url:string,menuId:string,menuName:string){
+        this.menuName = menuName;
         this.url = url;
-        this.flatId = +flatId;
+        this.menuId = +menuId;
     }
 }

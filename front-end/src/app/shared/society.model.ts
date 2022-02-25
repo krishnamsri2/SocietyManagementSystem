@@ -1,9 +1,9 @@
 export class SocietyModel{
-    private serialNo:string;
-    private societyId:number;
-    private societyName:string;
-    private createdBy:number;
-    private createdDate:string;
+    public serialNo:string;
+    public societyId:number;
+    public societyName:string;
+    public createdBy:number;
+    public createdDate:string;
 
     constructor(serialNo:string,societyId:number,societyName:string,createdBy:number,createdDate:string){
         this.serialNo=serialNo;

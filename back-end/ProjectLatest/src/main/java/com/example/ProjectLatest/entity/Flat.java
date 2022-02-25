@@ -13,7 +13,7 @@ public class Flat {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="flatId")
 	private long flatId;
-	@Column(name = "flatNo")
+	@Column(name = "flatNo",unique = true)
 	private String flatNo;
 	@Column(name="status")
 	private boolean status;

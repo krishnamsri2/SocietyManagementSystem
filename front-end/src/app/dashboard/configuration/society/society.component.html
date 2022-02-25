@@ -7,22 +7,8 @@
       <h3>Society</h3>
     </div>
   </div>
-  <div class="society-cards" *ngIf="route.children.length === 0">
-    <div class="card" style="width: 20rem" *ngFor="let society of societies">
-      <div class="card-body">
-        <h5 class="card-title">{{ society.societyName }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
-          {{ society.societyAddress }}
-        </h6>
-        <p class="card-text">Small Description of Society</p>
-        <div class="card-btns">
-          <a [routerLink]="['towerlist', society.societyId]" class="card-link"
-            >Enter</a
-          >
-          <app-edit-society [societyId]="society.societyId"></app-edit-society>
-        </div>
-      </div>
-    </div>
+  <div class="society-cards mt-2" *ngIf="route.children.length === 0">
+    <app-long-card *ngFor="let society of societies" [object]="society"></app-long-card>
   </div>
   <div class="btn-wrapper" *ngIf="route.children.length === 0">
     <app-add-society></app-add-society>

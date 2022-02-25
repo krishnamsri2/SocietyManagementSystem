@@ -35,7 +35,10 @@ import { EditFlatModalComponent } from './modals/flatmodals/edit-flat-modal/edit
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AddMenuModalComponent } from './modals/menumodals/add-menu-modal/add-menu-modal.component';
 import { EditMenuModalComponent } from './modals/menumodals/edit-menu-modal/edit-menu-modal.component';
-
+import { MenuSecurityAssignComponent } from './modals/menu-security-assign/menu-security-assign.component';
+import {MatIconModule} from '@angular/material/icon';
+import { RoleListComponent } from './modals/menu-security-assign/role-list/role-list.component';
+import { LongCardComponent } from './utility-components/long-card/long-card.component'
 
 
 
@@ -65,7 +68,10 @@ import { EditMenuModalComponent } from './modals/menumodals/edit-menu-modal/edit
     EditTowerComponent,
     EditFlatModalComponent,
     AddMenuModalComponent,
-    EditMenuModalComponent
+    EditMenuModalComponent,
+    MenuSecurityAssignComponent,
+    RoleListComponent,
+    LongCardComponent
     
     //DummyComponentComponent
   ],
@@ -77,7 +83,7 @@ import { EditMenuModalComponent } from './modals/menumodals/edit-menu-modal/edit
     HttpClientModule,
     NgbModule,
     NoopAnimationsModule,
-
+    MatIconModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

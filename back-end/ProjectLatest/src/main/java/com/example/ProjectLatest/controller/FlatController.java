@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class FlatController {
 
     @Autowired
@@ -61,6 +61,13 @@ public class FlatController {
     public void removeFlat(@PathVariable long flat_id)
     {
         flatService.removeFlat(flat_id);
+    }
+    // update to change name
+
+    @RequestMapping(method =RequestMethod.PUT,value="/society/{id}/tower/{tower_id}/flat/{flat_id}/updateName")
+    public void updateName(@PathVariable long flat_id,@RequestBody RestRequest<FlatTO> flatTo)
+    {
+        flatService.updateName(flat_id,flatTo.getRequestObject());
     }
 
 }

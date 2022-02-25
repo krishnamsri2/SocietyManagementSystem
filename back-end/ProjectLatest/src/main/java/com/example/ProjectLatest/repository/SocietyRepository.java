@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface SocietyRepository extends JpaRepository<Society, Long>{
-    @Query(value = "Select * from society s where s.is_deleted=0",nativeQuery = true)
-    List<Society> findAll();
 }

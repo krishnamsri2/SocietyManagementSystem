@@ -1,0 +1,35 @@
+.menu-security {
+  width: 100%;
+}
+.menu-security-header {
+  width: 100%;
+  text-align: center;
+}
+.menu-security-header h2 {
+  color: rgb(27, 8, 27);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}
+
+.role-menu-map {
+  width: 700px;
+  margin: 2rem auto;
+}
+.list-group-item {
+  margin-top: 6px !important;
+}
+.role {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.role-text {
+  color: rgb(47, 3, 3);
+  font-weight: 600;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 18px;
+}

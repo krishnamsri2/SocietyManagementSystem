@@ -1,0 +1,9 @@
+<div class="long-card ">
+    <div class="long-card-text">
+        <h3>{{object.societyName}}</h3>
+    </div>
+    <div class="long-card-btns">
+        <button class="btn btn-sm btn-primary" (click)="onClick(object.societyId)"><mat-icon>exit_to_app</mat-icon></button>
+        <app-edit-society [id]="object.societyId"></app-edit-society>
+    </div>
+</div>

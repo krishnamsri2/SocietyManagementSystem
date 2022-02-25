@@ -15,7 +15,8 @@ export class AddMenuModalComponent implements OnInit {
     
   }
   menuFormData={
-    url:''
+    url:'',
+    menuName:''
   };
   constructor(private modalService: NgbModal,private menuService:MenuService) {
 
@@ -40,6 +41,7 @@ export class AddMenuModalComponent implements OnInit {
   }
   onSubmit(form:NgForm){
     this.menuFormData.url = form.value.url;
+    this.menuFormData.menuName = form.value.menuName;
     console.log(this.menuFormData);
     this.menuService.addMenu(this.menuFormData);
   }

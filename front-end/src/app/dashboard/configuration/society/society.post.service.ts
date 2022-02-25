@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { SocietyModel } from '../../../shared/society.model';
 import { TowerListPostService } from './tower-list/tower-list.post-services';
 import { map } from 'rxjs/operators';
+//import { ReloadService } from '../../../service/reload.service';
 @Injectable({
   providedIn: 'root',
 })
 export class SocietyPostService {
   constructor(
     private http: HttpClient,
-    private towerListPostService: TowerListPostService
+    private towerListPostService: TowerListPostService,
   ) {}
   addSociety(newSociety) {
     this.http.post('http://localhost:9191/addSociety', newSociety).subscribe(
@@ -41,6 +42,7 @@ export class SocietyPostService {
       .put(`http://localhost:9191/society/updates/${Id}`, newName)
       .subscribe(() => {
         alert('Name changed');
+
       });
   }
 }

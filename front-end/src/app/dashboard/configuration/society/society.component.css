@@ -49,7 +49,7 @@ li.active>a{
 .society-cards{
     width:100%;
     display:flex;
-    flex:1;
+    flex-direction:column;
 }
 .card-btns{
     width:100%;

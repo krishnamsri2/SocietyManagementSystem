@@ -1,0 +1,10 @@
+<ul class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="let roleItem of roleList"
+    >
+      {{ roleItem.roleName }}
+      <span class="btn custom-btn" (click) = "onClick(roleItem.roleId)" *ngIf="!roleItem.isAssigned">Assign</span>
+      <span class="btn custom-btn" (click) = "onClick(roleItem.roleId)" *ngIf="roleItem.isAssigned">Unassign</span>
+    </li>
+</ul>
