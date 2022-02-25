@@ -31,8 +31,8 @@ public class MenuSecurityController
         return service.getAllRolesAssigned(menuSecurityTORestRequest.getRequestObject());
     }
 
-    //DELETE
-    @RequestMapping(method = RequestMethod.DELETE,value="/DeassignMenu")
+    //SOFT Delete
+    @RequestMapping(method = RequestMethod.PUT,value="/DeassignMenu")
     public void deassignMenu(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
     {
         service.deassignMenu(menuSecurityTORestRequest.getRequestObject());

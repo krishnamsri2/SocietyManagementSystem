@@ -2,8 +2,7 @@ package com.example.ProjectLatest.response;
 
 import com.example.ProjectLatest.entity.RoleType;
 
-public class RoleResponse
-{
+public class RoleResponse {
     private long roleId;
     private RoleType roleType;
     private String role;
@@ -12,13 +11,12 @@ public class RoleResponse
     private Boolean isMenuAssigned;
 
 
-    public RoleResponse(long roleId, RoleType roleType, String role, String roleDescription, Boolean isActive, Boolean isMenuAssigned) {
+    public RoleResponse(long roleId, RoleType roleType, String role, String roleDescription, Boolean isActive) {
         this.roleId = roleId;
         this.roleType = roleType;
         this.role = role;
         this.roleDescription = roleDescription;
         this.isActive = isActive;
-        this.isMenuAssigned = isMenuAssigned;
     }
 
     public long getRoleId() {
