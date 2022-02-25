@@ -37,7 +37,8 @@ import { NewFlatModalComponent } from './modals/flatmodals/new-flat-modal/new-fl
 import { FlatEditModalComponent } from './modals/flatmodals/flat-edit-modal/flat-edit-modal.component';
 import {MatIconModule} from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
-//import { PutTokenService } from 'src/credential-validation.service';
+import { PutTokenService } from 'src/token-interceptor.service';
+import { ForgotPasswordModalComponent } from './modals/forgot-password-modal/forgot-password-modal.component';
 
 
 
@@ -67,7 +68,8 @@ import { MatSliderModule } from '@angular/material/slider';
     EditUserModalComponent,
     FlatDetailsComponent,
     NewFlatModalComponent,
-    FlatEditModalComponent
+    FlatEditModalComponent,
+    ForgotPasswordModalComponent
     
   ],
   imports: [
@@ -81,7 +83,7 @@ import { MatSliderModule } from '@angular/material/slider';
     
   ],
   providers:[
-     //{ provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true }
+     { provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

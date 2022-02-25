@@ -10,25 +10,14 @@ import { RequestObject } from "src/app/service/request.service";
 export class UserPostServices{
     
 
-    getUserById(userDetailId: number)  {
-        return this.http.get<any>(`http://localhost:9191/users/${userDetailId}`,
-        {
-            responseType:'json'
-        }).
-        pipe(map((responseData: any)=>{
-            return responseData;
-        }),catchError((errResponse)=>{
-            return throwError(errResponse);
-        }));
-    }
+    
     
     constructor(private http: HttpClient,private requestObj : RequestObject){}
     errorMessage = new Subject<String>();
 
-    setUserInactive(userId: number) {
-        return this.http.delete(`http://localhost:9191/users/delete/${userId}`);
-    }
+   
 
+    //POST
     addUsers(newUser){
         this.requestObj.putRequestObject(newUser);
         let userObjWithToken=this.requestObj.getRequestObject();
@@ -37,6 +26,7 @@ export class UserPostServices{
         });
     }
 
+    //PUT
     updateUser(updatedUser: UserModel) {
 
         this.requestObj.putRequestObject(updatedUser);
@@ -46,6 +36,8 @@ export class UserPostServices{
         return this.http.put(`http://localhost:9191/users/update`,updatedUserRequestObj);
     }
 
+
+    //GET
     fetchUsers(){
         return this.http.get('http://localhost:9191/users',
         {
@@ -64,5 +56,31 @@ export class UserPostServices{
         }));
     }
 
+    getUserById(userDetailId: number)  {
+        return this.http.get<any>(`http://localhost:9191/users/${userDetailId}`,
+        {
+            responseType:'json'
+        }).
+        pipe(map((responseData: any)=>{
+            return responseData;
+        }),catchError((errResponse)=>{
+            return throwError(errResponse);
+        }));
+    }
+
+    getMenuofAUser(userDetailId:number){
+        return this.http.get<any>('',{
+            responseType:'json'
+        }).pipe(map((responseData)=>{
+            return responseData;
+        }),catchError((errorResponse)=>{
+            return throwError(errorResponse);
+        }));
+    }
+
+    //DELETE
+    setUserInactive(userId: number) {
+        return this.http.delete(`http://localhost:9191/users/delete/${userId}`);
+    }
     
 }

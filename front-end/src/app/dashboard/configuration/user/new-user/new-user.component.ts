@@ -16,8 +16,6 @@ export class NewUserComponent implements OnInit,OnDestroy {
 
   constructor(private userOperations : UserPostServices, private roleService : RoleService) { }
 
-  private errorMessage : Subscription;
-
   ngOnInit(): void {
     
   }
@@ -26,28 +24,6 @@ export class NewUserComponent implements OnInit,OnDestroy {
     
   }
 
-  
-
-  // private user = {
-
-  //   token: {
-  //     societyId: '',
-  //     userId: '',
-  //   },
-    
-  //   requestObject: {
-
-  //     firstName : '',
-  //     userDetailId: '',
-  //     lastName : '',
-  //     emailId : '',
-  //     phoneNumber: '',
-      
-    
-  //   }
-    
-  
-
   onFormSubmit(signUpForm : NgForm){
     
     let firstName = signUpForm.value.firstName;
@@ -55,8 +31,7 @@ export class NewUserComponent implements OnInit,OnDestroy {
     let emailId=signUpForm.value.email;
     let phoneNumber=signUpForm.value.phoneNumber;
     this.user= new UserModel(firstName,lastName,phoneNumber,emailId);
-    this.errorMessage=this.userOperations.addUsers(this.user).subscribe(()=>{
-      alert('User registered');
+    this.userOperations.addUsers(this.user).subscribe((response)=>{
     });
     signUpForm.reset();
   }
