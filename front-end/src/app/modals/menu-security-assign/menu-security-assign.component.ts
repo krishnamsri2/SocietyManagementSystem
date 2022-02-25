@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { MenuSecurityService } from '../../service/menu-security.service';
@@ -20,26 +20,15 @@ export class MenuSecurityAssignComponent implements OnInit {
   roleList:any = [];
   heading:string = 'All Roles';
   searchText:any;
+  @Input() menuId:any;
   getRoles(){
     this.menuSecurityService.fetchAllRoles().subscribe((data)=>{
-      // this.roles=data;
+      this.roles=data;
       console.log(data);
+      this.roleList=this.roles;
     })
   }
-  getAllRoles(){
-    this.roles = [
-      {roleId:1,roleName:'Admin',roleType:'ADMIN',isAssigned:false},
-      {roleId:2,roleName:'Owner',roleType:'RESIDENT',isAssigned:true},
-      {roleId:3,roleName:'Tenant',roleType:'RESIDENT',isAssigned:false},
-      {roleId:4,roleName:'Electrician',roleType:'WORKER',isAssigned:false},
-      {roleId:5,roleName:'Secratary',roleType:'RESIDENT',isAssigned:false},
-      {roleId:6,roleName:'Incharge',roleType:'WORKER',isAssigned:false},
-      {roleId:7,roleName:'Guard',roleType:'WORKER',isAssigned:false},
-    ]
-    this.roleList = this.roles;
-  }
   ngOnInit(): void {
-    this.getAllRoles();
     this.getRoles();
   }
   constructor(private modalService: NgbModal,private http:HttpClient,private menuSecurityService:MenuSecurityService) {}
@@ -66,13 +55,13 @@ export class MenuSecurityAssignComponent implements OnInit {
     this.roleList=this.roles;
     if(this.heading === 'Assigned Roles'){
       let newRoleList = this.roles.filter((role)=>{
-        return role.isAssigned;
+        return role.menuAssigned;
       })
       this.roleList = newRoleList;
     }
     else if(this.heading === 'Unassigned Roles'){
       let newRoleList = this.roles.filter((role)=>{
-        return !role.isAssigned;
+        return !role.menuAssigned;
       })
       this.roleList = newRoleList;
     }
@@ -84,7 +73,7 @@ export class MenuSecurityAssignComponent implements OnInit {
     if(this.searchText==='')this.ngOnInit();
     else{
       let newRoleList = this.roles.filter((role)=>{
-        return role.roleName.toLowerCase().includes(this.searchText.toLowerCase());
+        return role.role.toLowerCase().includes(this.searchText.toLowerCase());
       });
       this.roleList = newRoleList;
     }

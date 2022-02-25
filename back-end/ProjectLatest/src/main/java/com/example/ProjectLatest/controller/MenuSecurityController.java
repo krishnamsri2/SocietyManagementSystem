@@ -6,12 +6,10 @@ import com.example.ProjectLatest.service.MenuSecurityService;
 import com.example.ProjectLatest.to.MenuSecurityTO;
 import com.example.ProjectLatest.to.RestRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class MenuSecurityController
 {
     @Autowired
@@ -32,7 +30,7 @@ public class MenuSecurityController
     }
 
     //DELETE
-    @RequestMapping(method = RequestMethod.DELETE,value="/DeassignMenu")
+    @RequestMapping(method = RequestMethod.PUT,value="/DeassignMenu")
     public void deassignMenu(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
     {
         service.deassignMenu(menuSecurityTORestRequest.getRequestObject());

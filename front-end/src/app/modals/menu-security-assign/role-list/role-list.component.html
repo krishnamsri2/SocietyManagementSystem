@@ -3,8 +3,8 @@
       class="list-group-item"
       *ngFor="let roleItem of roleList"
     >
-      {{ roleItem.roleName }}
-      <span class="btn custom-btn" (click) = "onClick(roleItem.roleId)" *ngIf="!roleItem.isAssigned">Assign</span>
-      <span class="btn custom-btn" (click) = "onClick(roleItem.roleId)" *ngIf="roleItem.isAssigned">Unassign</span>
+      {{ roleItem.role }}
+      <span class="btn custom-btn" (click) = "onClick($event,roleItem.roleId)" *ngIf="!roleItem.menuAssigned">Assign</span>
+      <span class="btn custom-btn" (click) = "onClick($event,roleItem.roleId)" *ngIf="roleItem.menuAssigned">Unassign</span>
     </li>
 </ul>
