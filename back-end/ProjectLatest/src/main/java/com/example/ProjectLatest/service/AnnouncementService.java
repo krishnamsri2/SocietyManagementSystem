@@ -15,51 +15,77 @@ public class AnnouncementService {
     @Autowired
     private AnnouncementRepository repository;
     //POST
-    public AnnouncementResponse saveAnnouncement(AnnouncementTO announcement){
+    public AnnouncementResponse saveAnnouncement(AnnouncementTO announcement) {
+        AnnouncementResponse announcementResponse = null;
+        try {
+            Announcement tempAnnouncement = new Announcement(announcement.getAnnouncementDetail(), 76);
+            announcementResponse = new AnnouncementResponse(tempAnnouncement.getAnnouncementDetail(), tempAnnouncement.getannoucementId());
+            repository.save(tempAnnouncement);
 
-        Announcement tempAnnouncement = new Announcement(announcement.getAnnouncementDetail(), 76);
-        AnnouncementResponse announcementResponse = new AnnouncementResponse(tempAnnouncement.getAnnouncementDetail(), tempAnnouncement.getannoucementId());
-         repository.save(tempAnnouncement);
-         return announcementResponse;
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return announcementResponse;
     }
 
     //PUT
-    public AnnouncementResponse updateAnnouncement(long id,AnnouncementTO announcement){
-        Announcement existingAnnouncement=repository.findById(id).orElse(null);
+    public AnnouncementResponse updateAnnouncement(long id,AnnouncementTO announcement) {
+        AnnouncementResponse announcementResponse = null;
+        try {
+            Announcement existingAnnouncement = repository.findById(id).orElse(null);
 
-        existingAnnouncement.setAnnouncementDetail(announcement.getAnnouncementDetail());
-        AnnouncementResponse announcementResponse = new AnnouncementResponse(existingAnnouncement.getAnnouncementDetail(), existingAnnouncement.getannoucementId());
-        repository.save(existingAnnouncement);
+            existingAnnouncement.setAnnouncementDetail(announcement.getAnnouncementDetail());
+            announcementResponse = new AnnouncementResponse(existingAnnouncement.getAnnouncementDetail(), existingAnnouncement.getannoucementId());
+            repository.save(existingAnnouncement);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return announcementResponse;
     }
 
     //GET
-    public List<AnnouncementResponse> getAnnouncements(){
-        List<AnnouncementResponse> responseList = new ArrayList<>();
-        List<Announcement> announcementList =   repository.findAll();
-        for(Announcement announcement: announcementList){
-            responseList.add(new AnnouncementResponse(announcement.getAnnouncementDetail(), announcement.getannoucementId()));
+    public List<AnnouncementResponse> getAnnouncements() {
+        List<AnnouncementResponse> responseList = null;
+        try {
+            responseList = new ArrayList<>();
+            List<Announcement> announcementList = repository.findAll();
+            for (Announcement announcement : announcementList) {
+                responseList.add(new AnnouncementResponse(announcement.getAnnouncementDetail(), announcement.getannoucementId()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return responseList;
 
     }
 
-    public AnnouncementResponse getAnnouncementById(long id){
-        Announcement existingAnnouncement = repository.findById(id).orElse(null);
-        AnnouncementResponse announcementResponse = new AnnouncementResponse(existingAnnouncement.getAnnouncementDetail(), existingAnnouncement.getannoucementId());
+    public AnnouncementResponse getAnnouncementById(long id) {
+
+        AnnouncementResponse announcementResponse = null;
+        try {
+            Announcement existingAnnouncement = repository.findById(id).orElse(null);
+            announcementResponse = new AnnouncementResponse(existingAnnouncement.getAnnouncementDetail(), existingAnnouncement.getannoucementId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return announcementResponse;
     }
 
     //DELETE
     public String deleteAnnouncement(long id){
-        Announcement announcement = repository.findById(id).orElse(null);
-        if(announcement!=null){
-            announcement.setIsDeleted(true);
+        try {
+            Announcement announcement = repository.findById(id).orElse(null);
+            if (announcement != null) {
+                announcement.setIsDeleted(true);
 
-            return "Product removed !!" +id;
+                return "Product removed !!" + id;
+            }
+
         }
-        return " No Announceemnt found with this !!" +id;
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return " No Announceemnt found with this !!" + id;
     }
 
 

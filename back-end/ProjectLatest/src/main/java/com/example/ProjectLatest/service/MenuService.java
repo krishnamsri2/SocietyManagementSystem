@@ -1,9 +1,7 @@
 package com.example.ProjectLatest.service;
 
-import com.example.ProjectLatest.entity.Announcement;
 import com.example.ProjectLatest.entity.Menu;
 import com.example.ProjectLatest.repository.MenuRepository;
-import com.example.ProjectLatest.response.AnnouncementResponse;
 import com.example.ProjectLatest.response.MenuResponse;
 import com.example.ProjectLatest.to.MenuTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,48 +17,73 @@ public class MenuService {
 
     //POST
 
-    public MenuResponse saveMenu(MenuTO menu){
+    public MenuResponse saveMenu(MenuTO menu) {
+        MenuResponse menuResponse = null;
+        try {
+            Menu tempMenu = new Menu(menu.getUrl(), 765, menu.getMenuName());
+            menuResponse = new MenuResponse(tempMenu.getUrl(), tempMenu.getMenuId(), tempMenu.getMenuName());
+            repository.save(tempMenu);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-
-        Menu tempMenu = new Menu(menu.getUrl(), 765, menu.getMenuName());
-        MenuResponse menuResponse = new MenuResponse(tempMenu.getUrl(),tempMenu.getMenuId(),tempMenu.getMenuName());
-       repository.save(tempMenu);
         return menuResponse;
 
     }
     //PUT
-    public MenuResponse updateMenu(long id,MenuTO menu){
-        Menu existingMenu=repository.findById(id).orElse(null);
-        existingMenu.setUrl(menu.getUrl());
-        existingMenu.setMenuName(menu.getMenuName());
-        MenuResponse menuResponse = new MenuResponse(existingMenu.getUrl(),existingMenu.getMenuId(),existingMenu.getMenuName());
-         repository.save(existingMenu);
-         return menuResponse;
+    public MenuResponse updateMenu(long id,MenuTO menu) {
+        MenuResponse menuResponse = null;
+        try {
+            Menu existingMenu = repository.findById(id).orElse(null);
+            existingMenu.setUrl(menu.getUrl());
+            existingMenu.setMenuName(menu.getMenuName());
+            menuResponse = new MenuResponse(existingMenu.getUrl(), existingMenu.getMenuId(), existingMenu.getMenuName());
+            repository.save(existingMenu);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return menuResponse;
     }
 
     //GET
-    public List<MenuResponse> getMenus(){
-        List<MenuResponse> responseList = new ArrayList<>();
-        List<Menu> menuList =   repository.findAll();
-        for(Menu menu: menuList){
-            responseList.add(new MenuResponse(menu.getUrl(), menu.getMenuId(), menu.getMenuName()));
+    public List<MenuResponse> getMenus() {
+        List<MenuResponse> responseList = null;
+        try {
+            responseList = new ArrayList<>();
+            List<Menu> menuList = repository.findAll();
+            for (Menu menu : menuList) {
+                responseList.add(new MenuResponse(menu.getUrl(), menu.getMenuId(), menu.getMenuName()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return responseList;
     }
 
-    public MenuResponse getMenuById(long id){
-        Menu existingMenu = repository.findById(id).orElse(null);
-        MenuResponse menuResponse = new MenuResponse(existingMenu.getUrl(), existingMenu.getMenuId(), existingMenu.getMenuName());
+    public MenuResponse getMenuById(long id) {
+        MenuResponse menuResponse = null;
+        try {
+            Menu existingMenu = repository.findById(id).orElse(null);
+            menuResponse = new MenuResponse(existingMenu.getUrl(), existingMenu.getMenuId(), existingMenu.getMenuName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return menuResponse;
     }
 
     //DELETE
     public String deleteMenu(long id){
-        Menu menu = repository.findById(id).orElse(null);
-        if(menu!=null){
-            menu.setIsDeleted(true);
+        try {
+            Menu menu = repository.findById(id).orElse(null);
+            if (menu != null) {
+                menu.setIsDeleted(true);
 
-            return "product removed !!" +id;
+                return "product removed !!" + id;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
         return " No menu found with this !!" +id;
     }
