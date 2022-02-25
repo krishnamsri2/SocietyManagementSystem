@@ -4,24 +4,28 @@ import com.example.ProjectLatest.entity.RoleType;
 
 public class RoleResponse
 {
-    private Long roleId;
+    private long roleId;
     private RoleType roleType;
     private String role;
     private String roleDescription;
+    private Boolean isActive;
+    private Boolean isMenuAssigned;
 
-    public Long getRoleId() {
-        return roleId;
-    }
 
-    public RoleResponse()
-    {
-
-    }
-    public RoleResponse(Long roleId,RoleType roleType, String role, String roleDescription)
-    {
+    public RoleResponse(long roleId, RoleType roleType, String role, String roleDescription, Boolean isActive, Boolean isMenuAssigned) {
+        this.roleId = roleId;
         this.roleType = roleType;
         this.role = role;
         this.roleDescription = roleDescription;
+        this.isActive = isActive;
+        this.isMenuAssigned = isMenuAssigned;
+    }
+
+    public long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(long roleId) {
         this.roleId = roleId;
     }
 
@@ -47,5 +51,22 @@ public class RoleResponse
 
     public void setRoleDescription(String roleDescription) {
         this.roleDescription = roleDescription;
+    }
+
+
+    public Boolean getIsActive() {
+        return this.isActive;
+    }
+
+    public void setIsActive(Boolean activeRole) {
+        this.isActive = isActive;
+    }
+
+    public Boolean getMenuAssigned() {
+        return isMenuAssigned;
+    }
+
+    public void setMenuAssigned(Boolean menuAssigned) {
+        isMenuAssigned = menuAssigned;
     }
 }

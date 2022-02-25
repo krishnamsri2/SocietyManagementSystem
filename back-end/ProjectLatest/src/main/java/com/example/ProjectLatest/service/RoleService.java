@@ -2,6 +2,7 @@ package com.example.ProjectLatest.service;
 
 import com.example.ProjectLatest.entity.Role;
 
+import com.example.ProjectLatest.entity.RoleType;
 import com.example.ProjectLatest.entity.UserDetails;
 import com.example.ProjectLatest.repository.RoleRepository;
 import com.example.ProjectLatest.repository.UserDetailRepository;
@@ -48,12 +49,10 @@ public class RoleService
         try{
         UserDetails usd = userDetailsRepository.getById(userId);
         Set<Role> roles = usd.getRoles();
-        for(Role role:roles)
+        for(Role currentRole:roles)
         {
-            if(role.getIsDeleted()==false) {
-                RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription());
-                roleResponses.add(roleResponse);
-            }
+            RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive(),currentRole.getIsMenuAssigned());
+            roleResponses.add(response);
         }
         }
         catch(Exception e) {
@@ -64,7 +63,7 @@ public class RoleService
     public RoleResponse findRoleByRoleId(Long id)
     {
         Role currentRole = roleRepository.getById(id);
-        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription());
+        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive(),currentRole.getIsMenuAssigned());
         return response;
     }
     public void updateRoleByRoleId(RoleTO newRole, Long id)
@@ -104,6 +103,30 @@ public class RoleService
         }
         return roleResponses;
 
+    public void deactivateActivateRoleByRoleId(Long id)
+    {
+        try{
+            Role role = roleRepository.getById(id);
+            Boolean isActive = role.getIsActive();
+            role.setIsActive(isActive);
+            roleRepository.save(role);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
+
+    public List<RoleResponse> getAllRoles(){
+        List<Role> roles =  roleRepository.findAll();
+        List<RoleResponse> roleResponses= new ArrayList<RoleResponse>();
+        for(Role role:roles){
+            RoleResponse response = new RoleResponse(role.getRoleId(),role.getRoleType(),role.getRole(),role.getRoleDescription(),role.getIsActive(),role.getIsMenuAssigned());
+            roleResponses.add(response);
+        }
+        return roleResponses;
+
+    }
+
 
 }
