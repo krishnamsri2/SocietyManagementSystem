@@ -2,21 +2,24 @@ package com.example.ProjectLatest.Security;
 
 import com.example.ProjectLatest.entity.User;
 import com.example.ProjectLatest.service.LoginService;
+import com.example.ProjectLatest.to.LoginTO;
+import com.example.ProjectLatest.to.RestRequest;
 import com.example.ProjectLatest.to.Token;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Component
 public class Interceptor implements HandlerInterceptor {
 
-    static ConcurrentHashMap<Long, Token> hashMemory = new ConcurrentHashMap<>();
+    public static HashMap<Long,Token> hashMemory = new HashMap<>();
 
     @Autowired
     private LoginService service;
@@ -25,35 +28,22 @@ public class Interceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getMethod().equalsIgnoreCase("POST")) {
 
-            Scanner s = null;
-            try {
-                s = new Scanner(request.getInputStream(), "UTF-8").useDelimiter("\\A");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String p =  s.hasNext() ? s.next() : "";
+            String q = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+            ObjectMapper m = new ObjectMapper();
+            RestRequest<LoginTO> tempLogin = m.readValue(q,new TypeReference<RestRequest<LoginTO>>() {});
 
-            System.out.println(p);
-
-            String emailId = request.getParameter("emailId");
-            String password = request.getParameter("password");
+            String emailId = tempLogin.getRequestObject().getEmailId();
+            String password = tempLogin.getRequestObject().getPassword();
             User user = service.verifyUser(emailId,password);
 
             if(user != null){
-                Token token = new Token();
-                token.setSocietyId(user.getSocietyId());
-                token.setUserId(user.getUserId());
-
-                hashMemory.put(user.getUserId(),token);
                 return true;
-
             }else{
                 return false;
             }
-
         }
 
-        return true;
+  return true;
     }
 
 }

@@ -14,7 +14,7 @@ public class User
 	private Boolean status; // Active or Inactive
 	@Column(unique = true,nullable = false)
 	private String emailId;
-	@Column(unique = true,nullable = false)
+	@Column(nullable = false)
 	private long societyId;
 
 	
