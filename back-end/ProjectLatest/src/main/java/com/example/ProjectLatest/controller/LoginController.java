@@ -20,4 +20,9 @@ public class LoginController {
         return service.createToken(emailId);
     }
 
+    @GetMapping("/logout")
+    public String logoutUser(){
+        return "User Logout Successful";
+    }
+
 }

@@ -27,9 +27,11 @@ public class Interceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url = request.getRequestURL().toString();
         Boolean isUser = false;
+        long userId = Long.parseLong(request.getHeader("userId"));
+        long societyId = Long.parseLong(request.getHeader("societyId"));
 
         try {
-            if (request.getMethod().equalsIgnoreCase("POST") && url.indexOf("/login/") != -1) {
+            if (url.indexOf("/login/") != -1) {
                 String q = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
                 ObjectMapper m = new ObjectMapper();
                 RestRequest<LoginTO> tempLogin = m.readValue(q, new TypeReference<RestRequest<LoginTO>>() {
@@ -43,16 +45,16 @@ public class Interceptor implements HandlerInterceptor {
                     isUser =  true;
                 }
 
-            } else {
-                long userId = Long.parseLong(request.getHeader("userId"));
-                long societyId = Long.parseLong(request.getHeader("societyId"));
+            } else if(url.indexOf("/logout") != -1) {
+                service.deleteToken(userId);
+            }else{
+                    isUser = service.verifyToken(userId, societyId);
 
-                isUser = service.verifyToken(userId, societyId);
-
-                if (isUser == false) {
-                    System.out.println("Please LOGIN");
+                    if (isUser == false) {
+                        System.out.println("Please LOGIN");
+                    }
                 }
-            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

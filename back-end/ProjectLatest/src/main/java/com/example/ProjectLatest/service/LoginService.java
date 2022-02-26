@@ -85,4 +85,12 @@ public class LoginService  {
 
         return isFound;
     }
+
+    public void deleteToken(long userId){
+        try{
+            hashMemory.remove(userId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
