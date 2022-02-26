@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import static com.example.ProjectLatest.Security.Interceptor.hashMemory;
 
-
 @RestController
 public class LoginController {
 
