@@ -13,7 +13,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Component
@@ -26,24 +25,37 @@ public class Interceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getMethod().equalsIgnoreCase("POST")) {
+        String url = request.getRequestURL().toString();
+        Boolean isUser = false;
 
-            String q = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-            ObjectMapper m = new ObjectMapper();
-            RestRequest<LoginTO> tempLogin = m.readValue(q,new TypeReference<RestRequest<LoginTO>>() {});
+        try {
+            if (request.getMethod().equalsIgnoreCase("POST") && url.indexOf("/login/") != -1) {
+                String q = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+                ObjectMapper m = new ObjectMapper();
+                RestRequest<LoginTO> tempLogin = m.readValue(q, new TypeReference<RestRequest<LoginTO>>() {
+                });
 
-            String emailId = tempLogin.getRequestObject().getEmailId();
-            String password = tempLogin.getRequestObject().getPassword();
-            User user = service.verifyUser(emailId,password);
+                String emailId = tempLogin.getRequestObject().getEmailId();
+                String password = tempLogin.getRequestObject().getPassword();
+                User user = service.verifyUser(emailId, password);
 
-            if(user != null){
-                return true;
-            }else{
-                return false;
+                if (user != null) {
+                    isUser =  true;
+                }
+
+            } else {
+                long userId = Long.parseLong(request.getHeader("userId"));
+                long societyId = Long.parseLong(request.getHeader("societyId"));
+
+                isUser = service.verifyToken(userId, societyId);
+
+                if (isUser == false) {
+                    System.out.println("Please LOGIN");
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-  return true;
+        return isUser;
     }
-
 }

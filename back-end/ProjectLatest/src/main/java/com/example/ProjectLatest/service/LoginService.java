@@ -3,7 +3,6 @@ package com.example.ProjectLatest.service;
 import com.example.ProjectLatest.builder.LoginResBuilder;
 import com.example.ProjectLatest.entity.User;
 import com.example.ProjectLatest.entity.UserDetails;
-import com.example.ProjectLatest.repository.RoleRepository;
 import com.example.ProjectLatest.repository.UserDetailRepository;
 import com.example.ProjectLatest.repository.UserRepository;
 import com.example.ProjectLatest.response.LoginResponse;
@@ -49,6 +48,12 @@ public class LoginService  {
 
             hashMemory.put(user.getUserId(),token);
 
+            for (long userId : hashMemory.keySet())
+                System.out.println("key: " + userId);
+
+            for (Token token1 : hashMemory.values())
+                System.out.println("value: " + token1.getSocietyId() + " , " + token1.getUserId());
+
             UserDetails usd = userDetailRepository.getByUserId(user.getUserId());
 
              response = new LoginResBuilder()
@@ -64,5 +69,20 @@ public class LoginService  {
            e.printStackTrace();
         }
         return response;
+    }
+
+    public boolean verifyToken(long userId, long societyId){
+        Boolean isFound = false;
+        try {
+            Token token = hashMemory.get(userId);
+
+            if (token != null && token.getSocietyId() == societyId) {
+                isFound = true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return isFound;
     }
 }
