@@ -27,8 +27,6 @@ public class Interceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url = request.getRequestURL().toString();
         Boolean isUser = false;
-        long userId = Long.parseLong(request.getHeader("userId"));
-        long societyId = Long.parseLong(request.getHeader("societyId"));
 
         try {
             if (url.indexOf("/login/") != -1) {
@@ -46,8 +44,12 @@ public class Interceptor implements HandlerInterceptor {
                 }
 
             } else if(url.indexOf("/logout") != -1) {
+                long userId = Long.parseLong(request.getHeader("userId"));
+                long societyId = Long.parseLong(request.getHeader("societyId"));
                 service.deleteToken(userId);
             }else{
+                long userId = Long.parseLong(request.getHeader("userId"));
+                long societyId = Long.parseLong(request.getHeader("societyId"));
                     isUser = service.verifyToken(userId, societyId);
 
                     if (isUser == false) {

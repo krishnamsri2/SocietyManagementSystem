@@ -20,8 +20,8 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logoutUser(){
-        return "User Logout Successful";
+    public void logoutUser(){
+        //return "User Logout Successful";
     }
 
 }
