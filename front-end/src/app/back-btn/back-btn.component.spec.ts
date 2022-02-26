@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LongCardComponent } from './long-card.component';
+import { BackBtnComponent } from './back-btn.component';
 
-describe('LongCardComponent', () => {
-  let component: LongCardComponent;
-  let fixture: ComponentFixture<LongCardComponent>;
+describe('BackBtnComponent', () => {
+  let component: BackBtnComponent;
+  let fixture: ComponentFixture<BackBtnComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LongCardComponent ]
+      declarations: [ BackBtnComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LongCardComponent);
+    fixture = TestBed.createComponent(BackBtnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

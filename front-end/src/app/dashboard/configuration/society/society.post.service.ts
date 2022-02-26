@@ -13,11 +13,7 @@ export class SocietyPostService {
     private towerListPostService: TowerListPostService,
   ) {}
   addSociety(newSociety) {
-    this.http.post('http://localhost:9191/addSociety', newSociety).subscribe(
-      (newUser) => {
-        alert('ADDED Society');
-      }
-    );
+    return this.http.post('http://localhost:9191/addSociety', newSociety);
   }
   fetchSocieties() {
     return this.http

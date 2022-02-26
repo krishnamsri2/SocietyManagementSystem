@@ -9,8 +9,11 @@ public class MenuSecurityResponse
 
     public MenuSecurityResponse(long menuId, List<RoleResponse> roleResponses) {
         this.menuId = menuId;
+
         this.roleResponses = roleResponses;
     }
+
+
 
     public long getMenuId() {
         return menuId;

@@ -38,7 +38,8 @@ import { EditMenuModalComponent } from './modals/menumodals/edit-menu-modal/edit
 import { MenuSecurityAssignComponent } from './modals/menu-security-assign/menu-security-assign.component';
 import {MatIconModule} from '@angular/material/icon';
 import { RoleListComponent } from './modals/menu-security-assign/role-list/role-list.component';
-import { LongCardComponent } from './utility-components/long-card/long-card.component'
+import { BackBtnComponent } from './back-btn/back-btn.component';
+
 
 
 
@@ -71,7 +72,7 @@ import { LongCardComponent } from './utility-components/long-card/long-card.comp
     EditMenuModalComponent,
     MenuSecurityAssignComponent,
     RoleListComponent,
-    LongCardComponent
+    BackBtnComponent,
     
     //DummyComponentComponent
   ],

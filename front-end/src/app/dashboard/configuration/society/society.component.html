@@ -1,17 +1,27 @@
 <div class="container society">
   <div class="society-header" *ngIf="route.children.length === 0">
-    <div class="back-button">
-      <a class="back-btn" [routerLink]="['/dashboard/configuration']">&larr;</a>
-    </div>
+    <app-back-btn></app-back-btn>
     <div class="header-text">
       <h3>Society</h3>
     </div>
   </div>
   <div class="society-cards mt-2" *ngIf="route.children.length === 0">
-    <app-long-card *ngFor="let society of societies" [object]="society"></app-long-card>
+    <div class="long-card" *ngFor="let society of societies">
+      <div class="long-card-wrapper">
+        <div class="long-card-text">
+          <h3>{{ society.societyName }}</h3>
+        </div>
+        <div class="long-card-btns">
+          <button class="btn btn-primary btn-sm" (click)="navigateIn(society.societyId)">
+            <mat-icon>exit_to_app</mat-icon>
+          </button>
+          <app-edit-society (reloadPage)="reloadPage()" [id]="society.societyId"></app-edit-society>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="btn-wrapper" *ngIf="route.children.length === 0">
-    <app-add-society></app-add-society>
+    <app-add-society (reloadPage)="reloadPage()"></app-add-society>
   </div>
   <router-outlet></router-outlet>
 </div>

@@ -1,44 +1,62 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MenuSecurityService } from '../../service/menu-security.service';
 import { RoleModel } from '../../shared/roles.model';
-import {MatIconModule} from '@angular/material/icon';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-menu-security-assign',
   templateUrl: './menu-security-assign.component.html',
-  styleUrls: ['./menu-security-assign.component.css']
+  styleUrls: ['./menu-security-assign.component.css'],
 })
 export class MenuSecurityAssignComponent implements OnInit {
-
   closeResult = '';
   //roles:RoleModel[]=[];
-  roles:any = [];
-  roleList:any = [];
-  heading:string = 'All Roles';
-  searchText:any;
-  @Input() menuId:any;
-  getRoles(){
-    this.menuSecurityService.fetchAllRoles().subscribe((data)=>{
-      this.roles=data;
+  roles: any = [];
+  roleList: any = [];
+  heading: string = 'All Roles';
+  searchText: any;
+  @Input() menuId: any;
+  getRoles() {
+    this.menuSecurityService.fetchAllRoles().subscribe((data) => {
+      this.roles = data;
       console.log(data);
-      this.roleList=this.roles;
-    })
+      this.roleList = this.roles;
+    });
+  }
+  getAllRoles(){
+    this.roles=[
+      {roleId:1,role:'Admin',menuAssigned:false},
+      {roleId:2,role:'Owner',menuAssigned:false},
+      {roleId:3,role:'Tenant',menuAssigned:false},
+      {roleId:4,role:'Electrician',menuAssigned:false},
+      {roleId:5,role:'Carpenter',menuAssigned:false},
+      {roleId:6,role:'Guard',menuAssigned:false},
+    ];
+    this.roleList = this.roles;
   }
   ngOnInit(): void {
-    this.getRoles();
+    this.getAllRoles();
   }
-  constructor(private modalService: NgbModal,private http:HttpClient,private menuSecurityService:MenuSecurityService) {}
+  constructor(
+    private modalService: NgbModal,
+    private http: HttpClient,
+    private menuSecurityService: MenuSecurityService
+  ) {}
 
   open(content) {
-    this.modalService.open(content, {size:'xl',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { size: 'xl', ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -50,32 +68,30 @@ export class MenuSecurityAssignComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  onDropdownMenuClick(e){
-    this.heading=e.target.innerText;
-    this.roleList=this.roles;
-    if(this.heading === 'Assigned Roles'){
-      let newRoleList = this.roles.filter((role)=>{
+  onDropdownMenuClick(e) {
+    this.heading = e.target.innerText;
+    this.roleList = this.roles;
+    if (this.heading === 'Assigned Roles') {
+      let newRoleList = this.roles.filter((role) => {
         return role.menuAssigned;
-      })
+      });
       this.roleList = newRoleList;
-    }
-    else if(this.heading === 'Unassigned Roles'){
-      let newRoleList = this.roles.filter((role)=>{
+    } else if (this.heading === 'Unassigned Roles') {
+      let newRoleList = this.roles.filter((role) => {
         return !role.menuAssigned;
-      })
+      });
       this.roleList = newRoleList;
-    }
-    else{
+    } else {
       this.roleList = this.roles;
     }
   }
-  searchFilter=()=>{
-    if(this.searchText==='')this.ngOnInit();
-    else{
-      let newRoleList = this.roles.filter((role)=>{
+  searchFilter = () => {
+    if (this.searchText === '') this.ngOnInit();
+    else {
+      let newRoleList = this.roles.filter((role) => {
         return role.role.toLowerCase().includes(this.searchText.toLowerCase());
       });
       this.roleList = newRoleList;
     }
-  }
+  };
 }

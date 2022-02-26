@@ -1,10 +1,6 @@
 <div class="container" *ngIf="route.children.length === 0">
   <div class="towerlist-header">
-    <div class="back-button">
-      <a class="back-btn" [routerLink]="['/dashboard/configuration/society']"
-        >&larr;</a
-      >
-    </div>
+    <app-back-btn></app-back-btn>
     <div class="header-text">
       <h3>{{ societyName }}</h3>
     </div>

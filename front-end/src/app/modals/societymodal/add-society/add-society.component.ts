@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { SocietyPostService } from '../../../dashboard/configuration/society/society.post.service';
@@ -14,6 +14,7 @@ export class AddSocietyComponent implements OnInit {
   ngOnInit(): void {
     
   }
+  @Output() reloadPage = new EventEmitter<boolean>();
   constructor(private modalService: NgbModal,private societyPostService:SocietyPostService) {}
   societyReqObj = {
     token:{
@@ -44,7 +45,9 @@ export class AddSocietyComponent implements OnInit {
   }
   onSubmit(form:NgForm ){
     this.societyReqObj.requestObject.societyName=form.value.societyName;
-    this.societyPostService.addSociety(this.societyReqObj);
+    this.societyPostService.addSociety(this.societyReqObj).subscribe(()=>{
+      this.reloadPage.emit(true);
+    });
     form.reset();
   }
 }
