@@ -5,6 +5,10 @@ public class MenuResponse {
     private long  menuId;
     private String menuName;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
     public MenuResponse(String url, long menuId, String menuName) {
         this.url = url;
         this.menuId = menuId;

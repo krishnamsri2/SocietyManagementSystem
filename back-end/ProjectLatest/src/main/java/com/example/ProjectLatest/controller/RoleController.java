@@ -40,7 +40,7 @@ public class RoleController
         roleService.updateRoleByRoleId(role.getRequestObject(),id);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE,value = "role/activate_deactivate/{id}")
+    @RequestMapping(method = RequestMethod.DELETE,value = "role/deactivate_activate/{id}")
     public void deactivateActivateRoleStatus(@PathVariable Long id)
     {
         roleService.deactivateActivateRoleByRoleId(id);

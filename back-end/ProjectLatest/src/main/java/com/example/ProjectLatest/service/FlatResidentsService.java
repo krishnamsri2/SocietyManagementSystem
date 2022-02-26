@@ -57,6 +57,7 @@ public class FlatResidentsService {
         try {
             FlatResidents temp = frRepo.findById(requestObject.getFlatResId()).orElse(null);
 
+<<<<<<< HEAD
             //long towerId =  towerRepository.getByTowerName(requestObject.getTowerName(), token.getSocietyId()).getTowerId();
             //Flat tempFlat =   flatRepo.getByFlatNo(requestObject.getFlatNo(),towerId );
 
@@ -64,6 +65,11 @@ public class FlatResidentsService {
                 temp.setTenant(requestObject.getIsTenant());
                 temp.setOwner(requestObject.getIsOwner());
                 //temp.setFlat(tempFlat);
+=======
+            if(temp != null && temp.getIsDeleted() == false ) {
+                temp.setTenant(requestObject.getIsTenant());
+                temp.setOwner(requestObject.getIsOwner());
+>>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
                 frRepo.save(temp);
             }
         }catch (Exception e){

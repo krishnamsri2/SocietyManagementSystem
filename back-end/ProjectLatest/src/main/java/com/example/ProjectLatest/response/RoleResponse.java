@@ -9,6 +9,7 @@ public class RoleResponse
     private String role;
     private String roleDescription;
     private Boolean isActive;
+<<<<<<< HEAD
     private Boolean isDeleted;
 
 
@@ -44,6 +45,14 @@ public class RoleResponse
 
     public Long getRoleId() {
         return roleId;
+=======
+
+    public RoleResponse(RoleType roleType, String role, String roleDescription, Boolean isActive) {
+        this.roleType = roleType;
+        this.role = role;
+        this.roleDescription = roleDescription;
+        this.isActive = isActive;
+>>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
     }
 
     public RoleType getRoleType() {
@@ -68,5 +77,14 @@ public class RoleResponse
 
     public void setRoleDescription(String roleDescription) {
         this.roleDescription = roleDescription;
+    }
+
+
+    public Boolean getIsActive() {
+        return this.isActive;
+    }
+
+    public void setIsActive(Boolean activeRole) {
+        this.isActive = isActive;
     }
 }
