@@ -1,15 +1,15 @@
 package com.example.ProjectLatest.controller;
 
-import com.example.ProjectLatest.entity.MenuSecurity;
-import com.example.ProjectLatest.response.MenuSecurityResponse;
+
+
+import com.example.ProjectLatest.response.RoleWithStatusResponse;
 import com.example.ProjectLatest.service.MenuSecurityService;
 import com.example.ProjectLatest.to.MenuSecurityTO;
 import com.example.ProjectLatest.to.RestRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class MenuSecurityController
@@ -24,17 +24,17 @@ public class MenuSecurityController
         service.assignMenu(menuSecurityTORestRequest.getRequestObject());
     }
 
-    //GET
-    @RequestMapping(method = RequestMethod.GET,value="/AssignedRoles")
-    public MenuSecurityResponse assignedRoles(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
+    //GET Role Status
+    @RequestMapping(method = RequestMethod.GET,value = "/status/{id}")
+    public List<RoleWithStatusResponse> getRolesStatuses(@PathVariable Long id)
     {
-        return service.getAllRolesAssigned(menuSecurityTORestRequest.getRequestObject());
+        return service.getRolesStatuses(id);
     }
 
-    //SOFT Delete
-    @RequestMapping(method = RequestMethod.PUT,value="/DeassignMenu")
-    public void deassignMenu(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
+    //Unassign Role to a menu
+    @RequestMapping(method = RequestMethod.PUT,value="/unassignMenu")
+    public void unassignMenu(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
     {
-        service.deassignMenu(menuSecurityTORestRequest.getRequestObject());
+        service.unassignMenu(menuSecurityTORestRequest.getRequestObject());
     }
 }
