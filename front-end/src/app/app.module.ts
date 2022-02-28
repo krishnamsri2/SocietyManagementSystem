@@ -80,7 +80,6 @@ import { ForgotPasswordModalComponent } from './modals/forgot-password-modal/for
     HttpClientModule,
     NgbModule,
     MatIconModule
-    
   ],
   providers:[
      { provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true }

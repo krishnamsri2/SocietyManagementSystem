@@ -5,10 +5,13 @@ import { Injectable } from "@angular/core";
 })
 export class RequestObject {
 
+    private societyId=+btoa(localStorage.getItem("societyId"));
+    private userId=+btoa(localStorage.getItem("userId"));
+
     public request = {
         token: {
-            societyId: 30,
-            userId: 12
+            societyId: this.societyId,
+            userId: this.userId
         },
         requestObject: {
         }

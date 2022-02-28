@@ -9,11 +9,7 @@ import java.util.*;
 @Table(name="Role")
 public class Role 
 {
-<<<<<<< HEAD
 	//private  String roleDescription;
-=======
-	private  String roleDescription;
->>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
 	@Enumerated(EnumType.STRING)
 	private RoleType roleType;
 
@@ -43,12 +39,6 @@ public class Role
 	@ManyToMany(mappedBy = "roles")
 	@JsonBackReference
 	private Set<UserDetails> userDetails = new HashSet<UserDetails>();
-<<<<<<< HEAD
-	
-	@OneToOne(mappedBy="role")
-	private MenuSecurity menuSecurity;
-=======
->>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
 
 	@ManyToMany
 	@JoinTable(
@@ -82,13 +72,13 @@ public class Role
 		this.isActive = true;
 	}
 
-	public String getRoleDescription() {
-		return roleDescription;
-	}
+	// public String getRoleDescription() {
+	// 	return roleDescription;
+	// }
 
-	public void setRoleDescription(String roleDescription) {
-		this.roleDescription = roleDescription;
-	}
+	// public void setRoleDescription(String roleDescription) {
+	// 	this.roleDescription = roleDescription;
+	// }
 
 	public RoleType getRoleType() {
 		return roleType;

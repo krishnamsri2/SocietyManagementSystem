@@ -31,14 +31,14 @@ export class UserComponent implements OnInit,OnDestroy {
   currentUsers(){
     this.userSubscription = this.userPostService.fetchUsers().subscribe((userData)=>{
       this.users=userData;
-      //this.userService.setUsers(this.users);
-      //console.log(this.users);
+      console.log("Hello",this.users)
       },error =>{
       console.log("Error in retrieving users",error);
     });
   }
 
   ngOnInit(){
+    this.userDetailId=+btoa(localStorage.getItem('userId'));
     this.currentUsers();
   }
 

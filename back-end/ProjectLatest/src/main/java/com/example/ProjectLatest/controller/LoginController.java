@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import static com.example.ProjectLatest.Security.Interceptor.hashMemory;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class LoginController {
 
     @Autowired
     private LoginService service;
+
 
     @PostMapping("/login/{emailId}")
     public LoginResponse verifyUser(@PathVariable String emailId){
@@ -20,8 +22,8 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logoutUser(){
-        return "User Logout Successful";
+    public void logoutUser(){
+        //return "User Logout Successful";
     }
 
 }

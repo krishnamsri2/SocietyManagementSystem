@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,13 +10,13 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ForgotPasswordModalComponent implements OnInit {
 
   closeResult = '';
-  public emailId : string;
-  public linkSent=false;
+  public emailId : string='';
+  public message : string='';
   
   ngOnInit(): void {
     
   }
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,private http:HttpClient) {}
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -33,6 +34,14 @@ export class ForgotPasswordModalComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  onClick(){
+    this.http.post('',this.emailId).subscribe((response)=>{
+      this.message="Password reset link sent to Email-Id"
+    },error=>{
+      this.message="Email-Id doesn't exist"
+    });
   }
 
 }

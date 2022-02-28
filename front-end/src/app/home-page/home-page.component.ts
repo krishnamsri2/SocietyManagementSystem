@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmailValidator, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { LoginModel } from './login.model';
 
 @Component({
   selector: 'app-home-page',
@@ -11,30 +12,38 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class HomePageComponent implements OnInit {
 
-  public userName:string='';
-  public password:string='';
-  public errorMessage:string='';
-  
-  constructor(private router:Router,private authService : AuthService) { }
+  public userName: string = '';
+  public password: string = '';
+  public errorMessage: string = '';
+
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-    console.log(this.userName,this.password);
-    
+    console.log(this.userName, this.password);
+
   }
 
-  onClick(){
+  onClick() {
 
-    // this.authService.login(this.userName,this.password).subscribe((response:HttpResponse<any>)=>{
-    //   localStorage.setItem("token",response.headers.get('token'));
-    //   localStorage.setItem("id",response.userDetailId);
-    //   let menuList = response.headers.get('list');
+      this.authService.login(this.userName, this.password).subscribe((response: any) => {
 
-    //   this.router.navigate(['dashboard']);   
-    // },error=>{
-    //   this.errorMessage=error;
-    // });
-    
-    this.router.navigate(['dashboard']);
+      console.log(response);
+
+      if (response) {
+        localStorage.setItem("societyId", btoa(response.societyId));
+        localStorage.setItem("userId", btoa(response.userId));
+        this.router.navigate(['dashboard']);
+      }
+
+      else {
+        this.errorMessage = "Invalid Credentials!!!"
+      }
+    }, error => {
+      //this.errorMessage=error;
+      console.log(error);
+    });
+
+    //this.router.navigate(['dashboard']);
   }
 
 

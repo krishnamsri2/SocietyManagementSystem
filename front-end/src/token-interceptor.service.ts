@@ -1,27 +1,20 @@
-import { HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
+import { HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
 
 import { Injectable } from "@angular/core";
 
-
-import { Subscription } from "rxjs";
-
 @Injectable()
 export class PutTokenService implements HttpInterceptor{
-    private id_token : string;
-    private tokenSubs : Subscription;
-    private token : {
-        societyId : number,
-        userId : number
-    };
-
+    
     intercept(req,next){
-        let token_value;
-        let tokenAdded = req.clone({
-            setHeaders : {
-                Authorization : "Bearer Token added"
-            }
+
+        if(req.url.includes("login"))
+        return next.handle(req);
+        
+        const newRequest=req.clone({
+            headers : req.headers.set('societyId',`${+atob(localStorage.getItem("societyId"))}`).set('userId',`${+atob(localStorage.getItem("userId"))}`)
         });
-        localStorage.setItem(token_value,'45');
-        return next.handle(tokenAdded);
+
+        return next.handle(newRequest);
+        
     }
 }

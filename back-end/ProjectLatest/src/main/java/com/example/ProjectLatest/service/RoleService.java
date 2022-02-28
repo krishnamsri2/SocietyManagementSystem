@@ -1,14 +1,8 @@
 package com.example.ProjectLatest.service;
 
-<<<<<<< HEAD
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.example.ProjectLatest.entity.Role;
-
-=======
 import com.example.ProjectLatest.entity.Role;
 
 import com.example.ProjectLatest.entity.RoleType;
->>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
 import com.example.ProjectLatest.entity.UserDetails;
 import com.example.ProjectLatest.repository.RoleRepository;
 import com.example.ProjectLatest.repository.UserDetailRepository;
@@ -51,16 +45,6 @@ public class RoleService
     {
         Set<RoleResponse> roleResponses = new HashSet<RoleResponse>();
         try{
-<<<<<<< HEAD
-            UserDetails usd = userDetailsRepository.getById(userId);
-            Set<Role> roles = usd.getRoles();
-            for(Role role:roles)
-            {
-
-                RoleResponse roleResponse = new RoleResponse(role.getRoleId(), role.getRoleType(), role.getRole(), role.getRoleDescription(),role.getIsActive(),role.getIsDeleted());
-                roleResponses.add(roleResponse);
-            }
-=======
         UserDetails usd = userDetailsRepository.getById(userId);
         Set<Role> roles = usd.getRoles();
         for(Role currentRole:roles)
@@ -68,24 +52,10 @@ public class RoleService
             RoleResponse response = new RoleResponse(currentRole.getRoleType(),currentRole.getRole(),currentRole.getRoleDescription(),currentRole.getIsActive());
             roleResponses.add(response);
         }
->>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
         }
         catch(Exception e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
-
-        return roleResponses;
-    }
-    public RoleResponse findRoleByRoleId(Long id)
-    {
-        Role currentRole = roleRepository.getById(id);
-        RoleResponse response = new RoleResponse(currentRole.getRoleId(),currentRole.getRoleType(), currentRole.getRole(), currentRole.getRoleDescription(),currentRole.getIsActive(),currentRole.getIsDeleted());
-        return response;
-    }
-    public void updateRoleByRoleId(RoleTO newRole, Long id)
-    {
-=======
         return roleResponses;
     }
     public RoleResponse findRoleByRoleId(Long id)
@@ -96,7 +66,6 @@ public class RoleService
     }
     public void updateRoleByRoleId(RoleTO newRole, Long id)
     {
->>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
         try {
             Role currentRole = roleRepository.getById(id);
             currentRole.setRole(newRole.getRole());
@@ -128,11 +97,7 @@ public class RoleService
     {
         try{
             Role role = roleRepository.getById(id);
-<<<<<<< HEAD
-            boolean isActive=!role.getIsActive();
-=======
             Boolean isActive = role.getIsActive();
->>>>>>> 2d17a4c1b374e9febbda54c5abdcc254b56e488e
             role.setIsActive(isActive);
             roleRepository.save(role);
         }
