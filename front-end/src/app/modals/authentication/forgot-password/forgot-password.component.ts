@@ -3,20 +3,21 @@ import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-forgot-password-modal',
-  templateUrl: './forgot-password-modal.component.html',
-  styleUrls: ['./forgot-password-modal.component.css']
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordModalComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
 
-  closeResult = '';
-  public emailId : string='';
-  public message : string='';
+  public emailId : string = '';
+  public errorMessage : boolean;
+  public successMessage : boolean;
   
+  closeResult = '';
   ngOnInit(): void {
     
   }
-  constructor(private modalService: NgbModal,private http:HttpClient) {}
+  constructor(private modalService: NgbModal,private http : HttpClient) {}
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -37,10 +38,10 @@ export class ForgotPasswordModalComponent implements OnInit {
   }
 
   onClick(){
-    this.http.post('',this.emailId).subscribe((response)=>{
-      this.message="Password reset link sent to Email-Id"
+    this.http.post('',this.emailId).subscribe((response:any)=>{
+      this.successMessage=true;
     },error=>{
-      this.message="Email-Id doesn't exist"
+      this.errorMessage=true;
     });
   }
 

@@ -8,15 +8,23 @@ import { RequestObject } from "src/app/service/request.service";
 
 @Injectable({providedIn : 'root'})
 export class UserPostServices{
-    
 
-    
+    public currentUser : UserModel;
     
     constructor(private http: HttpClient,private requestObj : RequestObject){}
     errorMessage = new Subject<String>();
 
-   
+    setCurrentUser(user : UserModel){
+        this.currentUser=new UserModel(user.firstName,user.lastName,user.phoneNumber,user.emailId,user.userDetailId,user.societyId);
+    }
 
+    getCurrentUser(){
+        return this.currentUser;
+    }
+
+    deleteCurrentUser(){
+        delete this.currentUser;
+    }
     //POST
     addUsers(newUser){
         this.requestObj.putRequestObject(newUser);

@@ -16,12 +16,17 @@ import { NewUserComponent } from "./dashboard/configuration/user/new-user/new-us
 import { UserComponent } from "./dashboard/configuration/user/user.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { HomePageComponent } from "./home-page/home-page.component";
+import { ResetPasswordComponent } from "./modals/authentication/reset-password/reset-password.component";
+import { ProfileComponent } from "./vertical-navbar/profile/profile.component";
+
 
 
 const appRoutes:Route[] = [
     {path:'',component: HomePageComponent},
+    { path: 'reset_password/:email',component : ResetPasswordComponent},
     {path:'dashboard',component: DashboardComponent,
       children:[
+        { path: 'profile', component: ProfileComponent },
         {
           path:'configuration',component:ConfigurationComponent,
           children:[
@@ -38,7 +43,7 @@ const appRoutes:Route[] = [
               ]}
             ]},
             
-            { path: 'role', component:RoleComponent },
+            
             { path: 'menu', component: MenuComponent},
             { path: 'menu_security', component: MenuSecurityComponent}
           ]

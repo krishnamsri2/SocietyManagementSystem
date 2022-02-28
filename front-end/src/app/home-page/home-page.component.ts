@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmailValidator, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { UserPostServices } from '../dashboard/configuration/user/user.posts.service';
 import { LoginModel } from './login.model';
 
 @Component({
@@ -16,7 +17,9 @@ export class HomePageComponent implements OnInit {
   public password: string = '';
   public errorMessage: string = '';
 
-  constructor(private router: Router, private authService: AuthService) { }
+  public hide: boolean;
+
+  constructor(private router: Router, private authService: AuthService,private userService:UserPostServices) { }
 
   ngOnInit(): void {
     console.log(this.userName, this.password);
@@ -32,6 +35,7 @@ export class HomePageComponent implements OnInit {
       if (response) {
         localStorage.setItem("societyId", btoa(response.societyId));
         localStorage.setItem("userId", btoa(response.userId));
+        this.userService.setCurrentUser(response);
         this.router.navigate(['dashboard']);
       }
 
@@ -46,5 +50,8 @@ export class HomePageComponent implements OnInit {
     //this.router.navigate(['dashboard']);
   }
 
+  myFunction(){
+    this.hide=!this.hide;
+  }
 
 }
