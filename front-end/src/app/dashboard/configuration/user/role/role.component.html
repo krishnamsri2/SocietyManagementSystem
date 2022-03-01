@@ -8,6 +8,7 @@
             <th scope="col">Role Description</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
@@ -26,6 +27,7 @@
             <td>
                 <a [routerLink]="[]" class="link-danger" (click)="changeStatusOnClick(role.roleId)">{{role.active? 'Set Inactive':'Set Active'}}</a>
             </td>
+            <td>{{role.roleId}}</td>
         </tr>
 
     </tbody>

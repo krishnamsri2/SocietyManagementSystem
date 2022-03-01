@@ -30,7 +30,6 @@ export class RoleModalComponent implements OnInit, OnDestroy {
 
     console.log(this.roleId);
     
-
     this.roleWithARoleIdSubs=this.roleService.getRoleDetailsByRoleId(this.roleId).subscribe((responseData)=>{
       this.oldRole=responseData;
     },error=>{

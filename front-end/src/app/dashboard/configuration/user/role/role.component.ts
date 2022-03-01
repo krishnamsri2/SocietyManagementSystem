@@ -36,7 +36,7 @@ export class RoleComponent implements OnInit,OnDestroy {
     console.log(this.userDetailId);
   }
 
-  changeStatusOnClick(roleId:string){
+  changeStatusOnClick(roleId:number){
     this.updateStatusSubs=this.roleService.activateDeactivateRole(roleId).subscribe(()=>{
       this.getRoles();
     },err=>{
