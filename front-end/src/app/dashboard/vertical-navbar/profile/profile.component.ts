@@ -8,19 +8,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  public inUser:boolean;
+  public currentUser;
   
   constructor(private activeRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-    if(this.activeRoute.url.toString().includes('/profile'))
-    {
-      this.inUser=true;
-      console.log("Yes possible");
-    }  
+      this.currentUser=JSON.parse(atob(localStorage.getItem("user")));
   }
 
-  currentUser(){
-
-  }
+  
 }

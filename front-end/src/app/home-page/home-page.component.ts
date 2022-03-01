@@ -35,7 +35,7 @@ export class HomePageComponent implements OnInit {
       if (response) {
         localStorage.setItem("societyId", btoa(response.societyId));
         localStorage.setItem("userId", btoa(response.userId));
-        this.userService.setCurrentUser(response);
+        localStorage.setItem("user",btoa(JSON.stringify(response)));
         this.router.navigate(['dashboard']);
       }
 

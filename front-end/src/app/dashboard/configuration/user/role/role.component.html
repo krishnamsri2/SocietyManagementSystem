@@ -25,7 +25,7 @@
                 <app-role-modal [roleIdForEdit]="role.roleId" [id]="userDetailId" (reloadPage1)="reloadThePage($event)"></app-role-modal>
             </td>
             <td>
-                <a [routerLink]="[]" class="link-danger" (click)="changeStatusOnClick(role.roleId)">{{role.active? 'Set Inactive':'Set Active'}}</a>
+                <a [routerLink]="[]" class="link-danger" (click)="changeStatusOnClick(role.roleId)">{{role.isActive? 'Set Inactive':'Set Active'}}</a>
             </td>
             <td>{{role.roleId}}</td>
         </tr>

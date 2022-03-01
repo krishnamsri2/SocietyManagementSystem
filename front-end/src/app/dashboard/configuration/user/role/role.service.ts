@@ -65,7 +65,7 @@ export class RoleService{
     }
 
     activateDeactivateRole(roleId : number){
-            return this.http.delete(`http://localhost:9191/role/activate_deactivate/${roleId}`);
+            return this.http.delete(`http://localhost:9191/role/deactivate_activate/${roleId}`);
     }
 
     updateRoleDetailsByRoleId(updatedRoles: RoleModel,roleId : number) {

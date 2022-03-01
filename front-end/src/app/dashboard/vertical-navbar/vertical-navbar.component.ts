@@ -14,9 +14,8 @@ import { relative } from '@angular/compiler-cli/private/localize';
 })
 export class VerticalNavbarComponent implements OnInit {
 
-  public firstName:string;
-  public lastName:string;
-  isAdmin : boolean;
+  public currentUser;
+
   sizeOfComponents : number;
   startIndex = 0;
 
@@ -26,9 +25,7 @@ export class VerticalNavbarComponent implements OnInit {
               private activeRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.firstName=this.userService.getCurrentUser().firstName;
-    this.lastName=this.userService.getCurrentUser().lastName;
-    //this.components=this.userService.getMenuofAUser(this.currentUserId);
+    this.currentUser=JSON.parse(atob(localStorage.getItem("user")));
   }
 
   displayProfile(){

@@ -100,6 +100,7 @@ public class RoleService
         try{
             Role role = roleRepository.getById(id);
             Boolean isActive = role.getIsActive();
+            isActive=!isActive;
             role.setIsActive(isActive);
             roleRepository.save(role);
         }

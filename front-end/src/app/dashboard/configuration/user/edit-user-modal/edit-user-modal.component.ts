@@ -14,32 +14,30 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-user-modal.component.css']
 })
 export class EditUserModalComponent implements OnInit, OnDestroy {
-  @Input('displayProfile') inUser : boolean;
 
   @Input('userId') userDetailId: number;
- 
+
   @Output() reloadPage = new EventEmitter<boolean>();
 
   closeResult = '';
 
   public defaultUser;
 
-  private defaultUserSubscription: Subscription; 
-  private updatedUserSubs : Subscription;
+  private defaultUserSubscription: Subscription;
+  private updatedUserSubs: Subscription;
 
   private updatedUser: UserModel;
 
-  constructor(private modalService: NgbModal, private userService: UserPostServices,private activeRoute : ActivatedRoute) { }
+  constructor(private modalService: NgbModal, private userService: UserPostServices, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-
+    console.log(this.userDetailId);
     this.defaultUserSubscription = this.userService.getUserById(this.userDetailId).subscribe((responseData) => {
       this.defaultUser = responseData;
+      console.log(this.defaultUser);
     }, error => {
       console.log("Error in user updation", error);
     });
-
-    
   }
 
   open(content) {
@@ -62,8 +60,8 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
 
   onClick() {
     //console.log(this.defaultUser);
-    let defaultUser1= new UserModel(this.defaultUser.firstName,this.defaultUser.lastName,this.defaultUser.phoneNumber,this.defaultUser.emailId,this.userDetailId);
-    this.defaultUserSubscription=this.userService.updateUser(defaultUser1).subscribe(() => {
+    //let defaultUser1 = new UserModel(this.defaultUser.firstName, this.defaultUser.lastName, this.defaultUser.phoneNumber, this.defaultUser.emailId, this.userDetailId);
+    this.defaultUserSubscription = this.userService.updateUser(this.defaultUser).subscribe(() => {
       this.reloadPage.emit(true);
     }, error => {
       alert('User not updated!!');
@@ -72,7 +70,7 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    
+
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RoleService } from './role.service';
 
@@ -19,10 +20,10 @@ export class RoleComponent implements OnInit,OnDestroy {
   private rolesOfAUserSubs : Subscription;
   private updateStatusSubs : Subscription;
 
-  constructor(private roleService : RoleService) { }
+  constructor(private roleService : RoleService,private route : ActivatedRoute) { }
 
   getRoles(){
-    this.userDetailId=this.roleService.getUserID();
+    //this.userDetailId=this.roleService.getUserID();
     this.rolesOfAUserSubs = this.roleService.getAllRolesOfAUser(this.userDetailId).subscribe((responseData)=>{
       this.roleArray=responseData;
       console.log(responseData);
@@ -32,8 +33,12 @@ export class RoleComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getRoles();
+    this.route.params.subscribe((params:Params)=>{
+      this.userDetailId=+params['userDetailId'];
+    });
     console.log(this.userDetailId);
+    this.getRoles();
+    
   }
 
   changeStatusOnClick(roleId:number){

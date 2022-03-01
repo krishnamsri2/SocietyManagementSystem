@@ -33,8 +33,8 @@ const appRoutes:Route[] = [
           children:[
             { path: 'user', component: UserComponent,children : [
               { path : 'new_user', component : NewUserComponent},
-              { path: 'role', component: RoleComponent},
-              { path: 'flat_details', component : FlatDetailsComponent}
+              { path: 'role/:userDetailId', component: RoleComponent},
+              { path: 'flat_details/:userDetailId', component : FlatDetailsComponent}
             ]},
 
             {path:'society',component:SocietyComponent,children:[
