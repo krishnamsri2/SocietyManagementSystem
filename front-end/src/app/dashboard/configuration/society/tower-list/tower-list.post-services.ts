@@ -10,12 +10,10 @@ export class TowerListPostService {
   towers: TowerModel[] = [];
   constructor(private http: HttpClient) {}
   addTower(newTower, parentId) {
-    console.log(parentId);
-    this.http
-      .post(`http://localhost:9191/society/${parentId}/addTower`, newTower)
-      .subscribe(() => {
-        alert('Added tower');
-      });
+    return this.http.post(
+      `http://localhost:9191/society/${parentId}/addTower`,
+      newTower
+    );
   }
   fetchTowers(parentId: string) {
     return this.http
@@ -40,10 +38,8 @@ export class TowerListPostService {
   }
   updateTowerDetails(parentId: number, newName: any) {
     console.log(parentId);
-    this.http
+    return this.http
       .put(`http://localhost:9191/society/${parentId}/updateTower`, newName)
-      .subscribe(() => {
-        alert('updated details');
-      });
+      
   }
 }

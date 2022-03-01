@@ -3,12 +3,14 @@ package com.example.ProjectLatest.service;
 import com.example.ProjectLatest.entity.Menu;
 import com.example.ProjectLatest.entity.MenuSecurity;
 import com.example.ProjectLatest.entity.Role;
+import com.example.ProjectLatest.entity.RoleType;
 import com.example.ProjectLatest.repository.MenuSecurityRepository;
 import com.example.ProjectLatest.repository.RoleRepository;
-import com.example.ProjectLatest.response.MenuResponse;
-import com.example.ProjectLatest.response.MenuSecurityResponse;
-import com.example.ProjectLatest.response.RoleResponse;
+import com.example.ProjectLatest.response.*;
 import com.example.ProjectLatest.to.MenuSecurityTO;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ public class MenuSecurityService {
     private MenuSecurityRepository menuSecurityRepository;
     @Autowired
     private RoleRepository roleRepository;
+    private SessionFactory sessionFactory;
 
     public void assignMenu(MenuSecurityTO menuSecurityTO)
     {
@@ -38,39 +41,31 @@ public class MenuSecurityService {
         }
 
     }
-
-    public MenuSecurityResponse getAllRolesAssigned(MenuSecurityTO menuSecurityTO)
+    public List<RoleWithStatusResponse> getRolesStatuses(Long menuId)
     {
-        long menuId = menuSecurityTO.getMenuId();
-
-        List<MenuSecurity> menuSecurities = menuSecurityRepository.findAllByMenuId(menuId);
-
-        List<RoleResponse> roleResponses = new ArrayList<RoleResponse>();
-        for(MenuSecurity menuSecurity:menuSecurities)
+        List<Long> unassigendRoleIds = menuSecurityRepository.getAllUnassigned(menuId);
+        List<Long> assignedRoleIds = menuSecurityRepository.getAllAssigned(menuId);
+        List<RoleWithStatusResponse> responses = new ArrayList<RoleWithStatusResponse>();
+        for(Long roleId:unassigendRoleIds)
         {
-            long roleId = menuSecurity.getRoleId();
             Role role = roleRepository.getById(roleId);
-            if(menuSecurity.getActive())
-            {
-                RoleResponse roleResponse = new RoleResponse(role.getRoleId(),role.getRoleType(),role.getRole(),role.getRoleDescription(),role.getIsActive());
-                roleResponse.setMenuAssigned(menuSecurity.getActive());
-                roleResponses.add(roleResponse);
-            }
+            RoleWithStatusResponse response = new RoleWithStatusResponse(role.getRoleId(),role.getRoleType(),role.getRole(),false);
+            responses.add(response);
         }
-
-        MenuSecurityResponse MenuSecurityResponse = new MenuSecurityResponse(menuId,roleResponses);
-
-        return MenuSecurityResponse;
-
+        for(Long roleId:assignedRoleIds)
+        {
+            Role role = roleRepository.getById(roleId);
+            RoleWithStatusResponse response = new RoleWithStatusResponse(role.getRoleId(),role.getRoleType(),role.getRole(),true);
+            responses.add(response);
+        }
+        return responses;
     }
 
-    public void deassignMenu(MenuSecurityTO menuSecurityTO)
+    public void unassignMenu(MenuSecurityTO menuSecurityTO)
     {
         long menuId = menuSecurityTO.getMenuId();
         long roleId = menuSecurityTO.getRoleId();
         MenuSecurity menuSecurity = menuSecurityRepository.getByMenuIdRoleId(menuId,roleId);
-        menuSecurity.setActive(false);
-        menuSecurityRepository.save(menuSecurity);
-
+        menuSecurityRepository.delete(menuSecurity);
     }
 }

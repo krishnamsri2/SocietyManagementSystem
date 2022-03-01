@@ -20,25 +20,13 @@ export class MenuSecurityAssignComponent implements OnInit {
   searchText: any;
   @Input() menuId: any;
   getRoles() {
-    this.menuSecurityService.fetchAllRoles().subscribe((data) => {
-      this.roles = data;
-      console.log(data);
-      this.roleList = this.roles;
+    this.menuSecurityService.fetchAllRoles(this.menuId).subscribe((data) => {
+    this.roles = data;
+    this.roleList = this.roles;
     });
   }
-  getAllRoles(){
-    this.roles=[
-      {roleId:1,role:'Admin',menuAssigned:false},
-      {roleId:2,role:'Owner',menuAssigned:false},
-      {roleId:3,role:'Tenant',menuAssigned:false},
-      {roleId:4,role:'Electrician',menuAssigned:false},
-      {roleId:5,role:'Carpenter',menuAssigned:false},
-      {roleId:6,role:'Guard',menuAssigned:false},
-    ];
-    this.roleList = this.roles;
-  }
   ngOnInit(): void {
-    this.getAllRoles();
+    this.getRoles();
   }
   constructor(
     private modalService: NgbModal,
@@ -73,12 +61,12 @@ export class MenuSecurityAssignComponent implements OnInit {
     this.roleList = this.roles;
     if (this.heading === 'Assigned Roles') {
       let newRoleList = this.roles.filter((role) => {
-        return role.menuAssigned;
+        return role.status;
       });
       this.roleList = newRoleList;
     } else if (this.heading === 'Unassigned Roles') {
       let newRoleList = this.roles.filter((role) => {
-        return !role.menuAssigned;
+        return !role.status;
       });
       this.roleList = newRoleList;
     } else {

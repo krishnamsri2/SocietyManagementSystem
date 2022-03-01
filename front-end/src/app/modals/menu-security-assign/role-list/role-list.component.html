@@ -4,7 +4,7 @@
       *ngFor="let roleItem of roleList"
     >
       {{ roleItem.role }}
-      <span class="btn custom-btn" (click) = "onClick($event,roleItem.roleId)" *ngIf="!roleItem.menuAssigned">Assign</span>
-      <span class="btn custom-btn" (click) = "onClick($event,roleItem.roleId)" *ngIf="roleItem.menuAssigned">Unassign</span>
+      <span class="btn custom-btn" (click) = "onClick($event,roleItem.roleId)" *ngIf="!roleItem.status">Assign</span>
+      <span class="btn custom-btn" (click) = "onClick($event,roleItem.roleId)" *ngIf="roleItem.status">Unassign</span>
     </li>
 </ul>

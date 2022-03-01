@@ -11,9 +11,9 @@ export class MenuSecurityService {
     private http: HttpClient,
     private requestObject: RequestObjectService
   ) {}
-  fetchAllRoles() {
+  fetchAllRoles(menuId) {
     return this.http
-      .get<{ [key: string]: RoleModel }>(`http://localhost:9191/getAllRoles`, {
+      .get<{ [key: string]: RoleModel }>(`http://localhost:9191/status/${menuId}`, {
         responseType: 'json',
       })
       .pipe(
@@ -44,7 +44,7 @@ export class MenuSecurityService {
     this.requestObject.putRequestObject(mapObj);
     console.log(this.requestObject.getRequestObject());
     // this.requestObject.putRequestObject(mapObj);
-    this.http.put(`http://localhost:9191/DeassignMenu`,this.requestObject.getRequestObject()).subscribe(()=>{
+    this.http.put(`http://localhost:9191/unassignMenu`,this.requestObject.getRequestObject()).subscribe(()=>{
       alert('unassigned');
     })
   }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { TowerListPostService } from '../../../dashboard/configuration/society/t
 })
 export class EditTowerComponent implements OnInit {
   @Input() towerId:number ;
+  @Output() reloadPage = new EventEmitter<boolean>();
   closeResult = '';
   ngOnInit(): void {
   }
@@ -46,7 +47,9 @@ export class EditTowerComponent implements OnInit {
   onSubmit(form:NgForm){
     this.editTowerReqObj.requestObject.towerName = form.value.towerName;
     this.editTowerReqObj.requestObject.towerId = this.towerId;
-    this.towerListPostService.updateTowerDetails(this.towerId,this.editTowerReqObj);
+    this.towerListPostService.updateTowerDetails(this.towerId,this.editTowerReqObj).subscribe(()=>{
+      this.reloadPage.emit(true);
+    });
     form.reset();
   }
 

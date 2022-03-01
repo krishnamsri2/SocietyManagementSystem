@@ -42,3 +42,6 @@ a.card-link:hover {
   display: flex;
   flex-direction: column;
 }
+.list-items{
+  width:750px;
+}

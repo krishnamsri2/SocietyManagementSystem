@@ -19,14 +19,15 @@ export class RoleListComponent implements OnInit {
   onClick(e,roleId){
     this.roleList.forEach((role)=>{
       if(role.roleId===roleId){
-        role.menuAssigned = !role.menuAssigned;
+        role.status = !role.status;
       }
     })
-  //   this.mapObj.roleId = roleId;
-  //   this.mapObj.menuId = this.menuId;
-  //   if(e.target.innerText==='Assign')
-  //     this.menuSecurityService.assignRoles(this.mapObj);
-  //   else
-  //     this.menuSecurityService.deAssignRoles(this.mapObj);
+    this.mapObj.roleId = roleId;
+    this.mapObj.menuId = this.menuId;
+    //console.log(this.mapObj);
+    if(e.target.innerText==='Assign')
+      this.menuSecurityService.assignRoles(this.mapObj);
+    else
+      this.menuSecurityService.deAssignRoles(this.mapObj);
   }
 }

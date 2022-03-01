@@ -6,19 +6,17 @@
     </div>
   </div>
   <div class="society-cards mt-2" *ngIf="route.children.length === 0">
-    <div class="long-card" *ngFor="let society of societies">
-      <div class="long-card-wrapper">
-        <div class="long-card-text">
-          <h3>{{ society.societyName }}</h3>
-        </div>
-        <div class="long-card-btns">
-          <button class="btn btn-primary btn-sm" (click)="navigateIn(society.societyId)">
-            <mat-icon>exit_to_app</mat-icon>
-          </button>
-          <app-edit-society (reloadPage)="reloadPage()" [id]="society.societyId"></app-edit-society>
+    <ul class="list-group list-items mx-auto mt-1">
+      <div class="list-group-item container mt-2" *ngFor="let society of societies">
+        <div class="row">
+          <div class="col-9 text" [name]="society.societyName"><p>{{society.societyName}}</p></div>
+          <div class="col-3 btns d-flex justify-content-between">
+            <button class=" btn btn-sm btn-success" (click)="navigateIn(society.societyId)"><mat-icon>exit_to_app</mat-icon></button>
+            <app-edit-society [id]="society.societyId" (reloadPage)="reloadPage()"></app-edit-society>
+          </div>
         </div>
       </div>
-    </div>
+    </ul>
   </div>
   <div class="btn-wrapper" *ngIf="route.children.length === 0">
     <app-add-society (reloadPage)="reloadPage()"></app-add-society>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,7 @@ import { RequestObjectService } from '../../service/requestObject.service';
 export class FlatmodalsComponent implements OnInit {
 
   closeResult = '';
+  @Output() reloadPage = new EventEmitter<boolean>();
   ngOnInit(): void {
     
   }
@@ -46,7 +47,9 @@ export class FlatmodalsComponent implements OnInit {
     if(form.value.status === "occupied")this.flatData.status=true;
     this.flatData.numberOfOccupant = form.value.numberOfOccupant;
     this.requestObjectService.putRequestObject(this.flatData);
-    this.flatService.addFlat(this.requestObjectService.getRequestObject(),this.route.snapshot.params.id);
+    this.flatService.addFlat(this.requestObjectService.getRequestObject(),this.route.snapshot.params.id).subscribe(()=>{
+      this.reloadPage.emit(true);
+    });
     form.reset();
   }
 }

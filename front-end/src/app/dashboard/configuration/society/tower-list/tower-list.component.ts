@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlatIdServices } from '../../../../service/flat.id.services';
 import { TowerModel } from '../../../../shared/tower.model';
 import { TowerListPostService } from './tower-list.post-services';
@@ -13,12 +13,13 @@ import { TowerListPostService } from './tower-list.post-services';
 export class TowerListComponent implements OnInit {
   towers: TowerModel[] = [];
   parentId: string;
-  societyName: string = '';
+  societyName:string;
   constructor(
     public route: ActivatedRoute,
     private towerListPostService: TowerListPostService,
     private http: HttpClient,
-    private flatIdServices: FlatIdServices
+    private flatIdServices: FlatIdServices,
+    private router:Router
   ) {
     this.parentId = this.route.snapshot.params.id;
   }
@@ -36,5 +37,11 @@ export class TowerListComponent implements OnInit {
         this.societyName = societyData.societyName;
       });
     this.flatIdServices.putSocietyId(this.parentId);
+  }
+  reload(){
+    this.ngOnInit();
+  }
+  navigateIn(towerId){
+    this.router.navigate(['tower',towerId],{relativeTo:this.route});
   }
 }

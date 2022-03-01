@@ -16,14 +16,12 @@ export class FlatService {
   addFlat(newFlat, parentId: string) {
     // console.log(newFlat,parentId);
     this.societyId = this.flatIdService.getSocietyId();
-    this.http
+    return this.http
       .post(
         `http://localhost:9191/society/${this.societyId}/tower/${parentId}/addFlat`,
         newFlat
       )
-      .subscribe(() => {
-        alert('Flat Added');
-      });
+      
   }
   fetchFlats(parentId: string) {
     this.societyId = this.flatIdService.getSocietyId();

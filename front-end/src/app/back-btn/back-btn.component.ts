@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,12 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./back-btn.component.css']
 })
 export class BackBtnComponent implements OnInit {
-
+  // @Input() thisRoute:any;
   constructor(private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
   goBack(){
-    this.router.navigate(['../'],{relativeTo:this.route})
+    this.router.navigate(['.'],{relativeTo:this.route.parent})
   }
 }

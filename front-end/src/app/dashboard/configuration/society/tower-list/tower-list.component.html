@@ -5,27 +5,21 @@
       <h3>{{ societyName }}</h3>
     </div>
   </div>
-  <div class="towerlist row">
-    <div class="tower-card-wrapper" *ngFor="let tower of towers">
-      <div class="card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title">{{ tower.towerName }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            {{ tower.towerAddress }}
-          </h6>
-          <p class="card-text">Some Very Different Name</p>
-          <div class="card-btns">
-            <a [routerLink]="['tower', tower.towerId]" class="card-link"
-              >Enter</a
-            >
-            <app-edit-tower [towerId]="tower.towerId"></app-edit-tower>
+  <div class="towerlist mt-2">
+    <ul class="list-group list-items mx-auto mt-1">
+      <div class="list-group-item container mt-2" *ngFor="let tower of towers">
+        <div class="row">
+          <div class="col-9 text"><p>{{tower.towerName}}</p></div>
+          <div class="col-3 btns d-flex justify-content-between">
+            <button class="btn btn-sm btn-success" (click)="navigateIn(tower.towerId)"><mat-icon>exit_to_app</mat-icon></button>
+            <app-edit-tower [towerId]="tower.towerId" (reloadPage)="reload()"></app-edit-tower>
           </div>
         </div>
       </div>
-    </div>
+    </ul>
   </div>
   <div class="btn-wrapper">
-    <app-add-tower></app-add-tower>
+    <app-add-tower (reloadPage)="reload()"></app-add-tower>
   </div>
 </div>
 <div class="container">
