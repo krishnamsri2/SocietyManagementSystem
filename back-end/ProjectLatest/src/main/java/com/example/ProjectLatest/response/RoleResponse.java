@@ -2,19 +2,29 @@ package com.example.ProjectLatest.response;
 
 import com.example.ProjectLatest.entity.RoleType;
 
-public class RoleResponse
-{
-    private Long roleId;
+public class RoleResponse {
+    private long roleId;
     private RoleType roleType;
     private String role;
     private String roleDescription;
     private Boolean isActive;
+    private Boolean isMenuAssigned;
 
-    public RoleResponse(RoleType roleType, String role, String roleDescription, Boolean isActive) {
+
+    public RoleResponse(long roleId, RoleType roleType, String role, String roleDescription, Boolean isActive) {
+        this.roleId = roleId;
         this.roleType = roleType;
         this.role = role;
         this.roleDescription = roleDescription;
         this.isActive = isActive;
+    }
+
+    public long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(long roleId) {
+        this.roleId = roleId;
     }
 
     public RoleType getRoleType() {
@@ -48,5 +58,13 @@ public class RoleResponse
 
     public void setIsActive(Boolean activeRole) {
         this.isActive = isActive;
+    }
+
+    public Boolean getMenuAssigned() {
+        return isMenuAssigned;
+    }
+
+    public void setMenuAssigned(Boolean menuAssigned) {
+        isMenuAssigned = menuAssigned;
     }
 }

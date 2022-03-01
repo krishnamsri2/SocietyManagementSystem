@@ -1,69 +1,71 @@
 package com.example.ProjectLatest.service;
 
 import com.example.ProjectLatest.entity.Menu;
+import com.example.ProjectLatest.entity.MenuSecurity;
 import com.example.ProjectLatest.entity.Role;
-import com.example.ProjectLatest.repository.MenuRepository;
+import com.example.ProjectLatest.entity.RoleType;
+import com.example.ProjectLatest.repository.MenuSecurityRepository;
 import com.example.ProjectLatest.repository.RoleRepository;
-import com.example.ProjectLatest.response.MenuResponse;
-import com.example.ProjectLatest.response.MenuSecurityResponse;
+import com.example.ProjectLatest.response.*;
 import com.example.ProjectLatest.to.MenuSecurityTO;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MenuSecurityService
-{
+public class MenuSecurityService {
+
+    @Autowired
+    private MenuSecurityRepository menuSecurityRepository;
     @Autowired
     private RoleRepository roleRepository;
-    @Autowired
-    private MenuRepository menuRepository;
+    private SessionFactory sessionFactory;
 
-    public MenuSecurityResponse assignMenu(MenuSecurityTO menuSecurity)
+    public void assignMenu(MenuSecurityTO menuSecurityTO)
     {
+        long menuId = menuSecurityTO.getMenuId();
+        long roleId = menuSecurityTO.getRoleId();
+        MenuSecurity menuSecurity;
+        if(menuSecurityRepository.getByMenuIdRoleId(menuId,roleId)==null)
+        {
+            menuSecurity = new MenuSecurity(menuId, roleId);
+            menuSecurityRepository.save(menuSecurity);
+        }
 
-        long roleId = menuSecurity.getRoleId();
-        long menuId = menuSecurity.getMenuId();
-
-        Role role = roleRepository.getById(roleId);
-        Menu menu = menuRepository.getById(menuId);
-
-        role.getMenus().add(menu);
-        menu.getRoles().add(role);
-
-        roleRepository.save(role);
-        menuRepository.save(menu);
-
-
-
-        List<Menu> temp = role.getMenus();
-        List<MenuResponse> copy = temp.stream()
-        .map(Menu -> new MenuResponse(Menu.getUrl(),Menu.getMenuId(),Menu.getMenuName()))
-        .collect(Collectors.toList());
-
-        MenuSecurityResponse response = new MenuSecurityResponse(roleId,copy);
-
-        return response;
+    }
+    public List<RoleWithStatusResponse> getRolesStatuses(Long menuId)
+    {
+        List<Long> unassigendRoleIds = menuSecurityRepository.getAllUnassigned(menuId);
+        List<Long> assignedRoleIds = menuSecurityRepository.getAllAssigned(menuId);
+        List<RoleWithStatusResponse> responses = new ArrayList<RoleWithStatusResponse>();
+        for(Long roleId:unassigendRoleIds)
+        {
+            Role role = roleRepository.getById(roleId);
+            RoleWithStatusResponse response = new RoleWithStatusResponse(role.getRoleId(),role.getRoleType(),role.getRole(),false);
+            responses.add(response);
+        }
+        for(Long roleId:assignedRoleIds)
+        {
+            Role role = roleRepository.getById(roleId);
+            RoleWithStatusResponse response = new RoleWithStatusResponse(role.getRoleId(),role.getRoleType(),role.getRole(),true);
+            responses.add(response);
+        }
+        return responses;
     }
 
-    public MenuSecurityResponse getAssignedMenusByRoleId(MenuSecurityTO menuSecurity)
+    public void unassignMenu(MenuSecurityTO menuSecurityTO)
     {
-        long roleId = menuSecurity.getRoleId();
-        Role role = roleRepository.getById(roleId);
-
-        List<Menu> menuList = role.getMenus();
-
-        List<MenuResponse> menuResponseList = menuList.stream()
-                .map(Menu -> new MenuResponse(Menu.getUrl(),Menu.getMenuId(),Menu.getMenuName()))
-                .collect(Collectors.toList());
-
-        MenuSecurityResponse menuResponse = new MenuSecurityResponse(roleId,menuResponseList);
-
-        return menuResponse;
-
-
+        long menuId = menuSecurityTO.getMenuId();
+        long roleId = menuSecurityTO.getRoleId();
+        MenuSecurity menuSecurity = menuSecurityRepository.getByMenuIdRoleId(menuId,roleId);
+        menuSecurityRepository.delete(menuSecurity);
     }
 }
