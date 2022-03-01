@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { UserModel } from 'src/app/shared/user.model';
 import { EventEmitter } from '@angular/core';
 import { UserPostServices } from '../user.posts.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user-modal',
@@ -13,8 +14,10 @@ import { UserPostServices } from '../user.posts.service';
   styleUrls: ['./edit-user-modal.component.css']
 })
 export class EditUserModalComponent implements OnInit, OnDestroy {
+  @Input('displayProfile') inUser : boolean;
 
   @Input('userId') userDetailId: number;
+ 
   @Output() reloadPage = new EventEmitter<boolean>();
 
   closeResult = '';
@@ -26,15 +29,17 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
 
   private updatedUser: UserModel;
 
-  constructor(private modalService: NgbModal, private userService: UserPostServices) { }
+  constructor(private modalService: NgbModal, private userService: UserPostServices,private activeRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this.defaultUserSubscription = this.userService.getUserById(this.userDetailId).subscribe((responseData) => {
-      this.defaultUser = responseData;
-    }, error => {
-      console.log("Error in user updation", error);
-    });
+    // this.defaultUserSubscription = this.userService.getUserById(this.userDetailId).subscribe((responseData) => {
+    //   this.defaultUser = responseData;
+    // }, error => {
+    //   console.log("Error in user updation", error);
+    // });
+
+    
   }
 
   open(content) {

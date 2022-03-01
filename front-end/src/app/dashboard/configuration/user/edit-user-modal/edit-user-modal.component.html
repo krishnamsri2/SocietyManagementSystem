@@ -58,4 +58,4 @@
     </div>    
 </ng-template>
 
-<a class="link-danger" [routerLink]="[]" (click)="open(content)">Edit User</a>
+<a class="link-danger" [routerLink]="[]" (click)="open(content)" *ngIf="!inUser">Edit User</a>

@@ -34,7 +34,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { PutTokenService } from 'src/token-interceptor.service';
 import { ForgotPasswordComponent } from './modals/authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './modals/authentication/reset-password/reset-password.component';
-import { ProfileComponent } from './vertical-navbar/profile/profile.component';
+import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.component';
+
 
 
 @NgModule({
@@ -66,7 +67,7 @@ import { ProfileComponent } from './vertical-navbar/profile/profile.component';
     FlatEditModalComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ProfileComponent 
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

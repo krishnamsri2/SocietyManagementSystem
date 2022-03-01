@@ -17,7 +17,8 @@ import { UserComponent } from "./dashboard/configuration/user/user.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { HomePageComponent } from "./home-page/home-page.component";
 import { ResetPasswordComponent } from "./modals/authentication/reset-password/reset-password.component";
-import { ProfileComponent } from "./vertical-navbar/profile/profile.component";
+import { ProfileComponent } from "./dashboard/vertical-navbar/profile/profile.component";
+
 
 
 
@@ -26,7 +27,7 @@ const appRoutes:Route[] = [
     { path: 'reset_password/:email',component : ResetPasswordComponent},
     {path:'dashboard',component: DashboardComponent,
       children:[
-        { path: 'profile', component: ProfileComponent },
+         { path: 'profile', component: ProfileComponent },
         {
           path:'configuration',component:ConfigurationComponent,
           children:[
