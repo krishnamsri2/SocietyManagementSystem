@@ -28,7 +28,6 @@ public class Interceptor implements HandlerInterceptor {
         String url = request.getRequestURL().toString();
         Boolean isUser = false;
 
-
         try {
             if (url.indexOf("/login/") != -1) {
                 String q = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
