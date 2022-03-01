@@ -3,7 +3,7 @@ import {Route, RouterModule} from "@angular/router";
 import { ConfigurationComponent } from "./dashboard/configuration/configuration.component";
 import { MenuSecurityComponent } from "./dashboard/configuration/menu-security/menu-security.component";
 import { MenuComponent } from "./dashboard/configuration/menu/menu.component";
-import { RoleComponent } from "./dashboard/configuration/role/role.component";
+//import { RoleComponent } from "./dashboard/configuration/role/role.component";
 
 import { SocietyComponent } from "./dashboard/configuration/society/society.component";
 import { TowerListComponent } from "./dashboard/configuration/society/tower-list/tower-list.component";
@@ -35,7 +35,6 @@ const appRoutes:Route[] = [
               // ]}
             ]},
             
-            { path: 'role', component:RoleComponent },
             { path: 'menu', component: MenuComponent},
             { path: 'menu_security', component: MenuSecurityComponent}
           ]
