@@ -1,42 +1,48 @@
 package com.example.ProjectLatest.service;
 
-
 import com.example.ProjectLatest.entity.User;
 import com.example.ProjectLatest.repository.ChangePasswordRepository;
+import com.example.ProjectLatest.repository.UserRepository;
 import com.example.ProjectLatest.response.ChangePasswordResponse;
 import com.example.ProjectLatest.response.SocietyResponse;
 import com.example.ProjectLatest.to.ChangePasswordTO;
+import com.example.ProjectLatest.to.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
 
 @Service
 public class ChangePasswordService {
 
     @Autowired
-    private ChangePasswordRepository changePasswordRepository;
+    private UserRepository userRepository;
 
-    public ChangePasswordResponse updatePassword(long user_id, ChangePasswordTO requestObject) {
+    public ChangePasswordResponse updatePassword(ChangePasswordTO requestObject, Token token) {
         ChangePasswordResponse changePasswordResponse=new ChangePasswordResponse("NOT UPDATED");
         try
         {
-            User user = changePasswordRepository.findById(user_id).orElse(null);
-            if(user.getPassword().equals(requestObject.getOldPassword()))
+            User user=userRepository.findByEmailId(requestObject.getEmailId()).orElse(null);
+
+            if(user!=null)
             {
-                if(requestObject.getNewPassword().equals(requestObject.getConfirmPassword()))
+                if(user.getPassword().equals(requestObject.getOldPassword()))
                 {
+                    user.setPassword(requestObject.getNewPassword(), token.getUserId());
+                    userRepository.save(user);
                     changePasswordResponse.setAck("UPDATED");
-                    user.setPassword(requestObject.getNewPassword(), requestObject.getUserId());
-                    changePasswordRepository.save(user);
                 }
                 else
                 {
-                    changePasswordResponse.setAck("NEW PASSWORD DID NOT MATCH");
+                    changePasswordResponse.setAck("PASSWORD DIDN'T MATCH");
                 }
             }
             else
             {
-                changePasswordResponse.setAck("OLD PASSWORD DID NOT MATCH");
+                changePasswordResponse.setAck("User not found");
             }
+
         }
         catch (Exception e)
         {

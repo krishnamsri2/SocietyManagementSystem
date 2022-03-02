@@ -14,13 +14,13 @@ export class UserPostServices{
     constructor(private http: HttpClient,private requestObj : RequestObject){}
     errorMessage = new Subject<String>();
 
-    setCurrentUser(user : UserModel){
-        this.currentUser=new UserModel(user.firstName,user.lastName,user.phoneNumber,user.emailId,user.userDetailId,user.societyId);
-    }
+    // setCurrentUser(user : UserModel){
+    //     this.currentUser=new UserModel(user.firstName,user.lastName,user.phoneNumber,user.emailId,user.userDetailId,user.societyId);
+    // }
 
-    getCurrentUser(){
-        return this.currentUser;
-    }
+    // getCurrentUser(){
+    //     return this.currentUser;
+    // }
 
     deleteCurrentUser(){
         delete this.currentUser;

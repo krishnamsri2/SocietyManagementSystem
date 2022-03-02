@@ -1,17 +1,16 @@
 package com.example.ProjectLatest.to;
 
 public class ChangePasswordTO {
-    private long userId;
+    private String emailId;
     private String oldPassword;
     private String newPassword;
-    private String confirmPassword;
 
-    public long getUserId() {
-        return userId;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setEmailId(String emailId) {
+        this.emailId= emailId;
     }
 
     public String getOldPassword() {
@@ -30,11 +29,4 @@ public class ChangePasswordTO {
         this.newPassword = newPassword;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }
