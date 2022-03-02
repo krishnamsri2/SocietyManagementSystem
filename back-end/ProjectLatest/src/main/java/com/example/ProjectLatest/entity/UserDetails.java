@@ -172,7 +172,6 @@ public class UserDetails
 	}
 
 
-
 	public Set<FlatResidents> getFlatResidents() {
 		return residents;
 	}

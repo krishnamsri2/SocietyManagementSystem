@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="main-body">
+        <div class="row gutters-sm">
+
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2>Personal Information</h2>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4 class="mb-0">First Name</h4>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.firstName}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4 class="mb-0">Last Name</h4>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.lastName}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4 class="mb-0">Email-ID</h4>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.emailId}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4 class="mb-0">Phone Number</h4>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.phoneNumber}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <app-edit-user-modal [userId]="currentUser.userId"></app-edit-user-modal>
+                                <!-- <button class="btn btn-danger">Change Password</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2>Flat Details</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <th>1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

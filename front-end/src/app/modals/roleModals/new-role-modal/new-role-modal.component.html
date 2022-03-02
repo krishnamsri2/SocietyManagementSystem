@@ -1,0 +1,35 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">New Role</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <!-- <form (ngSubmit)="onFormSubmit(f)" #f="ngForm"> -->
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="roleType" class="form-label">Role Type</label>
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="newRole.roleType">
+                        <option [value]="element" *ngFor="let element of roleTypeArray" >{{element}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="role" class="form-label">Role</label>
+                    <input type="text" id="role" class="form-control" [(ngModel)]="newRole.role">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="roleDescription" class="form-label">Role Description</label>
+                    <input type="text" id="roleDescription" class="form-control" [(ngModel)]="newRole.roleDescription">
+                </div>
+            </div>
+            <div class="row" style="float: right; margin-top: 10px;">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-danger" (click)="onSubmit()" (click)="modal.dismiss('Cross click')">Add</button>
+                </div>
+            </div>
+        <!-- </form> -->
+    </div>
+</ng-template>
+
+<button class="btn btn-danger" (click)="open(content)">Add Role</button>

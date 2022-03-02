@@ -1,8 +1,6 @@
 package com.example.ProjectLatest.entity;
-
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "MenuSecurity")
 public class MenuSecurity
@@ -10,24 +8,16 @@ public class MenuSecurity
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long menuSecurityId;
-
     private long menuId;
     private long roleId;
-
-
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="createdDate",nullable=false)
     private Date createDate;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="updatedDate",nullable=false)
     private Date modifyDate;
-
     private Boolean isDeleted;
     private Boolean isActive;
-
-
     public MenuSecurity()
     {
 
@@ -40,7 +30,6 @@ public class MenuSecurity
         this.modifyDate = new Date();
         this.isDeleted = false;
         this.isActive = true;
-
     }
 
     public long getMenuId() {

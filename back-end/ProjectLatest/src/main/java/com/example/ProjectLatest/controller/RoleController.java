@@ -23,7 +23,6 @@ public class RoleController
     {
         roleService.addRole(role.getRequestObject(),id);
     }
-
     @RequestMapping(method = RequestMethod.GET, value = "/roles/{id}")
     public Set<RoleResponse> getRoleByUserDetailsId(@PathVariable Long id)
     {

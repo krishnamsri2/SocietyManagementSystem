@@ -40,6 +40,20 @@ import {MatIconModule} from '@angular/material/icon';
 import { RoleListComponent } from './modals/menu-security-assign/role-list/role-list.component';
 import { BackBtnComponent } from './back-btn/back-btn.component';
 
+import { RoleComponent } from './dashboard/configuration/user/role/role.component';
+
+
+import { RoleModalComponent } from './modals/roleModals/role-modal/role-modal.component';
+import { NewRoleModalComponent } from './modals/roleModals/new-role-modal/new-role-modal.component';
+import { EditUserModalComponent } from './dashboard/configuration/user/edit-user-modal/edit-user-modal.component';
+import { FlatDetailsComponent } from './dashboard/configuration/user/flat-details/flat-details.component';
+import { NewFlatModalComponent } from './modals/flatmodals/new-flat-modal/new-flat-modal.component';
+import { FlatEditModalComponent } from './modals/flatmodals/flat-edit-modal/flat-edit-modal.component';
+
+import { PutTokenService } from 'src/token-interceptor.service';
+import { ForgotPasswordComponent } from './modals/authentication/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './modals/authentication/reset-password/reset-password.component';
+import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.component';
 
 
 
@@ -74,6 +88,16 @@ import { BackBtnComponent } from './back-btn/back-btn.component';
     BackBtnComponent,
     
     //DummyComponentComponent
+    RoleComponent,
+    RoleModalComponent,
+    NewRoleModalComponent,
+    EditUserModalComponent,
+    FlatDetailsComponent,
+    NewFlatModalComponent,
+    FlatEditModalComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +109,9 @@ import { BackBtnComponent } from './back-btn/back-btn.component';
     NoopAnimationsModule,
     MatIconModule
   ],
-  providers: [UserService],
+  providers:[
+     { provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

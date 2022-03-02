@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -36,6 +37,7 @@ public class UserController {
           service.updateUser(user.getRequestObject(),user.getToken());
 
     }
+
 
     @DeleteMapping("/users/delete/{id}")
     public void deleteUser(@PathVariable long id){

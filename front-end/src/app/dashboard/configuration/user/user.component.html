@@ -3,15 +3,15 @@
   
   <thead>
     <tr>
-      <th scope="col">User Id</th>
+      <th scope="col">Serial No.</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">Phone Number</th>
       <th scope="col">Email-ID</th>
-      <th scope="col">Role Type</th>
-      <th scope="col">Tower Number</th>
-      <th scope="col">Flat Number</th>
-      
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
 
@@ -19,23 +19,24 @@
     
     <tr *ngFor="let user of users ; let i=index">
 
-      <th scope="row">{{user.userId ? user.userId : "-"}}</th>
+      <th scope="row">{{i+1}}</th>
       <td>{{user.firstName}}</td>
       <td>{{user.lastName}}</td>
       <td >{{user.phoneNumber}}</td>
-      <td>{{user.email ? user.email : "-"}}</td>
-      <td>{{user.roleType}}</td>
-      <td>{{user.towerNumber ? user.towerNumber : "-"}}</td>
-      <td>{{user.flatNumber ? user.flatNumber : "-"}}</td>
+      <td>{{user.emailId ? user.emailId : "-"}}</td>
+      <td><a class="link-danger" [routerLink]="['flat_details',user.userDetailId]" (click)="setUserId(user.userDetailId)">Flat Details</a></td>
+      <td><a [routerLink]="['role',user.userDetailId]" class="link-danger" (click)="saveUserId(user.userDetailId)">Role</a></td>
+      <td><app-edit-user-modal [userId]="user.userDetailId" (reloadPage)="onUpdateUser($event)"></app-edit-user-modal></td>
+      <td><a class="link-danger" (click)="setUserInactive(user.userDetailId)" [routerLink]="[]">{{user.isDeleted ? 'Set Active' : 'Set Inactive'}}</a></td>
       
     </tr>
-    
+
   </tbody>
 
  </table>
 
 <div class="row" *ngIf="activeRoute.children.length===0" style="float: right;">
-  <button class="btn btn-danger" [routerLink]="['new_user']">Add User</button>
+  <button class="btn btn-danger" [routerLink]="['new_user']">Add</button>
 </div>
 
 

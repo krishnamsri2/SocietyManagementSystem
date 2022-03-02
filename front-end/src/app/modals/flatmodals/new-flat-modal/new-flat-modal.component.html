@@ -1,0 +1,51 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Flat</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <!-- <form (ngSubmit)="onFormSubmit(f)" #f="ngForm"> -->
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="towerName" class="form-label">Tower Name</label>
+                    <input type="text" class="form-control" id="towerName" [(ngModel)]="flatModel.towerName" required #towerName="ngModel">
+                    <span class="help-block" *ngIf="!towerName.valid && towerName.touched">Please enter the tower name</span>
+                </div>
+                <div class="col-md-6">
+                    <label for="flatNo" class="form-label">Flat Number</label>
+                    <input type="text" id="flatNo" class="form-control" [(ngModel)]="flatModel.flatNo" pattern="^(0|\+?[1-9]\d*)$" #flatNo="ngModel">
+                    <span class="help-block" *ngIf="!flatNo.valid && flatNo.touched">Please Enter a valid flat number</span>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="owner" [(ngModel)]="flatModel.isOwner" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          Owner
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="tenant" [(ngModel)]="flatModel.isTenant" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                          Tenant
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="float: right; margin-top: 10px;">
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cross click')" (click)="onClick()">Add</button>
+                </div>
+                
+            </div>
+            
+        <!-- </form> -->
+    </div>
+    
+  </ng-template>
+  
+  <button class="btn btn-danger" (click)="open(content)">Add flat</button>
+  
+  
+
