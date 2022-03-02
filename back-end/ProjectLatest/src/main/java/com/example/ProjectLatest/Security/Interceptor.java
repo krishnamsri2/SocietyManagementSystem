@@ -29,7 +29,7 @@ public class Interceptor implements HandlerInterceptor {
         Boolean isUser = false;
 
         try {
-            if (url.indexOf("/login/") != -1) {
+            if (url.contains("/login/")) {
                 String q = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
                 ObjectMapper m = new ObjectMapper();
                 RestRequest<LoginTO> tempLogin = m.readValue(q, new TypeReference<RestRequest<LoginTO>>() {
@@ -46,7 +46,8 @@ public class Interceptor implements HandlerInterceptor {
                     isUser =  true;
                 }
 
-            } else if(url.indexOf("/logout") != -1) {
+            } else if(url.contains("/logout")) {
+                System.out.println("logout");
                 long userId = Long.parseLong(request.getHeader("userId"));
                 long societyId = Long.parseLong(request.getHeader("societyId"));
                 service.deleteToken(userId);

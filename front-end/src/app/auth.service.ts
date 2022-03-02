@@ -14,8 +14,10 @@ export class AuthService{
     constructor(private http: HttpClient,private requestObj:RequestObject){}
 
     login(userName : string, password:string){
+        
         this.requestObj.putRequestObject(new LoginModel(userName,password,null));
         console.log(this.requestObj.getRequestObject());
+
         return this.http.post(`http://localhost:9191/login/${userName}`,this.requestObj.getRequestObject()).
         pipe(catchError(responseData=>{
             return throwError(responseData);

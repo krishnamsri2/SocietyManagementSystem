@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RequestObject } from 'src/app/service/request.service';
 import { ChangePasswordModel } from './change-password.model';
 
 @Component({
@@ -22,11 +24,13 @@ export class ChangePasswordComponent implements OnInit {
   private currentUser;
 
   closeResult = '';
+
+  constructor(private modalService: NgbModal, private http: HttpClient,private route:Router,private requestObj:RequestObject) { }
+
   ngOnInit(): void {
     this.currentUser = JSON.parse(atob(localStorage.getItem("user")));
   }
-  constructor(private modalService: NgbModal, private http: HttpClient) { }
-
+  
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -51,14 +55,21 @@ export class ChangePasswordComponent implements OnInit {
 
   onClick() {
     let changePasswordTO = new ChangePasswordModel(this.currentUser.emailId, this.oldPassword, this.password);
-    console.log(changePasswordTO);
-    //   this.http.post(``,changePasswordTO).subscribe((responseData)=>{
-    //     this.successMessage=true;
-    //   },error=>{
-    //     this.errorMessage=true;
-    //     console.log(error);
-    //   });
-    // }
+    this.requestObj.putRequestObject(changePasswordTO);
 
+    this.http.put(`http://localhost:9191/changePassword`, this.requestObj.getRequestObject()).subscribe((responseData) => {
+      console.log("Password changed successfully",responseData);
+      this.successMessage = true;
+    }, error => {
+      this.errorMessage = true;
+      console.log(error);
+    });
   }
+
+  redirectToLogin(){
+    localStorage.clear();
+    this.route.navigate(['']);
+  }
+
 }
+
