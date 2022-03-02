@@ -29,30 +29,14 @@ public class Interceptor implements HandlerInterceptor {
         Boolean isUser = false;
 
         try {
-            if (url.indexOf("/login/") != -1) {
-                String q = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-                ObjectMapper m = new ObjectMapper();
-                RestRequest<LoginTO> tempLogin = m.readValue(q, new TypeReference<RestRequest<LoginTO>>() {
-                });
-
-                String emailId = tempLogin.getRequestObject().getEmailId();
-                String password = tempLogin.getRequestObject().getPassword();
-                User user = service.verifyUser(emailId, password);
-
-                if (user != null) {
-                    isUser =  true;
-                }
-
-            } else if(url.indexOf("/logout") != -1) {
-                long userId = Long.parseLong(request.getHeader("userId"));
-                long societyId = Long.parseLong(request.getHeader("societyId"));
-                service.deleteToken(userId);
-            }else{
+            if (url.contains("/login")) {
+                isUser = true;
+            } else {
                 long userId = Long.parseLong(request.getHeader("userId"));
                 long societyId = Long.parseLong(request.getHeader("societyId"));
                     isUser = service.verifyToken(userId, societyId);
 
-                    if (isUser == false) {
+                    if (isUser) {
                         System.out.println("Please LOGIN");
                     }
                 }

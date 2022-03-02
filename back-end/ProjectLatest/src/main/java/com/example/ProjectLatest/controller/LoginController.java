@@ -1,5 +1,6 @@
 package com.example.ProjectLatest.controller;
 
+import com.example.ProjectLatest.entity.User;
 import com.example.ProjectLatest.response.LoginResponse;
 import com.example.ProjectLatest.service.LoginService;
 import com.example.ProjectLatest.to.*;
@@ -14,14 +15,15 @@ public class LoginController {
     @Autowired
     private LoginService service;
 
-    @PostMapping("/login/{emailId}")
-    public LoginResponse verifyUser(@PathVariable String emailId){
-        return service.createToken(emailId);
+    @PostMapping("/login")
+    public LoginResponse verifyUser(@RequestBody RestRequest<LoginTO> login){
+        User user = service.verifyUser(login.getRequestObject());
+        return service.createToken(login.getRequestObject().getEmailId());
     }
 
     @GetMapping("/logout")
-    public void logoutUser(){
-        //return "User Logout Successful";
+    public void logoutUser(@RequestBody RestRequest<LoginTO> login){
+        service.deleteToken(login.getRequestObject().getUserId());
     }
 
 }
