@@ -42,11 +42,9 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <app-edit-user-modal [userId]="currentUser.userId"></app-edit-user-modal>
-                                <!-- <button class="btn btn-danger">Change Password</button> -->
-                            </div>
+                        <div class="d-flex justify-content-end">
+                            <app-edit-user-modal [userId]="currentUser.userId"></app-edit-user-modal>
+                            <app-change-password style="margin-left: 5px;"></app-change-password>
                         </div>
                     </div>
                 </div>

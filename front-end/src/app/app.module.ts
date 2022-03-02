@@ -35,6 +35,7 @@ import { PutTokenService } from 'src/token-interceptor.service';
 import { ForgotPasswordComponent } from './modals/authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './modals/authentication/reset-password/reset-password.component';
 import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.component';
+import { ChangePasswordComponent } from './modals/profile-modals/change-password/change-password.component';
 
 
 
@@ -67,7 +68,8 @@ import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.co
     FlatEditModalComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
