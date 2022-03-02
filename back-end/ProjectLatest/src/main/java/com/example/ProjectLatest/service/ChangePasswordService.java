@@ -7,7 +7,9 @@ import com.example.ProjectLatest.response.ChangePasswordResponse;
 import com.example.ProjectLatest.response.SocietyResponse;
 import com.example.ProjectLatest.to.ChangePasswordTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ChangePasswordService {
 
     @Autowired
