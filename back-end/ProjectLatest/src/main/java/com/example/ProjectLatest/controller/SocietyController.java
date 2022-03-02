@@ -18,9 +18,9 @@ public class SocietyController {
     // Post request to add society
 
     @RequestMapping(method = RequestMethod.POST,value = "/addSociety")
-    public Society addSociety(@RequestBody RestRequest<SocietyTO> restRequest)
+    public void addSociety(@RequestBody RestRequest<SocietyTO> restRequest)
     {
-        return societyService.saveSociety(restRequest.getRequestObject(),restRequest.getToken());
+         societyService.saveSociety(restRequest.getRequestObject(),restRequest.getToken());
     }
 
     // get all notice
@@ -39,13 +39,13 @@ public class SocietyController {
     }
     // update
     @RequestMapping(method = RequestMethod.PUT,value = "/society/updates/{id}")
-    public Society updateSociety(@PathVariable long id, @RequestBody RestRequest<SocietyTO> society)
+    public void updateSociety(@PathVariable long id, @RequestBody RestRequest<SocietyTO> society)
     {
-        return societyService.updateSociety(id,society.getRequestObject());
+        societyService.updateSociety(id,society.getRequestObject());
     }
 
     // delete
-    @RequestMapping(method = RequestMethod.DELETE,value = "/society/update/{id}")
+    @RequestMapping(method = RequestMethod.DELETE,value = "/society/delete/{id}")
     public String deleteSociety(@PathVariable long id)
     {
         return societyService.deleteSociety(id);
