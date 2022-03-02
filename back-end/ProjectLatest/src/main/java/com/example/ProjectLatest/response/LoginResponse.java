@@ -7,14 +7,24 @@ public class LoginResponse {
     private String emailId;
     private long societyId;
     private long userId;
+    private long userDetailId;
 
-    public LoginResponse(String firstName, String lastName, long phoneNumber, String emailId, long societyId, long userId) {
+    public LoginResponse(String firstName, String lastName, long phoneNumber, String emailId, long societyId, long userId,long userDetailId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
         this.societyId = societyId;
         this.userId = userId;
+        this.userDetailId=userDetailId;
+    }
+
+    public long getUserDetailId() {
+        return userDetailId;
+    }
+
+    public void setUserDetailId(long userDetailId) {
+        this.userDetailId = userDetailId;
     }
 
     public String getFirstName() {

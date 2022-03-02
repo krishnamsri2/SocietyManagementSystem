@@ -9,6 +9,7 @@ public class LoginResBuilder {
     private String emailId;
     private long societyId;
     private long userId;
+    private long userDetailId;
 
     public LoginResBuilder setFirstName(String firstName) {
         this.firstName = firstName;
@@ -41,6 +42,11 @@ public class LoginResBuilder {
     }
 
     public LoginResponse getResponse(){
-        return new LoginResponse(firstName,lastName,phoneNumber,emailId,societyId,userId);
+        return new LoginResponse(firstName,lastName,phoneNumber,emailId,societyId,userId,userDetailId);
+    }
+
+    public LoginResBuilder setUserDetailId(long userDetailsId) {
+        this.userDetailId=userDetailsId;
+        return this;
     }
 }

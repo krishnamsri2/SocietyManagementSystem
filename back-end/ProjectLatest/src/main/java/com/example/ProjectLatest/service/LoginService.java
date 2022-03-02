@@ -63,6 +63,7 @@ public class LoginService  {
                     .setPhoneNumber(usd.getPhoneNumber())
                     .setUserId(token.getUserId())
                     .setSocietyId(token.getSocietyId())
+                     .setUserDetailId(usd.getUserDetailsId())
                     .getResponse();
 
         }catch (Exception e){

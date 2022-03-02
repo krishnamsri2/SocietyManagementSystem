@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditUserModalComponent implements OnInit, OnDestroy {
 
-  @Input('userId') userDetailId: number;
+  @Input('userDetailId') userDetailId: number;
 
   @Output() reloadPage = new EventEmitter<boolean>();
 
@@ -31,13 +31,13 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
   constructor(private modalService: NgbModal, private userService: UserPostServices, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.userDetailId);
+    
     this.defaultUserSubscription = this.userService.getUserById(this.userDetailId).subscribe((responseData) => {
       this.defaultUser = responseData;
-      console.log(this.defaultUser);
     }, error => {
       console.log("Error in user updation", error);
     });
+
   }
 
   open(content) {
@@ -60,7 +60,8 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
 
   onClick() {
 
-    this.defaultUserSubscription = this.userService.updateUser(this.defaultUser).subscribe(() => {
+    this.defaultUserSubscription = this.userService.updateUser(this.defaultUser).subscribe((response) => {
+      console.log("User updated", response);
       this.reloadPage.emit(true);
     }, error => {
       alert('User not updated!!');
