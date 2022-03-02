@@ -59,8 +59,7 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
   }
 
   onClick() {
-    //console.log(this.defaultUser);
-    //let defaultUser1 = new UserModel(this.defaultUser.firstName, this.defaultUser.lastName, this.defaultUser.phoneNumber, this.defaultUser.emailId, this.userDetailId);
+
     this.defaultUserSubscription = this.userService.updateUser(this.defaultUser).subscribe(() => {
       this.reloadPage.emit(true);
     }, error => {
