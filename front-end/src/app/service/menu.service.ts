@@ -13,9 +13,7 @@ export class MenuService{
     addMenu(newMenu){
         this.requestObject.putRequestObject(newMenu);
         //console.log(this.requestObject.getRequestObject());
-        this.http.post(`http://localhost:9191/addMenu`,this.requestObject.getRequestObject()).subscribe(()=>{
-            alert("Menu Added");
-        })
+        return this.http.post(`http://localhost:9191/addMenu`,this.requestObject.getRequestObject());
     }
     fetchMenus() {
         return this.http

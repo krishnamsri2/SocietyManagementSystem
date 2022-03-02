@@ -50,7 +50,7 @@ import { FlatDetailsComponent } from './dashboard/configuration/user/flat-detail
 import { NewFlatModalComponent } from './modals/flatmodals/new-flat-modal/new-flat-modal.component';
 import { FlatEditModalComponent } from './modals/flatmodals/flat-edit-modal/flat-edit-modal.component';
 
-import { PutTokenService } from 'src/token-interceptor.service';
+import { PutTokenService } from './token-interceptor.service';
 import { ForgotPasswordComponent } from './modals/authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './modals/authentication/reset-password/reset-password.component';
 import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.component';

@@ -17,5 +17,7 @@ export class MenuComponent implements OnInit {
       console.log(this.menus);
     })
   }
-
+  reload(){
+    this.ngOnInit();
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { MenuService } from '../../../service/menu.service';
@@ -9,7 +9,7 @@ import { MenuService } from '../../../service/menu.service';
   styleUrls: ['./add-menu-modal.component.css']
 })
 export class AddMenuModalComponent implements OnInit {
-
+  @Output() reloadPage = new EventEmitter<boolean>();
   closeResult = '';
   ngOnInit(): void {
     
@@ -43,6 +43,8 @@ export class AddMenuModalComponent implements OnInit {
     this.menuFormData.url = form.value.url;
     this.menuFormData.menuName = form.value.menuName;
     console.log(this.menuFormData);
-    this.menuService.addMenu(this.menuFormData);
+    this.menuService.addMenu(this.menuFormData).subscribe(()=>{
+      this.reloadPage.emit(true);
+    });
   }
 }
