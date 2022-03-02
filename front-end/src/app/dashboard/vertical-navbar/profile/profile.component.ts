@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
 
   onReload(reloadPage:boolean){
     this.ngOnInit();
-    //location.reload();
+    location.reload();
   }
   
 }
