@@ -41,12 +41,12 @@ public class LoginResBuilder {
         return this;
     }
 
-    public LoginResponse getResponse(){
-        return new LoginResponse(firstName,lastName,phoneNumber,emailId,societyId,userId,userDetailId);
+    public LoginResBuilder setUserDetailId(long userDetailId) {
+        this.userDetailId = userDetailId;
+        return this;
     }
 
-    public LoginResBuilder setUserDetailId(long userDetailsId) {
-        this.userDetailId=userDetailsId;
-        return this;
+    public LoginResponse getResponse(){
+        return new LoginResponse(firstName,lastName,phoneNumber,emailId,societyId,userId,userDetailId);
     }
 }

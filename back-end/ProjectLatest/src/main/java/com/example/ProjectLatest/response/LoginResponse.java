@@ -16,7 +16,7 @@ public class LoginResponse {
         this.emailId = emailId;
         this.societyId = societyId;
         this.userId = userId;
-        this.userDetailId=userDetailId;
+        this.userDetailId = userDetailId;
     }
 
     public long getUserDetailId() {

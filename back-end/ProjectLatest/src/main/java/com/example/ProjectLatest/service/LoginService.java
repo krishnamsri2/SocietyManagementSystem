@@ -6,6 +6,7 @@ import com.example.ProjectLatest.entity.UserDetails;
 import com.example.ProjectLatest.repository.UserDetailRepository;
 import com.example.ProjectLatest.repository.UserRepository;
 import com.example.ProjectLatest.response.LoginResponse;
+import com.example.ProjectLatest.to.LoginTO;
 import com.example.ProjectLatest.to.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,12 @@ public class LoginService  {
 
 
 
-    public User verifyUser(String emailId, String password) {
+    public User verifyUser(LoginTO login) {
         User user = null;
         try{
-            user = repository.findByEmailId(emailId).orElse(null);
+            user = repository.findByEmailId(login.getEmailId()).orElse(null);
 
-            if(user == null || !user.getPassword().equals(password)) {
+            if(user == null || !user.getPassword().equals(login.getPassword())) {
                 user = null;
                 throw new Exception("User Not Found");
             }
