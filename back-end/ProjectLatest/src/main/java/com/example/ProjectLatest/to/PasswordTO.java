@@ -1,24 +1,24 @@
 package com.example.ProjectLatest.to;
 
-public class ChangePasswordTO {
-    private String emailId;
-    private String oldPassword;
-    private String newPassword;
+public class PasswordTO {
+    String emailId;
+    String token;
+    String newPassword;
 
     public String getEmailId() {
         return emailId;
     }
 
     public void setEmailId(String emailId) {
-        this.emailId= emailId;
+        this.emailId = emailId;
     }
 
-    public String getOldPassword() {
-        return oldPassword;
+    public String getToken() {
+        return token;
     }
 
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getNewPassword() {
@@ -28,5 +28,4 @@ public class ChangePasswordTO {
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
-
 }

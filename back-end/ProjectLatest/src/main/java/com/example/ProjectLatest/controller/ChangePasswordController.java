@@ -14,9 +14,9 @@ public class ChangePasswordController {
 
     // update to change password
     // post request to change password
-    @RequestMapping(method = RequestMethod.PUT,value = "/user/{user_id}/changePassword")
-    public ChangePasswordResponse updatePassword(@PathVariable long user_id, @RequestBody RestRequest<ChangePasswordTO> restRequest)
+    @RequestMapping(method = RequestMethod.PUT,value = "/changePassword")
+    public ChangePasswordResponse updatePassword(@RequestBody RestRequest<ChangePasswordTO> restRequest)
     {
-        return changePasswordService.updatePassword(user_id,restRequest.getRequestObject());
+        return changePasswordService.updatePassword(restRequest.getRequestObject(),restRequest.getToken());
     }
 }
