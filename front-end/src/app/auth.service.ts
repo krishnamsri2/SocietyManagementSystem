@@ -18,13 +18,14 @@ export class AuthService{
         this.requestObj.putRequestObject(new LoginModel(userName,password,null));
         console.log(this.requestObj.getRequestObject());
 
-        return this.http.post(`http://localhost:9191/login/${userName}`,this.requestObj.getRequestObject()).
+        return this.http.post('http://localhost:9191/login',this.requestObj.getRequestObject()).
         pipe(catchError(responseData=>{
             return throwError(responseData);
         }));
     }
 
-    logout() {
-        return this.http.get("http://localhost:9191/logout");
+    logout(currentUser) {
+        this.requestObj.putRequestObject(currentUser);
+        return this.http.put("http://localhost:9191/logout",this.requestObj.getRequestObject());
     }
 }
