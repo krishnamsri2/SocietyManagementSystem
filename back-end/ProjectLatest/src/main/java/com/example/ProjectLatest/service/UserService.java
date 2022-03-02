@@ -33,7 +33,7 @@ public class UserService {
     //POST
     public void saveUser(UserTO user, Token token){
         try{
-            User tempUser = new User("Default@123",token.getUserId());
+            User tempUser = new User("Default@123",user.getEmailId(),token.getUserId(),token.getSocietyId());
             repoUser.save(tempUser);
 
             UserDetails tempUd = new UserDetailBuilder()
