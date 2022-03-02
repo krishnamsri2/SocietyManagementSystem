@@ -12,7 +12,8 @@ public class Complaint {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long complaintId;
     private String type; // Plumber , Electrician , carpenter
-    private int status; // 0 =filed , 1 =inprogress , 2 =solved
+	@Enumerated(EnumType.STRING)
+    private ComplaintStatus status; // CREATED, ASSIGNED,INPROGRESS,COMPLETED,CLOSED
     private long userId;
 
     //private Flat flatId; for foreignkey relationship
@@ -42,9 +43,9 @@ public class Complaint {
     public Complaint() {
     }
 
-    public Complaint(String type, long createdBy) {
+    public Complaint(String type,ComplaintStatus status ,long createdBy) {
         this.type = type;
-        this.status = 0;
+        this.status = status;
         this.updated = new Date();
         this.created = new Date();
         this.createdBy = createdBy;
@@ -75,11 +76,11 @@ public class Complaint {
 		return complaintHistories;
 	}
 
-	public void addComplaintHistory(ComplaintHistory complaintHistory ) {
-		setUpdated();
-    	complaintHistories.add(complaintHistory);
-    	complaintHistory.setComplaint(this);
-	}
+//	public void addComplaintHistory(ComplaintHistory complaintHistory ) {
+//		setUpdated();
+//    	complaintHistories.add(complaintHistory);
+//    	complaintHistory.setComplaint(this);
+//	}
 
 	public long getCreatedBy() {
 		return createdBy;
@@ -125,16 +126,16 @@ public class Complaint {
 		this.isDeleted = isDeleted;
 	}
 
-	public int getStatus() {
+	public ComplaintStatus getStatus() {
 		return status;
 	}
 	
-	public void setStatus(int status) {
+	public void setStatus(ComplaintStatus status) {
     	setUpdated();
         this.status = status;
         
-        if(status == 2)
-        	setIsActive(false);
+       // if(status == 2)
+        	//setIsActive(false);
     }
 
 	public Flat getFlat1() {

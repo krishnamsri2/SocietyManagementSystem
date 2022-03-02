@@ -1,6 +1,9 @@
 package com.example.ProjectLatest.service;
 
 import com.example.ProjectLatest.entity.Complaint;
+import com.example.ProjectLatest.entity.ComplaintHistory;
+import com.example.ProjectLatest.entity.ComplaintStatus;
+import com.example.ProjectLatest.repository.ComplaintHistoryRepository;
 import com.example.ProjectLatest.repository.ComplaintRepository;
 import com.example.ProjectLatest.response.ComplaintResponse;
 import com.example.ProjectLatest.to.ComplaintTO;
@@ -13,14 +16,22 @@ import java.util.List;
 @Service
 public class ComplaintService {
     @Autowired
-    private ComplaintRepository repository;
+    private ComplaintRepository complaintRepository;
+
+    @Autowired
+    private ComplaintHistoryRepository complaintHistoryRepository;
     //POST
     public ComplaintResponse saveComplaint(ComplaintTO complaint) {
         ComplaintResponse complaintResponse = null;
         try {
-            Complaint tempComplaint = new Complaint(complaint.getType(), 76);
+            Complaint tempComplaint = new Complaint(complaint.getType(), ComplaintStatus.CREATED, complaint.getFlatIdId());
+
             complaintResponse = new ComplaintResponse(tempComplaint.getType(), tempComplaint.getcomplaintId());
-            repository.save(tempComplaint);
+            complaintRepository.save(tempComplaint);
+
+            ComplaintHistory complaintHistory = new ComplaintHistory(tempComplaint.getType(),tempComplaint.getStatus(),complaint.getFlatIdId(),tempComplaint);
+            complaintHistoryRepository.save(complaintHistory);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,11 +43,11 @@ public class ComplaintService {
     public ComplaintResponse updateComplaint(long id,ComplaintTO complaint) {
         ComplaintResponse complaintResponse = null;
         try {
-            Complaint existingComplaint = repository.findById(id).orElse(null);
+            Complaint existingComplaint = complaintRepository.findById(id).orElse(null);
 
             existingComplaint.setType(complaint.getType());
             complaintResponse = new ComplaintResponse(existingComplaint.getType(), existingComplaint.getcomplaintId());
-            repository.save(existingComplaint);
+            complaintRepository.save(existingComplaint);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,7 +59,7 @@ public class ComplaintService {
         List<ComplaintResponse> responseList = null;
         try {
             responseList = new ArrayList<>();
-            List<Complaint> complaintList = repository.findAll();
+            List<Complaint> complaintList = complaintRepository.findAll();
             for (Complaint complaint : complaintList) {
                 responseList.add(new ComplaintResponse(complaint.getType(), complaint.getcomplaintId()));
             }
@@ -62,7 +73,7 @@ public class ComplaintService {
     public ComplaintResponse getComplaintById(long id) {
         ComplaintResponse complaintResponse = null;
         try {
-            Complaint existingComplaint = repository.findById(id).orElse(null);
+            Complaint existingComplaint = complaintRepository.findById(id).orElse(null);
             complaintResponse = new ComplaintResponse(existingComplaint.getType(), existingComplaint.getcomplaintId());
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +84,7 @@ public class ComplaintService {
     //DELETE
     public String deleteComplaint(long id){
         try {
-            Complaint complaint = repository.findById(id).orElse(null);
+            Complaint complaint = complaintRepository.findById(id).orElse(null);
             if (complaint != null) {
                 complaint.setIsDeleted(true);
 

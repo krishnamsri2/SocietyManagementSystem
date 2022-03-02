@@ -5,6 +5,7 @@ public class ComplaintTO {
     private String complaintDetail;
     private long  complaintId;
     private String type;
+    private long flatId;
 
     public String getComplaintDetail() {
         return complaintDetail;
@@ -20,6 +21,10 @@ public class ComplaintTO {
 
     public void setComplaintId(long ComplaintId) {
         this.complaintId = ComplaintId;
+    }
+
+    public long getFlatIdId() {
+        return flatId;
     }
 
 

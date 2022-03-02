@@ -10,7 +10,7 @@ public class ComplaintHistory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cmpHisId;
     private String type; // Plumber , Electrician , carpenter
-    private int status; // 0 =filed , 1 =inprogress , 2 =solved
+    private ComplaintStatus status; // 0 =filed , 1 =inprogress , 2 =solved
     private Long userId;
 
     @ManyToOne(cascade={CascadeType.PERSIST})
@@ -35,7 +35,8 @@ public class ComplaintHistory {
     public ComplaintHistory() {
     }
 
-    public ComplaintHistory(String type,int status, Long createdBy) {
+    public ComplaintHistory(String type,ComplaintStatus status, Long createdBy, Complaint complaint) {
+
         this.type = type;
         this.status = status;
         this.updated = new Date();
@@ -44,6 +45,7 @@ public class ComplaintHistory {
         this.modifyBy = createdBy;
         this.isActive = true;
         this.isDeleted = false;
+		this.complaint= complaint;
     }
 
 	public Long getCmpHisId() {
@@ -54,7 +56,7 @@ public class ComplaintHistory {
 		return type;
 	}
 
-	public int getStatus() {
+	public ComplaintStatus getStatus() {
 		return status;
 	}
 
@@ -71,10 +73,10 @@ public class ComplaintHistory {
 		return complaint;
 	}
 
-	public void setComplaint(Complaint complaint) {
-		setUpdated();
-		this.complaint = complaint;
-	}
+//	public void setComplaint(Complaint complaint) {
+//		setUpdated();
+//		this.complaint = complaint;
+//	}
 
 	public Long getCreatedBy() {
 		return createdBy;
