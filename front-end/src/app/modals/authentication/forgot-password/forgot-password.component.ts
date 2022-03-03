@@ -38,7 +38,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onClick(){
-    this.http.post('',this.emailId).subscribe((response:any)=>{
+    this.http.post('',{ emailId : this.emailId }).subscribe((response:any)=>{
       this.successMessage=true;
     },error=>{
       this.errorMessage=true;

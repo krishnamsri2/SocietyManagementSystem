@@ -33,9 +33,9 @@ export class VerticalNavbarComponent implements OnInit {
   }
 
   logoutOnClick(){
-    this.authService.logout(this.currentUser).subscribe(responseData=>{
-      localStorage.clear();
-      this.userService.deleteCurrentUser();
+    this.authService.logout(this.currentUser).subscribe(()=>{
+      localStorage.clear(); //djkfk
+      //this.userService.deleteCurrentUser();
       this.route.navigate(['']);
     },error=>{
       console.log("Error in logging out",error);

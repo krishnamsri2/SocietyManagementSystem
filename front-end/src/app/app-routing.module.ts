@@ -20,11 +20,9 @@ import { ResetPasswordComponent } from "./modals/authentication/reset-password/r
 import { ProfileComponent } from "./dashboard/vertical-navbar/profile/profile.component";
 
 
-
-
 const appRoutes:Route[] = [
     {path:'',component: HomePageComponent},
-    { path: 'reset_password/:email',component : ResetPasswordComponent},
+    { path: 'reset',component : ResetPasswordComponent},
     {path:'dashboard',component: DashboardComponent,
       children:[
          { path: 'profile', component: ProfileComponent },
