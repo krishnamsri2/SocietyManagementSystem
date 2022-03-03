@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,5 +22,11 @@ public class PasswordController {
     public void forgotPassword(@RequestBody RestRequest<PasswordTO> restRequest, HttpServletRequest request)
     {
          passwordService.forgotPassword(restRequest.getRequestObject(),restRequest.getToken(),request);
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value="/reset")
+    public void setNewPassword(@RequestBody RestRequest<PasswordTO> restRequest, RedirectAttributes redirectAttributes)
+    {
+        passwordService.setNewPassword(restRequest.getRequestObject(),restRequest.getToken(),redirectAttributes);
     }
 }
