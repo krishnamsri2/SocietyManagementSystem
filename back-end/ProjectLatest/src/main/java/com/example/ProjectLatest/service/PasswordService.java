@@ -27,7 +27,7 @@ import java.util.UUID;
 
 
 
-    public void forgotPassword(PasswordTO requestObject, Token token, HttpServletRequest request) {
+    public void forgotPassword(PasswordTO requestObject, HttpServletRequest request) {
 
         PasswordResponse passwordResponse=new PasswordResponse("");
         User user= userRepository.findByEmailId(requestObject.getEmailId()).orElse(null);
@@ -45,7 +45,7 @@ import java.util.UUID;
             passwordResetEmail.setTo(user.getEmailId());
             passwordResetEmail.setSubject("Password Reset Request");
             passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl
-                    + "/reset?token=" + user.getResetToken());
+                    + ":4200/reset?token=" + user.getResetToken());
 
             emailService.sendEmail(passwordResetEmail);
             passwordResponse.setAck("Success");
@@ -60,12 +60,12 @@ import java.util.UUID;
     }
 
 
-    public void setNewPassword(PasswordTO requestObject, Token token, RedirectAttributes redirectAttributes) {
+    public void setNewPassword(PasswordTO requestObject, RedirectAttributes redirectAttributes) {
 
         PasswordResponse passwordResponse=new PasswordResponse("");
         User user=userRepository.findByResetToken(requestObject.getToken()).orElse(null);
         if(user!=null) {
-            user.setPassword(bCryptPasswordEncoder.encode(requestObject.getNewPassword()), token.getUserId());
+            user.setPassword(requestObject.getNewPassword(),user.getUserId());
             user.setResetToken(null);
             userRepository.save(user);
             passwordResponse.setAck("reset");

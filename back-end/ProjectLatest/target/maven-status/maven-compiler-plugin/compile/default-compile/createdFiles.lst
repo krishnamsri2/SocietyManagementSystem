@@ -1,8 +1,5 @@
 com\example\ProjectLatest\entity\RoleType.class
-<<<<<<< HEAD
-=======
 com\example\ProjectLatest\to\PasswordTO.class
->>>>>>> samarth-backend-new
 com\example\ProjectLatest\to\Token.class
 com\example\ProjectLatest\controller\TowerController.class
 com\example\ProjectLatest\to\NoticeTO.class
@@ -31,17 +28,11 @@ com\example\ProjectLatest\builder\NoticeResBuilder.class
 com\example\ProjectLatest\to\RestRequest.class
 com\example\ProjectLatest\entity\Tower.class
 com\example\ProjectLatest\response\MenuSecurityStatusResponse.class
-<<<<<<< HEAD
-com\example\ProjectLatest\controller\ChangePasswordController.class
-com\example\ProjectLatest\service\RoleService.class
-com\example\ProjectLatest\repository\SocietyRepository.class
-=======
 com\example\ProjectLatest\service\EmailService.class
 com\example\ProjectLatest\controller\ChangePasswordController.class
 com\example\ProjectLatest\service\RoleService.class
 com\example\ProjectLatest\repository\SocietyRepository.class
 com\example\ProjectLatest\service\PasswordService.class
->>>>>>> samarth-backend-new
 com\example\ProjectLatest\service\TowerService.class
 com\example\ProjectLatest\to\ComplaintTO.class
 com\example\ProjectLatest\repository\AnnouncementRepository.class
@@ -63,18 +54,12 @@ com\example\ProjectLatest\repository\RoleRepository.class
 com\example\ProjectLatest\response\TowerResponse.class
 com\example\ProjectLatest\controller\FlatController.class
 com\example\ProjectLatest\builder\FlatResidentResBuilder.class
-<<<<<<< HEAD
-=======
 com\example\ProjectLatest\controller\PasswordController.class
->>>>>>> samarth-backend-new
 com\example\ProjectLatest\entity\MenuSecurity.class
 com\example\ProjectLatest\response\UserDetailsResponse.class
 com\example\ProjectLatest\service\FlatResidentsService.class
 com\example\ProjectLatest\entity\Role.class
-<<<<<<< HEAD
-=======
 com\example\ProjectLatest\response\PasswordResponse.class
->>>>>>> samarth-backend-new
 com\example\ProjectLatest\repository\ChangePasswordRepository.class
 com\example\ProjectLatest\controller\MenuController.class
 com\example\ProjectLatest\entity\Menu.class
@@ -103,10 +88,6 @@ com\example\ProjectLatest\to\FlatTO.class
 com\example\ProjectLatest\to\TowerTO.class
 com\example\ProjectLatest\builder\UserDetailsResBuilder.class
 com\example\ProjectLatest\response\ChangePasswordResponse.class
-<<<<<<< HEAD
-=======
-com\example\ProjectLatest\Security\Interceptor$1.class
->>>>>>> samarth-backend-new
 com\example\ProjectLatest\repository\FlatResidentsRepository.class
 com\example\ProjectLatest\to\MenuSecurityTO.class
 com\example\ProjectLatest\entity\UserDetails.class
@@ -114,11 +95,8 @@ com\example\ProjectLatest\builder\UserDetailBuilder.class
 com\example\ProjectLatest\entity\Attendance.class
 com\example\ProjectLatest\entity\Complaint.class
 com\example\ProjectLatest\service\MenuSecurityService.class
-<<<<<<< HEAD
 com\example\ProjectLatest\Security\ConfigInterceptor.class
 com\example\ProjectLatest\Security\ConfigInterceptor$1.class
-=======
->>>>>>> samarth-backend-new
 com\example\ProjectLatest\repository\UserRepository.class
 com\example\ProjectLatest\repository\ComplaintRepository.class
 com\example\ProjectLatest\to\RoleTO.class

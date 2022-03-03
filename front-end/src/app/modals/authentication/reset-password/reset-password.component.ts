@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { RequestObject } from 'src/app/service/request.service';
 import { ResetPasswordModel } from './reset-password.model';
 
 @Component({
@@ -18,26 +19,31 @@ export class ResetPasswordComponent implements OnInit,OnDestroy {
   private token : string;
   
   public successMessage:boolean;
+  public errorMessage:boolean;
  
   private paramsSubs : Subscription;
   
-  constructor(private http : HttpClient,private activatedRoute : ActivatedRoute,private route : Router) {}
+  constructor(private http : HttpClient,private activatedRoute : ActivatedRoute,private route : Router,private requestObj:RequestObject) {}
 
   ngOnInit(): void {
-    this.paramsSubs=this.activatedRoute.params.subscribe((params : Params)=>{
+    this.paramsSubs=this.activatedRoute.queryParams.subscribe((params : Params)=>{
        this.token=params['token'];
+       
      });
    }
 
   onClick(){
 
-    let resetPasswordTO=new ResetPasswordModel(this.token,this.password);
+    this.requestObj.putRequestObject(new ResetPasswordModel(this.token,this.password));
+    let resetPasswordTO=this.requestObj.getRequestObject();
+
+    console.log(resetPasswordTO);
     
-    // this.http.post('',).subscribe((response)=>{
-    //   this.successMessage=true;
-    // },error=>{
-    //   this.errorMessage=true;  
-    // });
+    this.http.post('http://localhost:9191/reset',resetPasswordTO).subscribe((response)=>{
+      this.successMessage=true;
+    },error=>{
+      this.errorMessage=true;  
+    });
 
   }
 
