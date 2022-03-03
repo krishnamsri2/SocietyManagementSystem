@@ -17,10 +17,10 @@ import java.util.UUID;
  @Service
  public class PasswordService {
 
-     @Autowired
-     private UserRepository userRepository;
-     @Autowired
-     private EmailService emailService;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -74,6 +74,5 @@ import java.util.UUID;
         {
             passwordResponse.setAck("User not found");
         }
-        System.out.println(passwordResponse.getAck());
     }
 }

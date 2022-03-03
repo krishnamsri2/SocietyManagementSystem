@@ -35,10 +35,6 @@ public class Interceptor implements HandlerInterceptor {
                 long userId = Long.parseLong(request.getHeader("userId"));
                 long societyId = Long.parseLong(request.getHeader("societyId"));
                     isUser = service.verifyToken(userId, societyId);
-
-                    if (isUser) {
-                        System.out.println("Please LOGIN");
-                    }
                 }
 
         }catch (Exception e){

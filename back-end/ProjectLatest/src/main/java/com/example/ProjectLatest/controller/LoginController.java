@@ -19,12 +19,10 @@ public class LoginController {
     @PostMapping("/login")
     public LoginResponse verifyUser(@RequestBody RestRequest<LoginTO> login){
         User user = service.verifyUser(login.getRequestObject());
-
-        if(user!=null)
+        if(user != null)
         return service.createToken(login.getRequestObject().getEmailId());
-
         else
-        return null;
+            return null;
     }
 
     @PutMapping("/logout")
