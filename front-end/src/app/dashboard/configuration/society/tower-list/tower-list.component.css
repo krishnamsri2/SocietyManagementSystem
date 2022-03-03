@@ -1,45 +1,16 @@
-a{
-    text-decoration:none;
-    color:#000;
+.header-text>h2{
+    font-family: 'Fira sans',sans-serif;
+    font-weight: bold;
+    font-size:1.3rem;
+}
+.tower{
+    max-height:95vh;
+}
+.card-link{
+    margin-right:1.5rem;
     
 }
-
-a.back-btn{
-    font-weight:500;
-    font-size: 32px;
-    cursor:pointer;
-}
-.towerlist-header{
-    width:100%;
-    display:flex;
-    align-items:center;
-}
-.header-text{
-    position: relative;
-    margin:0 auto;
-    margin-top:8px;
-}
-.towerlist{
-    margin-top:1.5rem;
-}
-.tower-card-wrapper{
-    flex:1;
-    margin-top:10px;
-}
-a.card-link{
-    color:#fff;
-    font-weight:600;
-    background:black;
-    padding:6px 10px;
-}
-a.card-link:hover{
-    opacity:0.8;
-}
-.btn-wrapper{
-    position:fixed;
-    top:50%;
-    right:10px;
-    transform: translateY(-50%);
-    display:flex;
-    flex-direction:column;
+.towerName>p{
+    font-family: 'Hind Guntur', sans-serif;
+    font-weight:bold;
 }

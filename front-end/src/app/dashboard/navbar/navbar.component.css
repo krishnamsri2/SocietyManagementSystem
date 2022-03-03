@@ -1,0 +1,38 @@
+.navbar-header{
+    border-bottom:1px solid rgba(0,0,0,0.1);
+}
+.links li{
+    margin-right:0.8rem;
+}
+.links li>a{
+    color:#333;
+    font-weight:bold;
+    font-size:1.2rem;
+    font-family: 'Rajdhani', sans-serif;
+}
+.links li>a:hover{
+    color:red;
+}
+.image{
+    width:70px;
+    height:70px;
+    border:1px solid rgba(0,0,0,0.1);
+    border-radius:50%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f1f1;
+}
+.image>img{
+    width:50px;
+    height:50px;
+}
+.profile-section>li{
+    margin-top:5px;
+    font-size:12px;
+    margin-left:6px;
+    cursor:pointer;
+}
+.active{
+    color:red !important;
+}

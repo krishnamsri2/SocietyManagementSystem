@@ -1,14 +1,39 @@
-<div class="container menu">
-  <div class="menu-header">
-    <h2>Menu</h2>
-  </div>
-  <div class="menu-cards">
-    <app-narrow-long-cards
-      *ngFor="let menu of menus"
-      [data]="menu"
-    ></app-narrow-long-cards>
-  </div>
-  <div class="add-btn">
-    <app-add-menu-modal (reloadPage)="reload()"></app-add-menu-modal>
+<div class="container mt-2">
+  <div class="card w-90 mx-auto society">
+    <div class="card-header d-flex justify-content-between">
+      <div class="header-text">
+        <h2>Menus</h2>
+      </div>
+      <div class="search-box">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here..."
+          />
+          <div class="input-group-append">
+            <span class="input-group-text"><mat-icon>search</mat-icon></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body w-75 mx-auto">
+      <ul class="list-group" *ngFor="let menu of menus">
+        <div
+          class="list-group-item d-flex align-items-center justify-content-between"
+        >
+          <div class="societyName mt-2">
+            <p>{{ menu.menuName }}</p>
+          </div>
+          <div class="society-btns mb-1">
+            <app-menu-security-assign [menuId]="menu.menuId"></app-menu-security-assign>
+            <app-edit-menu-modal [menuId]="menu.menuId"></app-edit-menu-modal>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+      <app-add-menu-modal (reloadPage)="reload()"></app-add-menu-modal>
+    </div>
   </div>
 </div>

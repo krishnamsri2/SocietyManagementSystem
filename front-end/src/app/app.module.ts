@@ -55,6 +55,11 @@ import { ForgotPasswordComponent } from './modals/authentication/forgot-password
 import { ResetPasswordComponent } from './modals/authentication/reset-password/reset-password.component';
 import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.component';
 import { ChangePasswordComponent } from './modals/profile-modals/change-password/change-password.component';
+import { NavbarComponent } from './dashboard/navbar/navbar.component';
+import { AnnouncementComponent } from './dashboard/announcement/announcement.component';
+import { ExpandAnnouncementModalComponent } from './modals/announcement-modal/expand-announcement-modal/expand-announcement-modal.component';
+import { AddAnnouncementModalComponent } from './modals/announcement-modal/add-announcement-modal/add-announcement-modal.component';
+import { EditAnnouncementModalComponent } from './modals/announcement-modal/edit-announcement-modal/edit-announcement-modal.component';
 
 
 
@@ -99,7 +104,12 @@ import { ChangePasswordComponent } from './modals/profile-modals/change-password
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    NavbarComponent,
+    AnnouncementComponent,
+    ExpandAnnouncementModalComponent,
+    AddAnnouncementModalComponent,
+    EditAnnouncementModalComponent
   ],
   imports: [
     BrowserModule,

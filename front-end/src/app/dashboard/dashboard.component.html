@@ -1,7 +1,7 @@
-<div *ngIf="tokenValueSocietyId&&tokenValueUserId">
-    <app-vertical-navbar></app-vertical-navbar>
-    <div class="dashboard-wrapper">
-        <div class="dashboard-content">
+<div class="container-fluid" *ngIf="tokenValueSocietyId&&tokenValueUserId">
+    <app-navbar></app-navbar>
+    <div class="dashboard container-fluid">
+        <div class="dashboard-content container mx-auto mt-2">
             <router-outlet></router-outlet>
         </div>
     </div> 

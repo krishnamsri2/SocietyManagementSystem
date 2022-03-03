@@ -1,29 +1,38 @@
-<div class="container tower-wrapper" *ngIf="route.children.length === 0">
-  <div class="tower-header">
-    <div class="back-button">
-      <app-back-btn></app-back-btn>
-    </div>
-    <div class="header-text">
-      <h3>{{towerName}}</h3>
-    </div>
-  </div>
-  <div class="flat-list">
-    <ul class="list-group list-items mx-auto mt-1">
-      <div class="list-group-item container mt-2" *ngFor="let flat of flats">
-        <div class="row">
-          <div class="col-9 text"><p>Flat No: {{flat.flatNo}}</p></div>
-          <div class="col-3 btns d-flex justify-content-between">
-            <button class="btn btn-sm btn-success"><mat-icon>exit_to_app</mat-icon></button>
-            <app-edit-tower></app-edit-tower>
+<div class="container" *ngIf="route.children.length===0">
+  <app-back-btn></app-back-btn>
+  <div class="card w-90 mx-auto flat">
+    <div class="card-header d-flex justify-content-between">
+      <div class="header-text">
+        <h2>Tower:{{towerName}}</h2>
+      </div>
+      <div class="search-box">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here..."
+          />
+          <div class="input-group-append">
+            <span class="input-group-text"><mat-icon>search</mat-icon></span>
           </div>
         </div>
       </div>
-    </ul>
+    </div>
+    <div class="card-body w-75 mx-auto">
+      <ul class="list-group" *ngFor="let flat of flats">
+        <div class="list-group-item d-flex align-items-center justify-content-between">
+          <div class="flatName mt-2">
+            <p>Flat No:{{flat.flatNo}}</p>
+          </div>
+          <div class="tower-btns mb-1">
+            <!-- <a class="card-link" [routerLink]="['tower',tower.towerId]">Enter</a> -->
+            <app-edit-tower [flatId]="flat.flatId"></app-edit-tower>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+      <app-flatmodals (reloadPage)="reload()"></app-flatmodals>
+    </div>
   </div>
-  <div class="btn-wrapper">
-    <app-flatmodals (reloadPage)="reload()"></app-flatmodals>
-  </div>
-</div>
-<div class="flat-section container">
-  <router-outlet></router-outlet>
 </div>

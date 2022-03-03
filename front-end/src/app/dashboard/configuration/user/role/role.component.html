@@ -1,4 +1,4 @@
-<table class="table" style="margin-top: 15px;">
+<!-- <table class="table" style="margin-top: 15px;">
 
     <thead>
         <tr>
@@ -38,4 +38,77 @@
     <div class="col-md-2 offset-11">
         <app-new-role-modal [userIdForRoleAddition]="userDetailId" (reloadPage)="reloadThePage($event)"></app-new-role-modal>
     </div>
+</div> -->
+<div class="container">
+  <div class="back-button">
+    <a class="back-btn" [routerLink]="['/dashboard/configuration/user']"
+      >&larr;</a
+    >
+  </div>
+  <div class="card w-90 mx-auto roles">
+    <div class="card-header d-flex justify-content-between">
+      <div class="header-text">
+        <h2>Role</h2>
+      </div>
+      <div class="search-box">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here..."
+          />
+          <div class="input-group-append">
+            <span class="input-group-text"><mat-icon>search</mat-icon></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body w-75 mx-auto">
+      <table class="table" style="margin-top: 15px">
+        <thead>
+          <tr>
+            <th scope="col">Serial No.</th>
+            <th scope="col">Role Type</th>
+            <th scope="col">Role</th>
+            <th scope="col">Role Description</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let role of roleArray; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ role.roleType }}</td>
+            <td>{{ role.role }}</td>
+            <td>{{ role.roleDescription }}</td>
+
+            <td>
+              <app-role-modal
+                [roleIdForEdit]="role.roleId"
+                [id]="userDetailId"
+                (reloadPage1)="reloadThePage($event)"
+              ></app-role-modal>
+            </td>
+            <td>
+              <a
+                [routerLink]="[]"
+                class="link-danger"
+                (click)="changeStatusOnClick(role.roleId)"
+                >{{ role.isActive ? "Set Inactive" : "Set Active" }}</a
+              >
+            </td>
+            <td>{{ role.roleId }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+      <app-new-role-modal
+        [userIdForRoleAddition]="userDetailId"
+        (reloadPage)="reloadThePage($event)"
+      ></app-new-role-modal>
+    </div>
+  </div>
 </div>

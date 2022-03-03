@@ -1,25 +1,39 @@
-<div class="container society">
-  <div class="society-header" *ngIf="route.children.length === 0">
-    <app-back-btn></app-back-btn>
-    <div class="header-text">
-      <h3>Society</h3>
-    </div>
-  </div>
-  <div class="society-cards mt-2" *ngIf="route.children.length === 0">
-    <ul class="list-group list-items mx-auto mt-1">
-      <div class="list-group-item container mt-2" *ngFor="let society of societies">
-        <div class="row">
-          <div class="col-9 text" [name]="society.societyName"><p>{{society.societyName}}</p></div>
-          <div class="col-3 btns d-flex justify-content-between">
-            <button class=" btn btn-sm btn-success" (click)="navigateIn(society.societyId)"><mat-icon>exit_to_app</mat-icon></button>
-            <app-edit-society [id]="society.societyId" (reloadPage)="reloadPage()"></app-edit-society>
+<div class="container" *ngIf="route.children.length===0">
+  <app-back-btn></app-back-btn>
+  <div class="card w-90 mx-auto society">
+    <div class="card-header d-flex justify-content-between">
+      <div class="header-text">
+        <h2>Societies</h2>
+      </div>
+      <div class="search-box">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here..."
+          />
+          <div class="input-group-append">
+            <span class="input-group-text"><mat-icon>search</mat-icon></span>
           </div>
         </div>
       </div>
-    </ul>
+    </div>
+    <div class="card-body w-75 mx-auto">
+      <ul class="list-group" *ngFor="let society of societies">
+        <div class="list-group-item d-flex align-items-center justify-content-between">
+          <div class="societyName mt-2">
+            <p>{{society.societyName}}</p>
+          </div>
+          <div class="society-btns mb-1">
+            <a class="card-link" [routerLink]="['towerlist',society.societyId]">Enter</a>
+            <app-edit-society [societyId]="society.societyId"></app-edit-society>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+      <app-add-society (reloadPage)="reloadPage()"></app-add-society>
+    </div>
   </div>
-  <div class="btn-wrapper" *ngIf="route.children.length === 0">
-    <app-add-society (reloadPage)="reloadPage()"></app-add-society>
-  </div>
-  <router-outlet></router-outlet>
 </div>
+<router-outlet></router-outlet>

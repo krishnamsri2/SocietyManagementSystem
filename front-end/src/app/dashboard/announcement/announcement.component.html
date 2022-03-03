@@ -1,0 +1,21 @@
+<div class="announcement mt-3">
+    <div class="card">
+        <div class="card-header">
+            <h2>Announcements</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item mt-2 p-1 d-flex justify-content-between" *ngFor="let announcement of announcements;">
+                    <h3 class="mt-1">Announcement {{+announcement.serialNo+1}}</h3>
+                    <div class="btns">
+                    <app-expand-announcement-modal [announcementObj]="announcement"></app-expand-announcement-modal>
+                    <app-edit-announcement-modal [announcement]="announcement" (reloadPage)="reload()"></app-edit-announcement-modal>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <app-add-announcement-modal (reloadPage)="reload()"></app-add-announcement-modal>
+        </div>
+    </div>
+</div>

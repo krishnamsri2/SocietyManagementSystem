@@ -1,27 +1,39 @@
-<div class="container" *ngIf="route.children.length === 0">
-  <div class="towerlist-header">
-    <app-back-btn></app-back-btn>
-    <div class="header-text">
-      <h3>{{ societyName }}</h3>
-    </div>
-  </div>
-  <div class="towerlist mt-2">
-    <ul class="list-group list-items mx-auto mt-1">
-      <div class="list-group-item container mt-2" *ngFor="let tower of towers">
-        <div class="row">
-          <div class="col-9 text"><p>{{tower.towerName}}</p></div>
-          <div class="col-3 btns d-flex justify-content-between">
-            <button class="btn btn-sm btn-success" (click)="navigateIn(tower.towerId)"><mat-icon>exit_to_app</mat-icon></button>
-            <app-edit-tower [towerId]="tower.towerId" (reloadPage)="reload()"></app-edit-tower>
+<div class="container" *ngIf="route.children.length===0">
+  <app-back-btn></app-back-btn>
+  <div class="card w-90 mx-auto tower">
+    <div class="card-header d-flex justify-content-between">
+      <div class="header-text">
+        <h2>Society:{{societyName}}</h2>
+      </div>
+      <div class="search-box">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here..."
+          />
+          <div class="input-group-append">
+            <span class="input-group-text"><mat-icon>search</mat-icon></span>
           </div>
         </div>
       </div>
-    </ul>
-  </div>
-  <div class="btn-wrapper">
-    <app-add-tower (reloadPage)="reload()"></app-add-tower>
+    </div>
+    <div class="card-body w-75 mx-auto">
+      <ul class="list-group" *ngFor="let tower of towers">
+        <div class="list-group-item d-flex align-items-center justify-content-between">
+          <div class="towerName mt-2">
+            <p>{{tower.towerName}}</p>
+          </div>
+          <div class="tower-btns mb-1">
+            <a class="card-link" [routerLink]="['tower',tower.towerId]">Enter</a>
+            <app-edit-tower [towerId]="tower.towerId"></app-edit-tower>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+      <app-add-tower (reloadPage)="reload()"></app-add-tower>
+    </div>
   </div>
 </div>
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>
