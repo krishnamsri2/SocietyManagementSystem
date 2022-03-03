@@ -9,6 +9,7 @@ import com.example.ProjectLatest.response.UserDetailsResponse;
 import com.example.ProjectLatest.to.Token;
 import com.example.ProjectLatest.to.UserTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,12 +29,15 @@ public class UserService {
     private TowerRepository towerRepository;
     @Autowired
     private FlatResidentsRepository flatResidentsRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     //POST
     public void saveUser(UserTO user, Token token){
         try{
-            User tempUser = new User("Default@123",user.getEmailId(),token.getUserId(),token.getSocietyId());
+            String pass= bCryptPasswordEncoder.encode("Default@123");
+            User tempUser = new User(pass,user.getEmailId(),token.getUserId(),token.getSocietyId());
             repoUser.save(tempUser);
 
             UserDetails tempUd = new UserDetailBuilder()
