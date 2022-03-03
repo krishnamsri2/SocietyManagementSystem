@@ -16,6 +16,10 @@ C:\Angular\SocietyManagementSystem\back-end\ProjectLatest\src\main\java\com\exam
 C:\Angular\SocietyManagementSystem\back-end\ProjectLatest\src\main\java\com\example\ProjectLatest\service\NoticeService.java
 C:\Angular\SocietyManagementSystem\back-end\ProjectLatest\src\main\java\com\example\ProjectLatest\service\ComplaintService.java
 C:\Angular\SocietyManagementSystem\back-end\ProjectLatest\src\main\java\com\example\ProjectLatest\to\TowerTO.java
+<<<<<<< HEAD
+=======
+C:\Angular\SocietyManagementSystem\back-end\ProjectLatest\src\main\java\com\example\ProjectLatest\response\PasswordResponse.java
+>>>>>>> samarth-backend-new
 C:\Angular\SocietyManagementSystem\back-end\ProjectLatest\src\main\java\com\example\ProjectLatest\controller\PasswordController.java
 C:\Angular\SocietyManagementSystem\back-end\ProjectLatest\src\main\java\com\example\ProjectLatest\entity\Bill.java
 C:\Angular\SocietyManagementSystem\back-end\ProjectLatest\src\main\java\com\example\ProjectLatest\controller\MenuSecurityController.java
