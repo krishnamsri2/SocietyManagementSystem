@@ -22,9 +22,6 @@ public class PasswordService {
     @Autowired
     private EmailService emailService;
 
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -75,6 +72,5 @@ public class PasswordService {
         {
             passwordResponse.setAck("User not found");
         }
-        System.out.println(passwordResponse.getAck());
     }
 }
