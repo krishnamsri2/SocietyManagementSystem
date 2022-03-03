@@ -36,6 +36,7 @@ import { ForgotPasswordComponent } from './modals/authentication/forgot-password
 import { ResetPasswordComponent } from './modals/authentication/reset-password/reset-password.component';
 import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.component';
 import { ChangePasswordComponent } from './modals/profile-modals/change-password/change-password.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -81,7 +82,8 @@ import { ChangePasswordComponent } from './modals/profile-modals/change-password
     MatIconModule
   ],
   providers:[
-     { provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true }
+     { provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true },
+      CookieService
   ],
   bootstrap: [AppComponent]
 })
