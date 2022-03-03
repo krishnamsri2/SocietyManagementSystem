@@ -4,6 +4,7 @@ import com.example.ProjectLatest.entity.Menu;
 import com.example.ProjectLatest.entity.MenuSecurity;
 import com.example.ProjectLatest.entity.Role;
 import com.example.ProjectLatest.entity.RoleType;
+import com.example.ProjectLatest.repository.MenuRepository;
 import com.example.ProjectLatest.repository.MenuSecurityRepository;
 import com.example.ProjectLatest.repository.RoleRepository;
 import com.example.ProjectLatest.response.*;
@@ -15,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +26,8 @@ public class MenuSecurityService {
     private MenuSecurityRepository menuSecurityRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private MenuRepository menuRepository;
     private SessionFactory sessionFactory;
 
     public void assignMenu(MenuSecurityTO menuSecurityTO)
@@ -59,6 +60,23 @@ public class MenuSecurityService {
             responses.add(response);
         }
         return responses;
+    }
+
+    public List<MenuSecurityResponse> getMenuByUserId(MenuSecurityTO menuSecurityTO)
+    {
+
+        Set<Long> menuIdsAssigned = menuSecurityRepository.findByUserId(menuSecurityTO.getUserId());
+
+        List<MenuSecurityResponse> menuSecurityResponses = new ArrayList<MenuSecurityResponse>();
+
+        for(Long Id:menuIdsAssigned)
+        {
+            Menu menu = menuRepository.getById(Id);
+            MenuSecurityResponse menuSecurityResponse = new MenuSecurityResponse(menu.getMenuId(),menu.getMenuName(),menu.getUrl());
+            menuSecurityResponses.add(menuSecurityResponse);
+        }
+
+        return menuSecurityResponses;
     }
 
     public void unassignMenu(MenuSecurityTO menuSecurityTO)
