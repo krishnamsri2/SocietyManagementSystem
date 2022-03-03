@@ -13,7 +13,7 @@ import { LoginModel } from './login.model';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-
+//
   public userName: string = '';
   public password: string = '';
   public errorMessage: string = '';
