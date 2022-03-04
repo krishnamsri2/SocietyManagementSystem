@@ -8,9 +8,11 @@ import com.example.ProjectLatest.to.RoleTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class RoleController
 {
     @Autowired
@@ -39,12 +41,19 @@ public class RoleController
         roleService.updateRoleByRoleId(role.getRequestObject(),id);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE,value = "role/deactivate_activate/{id}")
+    public void deactivateActivateRoleStatus(@PathVariable Long id)
+    {
+        roleService.deactivateActivateRoleByRoleId(id);
+    }
+
     @RequestMapping(method = RequestMethod.DELETE,value="/role/{id}")
     public void deleteRoleByRoleId(@PathVariable Long id)
     {
         roleService.deleteRoleByRoleId(id);
     }
 
-
+    @RequestMapping(method = RequestMethod.GET, value = "/getAllRoles")
+    public List<RoleResponse> getAllRoles(){return roleService.getAllRoles();}
 
 }

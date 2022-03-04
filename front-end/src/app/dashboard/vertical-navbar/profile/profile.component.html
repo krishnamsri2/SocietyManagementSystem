@@ -1,0 +1,84 @@
+<div class="container-fluid">
+    <div class="main-body">
+        <div class="row gutters-sm">
+
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2>Personal Information</h2>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4 class="mb-0">First Name</h4>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.firstName}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4 class="mb-0">Last Name</h4>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.lastName}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4 class="mb-0">Email-ID</h4>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.emailId}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h4 class="mb-0">Phone Number</h4>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.phoneNumber}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <app-edit-user-modal [userDetailId]="currentUser.userDetailId"
+                                (reloadPage)="onReload($event)"></app-edit-user-modal>
+                            <app-change-password style="margin-left: 5px;"></app-change-password>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2>Flat Details</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th scope="col">Tower Name</th>
+                                    <th scope="col">Flat Number</th>
+                                    <th scope="col">Owner</th>
+                                    <th scope="col">Tenant</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let flat of flatDetails;let i=index">
+                                    <th>{{i+1}}</th>
+                                    <td>{{flat.towerName}}</td>
+                                    <td>{{flat.flatNo}}</td>
+                                    <td>{{flat.isOwner ? 'Yes' : 'No'}}</td>
+                                    <td>{{flat.isTenant ? 'Yes' : 'No'}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

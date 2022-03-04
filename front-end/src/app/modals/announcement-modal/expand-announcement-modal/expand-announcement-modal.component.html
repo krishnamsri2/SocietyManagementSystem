@@ -1,0 +1,38 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Announcement</h3>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="card text-center">
+      <div class="card-header">
+        <p class="mt-1">Announcement!!</p>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">Some Heading</h2>
+        <p class="card-text">
+          {{announcementObj.announcementDetail}}
+        </p>
+      </div>
+      <div class="card-footer">
+        <p class="mt-1">Announcement!!</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<button class="btn btn-danger mt-1" (click)="open(content)">Expand</button>

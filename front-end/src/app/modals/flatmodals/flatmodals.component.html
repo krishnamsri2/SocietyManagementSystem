@@ -1,0 +1,36 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-basic-title">Add a Flat</h3>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div id="flat-info">
+          <div class="form-group">
+            <label for="flat-number">Enter the Flat Number</label>
+            <input type="text" class="form-control" id="flat-number" name="flatNo" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="for-status">Select Status</label>
+            <select name="status" id="for-status" class="form-control" ngModel>
+              <option value="occupied">Occupied</option>
+              <option value="unoccupied">Unoccupied</option>
+            </select>
+          </div>
+        </div>
+        <div id="other-info">
+          <div class="form-group">
+            <label for="number-occupants">Enter Number of Occupants</label>
+            <input type="text" class="form-control" id="number-occupants" name="numberOfOccupant" ngModel >
+          </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+</ng-template>
+  
+<button class="btn btn-danger" (click)="open(content)">Add Flat</button>

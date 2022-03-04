@@ -1,5 +1,7 @@
 package com.example.ProjectLatest.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,20 +15,22 @@ public class Complaint {
     private long complaintId;
     private String type; // Plumber , Electrician , carpenter
 	@Enumerated(EnumType.STRING)
-    private ComplaintStatus status; // CREATED, ASSIGNED,INPROGRESS,COMPLETED,CLOSED
+    private ComplaintStatus complaintStatus; // 0 =filed , 1 =inprogress , 2 =solved
     private long userId;
 
+	private String complaintDetails;
     //private Flat flatId; for foreignkey relationship
     
     @OneToMany(mappedBy = "complaint", cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	@JsonManagedReference
     private Set<ComplaintHistory> complaintHistories = new HashSet<ComplaintHistory>();
     
     @ManyToOne(cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="FlatId")
-	private Flat flat1;
+	private Flat flat;
 
-    private long createdBy;
-    private long modifyBy;
+    private String createdBy;
+    private String modifyBy;
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdDate", nullable = false)
@@ -43,9 +47,10 @@ public class Complaint {
     public Complaint() {
     }
 
-    public Complaint(String type,ComplaintStatus status ,long createdBy) {
+    public Complaint(String type,ComplaintStatus complaintStatus,String complaintDetails, String createdBy) {
         this.type = type;
-        this.status = status;
+        this.complaintStatus = complaintStatus;
+		this.complaintDetails = complaintDetails;
         this.updated = new Date();
         this.created = new Date();
         this.createdBy = createdBy;
@@ -82,15 +87,15 @@ public class Complaint {
 //    	complaintHistory.setComplaint(this);
 //	}
 
-	public long getCreatedBy() {
+	public String getCreatedBy() {
 		return createdBy;
 	}
 
-	public long getModifyBy() {
+	public String getModifyBy() {
 		return modifyBy;
 	}
 
-	public void setModifyBy(Long modifyBy) {
+	public void setModifyBy(String modifyBy) {
 		setUpdated();
 		this.modifyBy = modifyBy;
 	}
@@ -126,33 +131,37 @@ public class Complaint {
 		this.isDeleted = isDeleted;
 	}
 
-	public ComplaintStatus getStatus() {
-		return status;
+	public ComplaintStatus getComplaintStatus() {
+		return complaintStatus;
 	}
 	
-	public void setStatus(ComplaintStatus status) {
+	public void setStatus(ComplaintStatus complaintStatus) {
     	setUpdated();
-        this.status = status;
-        
-       // if(status == 2)
-        	//setIsActive(false);
+        this.complaintStatus = complaintStatus;
+
     }
 
-	public Flat getFlat1() {
-		return flat1;
+	public Flat getFlat() {
+		return flat;
 	}
 
-	public void setFlat1(Flat flat1) {
-		this.flat1 = flat1;
+	public void setFlat(Flat flat) {
+		this.flat = flat;
 	}
 
 
-	public long getcomplaintId() {
-		return complaintId;
-	}
+
 
 	public void setType(String type) {
 		this.type=type;
+	}
+
+	public String getComplaintDetails() {
+		return complaintDetails;
+	}
+
+	public void setComplaintDetails(String complaintDetails) {
+		this.complaintDetails = complaintDetails;
 	}
 }
 

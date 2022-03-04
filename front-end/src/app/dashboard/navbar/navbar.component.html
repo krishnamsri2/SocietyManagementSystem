@@ -1,0 +1,19 @@
+<div class="navbar-header container-fluid">
+  <div class="container mx-auto p-2 row">
+    <div class="col-8 d-flex links mt-4">
+      <li *ngFor="let menu of menus"><a [routerLink]="[menu.menuUrl]" [routerLinkActive]="['active']">{{menu.menuName}}</a></li>
+    </div>
+    <div class="col-4 d-flex justify-content-center">
+      <div class="image">
+        <img src="../../../assets/images/login_image.png" alt="" />
+      </div>
+      <div ngbDropdown class="profile-section mt-4">
+        <li id="dropdown" ngbDropdownToggle></li>
+        <div ngbDropdownMenu aria-labelledby="dropdown">
+          <button ngbDropdownItem (click)="displayProfile()" ><mat-icon aria-hidden="false" aria-label="Example home icon">person</mat-icon> Profile</button>
+          <button ngbDropdownItem (click)="logoutOnClick()"><mat-icon aria-hidden="false" aria-label="Example home icon">exit_to_app</mat-icon> Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

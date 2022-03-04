@@ -2,27 +2,28 @@
     <ul class="list-group">
         <div class="header list-group-item">
             <div class="logo">
-                <a href="#">
-                    <img src="https://www.societycity.in/images_tem/logo.png" 
-                    alt="Society" class="logo-img">
-                </a>
+                <div class="dropdown">
+                    <img src="assets/images/login_image.png" class="logo-img">
+                </div>
             </div>
             <div class="header-text">
-                <p class="logo-text">DummyText</p>
+                <p class="logo-text">{{currentUser.firstName}} {{currentUser.lastName}}</p>
             </div>
         </div>
-        <a [routerLink]="['configuration']">
-            <li class="list-group-items links" >Configuration</li>
-        </a><a [routerLink]="['dummy']">
-            <li class="list-group-items links">Dummy</li>
-        </a><a href="#">
-            <li class="list-group-items links">Item3</li>
-        </a><a href="#">
-            <li class="list-group-items links">Item4</li>
-        </a><a href="#">
-            <li class="list-group-items links">Item5</li>
-        </a><a href="#">
-            <li class="list-group-items links">Item6</li>
+
+        <li class="list-group-item profile-btns">
+            <button class="btn btn-danger btn-sm" (click)="displayProfile()">
+                
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="logoutOnClick()">
+                
+            </button>
+        </li>
+
+        <a *ngFor="let component of components | slice:startIndex:sizeOfComponents"
+            [routerLink]="[component.relativeUrl]">
+            <li class="list-group-items links" routerLinkActive="activeLink">{{component.name}}</li>
         </a>
+
     </ul>
 </div>

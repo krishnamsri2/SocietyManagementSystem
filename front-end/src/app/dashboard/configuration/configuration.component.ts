@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+//import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-configuration',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfigurationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:Router,private activeRoute:ActivatedRoute) {
+   }
 
   ngOnInit(): void {
   }
+
+  
+  
 
 }

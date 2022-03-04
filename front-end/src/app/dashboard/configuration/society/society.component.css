@@ -1,0 +1,16 @@
+.header-text>h2{
+    font-family: 'Fira sans',sans-serif;
+    font-weight: bold;
+    font-size:1.3rem;
+}
+.society{
+    max-height:95vh;
+}
+.card-link{
+    margin-right:1.5rem;
+    
+}
+.societyName>p{
+    font-family: 'Hind Guntur', sans-serif;
+    font-weight:bold;
+}

@@ -1,0 +1,14 @@
+h3.mt-1{
+    font-family: 'Hind Guntur', sans-serif;
+    font-size:1.1rem;
+    color:#222;
+}
+.card-header>h2{
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight:bold;
+    color:#111;
+}
+.card-body{
+    max-height:75vh;
+}

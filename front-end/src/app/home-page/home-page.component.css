@@ -122,3 +122,11 @@
 #login-btn {
     float:right;
 }
+.has-feedback{
+    position: relative;
+}
+.icon{
+    position: absolute;
+    right: 5px;
+    top: 30px;
+}

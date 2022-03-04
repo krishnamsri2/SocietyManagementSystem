@@ -1,0 +1,9 @@
+.list-group-item .btns{
+    width:15%;
+}
+.btns p{
+    color:red;
+    font-weight: bold;
+    font-family: 'Fira Sans', sans-serif;
+    cursor: pointer;
+}

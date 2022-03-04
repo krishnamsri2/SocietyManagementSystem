@@ -1,0 +1,39 @@
+<div class="container" *ngIf="route.children.length===0">
+  <app-back-btn></app-back-btn>
+  <div class="card w-90 mx-auto society">
+    <div class="card-header d-flex justify-content-between">
+      <div class="header-text">
+        <h2>Societies</h2>
+      </div>
+      <div class="search-box">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here..."
+          />
+          <div class="input-group-append">
+            <span class="input-group-text"><mat-icon>search</mat-icon></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body w-75 mx-auto">
+      <ul class="list-group" *ngFor="let society of societies">
+        <div class="list-group-item d-flex align-items-center justify-content-between">
+          <div class="societyName mt-2">
+            <p>{{society.societyName}}</p>
+          </div>
+          <div class="society-btns mb-1">
+            <a class="card-link" [routerLink]="['towerlist',society.societyId]">Enter</a>
+            <app-edit-society [societyId]="society.societyId"></app-edit-society>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+      <app-add-society (reloadPage)="reloadPage()"></app-add-society>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

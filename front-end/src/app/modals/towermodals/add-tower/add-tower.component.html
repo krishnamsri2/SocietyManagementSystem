@@ -1,0 +1,29 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-basic-title">Add a New Tower</h3>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div id="tower-data">
+          <div class="form-group">
+            <label for="tower-name">Enter the name of the Tower</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="tower-name"
+            ngModel
+            name="towerName"
+            >
+          </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+</ng-template>
+  
+<button class="btn btn-danger" (click)="open(content)">Add Tower</button>

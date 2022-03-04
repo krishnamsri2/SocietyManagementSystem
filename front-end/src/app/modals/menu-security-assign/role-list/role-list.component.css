@@ -1,0 +1,8 @@
+.custom-btn {
+    background-color: rgb(226, 81, 81);
+    color: white;
+}
+li{
+    display:flex;
+    justify-content:space-between;
+}

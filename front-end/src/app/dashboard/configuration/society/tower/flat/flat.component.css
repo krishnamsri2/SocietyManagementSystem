@@ -1,0 +1,23 @@
+a{
+    text-decoration:none;
+    color:#000;
+    
+}
+.flat-wrapper{
+    width:100%;
+}
+a.back-btn{
+    font-weight:500;
+    font-size: 32px;
+    cursor:pointer;
+}
+.flat-header{
+    width:100%;
+    display:flex;
+    align-items:center;
+}
+.header-text{
+    position: relative;
+    margin:0 auto;
+    margin-top:8px;
+}

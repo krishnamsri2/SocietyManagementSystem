@@ -77,9 +77,14 @@ public class AttendanceService {
     public void deleteUserAttendance(long id) {
         try {
             Attendance tempAtten = attendanceRepository.findById(id).orElse(null);
-            if(tempAtten != null && tempAtten.getIsDeleted() == false) {
-                tempAtten.setIsDeleted(true);
-                tempAtten.setIsActive(false);
+            if(tempAtten != null){
+                if(tempAtten.getIsDeleted() == false) {
+                    tempAtten.setIsDeleted(true);
+                    tempAtten.setIsActive(false);
+                }else{
+                    tempAtten.setIsDeleted(false);
+                    tempAtten.setIsActive(true);
+                }
                 attendanceRepository.save(tempAtten);
             }
         }catch (Exception e){

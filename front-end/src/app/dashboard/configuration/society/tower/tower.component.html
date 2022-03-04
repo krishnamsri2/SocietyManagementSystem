@@ -1,0 +1,38 @@
+<div class="container" *ngIf="route.children.length===0">
+  <app-back-btn></app-back-btn>
+  <div class="card w-90 mx-auto flat">
+    <div class="card-header d-flex justify-content-between">
+      <div class="header-text">
+        <h2>Tower:{{towerName}}</h2>
+      </div>
+      <div class="search-box">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search here..."
+          />
+          <div class="input-group-append">
+            <span class="input-group-text"><mat-icon>search</mat-icon></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body w-75 mx-auto">
+      <ul class="list-group" *ngFor="let flat of flats">
+        <div class="list-group-item d-flex align-items-center justify-content-between">
+          <div class="flatName mt-2">
+            <p>Flat No:{{flat.flatNo}}</p>
+          </div>
+          <div class="tower-btns mb-1">
+            <!-- <a class="card-link" [routerLink]="['tower',tower.towerId]">Enter</a> -->
+            <app-edit-tower [flatId]="flat.flatId"></app-edit-tower>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+      <app-flatmodals (reloadPage)="reload()"></app-flatmodals>
+    </div>
+  </div>
+</div>

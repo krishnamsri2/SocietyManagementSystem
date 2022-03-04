@@ -18,8 +18,8 @@ public class AnnouncementController {
     private AnnouncementService service;
     // Important to implement
     @PostMapping("/addAnnouncement")
-    public AnnouncementResponse addAnnouncement(@RequestBody RestRequest<AnnouncementTO> announcement){
-        return service.saveAnnouncement(announcement.getRequestObject());
+    public void addAnnouncement(@RequestBody RestRequest<AnnouncementTO> announcement){
+        service.saveAnnouncement(announcement.getRequestObject());
     }
 
     @GetMapping("/announcements")
@@ -33,15 +33,15 @@ public class AnnouncementController {
     }
 
     @PutMapping("/updateAnnouncement/{id}")
-    public AnnouncementResponse updateAnnouncement(@PathVariable long id,@RequestBody RestRequest<AnnouncementTO> announcement){
-        return service.updateAnnouncement(id,announcement.getRequestObject());
+    public void updateAnnouncement(@PathVariable long id,@RequestBody RestRequest<AnnouncementTO> announcement){
+        service.updateAnnouncement(id,announcement.getRequestObject());
 
     }
 
     @DeleteMapping("/deleteAnnouncement/{id}")
-    public String deleteAnnouncement(@PathVariable long id){
+    public void deleteAnnouncement(@PathVariable long id){
 
-        return service.deleteAnnouncement(id);
+        service.deleteAnnouncement(id);
     }
 
 }

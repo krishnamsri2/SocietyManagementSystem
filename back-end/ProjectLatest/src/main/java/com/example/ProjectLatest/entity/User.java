@@ -12,7 +12,13 @@ public class User
 	private long userId;
 	private String password;
 	private Boolean status; // Active or Inactive
-	
+	@Column(unique = true,nullable = false)
+	private String emailId;
+	@Column(nullable = false)
+	private long societyId;
+
+	private String resetToken;
+
 	private Long createdBy;
 	private Long modifiedBy;
 	
@@ -38,7 +44,7 @@ public class User
 		
 	}
 
-	public User(String password,long createdBy) {
+	public User(String password,String emailId,long createdBy,long societyId) {
 		super();
 		this.password = password;
 		this.status = false;
@@ -48,6 +54,33 @@ public class User
 		this.updated = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
+		this.emailId = emailId;
+		this.societyId = societyId;
+	}
+
+	public String getResetToken() {
+
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
+	}
+
+	public long getSocietyId() {
+		return societyId;
+	}
+
+	public void setSocietyId(long societyId) {
+		this.societyId = societyId;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
 	public long getUserId() {
@@ -125,7 +158,5 @@ public class User
 		setModifiedBy(modifiedBy);
 		this.isActive = isActive;
 	}
-	
-	
 
 }

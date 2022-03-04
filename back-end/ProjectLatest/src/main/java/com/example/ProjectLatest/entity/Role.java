@@ -1,49 +1,32 @@
 package com.example.ProjectLatest.entity;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.*;
 @Entity
 @Table(name="Role")
-public class Role 
+public class Role
 {
 	private  String roleDescription;
 	@Enumerated(EnumType.STRING)
 	private RoleType roleType;
-
-
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long roleId;
-	
 	private String role;
-	
 	private long createdBy;
 	private long modifiedBy;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="createdDate",nullable=false)
 	private Date createDate;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="updatedDate",nullable=false)
 	private Date modifyDate;
-	
 	private Boolean isDeleted;
 	private Boolean isActive;
-	
+	private Boolean isMenuAssigned;
 	@ManyToMany(mappedBy = "roles")
 	@JsonBackReference
 	private Set<UserDetails> userDetails = new HashSet<UserDetails>();
-	
-	@OneToOne(mappedBy="role")
-	private MenuSecurity menuSecurity;
-
 
 	public Role() {
 	}
@@ -59,6 +42,7 @@ public class Role
 		this.modifyDate = new Date();
 		this.isDeleted = false;
 		this.isActive = true;
+		this.isMenuAssigned=false;
 	}
 
 	public String getRoleDescription() {
@@ -81,21 +65,21 @@ public class Role
 	public Long getRoleId() {
 		return roleId;
 	}
-	
-	
+
+
 	public String getRole() {
-		
+
 		return role;
 	}
-	
+
 	public void setRole(String role) {
 		setModifyDate();
 		this.role = role;
 	}
-	
-	
+
+
 	public Set<UserDetails> getUserDetails() {
-		
+
 		return userDetails;
 	}
 
@@ -103,42 +87,50 @@ public class Role
 		return createdBy;
 	}
 
-	
+
 	public long getModifiedBy() {
 		return modifiedBy;
 	}
-	
-	
+
+
 	public Date getCreateDate() {
 		return createDate;
 	}
-	
-	
+
+
 	public Date getModifyDate() {
 		return modifyDate;
 	}
-	
+
 	public void setModifyDate() {
 		this.modifyDate = new Date();
 	}
-	
+
 	public Boolean getIsDeleted() {
 		return isDeleted;
 	}
-	
+
 	public void setIsDeleted(Boolean value) {
 		setModifyDate();
 		this.isDeleted = value;
 	}
-	
+
 	public Boolean getIsActive() {
 		return isActive;
 	}
-	
+
 	public void setIsActive(Boolean isActive) {
 		setModifyDate();
 		this.isActive = isActive;
 	}
-	
-	
+
+
+	public Boolean getIsMenuAssigned() {
+		return isMenuAssigned;
+	}
+
+	public void setIsMenuAssigned(Boolean menuAssigned) {
+		setModifyDate();
+		isMenuAssigned = menuAssigned;
+	}
 }

@@ -1,7 +1,9 @@
 package com.example.ProjectLatest.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name="Menu")
@@ -27,11 +29,8 @@ public class Menu
 	private Boolean isDeleted;
 	
 	private Boolean isActive;
-	
-	@OneToOne(mappedBy="menu")
-	private MenuSecurity menuSecurity;
-	
-	//private MenuSecurity ms;  from MenuSecurity table
+
+
 
 	public Menu() {
 	}
@@ -44,7 +43,7 @@ public class Menu
 		this.createDate = new Date();
 		this.modifiedDate = new Date();
 		this.isDeleted = false;
-		this.isActive = true;
+		this.isActive = false;
 	}
 
 	public String getMenuName() {
@@ -102,5 +101,7 @@ public class Menu
 		setModifiedDate();
 		this.isActive = isActive;
 	}
+
+
 
 }

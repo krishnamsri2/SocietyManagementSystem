@@ -8,13 +8,23 @@ public class NoticeResponse {
     private long createdBy;
     private Date createdDate;
     private Date updatedDate;
+    private Boolean isDeleted;
 
-    public NoticeResponse(long noticeId, String noticeDetail, long createdBy, Date createdDate, Date updatedDate) {
+    public NoticeResponse(long noticeId, String noticeDetail, long createdBy, Date createdDate, Date updatedDate, Boolean isDeleted) {
         this.noticeId = noticeId;
         this.noticeDetail = noticeDetail;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
+        this.isDeleted = isDeleted;
+    }
+
+    public Boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     public long getNoticeId() {

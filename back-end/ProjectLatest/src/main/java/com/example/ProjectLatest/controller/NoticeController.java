@@ -24,12 +24,12 @@ public class NoticeController {
 
     @GetMapping("/notices")
     public List<NoticeResponse> findAllNotices(){
-        return service.getNotices();
+        return service.getNoticesByAdmin();
     }
 
-    @GetMapping("/notices/{id}")
-    public NoticeResponse findNoticeById(@PathVariable long id) {
-        return service.getNoticeById(id);
+    @GetMapping("/users/notices")
+    public List<NoticeResponse> findNoticeById() {
+        return service.getNotices();
     }
 
     @PutMapping("/update/{id}")
