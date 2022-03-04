@@ -20,7 +20,7 @@ public class NoticeService {
     //POST
     public void saveNotice(NoticeTO notice, Token token){
         try {
-            Notice tempNotice = new Notice(notice.getNoticeDetail(), token.getUserId(), notice.getUserId());
+            Notice tempNotice = new Notice(notice.getNoticeDetail(), token.getUserId());
             repository.save(tempNotice);
         }catch (Exception e){
             e.printStackTrace();
@@ -34,8 +34,6 @@ public class NoticeService {
 
             if(existingNotice.isDeleted() == false && existingNotice != null) {
                 existingNotice.setNoticeDetail(notice.getNoticeDetail());
-                existingNotice.setUserId(notice.getUserId());
-
                 repository.save(existingNotice);
             }
         }catch(Exception e){
@@ -44,7 +42,7 @@ public class NoticeService {
     }
 
     //GET
-    public List<NoticeResponse> getNotices(){
+    public List<NoticeResponse> getNoticesByAdmin(){
         List<NoticeResponse> copy = null;
         try {
             List<Notice> tempNotices = repository.findAll();
@@ -56,6 +54,7 @@ public class NoticeService {
                             .setCreatedBy(Notice.getCreatedBy())
                             .setCreatedDate(Notice.getCreatedDate())
                             .setUpdatedDate(Notice.getUpdatedDate())
+                            .setIsDeleted(Notice.isDeleted())
                             .getResponse())
                     .collect(Collectors.toList());
         }catch (Exception e){
@@ -65,23 +64,25 @@ public class NoticeService {
         return copy;
     }
 
-    public NoticeResponse getNoticeById(long id){
-        NoticeResponse copy = null;
+    public List<NoticeResponse> getNotices(){
+        List<NoticeResponse> copy = null;
         try {
-            Notice tempNotice = repository.findById(id).orElse(null);
+            List<Notice> tempNotices = repository.findAllActive();
 
-            if (tempNotice != null && tempNotice.isDeleted() == false) {
-                copy = new NoticeResBuilder()
-                        .setNoticeId(tempNotice.getNoticeId())
-                        .setNoticeDetail(tempNotice.getNoticeDetail())
-                        .setCreatedBy(tempNotice.getCreatedBy())
-                        .setCreatedDate(tempNotice.getCreatedDate())
-                        .setUpdatedDate(tempNotice.getUpdatedDate())
-                        .getResponse();
-            }
+            copy = tempNotices.stream()
+                    .map(Notice -> new NoticeResBuilder()
+                            .setNoticeId(Notice.getNoticeId())
+                            .setNoticeDetail(Notice.getNoticeDetail())
+                            .setCreatedBy(Notice.getCreatedBy())
+                            .setCreatedDate(Notice.getCreatedDate())
+                            .setUpdatedDate(Notice.getUpdatedDate())
+                            .setIsDeleted(Notice.isDeleted())
+                            .getResponse())
+                    .collect(Collectors.toList());
         }catch (Exception e){
             e.printStackTrace();
         }
+
         return copy;
     }
 
@@ -89,8 +90,16 @@ public class NoticeService {
     public void deleteNotice(long id){
         try {
             Notice tempNotice = repository.findById(id).orElse(null);
-            if(tempNotice != null && tempNotice.isDeleted() == false){
-                tempNotice.setDeleted(true);
+            if(tempNotice != null){
+                if(tempNotice.isDeleted() == false) {
+                    tempNotice.setDeleted(true);
+                    tempNotice.setActive(false);
+                }else{
+                    tempNotice.setDeleted(false);
+                    tempNotice.setActive(true);
+                }
+
+                repository.save(tempNotice);
             }
         }catch (Exception e){
             e.printStackTrace();

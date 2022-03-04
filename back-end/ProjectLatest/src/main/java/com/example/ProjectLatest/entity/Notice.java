@@ -40,11 +40,11 @@ public class Notice {
 	public Notice() {
 	}
 
-	public Notice(String noticeDetail, long createdBy,long userId) {
+	public Notice(String noticeDetail,long userId) {
 		
 		this.noticeDetail = noticeDetail;
-		this.createdBy = createdBy;
-		this.modifyBy = createdBy;
+		this.createdBy = userId;
+		this.modifyBy = userId;
 		this.createdDate = new Date();
 		this.updatedDate = new Date();
 		this.isDeleted = false;
