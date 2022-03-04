@@ -10,6 +10,7 @@ public class NoticeResBuilder {
     private long createdBy;
     private Date createdDate;
     private Date updatedDate;
+    private Boolean isDeleted;
 
     public NoticeResBuilder setNoticeId(long noticeId) {
         this.noticeId = noticeId;
@@ -36,7 +37,12 @@ public class NoticeResBuilder {
         return this;
     }
 
+    public NoticeResBuilder setIsDeleted(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+        return this;
+    }
+
     public NoticeResponse getResponse(){
-        return new NoticeResponse(noticeId,noticeDetail,createdBy,createdDate,updatedDate);
+        return new NoticeResponse(noticeId,noticeDetail,createdBy,createdDate,updatedDate,isDeleted);
     }
 }

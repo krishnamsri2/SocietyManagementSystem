@@ -3,3 +3,14 @@
     color:#222;
     font-weight:bold;
 }
+.card-header{
+    background-color:white !important;
+}
+a.nav-link{
+    color:#222;
+    font-family: 'Rajdhani',sans-serif;
+    font-weight:bold;
+}
+a.active{
+    color:red !important;
+}

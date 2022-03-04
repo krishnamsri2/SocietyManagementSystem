@@ -20,6 +20,8 @@ import { ResetPasswordComponent } from './modals/authentication/reset-password/r
 import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.component';
 import { AnnouncementComponent } from './dashboard/announcement/announcement.component';
 import { NoticeComponent } from './dashboard/notice/notice.component';
+import { ShowNoticeComponent } from './dashboard/notice/show-notice/show-notice.component';
+import { CreateNoticeComponent } from './dashboard/notice/create-notice/create-notice.component';
 
 const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
@@ -63,7 +65,10 @@ const appRoutes: Route[] = [
           { path: 'menu_security', component: MenuSecurityComponent },
         ],
       },
-      { path: 'notice', component: NoticeComponent },
+      { path: 'notice', component: NoticeComponent,children:[
+        {path:'showNotice',component:ShowNoticeComponent},
+        {path:'createNotice',component:CreateNoticeComponent},
+      ] },
     ],
   },
 ];

@@ -1,4 +1,28 @@
 <div class="notice container">
-    <h2>Notices</h2>
-    
+  <h2>Notices</h2>
+  <div class="card w-90 mx-auto">
+    <div class="card-header">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            [routerLink]="['showNotice']"
+            [routerLinkActive]="['active']"
+            class="nav-link"
+            >My Notices</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="['createNotice']"
+            [routerLinkActive]="['active']"
+            class="nav-link"
+            >Create Notices</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="card-body w-75 mx-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

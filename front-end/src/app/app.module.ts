@@ -61,6 +61,8 @@ import { AddAnnouncementModalComponent } from './modals/announcement-modal/add-a
 import { EditAnnouncementModalComponent } from './modals/announcement-modal/edit-announcement-modal/edit-announcement-modal.component';
 import { CookieService } from 'ngx-cookie-service';
 import { NoticeComponent } from './dashboard/notice/notice.component';
+import { ShowNoticeComponent } from './dashboard/notice/show-notice/show-notice.component';
+import { CreateNoticeComponent } from './dashboard/notice/create-notice/create-notice.component';
 
 
 
@@ -110,7 +112,9 @@ import { NoticeComponent } from './dashboard/notice/notice.component';
     ExpandAnnouncementModalComponent,
     AddAnnouncementModalComponent,
     EditAnnouncementModalComponent,
-    NoticeComponent
+    NoticeComponent,
+    ShowNoticeComponent,
+    CreateNoticeComponent
   ],
   imports: [
     BrowserModule,
