@@ -61,28 +61,5 @@ public class ComplaintController {
         return service.allComplaintHistory(complaintTO.getRequestObject());
     }
 
-    /*
-    @GetMapping("/complaints")
-    public List<ComplaintResponse> findAllComplaint(){
-        return service.getComplaints();
-    }
-
-    @GetMapping("/complaints/{id}")
-    public ComplaintResponse findComplaintById(@PathVariable long id) {
-        return service.getComplaintById(id);
-    }
-
-    @PutMapping("/updateComplaint/{id}")
-    public ComplaintResponse updateComplaint(@PathVariable long id,@RequestBody RestRequest<ComplaintTO> complaint){
-        return service.updateComplaint(id,complaint.getRequestObject());
-
-    }
-
-    @DeleteMapping("/deleteComplaint/{id}")
-    public String deleteComplaint(@PathVariable long id){
-
-        return service.deleteComplaint(id);
-    }
-     */
 
 }

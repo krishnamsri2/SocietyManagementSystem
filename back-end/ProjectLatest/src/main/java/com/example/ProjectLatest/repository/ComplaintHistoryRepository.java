@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ComplaintHistoryRepository extends JpaRepository<ComplaintHistory,Long>
 {
-    @Query(value = "select * from complaint_history ch where ch.complaint_id=?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM complaint_history ch WHERE ch.complaint_id=?1",nativeQuery = true)
     List<ComplaintHistory> findByComplaintId(long complaintId);
 }
