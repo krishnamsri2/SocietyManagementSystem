@@ -30,16 +30,12 @@ public class Interceptor implements HandlerInterceptor {
         Boolean isUser = false;
 
         try {
-            if (url.contains("/login")) {
+            if (url.contains("/login")||(url.contains("/forgot")||url.contains(("/reset")))) {
                 isUser = true;
             } else {
                 long userId = Long.parseLong(request.getHeader("userId"));
                 long societyId = Long.parseLong(request.getHeader("societyId"));
                     isUser = service.verifyToken(userId, societyId);
-
-                    if (isUser) {
-                        System.out.println("Please LOGIN");
-                    }
                 }
 
         }catch (Exception e){

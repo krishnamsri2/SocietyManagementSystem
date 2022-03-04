@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserPostServices } from '../configuration/user/user.posts.service';
 import { AuthService } from 'src/app/auth.service';
 import { relative } from '@angular/compiler-cli/private/localize';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-vertical-navbar',
@@ -22,7 +23,7 @@ export class VerticalNavbarComponent implements OnInit {
   components : ComponentModel[] = [new ComponentModel("Configuration","configuration")];
 
   constructor(private roleService : RoleService,private route : Router,private userService : UserPostServices,private authService:AuthService,
-              private activeRoute:ActivatedRoute) { }
+              private activeRoute:ActivatedRoute,private cookieService:CookieService) { }
 
   ngOnInit(): void {
     this.currentUser=JSON.parse(atob(localStorage.getItem("user")));
@@ -33,9 +34,9 @@ export class VerticalNavbarComponent implements OnInit {
   }
 
   logoutOnClick(){
-    this.authService.logout(this.currentUser).subscribe(responseData=>{
-      localStorage.clear();
-      this.userService.deleteCurrentUser();
+    this.authService.logout(this.currentUser).subscribe(()=>{
+      localStorage.clear(); //djkfk
+      this.cookieService.delete('user');
       this.route.navigate(['']);
     },error=>{
       console.log("Error in logging out",error);

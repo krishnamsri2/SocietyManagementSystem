@@ -9,6 +9,7 @@ import com.example.ProjectLatest.response.LoginResponse;
 import com.example.ProjectLatest.to.LoginTO;
 import com.example.ProjectLatest.to.Token;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import static com.example.ProjectLatest.Security.Interceptor.hashMemory;
@@ -19,6 +20,8 @@ public class LoginService  {
     private UserRepository repository;
     @Autowired
     private UserDetailRepository userDetailRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
 
@@ -27,7 +30,7 @@ public class LoginService  {
         try{
             user = repository.findByEmailId(login.getEmailId()).orElse(null);
 
-            if(user == null || !user.getPassword().equals(login.getPassword())) {
+            if(user == null || !bCryptPasswordEncoder.matches(login.getPassword(), user.getPassword())) {
                 user = null;
                 throw new Exception("User Not Found");
             }

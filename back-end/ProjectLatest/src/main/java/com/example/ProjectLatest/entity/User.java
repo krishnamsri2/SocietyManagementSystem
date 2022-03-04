@@ -17,7 +17,8 @@ public class User
 	@Column(nullable = false)
 	private long societyId;
 
-	
+	private String resetToken;
+
 	private Long createdBy;
 	private Long modifiedBy;
 	
@@ -55,6 +56,15 @@ public class User
 		this.isActive = true;
 		this.emailId = emailId;
 		this.societyId = societyId;
+	}
+
+	public String getResetToken() {
+
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
 	}
 
 	public long getSocietyId() {

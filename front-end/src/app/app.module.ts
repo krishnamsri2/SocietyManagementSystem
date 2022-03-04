@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FooterComponent } from './home-page/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { VerticalNavbarComponent } from './dashboard/vertical-navbar/vertical-navbar.component';
 
 //import {MatIconModule} from '@angular/material/icon';
 import { ConfigurationComponent } from './dashboard/configuration/configuration.component';
@@ -60,6 +59,7 @@ import { AnnouncementComponent } from './dashboard/announcement/announcement.com
 import { ExpandAnnouncementModalComponent } from './modals/announcement-modal/expand-announcement-modal/expand-announcement-modal.component';
 import { AddAnnouncementModalComponent } from './modals/announcement-modal/add-announcement-modal/add-announcement-modal.component';
 import { EditAnnouncementModalComponent } from './modals/announcement-modal/edit-announcement-modal/edit-announcement-modal.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -69,7 +69,6 @@ import { EditAnnouncementModalComponent } from './modals/announcement-modal/edit
     HomePageComponent,
     FooterComponent,
     DashboardComponent,
-    VerticalNavbarComponent,
     ConfigurationComponent,
     SocietyComponent,
     UserComponent,
@@ -122,7 +121,8 @@ import { EditAnnouncementModalComponent } from './modals/announcement-modal/edit
     MatIconModule
   ],
   providers:[
-     { provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true }
+     { provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true },
+      CookieService
   ],
   bootstrap: [AppComponent]
 })

@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,Long > {
     @Query(value = "SELECT * FROM user u WHERE u.email_id = ?1",nativeQuery = true)
     Optional<User> findByEmailId(String emailId);
+
+    @Query(value = "SELECT * FROM user u WHERE u.reset_token = ?1",nativeQuery = true)
+    Optional<User> findByResetToken(String token);
 }

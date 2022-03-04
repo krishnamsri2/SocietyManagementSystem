@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmailValidator, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/auth.service';
 import { UserPostServices } from '../dashboard/configuration/user/user.posts.service';
 import { LoginModel } from './login.model';
@@ -12,18 +13,28 @@ import { LoginModel } from './login.model';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-
+//
   public userName: string = '';
   public password: string = '';
   public errorMessage: string = '';
 
   public hide: boolean;
 
-  constructor(private router: Router, private authService: AuthService,private userService:UserPostServices) { }
+  private cookie:boolean;
+
+  constructor(private router: Router, private authService: AuthService,private userService:UserPostServices,private cookieService:CookieService) { }
 
   ngOnInit(): void {
-    console.log(this.userName, this.password);
 
+    if(this.cookieService.get('user')){
+      //localStorage.setItem('user',this.cookieService.get('user'));
+      this.router.navigate(['dashboard']);
+    }
+    console.log(this.userName, this.password);
+  }
+
+  setCookies(){
+    this.cookie=true;
   }
 
   onClick() {
@@ -33,9 +44,15 @@ export class HomePageComponent implements OnInit {
       console.log(response);
 
       if (response) {
+
         localStorage.setItem("societyId", btoa(response.societyId));
         localStorage.setItem("userId", btoa(response.userId));
         localStorage.setItem("user",btoa(JSON.stringify(response)));
+
+        if(this.cookie){
+          this.cookieService.set('user',btoa(JSON.stringify(response)),0.00347222222);
+        }
+
         this.router.navigate(['dashboard']);
       }
 
@@ -43,11 +60,8 @@ export class HomePageComponent implements OnInit {
         this.errorMessage = "Invalid Credentials!!!"
       }
     }, error => {
-      //this.errorMessage=error;
       console.log(error);
     });
-
-    //this.router.navigate(['dashboard']);
   }
 
   myFunction(){

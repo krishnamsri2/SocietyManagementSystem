@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 import { RequestObject } from 'src/app/service/request.service';
 import { ChangePasswordModel } from './change-password.model';
 
@@ -25,7 +26,7 @@ export class ChangePasswordComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private modalService: NgbModal, private http: HttpClient,private route:Router,private requestObj:RequestObject) { }
+  constructor(private modalService: NgbModal, private http: HttpClient,private route:Router,private requestObj:RequestObject,private cookieService : CookieService) { }
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(atob(localStorage.getItem("user")));
@@ -68,6 +69,7 @@ export class ChangePasswordComponent implements OnInit {
 
   redirectToLogin(){
     localStorage.clear();
+    this.cookieService.delete('user');
     this.route.navigate(['']);
   }
 

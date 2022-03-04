@@ -8,6 +8,7 @@ import com.example.ProjectLatest.response.SocietyResponse;
 import com.example.ProjectLatest.to.ChangePasswordTO;
 import com.example.ProjectLatest.to.Token;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,6 +19,8 @@ public class ChangePasswordService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public ChangePasswordResponse updatePassword(ChangePasswordTO requestObject, Token token) {
         ChangePasswordResponse changePasswordResponse=new ChangePasswordResponse("NOT UPDATED");
@@ -27,9 +30,9 @@ public class ChangePasswordService {
 
             if(user!=null)
             {
-                if(user.getPassword().equals(requestObject.getOldPassword()))
+                if(bCryptPasswordEncoder.matches(requestObject.getOldPassword(), user.getPassword()))
                 {
-                    user.setPassword(requestObject.getNewPassword(), token.getUserId());
+                    user.setPassword(bCryptPasswordEncoder.encode(requestObject.getNewPassword()), token.getUserId());
                     userRepository.save(user);
                     changePasswordResponse.setAck("UPDATED");
                 }
