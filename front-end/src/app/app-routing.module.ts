@@ -19,6 +19,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ResetPasswordComponent } from './modals/authentication/reset-password/reset-password.component';
 import { ProfileComponent } from './dashboard/vertical-navbar/profile/profile.component';
 import { AnnouncementComponent } from './dashboard/announcement/announcement.component';
+import { NoticeComponent } from './dashboard/notice/notice.component';
 
 const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
@@ -62,6 +63,7 @@ const appRoutes: Route[] = [
           { path: 'menu_security', component: MenuSecurityComponent },
         ],
       },
+      { path: 'notice', component: NoticeComponent },
     ],
   },
 ];

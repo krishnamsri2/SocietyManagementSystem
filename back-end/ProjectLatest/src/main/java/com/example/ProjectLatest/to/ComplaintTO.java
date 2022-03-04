@@ -1,17 +1,25 @@
 package com.example.ProjectLatest.to;
 
+import com.example.ProjectLatest.entity.ComplaintStatus;
+
 public class ComplaintTO {
 
-    private String complaintDetail;
+    private long flatId;
+    private String complaintDetails;
     private long  complaintId;
     private String type;
+    private ComplaintStatus complaintStatus;
 
-    public String getComplaintDetail() {
-        return complaintDetail;
+    public long getFlatId() {
+        return flatId;
     }
 
-    public void setComplaintDetail(String complaintDetail) {
-        this.complaintDetail = complaintDetail;
+    public String getComplaintDetails() {
+        return complaintDetails;
+    }
+
+    public void setComplaintDetails(String complaintDetails) {
+        this.complaintDetails = complaintDetails;
     }
 
     public long getComplaintId() {
@@ -25,5 +33,13 @@ public class ComplaintTO {
 
     public String getType() {
         return type;
+    }
+
+    public ComplaintStatus getComplaintStatus() {
+        return complaintStatus;
+    }
+
+    public void setComplaintStatus(ComplaintStatus complaintStatus) {
+        this.complaintStatus = complaintStatus;
     }
 }

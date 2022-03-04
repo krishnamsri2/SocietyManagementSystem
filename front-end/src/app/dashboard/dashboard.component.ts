@@ -10,13 +10,15 @@ export class DashboardComponent implements OnInit {
 
   public tokenValueSocietyId=localStorage.getItem("societyId");
   public tokenValueUserId=localStorage.getItem("userId");
-
+  
   constructor(private route:Router) { }
 
   ngOnInit(): void {
     if(!this.tokenValueSocietyId&&!this.tokenValueUserId)
     {
       this.route.navigate(['']);
+      
+      
     }
   }
 

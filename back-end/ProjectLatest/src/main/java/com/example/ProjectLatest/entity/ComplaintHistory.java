@@ -1,5 +1,7 @@
 package com.example.ProjectLatest.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,15 +12,17 @@ public class ComplaintHistory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cmpHisId;
     private String type; // Plumber , Electrician , carpenter
-    private int status; // 0 =filed , 1 =inprogress , 2 =solved
+	@Enumerated(EnumType.STRING)
+    private ComplaintStatus complaintStatus; // 0 =filed , 1 =inprogress , 2 =solved
     private Long userId;
 
     @ManyToOne(cascade={CascadeType.PERSIST})
 	@JoinColumn(name="complaintId")
+	@JsonBackReference
     private Complaint complaint;
     
-    private Long createdBy;
-    private Long modifyBy;
+    private String createdBy;
+    private String modifyBy;
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdDate", nullable = false)
@@ -35,15 +39,16 @@ public class ComplaintHistory {
     public ComplaintHistory() {
     }
 
-    public ComplaintHistory(String type,int status, Long createdBy) {
+    public ComplaintHistory(String type,ComplaintStatus complaintStatus, String createdBy,Complaint complaint) {
         this.type = type;
-        this.status = status;
+        this.complaintStatus = complaintStatus;
         this.updated = new Date();
         this.created = new Date();
         this.createdBy = createdBy;
         this.modifyBy = createdBy;
         this.isActive = true;
         this.isDeleted = false;
+		this.complaint = complaint;
     }
 
 	public Long getCmpHisId() {
@@ -54,8 +59,8 @@ public class ComplaintHistory {
 		return type;
 	}
 
-	public int getStatus() {
-		return status;
+	public ComplaintStatus getStatus() {
+		return complaintStatus;
 	}
 
 	public Long getUserId() {
@@ -76,15 +81,15 @@ public class ComplaintHistory {
 		this.complaint = complaint;
 	}
 
-	public Long getCreatedBy() {
+	public String getCreatedBy() {
 		return createdBy;
 	}
 
-	public Long getModifyBy() {
+	public String getModifyBy() {
 		return modifyBy;
 	}
 
-	public void setModifyBy(Long modifyBy) {
+	public void setModifyBy(String modifyBy) {
 		setUpdated();
 		this.modifyBy = modifyBy;
 	}

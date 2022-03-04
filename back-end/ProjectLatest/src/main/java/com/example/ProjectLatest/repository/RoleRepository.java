@@ -10,9 +10,5 @@ import java.util.Optional;
 
 public interface RoleRepository extends JpaRepository<Role, Long>
 {
-   /* @Query(value = "SELECT * FROM role r WHERE r.role_type = ?1 ", nativeQuery = true)
-    List<Role> findAllByRoleType(String roleType);
 
-    @Query(value = "SELECT * FROM role r WHERE r.role_type = ?1 AND r.is_menu_assigned", nativeQuery = true)
-    List<Role> findAllByIsAssigned(String roleType);*/
 }

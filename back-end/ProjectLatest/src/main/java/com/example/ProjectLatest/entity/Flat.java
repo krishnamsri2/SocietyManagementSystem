@@ -42,7 +42,7 @@ public class Flat {
 	@OneToMany(mappedBy = "flat")
 	private Set<Bill> bills = new HashSet<Bill>();
 	
-	@OneToMany(mappedBy = "flat1")
+	@OneToMany(mappedBy = "flat")
 	private Set<Complaint> complaints = new HashSet<Complaint>();
 	
 	@OneToMany(mappedBy = "flat" )
@@ -162,7 +162,7 @@ public class Flat {
 	public void addComplaint(Complaint complaint) {
 		setUpdated();
 		complaints.add(complaint);
-		complaint.setFlat1(this);
+		complaint.setFlat(this);
 	}
 	
 	public Set<FlatResidents> getFlatResidents() {

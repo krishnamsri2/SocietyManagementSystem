@@ -2,6 +2,7 @@ package com.example.ProjectLatest.controller;
 
 
 
+import com.example.ProjectLatest.response.MenuSecurityResponse;
 import com.example.ProjectLatest.response.RoleWithStatusResponse;
 import com.example.ProjectLatest.service.MenuSecurityService;
 import com.example.ProjectLatest.to.MenuSecurityTO;
@@ -33,6 +34,15 @@ public class MenuSecurityController
     }
 
 
+
+
+    // GET assigned menu
+    @RequestMapping(method = RequestMethod.GET,value = "/menu/{id}")
+    public List<MenuSecurityResponse> getMenu(@PathVariable Long id)
+    {
+        return service.getMenuByUserId(id);
+    }
+
     //Unassign Role to a menu
     @RequestMapping(method = RequestMethod.PUT,value="/unassignMenu")
     public void unassignMenu(@RequestBody RestRequest<MenuSecurityTO> menuSecurityTORestRequest)
@@ -40,4 +50,5 @@ public class MenuSecurityController
     {
         service.unassignMenu(menuSecurityTORestRequest.getRequestObject());
     }
+
 }

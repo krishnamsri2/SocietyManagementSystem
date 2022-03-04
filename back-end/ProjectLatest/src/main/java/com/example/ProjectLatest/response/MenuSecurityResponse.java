@@ -5,15 +5,14 @@ import java.util.List;
 public class MenuSecurityResponse
 {
     private long menuId;
-    List<RoleResponse> roleResponses;
+    private String menuName;
+    private String menuUrl;
 
-    public MenuSecurityResponse(long menuId, List<RoleResponse> roleResponses) {
+    public MenuSecurityResponse(long menuId, String menuName, String menuUrl) {
         this.menuId = menuId;
-
-        this.roleResponses = roleResponses;
+        this.menuName = menuName;
+        this.menuUrl = menuUrl;
     }
-
-
 
     public long getMenuId() {
         return menuId;
@@ -23,11 +22,19 @@ public class MenuSecurityResponse
         this.menuId = menuId;
     }
 
-    public List<RoleResponse> getRoleResponses() {
-        return roleResponses;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setRoleResponses(List<RoleResponse> roleResponses) {
-        this.roleResponses = roleResponses;
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    public String getMenuUrl() {
+        return menuUrl;
+    }
+
+    public void setMenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl;
     }
 }

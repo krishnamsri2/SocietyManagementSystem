@@ -4,14 +4,19 @@ import com.example.ProjectLatest.entity.RoleType;
 
 public class MenuSecurityTO {
 
-    private long roleId;
+    private long userId;
     private long menuId;
+    private long roleId;
 
-    public long getRoleId() {
-        return roleId;
+    public long getUserId() {
+        return userId;
     }
 
     public long getMenuId() {
         return menuId;
+    }
+
+    public long getRoleId() {
+        return roleId;
     }
 }

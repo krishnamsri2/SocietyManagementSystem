@@ -91,6 +91,7 @@ public class NoticeService {
             Notice tempNotice = repository.findById(id).orElse(null);
             if(tempNotice != null && tempNotice.isDeleted() == false){
                 tempNotice.setDeleted(true);
+                repository.save(tempNotice);
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Set;
 
 public interface MenuSecurityRepository extends JpaRepository<MenuSecurity,Long>
 {
@@ -20,4 +21,7 @@ public interface MenuSecurityRepository extends JpaRepository<MenuSecurity,Long>
 
     @Query(value = "SELECT r.role_id FROM role r WHERE r.role_id IN (SELECT role_id from menu_security WHERE menu_id = ?1)",nativeQuery = true)
     List<Long> getAllAssigned(long menuId);
+
+    @Query(value = "SELECT menu_id FROM menu_security WHERE role_id IN (SELECT role_id FROM user_details_role WHERE user_details_id=?1)",nativeQuery = true)
+    Set<Long> findByUserId(long userId);
 }
