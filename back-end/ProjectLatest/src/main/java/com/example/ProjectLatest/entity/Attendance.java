@@ -14,6 +14,7 @@ public class Attendance
 	
 	private String punchIn;
 	private String punchOut;
+	private String punchTime;
 	
 	
 	private long createdBy;
@@ -56,8 +57,13 @@ public class Attendance
 		this.punchInFlag=true;
 		this.punchIn = createDate.toString();
 		this.punchOutFlag=false;
+		this.punchTime = createDate.toString().substring(0,10);
 	}
-	
+
+	public String getPunchTime() {
+		return punchTime;
+	}
+
 	public long getAttendId() {
 		return attendId;
 	}
@@ -71,7 +77,7 @@ public class Attendance
 	public void setPunchOut() 
 	{
 		setUpdateDate();
-		if(punchOutFlag==false&&punchInFlag==true)
+		if(punchInFlag==true)
 		{
 			Date date = new Date();
 		this.punchOut = date.toString();
