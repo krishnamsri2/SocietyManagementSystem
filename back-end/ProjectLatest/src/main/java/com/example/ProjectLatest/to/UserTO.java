@@ -6,9 +6,18 @@ public class UserTO {
     private String lastName;
     private long phoneNumber;
     private String emailId;
+    private String societyName;
     //private String password;
 //    private String towerName;
 //    private String flatNo;
+
+    public String getSocietyName() {
+        return societyName;
+    }
+
+    public void setSocietyName(String societyName) {
+        this.societyName = societyName;
+    }
 
     public long getUserDetailId() {
         return userDetailId;

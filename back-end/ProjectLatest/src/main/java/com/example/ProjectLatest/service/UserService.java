@@ -28,6 +28,8 @@ public class UserService {
     @Autowired
     private TowerRepository towerRepository;
     @Autowired
+    private SocietyRepository societyRepository;
+    @Autowired
     private FlatResidentsRepository flatResidentsRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -37,7 +39,8 @@ public class UserService {
     public void saveUser(UserTO user, Token token){
         try{
             String pass= bCryptPasswordEncoder.encode("Default@123");
-            User tempUser = new User(pass,user.getEmailId(),token.getUserId(),token.getSocietyId());
+            Society tempSoc = societyRepository.findByName(user.getSocietyName()).orElse(null);
+            User tempUser = new User(pass,user.getEmailId(),token.getUserId(),tempSoc.getSocietyid());
             repoUser.save(tempUser);
 
             UserDetails tempUd = new UserDetailBuilder()
