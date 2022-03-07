@@ -50,15 +50,15 @@ public class ComplaintController {
     }
 
     // GET all complaints created by flatId;
-    @GetMapping("/myComplaints")
-    public List<ComplaintResponse> allComplaintsByFlatId(@RequestBody RestRequest<ComplaintTO> complaintTO)
+    @GetMapping("/myComplaints/{id}")
+    public List<ComplaintResponse> allComplaintsByFlatId(@PathVariable long id)
     {
-        return service.allComplaints(complaintTO.getRequestObject());
+        return service.allComplaints(id);
     }
-    @GetMapping("/complaintHistory")
-    public List<ComplaintHistoryResponse> getComplaintHistory(@RequestBody RestRequest<ComplaintTO> complaintTO)
+    @GetMapping("/complaintHistory/{id}")
+    public List<ComplaintHistoryResponse> getComplaintHistory(@PathVariable long id)
     {
-        return service.allComplaintHistory(complaintTO.getRequestObject());
+        return service.allComplaintHistory(id);
     }
 
 

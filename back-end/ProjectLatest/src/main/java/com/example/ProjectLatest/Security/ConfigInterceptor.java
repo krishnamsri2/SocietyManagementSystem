@@ -17,16 +17,16 @@ public class ConfigInterceptor implements WebMvcConfigurer {
         registry.addInterceptor(getInterceptor()).addPathPatterns("/**");
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*")
-                        .allowCredentials(false)
-                        .allowedMethods("GET", "PUT", "POST", "DELETE", "OPTIONS");
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**").allowedOrigins("*")
+//                        .allowCredentials(false)
+//                        .allowedMethods("GET", "PUT", "POST", "DELETE", "OPTIONS");
+//            }
+//        };
+//    }
 
 }

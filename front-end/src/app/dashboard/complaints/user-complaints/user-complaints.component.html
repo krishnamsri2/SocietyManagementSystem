@@ -1,0 +1,46 @@
+<div class="container">
+    <app-back-btn></app-back-btn>
+    <div class="card w-90 mx-auto complaints">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-text">
+                <h2>Complaints</h2>
+            </div>
+            <div class="search-box">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search here..." />
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <mat-icon>search</mat-icon>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body w-75 mx-auto">
+            <table class="table"  style="margin-top: 15px">
+                <thead>
+                    <tr>
+                        <th scope="col">Serial No.</th>
+                        <th scope="col">Complaint type</th>
+                        <th scope="col">Complaint status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let complaint of complaints; let i = index">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>{{ complaint.type }}</td>
+                        <td>{{ complaint.complaintStatus }}</td>
+                        <td>
+                            <app-complaint-history [complaintId]="complaint.complaintId"></app-complaint-history>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <app-raise-complaint (reloadPage)="ngOnInit()"></app-raise-complaint>
+        </div>
+    </div>
+</div>

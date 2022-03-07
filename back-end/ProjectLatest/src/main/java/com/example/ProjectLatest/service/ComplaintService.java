@@ -127,12 +127,12 @@ public class ComplaintService {
         return complaintWorkerResponses;
     }
 
-    public List<ComplaintResponse> allComplaints(ComplaintTO complaintTO)
+    public List<ComplaintResponse> allComplaints(long flatId)
     {
         List<ComplaintResponse> complaintResponses = new ArrayList<ComplaintResponse>();;
 
         try {
-            List<Complaint> complaints = complaintRepository.findByFlatId(complaintTO.getFlatId());
+            List<Complaint> complaints = complaintRepository.findByFlatId(flatId);
             for (Complaint complaint : complaints) {
                 ComplaintResponse complaintResponse = new ComplaintResponse(complaint.getComplaintId(), complaint.getType(), complaint.getComplaintStatus());
                 complaintResponses.add(complaintResponse);
@@ -145,11 +145,11 @@ public class ComplaintService {
         return complaintResponses;
     }
 
-    public List<ComplaintHistoryResponse> allComplaintHistory(ComplaintTO complaintTO)
+    public List<ComplaintHistoryResponse> allComplaintHistory(long id)
     {
         List<ComplaintHistoryResponse> complaintHistoryResponses = new ArrayList<ComplaintHistoryResponse>();
         try {
-            List<ComplaintHistory> complaintHistories = complaintHistoryRepository.findByComplaintId(complaintTO.getComplaintId());
+            List<ComplaintHistory> complaintHistories = complaintHistoryRepository.findByComplaintId(id);
             for (ComplaintHistory complaintHistory : complaintHistories)
             {
                 ComplaintHistoryResponse complaintHistoryResponse = new ComplaintHistoryResponse(complaintHistory.getStatus(), complaintHistory.getCreated());

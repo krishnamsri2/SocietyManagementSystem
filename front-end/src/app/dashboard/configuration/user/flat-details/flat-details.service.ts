@@ -25,9 +25,9 @@ export class FlatDetailsService{
     }
 
     //GET
-    getFlatsOfAUser(){
-    
-        return this.http.get(`http://localhost:9191/users/${this.userDetailId}/flatResidents`).pipe(map((responseData:any)=>{
+    getFlatsOfAUser(userDetailId){
+        console.log(userDetailId);
+        return this.http.get(`http://localhost:9191/users/${userDetailId}/flatResidents`).pipe(map((responseData:any)=>{
             return responseData;
         }),catchError((errResponse)=>{
             return throwError(errResponse);

@@ -22,6 +22,8 @@ import { AnnouncementComponent } from './dashboard/announcement/announcement.com
 import { NoticeComponent } from './dashboard/notice/notice.component';
 import { ShowNoticeComponent } from './dashboard/notice/show-notice/show-notice.component';
 import { CreateNoticeComponent } from './dashboard/notice/create-notice/create-notice.component';
+import { UserComplaintsComponent } from './dashboard/complaints/user-complaints/user-complaints.component';
+import { ComplaintsComponent } from './dashboard/complaints/complaints.component';
 
 const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
@@ -32,6 +34,9 @@ const appRoutes: Route[] = [
     children: [
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnouncementComponent },
+      { path: 'complaints',component:ComplaintsComponent,children:[
+        { path: 'user_complaints/:flatId', component:UserComplaintsComponent}
+      ]},
       {
         path: 'configuration',
         component: ConfigurationComponent,
