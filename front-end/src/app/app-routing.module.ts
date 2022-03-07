@@ -22,6 +22,7 @@ import { AnnouncementComponent } from './dashboard/announcement/announcement.com
 import { NoticeComponent } from './dashboard/notice/notice.component';
 import { ShowNoticeComponent } from './dashboard/notice/show-notice/show-notice.component';
 import { CreateNoticeComponent } from './dashboard/notice/create-notice/create-notice.component';
+import { HomeComponent } from './dashboard/home/home.component';
 
 const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
@@ -30,6 +31,7 @@ const appRoutes: Route[] = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
+      {path:'home',component:HomeComponent},
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnouncementComponent },
       {

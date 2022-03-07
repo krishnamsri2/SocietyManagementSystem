@@ -28,7 +28,7 @@ export class HomePageComponent implements OnInit {
 
     if(this.cookieService.get('user')){
       //localStorage.setItem('user',this.cookieService.get('user'));
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['dashboard/home']);
     }
     console.log(this.userName, this.password);
   }
@@ -53,7 +53,7 @@ export class HomePageComponent implements OnInit {
           this.cookieService.set('user',btoa(JSON.stringify(response)),0.00347222222);
         }
 
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard/home']);
       }
 
       else {

@@ -63,6 +63,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { NoticeComponent } from './dashboard/notice/notice.component';
 import { ShowNoticeComponent } from './dashboard/notice/show-notice/show-notice.component';
 import { CreateNoticeComponent } from './dashboard/notice/create-notice/create-notice.component';
+import { ExpandNoticeComponent } from './modals/notice-modals/expand-notice/expand-notice.component';
+import { EditNoticeComponent } from './modals/notice-modals/edit-notice/edit-notice.component';
+import { HomeComponent } from './dashboard/home/home.component';
+import { ProfileCardComponent } from './dashboard/home/profile-card/profile-card.component';
 
 
 
@@ -114,7 +118,11 @@ import { CreateNoticeComponent } from './dashboard/notice/create-notice/create-n
     EditAnnouncementModalComponent,
     NoticeComponent,
     ShowNoticeComponent,
-    CreateNoticeComponent
+    CreateNoticeComponent,
+    ExpandNoticeComponent,
+    EditNoticeComponent,
+    HomeComponent,
+    ProfileCardComponent
   ],
   imports: [
     BrowserModule,

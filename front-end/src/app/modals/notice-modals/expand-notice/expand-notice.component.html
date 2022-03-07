@@ -1,0 +1,36 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">Notice</h2>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <blockquote class="blockquote text-center">
+      <p class="header-text">
+        Notice
+      </p>
+      <footer class="blockquote-footer mt-1">
+       <cite  title="Source Title">{{currentUser.firstName}}</cite>
+      </footer>
+    </blockquote>
+    <hr>
+    <div class="notice-body container mx-auto mt-2">
+        <p class="body-text">{{notice.noticeDetail}}</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<p class="btn-link"(click)="open(content)">Expand</p>

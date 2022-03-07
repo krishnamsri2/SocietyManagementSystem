@@ -1,0 +1,37 @@
+.card{
+    position: relative;
+    background:#f1f1f1;
+}
+.profile-img{
+    height:200px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    
+}
+.image{
+    width:150px;
+    height:150px;
+    border:1px solid rgba(0,0,0,0.1);
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto;
+    background-color: white;
+}
+.image>img{
+    width:75%;
+    height:75%;
+    padding:4px;
+}
+.profile-link{
+    text-align:center;
+    /* //font-family: 'Fjalla One', sans-serif; */
+}
+.profile-info>p{
+    font-family: 'Fjalla One', sans-serif;
+    font-size:18px;
+    letter-spacing: 1px;
+}

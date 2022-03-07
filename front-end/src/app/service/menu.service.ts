@@ -36,4 +36,8 @@ export class MenuService{
             })
           );
       }
+      updateMenu(menu){
+        this.requestObject.putRequestObject(menu);
+        return this.http.put(`http://localhost:9191/updateMenu/${menu.menuId}`,this.requestObject.getRequestObject());
+      }
 }

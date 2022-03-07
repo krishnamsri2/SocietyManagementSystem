@@ -36,4 +36,8 @@ export class NoticeService{
             })
           );
       }
+      updateNotice(noticeId:any,notice:any){
+        this.requestObj.putRequestObject(notice);
+        return this.http.put(`http://localhost:9191/update/${noticeId}`,this.requestObj.getRequestObject())
+      }
 }

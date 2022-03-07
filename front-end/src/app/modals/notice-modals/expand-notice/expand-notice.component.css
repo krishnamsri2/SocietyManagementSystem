@@ -1,0 +1,23 @@
+p.btn-link{
+    text-decoration:none;
+    color:red;
+    font-weight: bold;
+    font-family: 'Fira Sans', sans-serif;
+    cursor: pointer;
+}
+h2.modal-title{
+    font-family: 'Fira sans',sans-serif;
+    font-weight:bold;
+}
+p.header-text{
+    font-family: 'Fjalla One', sans-serif;
+}
+cite{
+    font-family: 'Noto Serif', serif;
+}
+p.body-text{
+    font-size:1rem;
+    color:#333;
+    font-family: 'Molengo', sans-serif;
+
+}

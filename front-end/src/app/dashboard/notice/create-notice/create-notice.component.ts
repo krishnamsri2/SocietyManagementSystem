@@ -19,7 +19,7 @@ export class CreateNoticeComponent implements OnInit {
     userId:0
   }
   onClick(){
-    let newNotice = new NoticeModel(this.noticeObj.noticeDetail,this.currentUser.userId);
+    let newNotice = new NoticeModel(this.noticeObj.noticeDetail,this.currentUser.userId,null);
     this.noticeService.addNotice(newNotice).subscribe(()=>{
       alert('Added');
     })

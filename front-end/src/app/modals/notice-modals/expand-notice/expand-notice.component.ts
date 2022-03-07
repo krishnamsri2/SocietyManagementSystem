@@ -1,21 +1,23 @@
-import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Component, Input, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { MenuService } from '../../../service/menu.service';
+import { NoticeModel } from '../../../shared/notice.model';
 
 @Component({
-  selector: 'app-edit-menu-modal',
-  templateUrl: './edit-menu-modal.component.html',
-  styleUrls: ['./edit-menu-modal.component.css']
+  selector: 'app-expand-notice',
+  templateUrl: './expand-notice.component.html',
+  styleUrls: ['./expand-notice.component.css']
 })
-export class EditMenuModalComponent implements OnInit {
+export class ExpandNoticeComponent implements OnInit {
 
   closeResult = '';
+  @Input() notice:NoticeModel;
+  currentUser:any;
   ngOnInit(): void {
-    
+    this.currentUser = JSON.parse(atob(localStorage.getItem('user')));
+    console.log(this.currentUser);
+    console.log(this.notice);
   }
-  @Input() menu:any;
-  constructor(private modalService: NgbModal,private menuService:MenuService) {}
+  constructor(private modalService: NgbModal) {}
 
   open(content) {
     this.modalService.open(content, {size:'lg',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -34,9 +36,5 @@ export class EditMenuModalComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  onClick(){
-    this.menuService.updateMenu(this.menu).subscribe(()=>{
-      this.modalService.dismissAll();
-    })
-  }
+
 }

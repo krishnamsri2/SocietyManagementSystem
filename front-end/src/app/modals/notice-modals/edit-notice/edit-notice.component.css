@@ -1,0 +1,7 @@
+p.btn-link{
+    text-decoration:none;
+    color:red;
+    font-weight: bold;
+    font-family: 'Fira Sans', sans-serif;
+    cursor: pointer;
+}
