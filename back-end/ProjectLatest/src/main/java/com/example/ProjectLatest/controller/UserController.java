@@ -25,14 +25,9 @@ public class UserController {
         service.saveUserAdmin(user.getRequestObject(),user.getToken());
     }
 
-    @GetMapping("/users/{id}")
-    public UserDetailsResponse findUserById(@PathVariable long id) {
-        return service.getUserById(id);
-    }
-
-    @GetMapping("/users")
-    public List<UserDetailsResponse> findAllUser() {
-        return service.getAllUser();
+    @GetMapping("/users/{userId}")
+    public List<UserDetailsResponse> findAllUserAdmin(@PathVariable long userId) {
+        return service.getAllUser(userId);
     }
 
 

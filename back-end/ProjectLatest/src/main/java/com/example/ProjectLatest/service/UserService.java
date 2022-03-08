@@ -126,20 +126,22 @@ public class UserService {
 
     }
 
-        public List<UserDetailsResponse> getAllUser(){
+
+
+    public List<UserDetailsResponse> getAllUser(long userId) {
         List<UserDetailsResponse> copy = new ArrayList<>();
 
         try {
-            for(UserDetails x : repository.findAll()){
+            for(UserDetails x : repository.findAllAdmin(userId)){
 
-                    copy.add(new UserDetailsResBuilder()
-                            .setUserDetailId(x.getUserDetailsId())
-                            .setFirstName(x.getFirstName())
-                            .setLastName(x.getLastName())
-                            .setPhoneNumber(x.getPhoneNumber())
-                            .setEmailId(x.getEmailId())
-                            .setIsDeleted(x.getIsDeleted())
-                            .getResponse());
+                copy.add(new UserDetailsResBuilder()
+                        .setUserDetailId(x.getUserDetailsId())
+                        .setFirstName(x.getFirstName())
+                        .setLastName(x.getLastName())
+                        .setPhoneNumber(x.getPhoneNumber())
+                        .setEmailId(x.getEmailId())
+                        .setIsDeleted(x.getIsDeleted())
+                        .getResponse());
             }
 
         }catch(Exception e){
@@ -148,7 +150,6 @@ public class UserService {
 
         return copy;
     }
-
 
     //DELETE
     public void deleteUser(long id){
@@ -182,4 +183,6 @@ public class UserService {
         }
 
     }
+
+
 }
