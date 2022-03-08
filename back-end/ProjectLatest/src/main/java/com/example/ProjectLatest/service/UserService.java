@@ -36,11 +36,33 @@ public class UserService {
 
 
     //POST
-    public void saveUser(UserTO user, Token token){
+    public void saveUserAdmin(UserTO user, Token token){
         try{
             String pass= bCryptPasswordEncoder.encode("Default@123");
             Society tempSoc = societyRepository.findByName(user.getSocietyName()).orElse(null);
             User tempUser = new User(pass,user.getEmailId(),token.getUserId(),tempSoc.getSocietyid());
+            repoUser.save(tempUser);
+
+            UserDetails tempUd = new UserDetailBuilder()
+                    .setFirstName(user.getFirstName())
+                    .setLastName(user.getLastName())
+                    .setEmailId(user.getEmailId())
+                    .setPhoneNumber(user.getPhoneNumber())
+                    .setCreatedBy(token.getUserId())
+                    .setUser(tempUser)
+                    .getResponse();
+            repository.save(tempUd);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void saveUser(UserTO user, Token token){
+        try{
+            String pass= bCryptPasswordEncoder.encode("Default@123");
+            User tempUser = new User(pass,user.getEmailId(),token.getUserId(), token.getSocietyId());
             repoUser.save(tempUser);
 
             UserDetails tempUd = new UserDetailBuilder()

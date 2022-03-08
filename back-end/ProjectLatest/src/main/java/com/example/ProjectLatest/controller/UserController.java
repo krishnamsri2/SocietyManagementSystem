@@ -15,9 +15,14 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @PostMapping("/users/addUser/admin")
+    public void addUserAdmin(@RequestBody RestRequest<UserTO> user){
+          service.saveUserAdmin(user.getRequestObject(),user.getToken());
+    }
+
     @PostMapping("/users/addUser")
     public void addUser(@RequestBody RestRequest<UserTO> user){
-          service.saveUser(user.getRequestObject(),user.getToken());
+        service.saveUserAdmin(user.getRequestObject(),user.getToken());
     }
 
     @GetMapping("/users/{id}")
