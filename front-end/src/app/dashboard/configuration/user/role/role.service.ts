@@ -17,11 +17,11 @@ export class RoleService{
 
     constructor( private http : HttpClient, private requestObj : RequestObject){}
 
-    setUserId(userDetailId: number) {
+    setUserDetailId(userDetailId: number) {
       this.userDetailId=userDetailId;
     }
 
-    getUserID() {
+    getUserDetailID() {
         return this.userDetailId;
     }
 

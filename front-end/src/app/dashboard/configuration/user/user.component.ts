@@ -18,7 +18,7 @@ import { UserPostServices } from './user.posts.service';
 })
 export class UserComponent implements OnInit,OnDestroy {
 
-  private userDetailId : number;
+  private userId : number;
   users : UserModel[];
 
   userSubscription : Subscription;
@@ -29,7 +29,7 @@ export class UserComponent implements OnInit,OnDestroy {
   }
 
   currentUsers(){
-    this.userSubscription = this.userPostService.fetchUsers().subscribe((userData)=>{
+    this.userSubscription = this.userPostService.fetchUsers(this.userId).subscribe((userData)=>{
       this.users=userData;
       console.log("Hello",this.users)
       },error =>{
@@ -38,18 +38,18 @@ export class UserComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(){
-    this.userDetailId=+btoa(localStorage.getItem('userId'));
+    this.userId=+atob(localStorage.getItem('userId'));
     this.currentUsers();
   }
 
-  saveUserId(userId : number){
-    this.roleService.setUserId(userId);
+  saveUserDetailId(userDetailId : number){
+    this.roleService.setUserDetailId(userDetailId);
     //console.log(this.roleService.getUserID());
     
   }
 
-  setUserInactive(userId : number){
-    this.userDeletionSubs=this.userPostService.setUserInactive(userId).subscribe(()=>{
+  setUserInactive(userDetailId : number){
+    this.userDeletionSubs=this.userPostService.setUserInactive(userDetailId).subscribe(()=>{
       this.currentUsers();
     },error=>{
       console.log("User deletion not successful",error);
@@ -57,7 +57,7 @@ export class UserComponent implements OnInit,OnDestroy {
     
   }
 
-  setUserId(userDetailId : number){
+  setUserDetailId(userDetailId : number){
     this.flatsDetailsService.setUserDetailId(userDetailId);
   }
 
