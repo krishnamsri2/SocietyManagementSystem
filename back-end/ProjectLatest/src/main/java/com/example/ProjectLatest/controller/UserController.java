@@ -22,7 +22,7 @@ public class UserController {
 
     @PostMapping("/users/addUser")
     public void addUser(@RequestBody RestRequest<UserTO> user){
-        service.saveUserAdmin(user.getRequestObject(),user.getToken());
+        service.saveUser(user.getRequestObject(),user.getToken());
     }
 
     @GetMapping("/users/{userId}")

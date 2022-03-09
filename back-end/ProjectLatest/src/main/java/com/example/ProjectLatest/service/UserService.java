@@ -127,7 +127,6 @@ public class UserService {
     }
 
 
-
     public List<UserDetailsResponse> getAllUser(long userId) {
         List<UserDetailsResponse> copy = new ArrayList<>();
 
