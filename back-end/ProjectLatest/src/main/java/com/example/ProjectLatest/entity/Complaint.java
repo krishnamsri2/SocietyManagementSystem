@@ -16,7 +16,9 @@ public class Complaint {
     private String type; // Plumber , Electrician , carpenter
 	@Enumerated(EnumType.STRING)
     private ComplaintStatus complaintStatus; // 0 =filed , 1 =inprogress , 2 =solved
-    private long userId;
+
+    private Long userId;
+	private Long workerId;
 
 	private String complaintDetails;
     //private Flat flatId; for foreignkey relationship
@@ -47,7 +49,7 @@ public class Complaint {
     public Complaint() {
     }
 
-    public Complaint(String type,ComplaintStatus complaintStatus,String complaintDetails, String createdBy) {
+    public Complaint(String type,ComplaintStatus complaintStatus,String complaintDetails, String createdBy,Long userId) {
         this.type = type;
         this.complaintStatus = complaintStatus;
 		this.complaintDetails = complaintDetails;
@@ -57,7 +59,8 @@ public class Complaint {
         this.modifyBy = createdBy;
         this.isActive = true;
         this.isDeleted = false;
-        //this.userId = null;
+        this.userId = userId;
+		this.workerId=0L;
     }
 
 	public long getComplaintId() {
@@ -68,7 +71,7 @@ public class Complaint {
 		return type;
 	}
 
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
@@ -161,6 +164,14 @@ public class Complaint {
 
 	public void setComplaintDetails(String complaintDetails) {
 		this.complaintDetails = complaintDetails;
+	}
+
+	public Long getWorkerId() {
+		return workerId;
+	}
+
+	public void setWorkerId(Long workerId) {
+		this.workerId = workerId;
 	}
 }
 

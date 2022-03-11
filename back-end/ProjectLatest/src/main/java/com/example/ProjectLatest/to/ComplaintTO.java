@@ -5,6 +5,7 @@ import com.example.ProjectLatest.entity.ComplaintStatus;
 public class ComplaintTO {
 
     private long flatId;
+    private long userId;
     private String complaintDetails;
     private long  complaintId;
     private String type;
@@ -41,5 +42,13 @@ public class ComplaintTO {
 
     public void setComplaintStatus(ComplaintStatus complaintStatus) {
         this.complaintStatus = complaintStatus;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

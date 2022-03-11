@@ -11,7 +11,9 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long>
 {
 
     List<Complaint> findByComplaintStatus(ComplaintStatus complaintStatus);
-    List<Complaint> findByUserId(long userId);
+    List<Complaint> findByWorkerId(long workerId);
     @Query(value = "SELECT * FROM complaint c WHERE c.flat_id=?1",nativeQuery = true)
     List<Complaint> findByFlatId(long flatId);
+    @Query(value = "SELECT * FROM complaint c WHERE c.worker_id=?1 AND c.complaint_status='CLOSED'",nativeQuery = true)
+    List<Complaint> findByWorkerIdAndStatus(long workerId);
 }

@@ -44,9 +44,14 @@ public class ComplaintController {
     }
 
     @GetMapping("/assignedWorks/{userId}")
-    public List<ComplaintWorkerResponse> assignedWorkByRoleId(@PathVariable long userId)
+    public List<ComplaintWorkerResponse> assignedWorkByUserId(@PathVariable long userId)
     {
         return service.assignedWorks(userId);
+    }
+    @GetMapping("/completedWorks/{workerId}")
+    public List<ComplaintWorkerResponse> completedWorks(@PathVariable long workerId)
+    {
+        return service.getCompletedWorks(workerId);
     }
 
     // GET all complaints created by flatId;
@@ -55,10 +60,10 @@ public class ComplaintController {
     {
         return service.allComplaints(complaintTO.getRequestObject());
     }
-    @GetMapping("/complaintHistory")
-    public List<ComplaintHistoryResponse> getComplaintHistory(@RequestBody RestRequest<ComplaintTO> complaintTO)
+    @GetMapping("/complaintHistory/{id}")
+    public List<ComplaintHistoryResponse> getComplaintHistory(@PathVariable long id)
     {
-        return service.allComplaintHistory(complaintTO.getRequestObject());
+        return service.allComplaintHistory(id);
     }
 
 
