@@ -1,0 +1,23 @@
+<!--  -->
+<div class="container">
+  <app-back-btn></app-back-btn>
+  <h2>Complaints</h2>
+  <div class="card">
+    <div class="card-header" style="background-color: white">
+      <ul class="nav nav-pills">
+        <li class="nav-item" *ngIf="isUser">
+          <a class="nav-link" [routerLink]="['registeredComplaints']" [routerLinkActive]="['active']">Registered Complaints</a>
+        </li>
+        <li class="nav-item" *ngIf="isWorker">
+          <a class="nav-link" [routerLink]="['task']" [routerLinkActive]="['active']">Tasks</a>
+        </li>
+        <li class="nav-item" *ngIf="isWorker">
+          <a class="nav-link" [routerLink]="['myTask']" [routerLinkActive]="['active']">My Tasks</a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

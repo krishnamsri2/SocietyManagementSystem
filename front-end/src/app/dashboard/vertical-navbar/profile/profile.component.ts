@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
 
   setCurrentUserFlats(){
     this.flatDetailsService.setUserDetailId(this.currentUser.userDetailId);
-    this.flatDetailsService.getFlatsOfAUser().subscribe((response)=>{
+    this.flatDetailsService.getFlatsOfAUser(this.currentUser.userDetailId).subscribe((response)=>{
       this.flatDetails=response;
     },error=>{
       console.log("Error in retrieving flats of a user");

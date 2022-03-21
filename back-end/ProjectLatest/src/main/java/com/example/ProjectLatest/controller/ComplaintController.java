@@ -44,21 +44,21 @@ public class ComplaintController {
     }
 
     @GetMapping("/assignedWorks/{userId}")
-    public List<ComplaintWorkerResponse> assignedWorkByRoleId(@PathVariable long userId)
+    public List<ComplaintWorkerResponse> assignedWorkByUserId(@PathVariable long userId)
     {
         return service.assignedWorks(userId);
     }
 
     // GET all complaints created by flatId;
-    @GetMapping("/myComplaints")
-    public List<ComplaintResponse> allComplaintsByFlatId(@RequestBody RestRequest<ComplaintTO> complaintTO)
+    @GetMapping("/myComplaints/{id}")
+    public List<ComplaintResponse> allComplaintsByFlatId(@PathVariable long id)
     {
-        return service.allComplaints(complaintTO.getRequestObject());
+        return service.allComplaints(id);
     }
-    @GetMapping("/complaintHistory")
-    public List<ComplaintHistoryResponse> getComplaintHistory(@RequestBody RestRequest<ComplaintTO> complaintTO)
+    @GetMapping("/complaintHistory/{id}")
+    public List<ComplaintHistoryResponse> getComplaintHistory(@PathVariable long id)
     {
-        return service.allComplaintHistory(complaintTO.getRequestObject());
+        return service.allComplaintHistory(id);
     }
 
 

@@ -16,7 +16,7 @@ public class Complaint {
     private String type; // Plumber , Electrician , carpenter
 	@Enumerated(EnumType.STRING)
     private ComplaintStatus complaintStatus; // 0 =filed , 1 =inprogress , 2 =solved
-    private long userId;
+    private Long userId;
 
 	private String complaintDetails;
     //private Flat flatId; for foreignkey relationship
@@ -68,7 +68,7 @@ public class Complaint {
 		return type;
 	}
 
-	public long getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 

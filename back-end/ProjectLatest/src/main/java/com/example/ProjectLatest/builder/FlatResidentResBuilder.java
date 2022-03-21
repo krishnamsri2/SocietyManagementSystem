@@ -9,6 +9,12 @@ public class FlatResidentResBuilder {
     private String flatNo;
     private String towerName;
     private Boolean isDeleted;
+    private long flatId;
+
+    public FlatResidentResBuilder setFlatId(long flatId) {
+        this.flatId = flatId;
+        return this;
+    }
 
     public FlatResidentResBuilder setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
@@ -41,6 +47,6 @@ public class FlatResidentResBuilder {
     }
 
     public FlatResidentResponse getResponse(){
-        return new FlatResidentResponse(flatResId,isOwner,isTenant,towerName,flatNo,isDeleted);
+        return new FlatResidentResponse(flatResId,isOwner,isTenant,towerName,flatNo,isDeleted,flatId);
     }
 }

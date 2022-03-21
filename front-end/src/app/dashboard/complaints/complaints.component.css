@@ -1,0 +1,12 @@
+.container h2{
+    color:#222;
+    font-weight:bold;
+    font-family: 'Fira Sans', sans-serif;
+}
+.active{
+    background-color: red !important;
+    
+}
+a.nav-link{
+    color:#222;
+}

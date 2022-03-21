@@ -1,0 +1,24 @@
+<table class="table mx-auto">
+    <thead>
+      <tr>
+        <th scope="col">Serial No.</th>
+        <th scope="col">Tower</th>
+        <th scope="col">Flat</th>
+        <th scope="col">Complaint Type</th>
+        <th scope="col">Complaint detail</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let myTask of myTasks;let i=index" >
+        <th scope="row">{{i+1}}</th>
+        <td>{{myTask.towerName}}</td>
+        <td>{{myTask.flatNo}}</td>
+        <td>{{myTask.type}}</td>
+        <td>{{myTask.complaintDetail}}</td>
+        <td><button class="btn btn-sm btn-danger"  (click)="action('DECLINED',myTask.complaintId)">Decline</button></td>
+        <td><button class="btn btn-sm btn-success" (click)="action('COMPLETED',myTask.complaintId)" >Completed</button></td>
+      </tr>
+    </tbody>
+  </table>

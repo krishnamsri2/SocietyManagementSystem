@@ -149,6 +149,7 @@ public class FlatResidentsService {
                                 .setIsTenant(FlatResidents.isTenant())
                                 .setTowerName(FlatResidents.getFlat().getTow2().getTowerName())
                                 .setIsDeleted(FlatResidents.getIsDeleted())
+                                .setFlatId(FlatResidents.getFlat().getFlatId())
                                 .getResponse())
                         .collect(Collectors.toList());
             }

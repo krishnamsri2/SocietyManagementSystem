@@ -1,0 +1,25 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h2 class="modal-title" id="modal-basic-title">Raise Complaint</h2>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+
+        <div class="mb-3">
+            <label for="complaintDetails" class="form-label">Complaint Details</label>
+            <input type="text" id="complaintDetails" [(ngModel)]="complaintDetails" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="complaintType" class="form-label">Complaint Type</label>
+            <input type="text" id="complaintType" [(ngModel)]="complaintType" class="form-control">
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close('Save click')"
+            (click)="addComplaint()">Add</button>
+    </div>
+</ng-template>
+
+<button class="btn btn-danger" (click)="open(content)">Raise Complaint</button>

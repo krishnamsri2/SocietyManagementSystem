@@ -67,6 +67,15 @@ import { ExpandNoticeComponent } from './modals/notice-modals/expand-notice/expa
 import { EditNoticeComponent } from './modals/notice-modals/edit-notice/edit-notice.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { ProfileCardComponent } from './dashboard/home/profile-card/profile-card.component';
+import { UserComplaintsComponent } from './dashboard/complaints/user-complaints/user-complaints.component';
+import { RaiseComplaintComponent } from './modals/complaints/raise-complaint/raise-complaint.component';
+import { ComplaintHistoryComponent } from './modals/complaints/complaint-history/complaint-history.component';
+import { ComplaintsComponent } from './dashboard/complaints/complaints.component';
+import { WorkerComplaintsComponent } from './dashboard/complaints/worker-complaints/worker-complaints.component';
+import { DatePipe } from '@angular/common';
+import { AssignedTaskComponent } from './dashboard/complaints/assigned-task/assigned-task.component';
+import { TaskComponent } from './dashboard/complaints/task/task.component';
+import { RegisteredComplaintsComponent } from './dashboard/complaints/registered-complaints/registered-complaints.component';
 
 
 
@@ -122,7 +131,15 @@ import { ProfileCardComponent } from './dashboard/home/profile-card/profile-card
     ExpandNoticeComponent,
     EditNoticeComponent,
     HomeComponent,
-    ProfileCardComponent
+    ProfileCardComponent,
+    UserComplaintsComponent,
+    RaiseComplaintComponent,
+    ComplaintHistoryComponent,
+    ComplaintsComponent,
+    WorkerComplaintsComponent,
+    AssignedTaskComponent,
+    TaskComponent,
+    RegisteredComplaintsComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,7 +153,8 @@ import { ProfileCardComponent } from './dashboard/home/profile-card/profile-card
   ],
   providers:[
      { provide: HTTP_INTERCEPTORS, useClass: PutTokenService, multi: true },
-      CookieService
+      CookieService,
+      DatePipe
   ],
   bootstrap: [AppComponent]
 })

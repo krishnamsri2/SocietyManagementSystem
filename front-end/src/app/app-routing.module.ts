@@ -23,6 +23,11 @@ import { NoticeComponent } from './dashboard/notice/notice.component';
 import { ShowNoticeComponent } from './dashboard/notice/show-notice/show-notice.component';
 import { CreateNoticeComponent } from './dashboard/notice/create-notice/create-notice.component';
 import { HomeComponent } from './dashboard/home/home.component';
+import { UserComplaintsComponent } from './dashboard/complaints/user-complaints/user-complaints.component';
+import { ComplaintsComponent } from './dashboard/complaints/complaints.component';
+import { WorkerComplaintsComponent } from './dashboard/complaints/worker-complaints/worker-complaints.component';
+import { AssignedTaskComponent } from './dashboard/complaints/assigned-task/assigned-task.component';
+import { RegisteredComplaintsComponent } from './dashboard/complaints/registered-complaints/registered-complaints.component';
 
 const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
@@ -34,6 +39,13 @@ const appRoutes: Route[] = [
       {path:'home',component:HomeComponent},
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnouncementComponent },
+      { path: 'complaints',component:ComplaintsComponent,children:[
+        {path:'registeredComplaints',component:RegisteredComplaintsComponent,children:[
+          { path: 'user_complaints/:flatId', component:UserComplaintsComponent},
+        ]},
+        {path:'task',component:WorkerComplaintsComponent},
+        {path:'myTask',component:AssignedTaskComponent}
+      ]},
       {
         path: 'configuration',
         component: ConfigurationComponent,
