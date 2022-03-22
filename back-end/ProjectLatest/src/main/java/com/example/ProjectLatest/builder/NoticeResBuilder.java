@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class NoticeResBuilder {
     private long noticeId;
+    private String noticeTitle;
     private String noticeDetail;
     private long createdBy;
     private Date createdDate;
@@ -22,6 +23,11 @@ public class NoticeResBuilder {
         return this;
     }
 
+
+    public NoticeResBuilder setNoticeTitle(String noticeTitle) {
+        this.noticeTitle = noticeTitle;
+        return this;
+    }
     public NoticeResBuilder setCreatedBy(long createdBy) {
         this.createdBy = createdBy;
         return this;
@@ -43,6 +49,6 @@ public class NoticeResBuilder {
     }
 
     public NoticeResponse getResponse(){
-        return new NoticeResponse(noticeId,noticeDetail,createdBy,createdDate,updatedDate,isDeleted);
+        return new NoticeResponse(noticeId,noticeTitle,noticeDetail,createdBy,createdDate,updatedDate,isDeleted);
     }
 }

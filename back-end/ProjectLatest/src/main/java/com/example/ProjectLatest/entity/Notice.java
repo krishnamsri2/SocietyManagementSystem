@@ -13,7 +13,8 @@ public class Notice {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "noticeId")
 	private long noticeId;
-
+	@Column(name = "noticeTitle")
+	private String noticeTitle;
 	@Column(name = "noticeDetail")
 	private String noticeDetail;
 	@Column(name = "userId")
@@ -40,8 +41,8 @@ public class Notice {
 	public Notice() {
 	}
 
-	public Notice(String noticeDetail,long userId) {
-		
+	public Notice(String noticeTitle, String noticeDetail, long userId) {
+		this.noticeTitle = noticeTitle;
 		this.noticeDetail = noticeDetail;
 		this.createdBy = userId;
 		this.modifyBy = userId;
@@ -60,6 +61,12 @@ public class Notice {
 		return noticeDetail;
 	}
 
+	public String getNoticeTitle() {
+		return noticeTitle;
+	}
+	public void setNoticeTitle(String noticeTitle) {
+		this.noticeTitle = noticeTitle;
+	}
 	public void setNoticeDetail(String noticeDetail) {
 		setUpdatedDate();
 		this.noticeDetail = noticeDetail;

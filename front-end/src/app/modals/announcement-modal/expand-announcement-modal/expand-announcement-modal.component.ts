@@ -10,11 +10,11 @@ import { AnnouncementModel } from '../../../shared/announcement.model';
 export class ExpandAnnouncementModalComponent implements OnInit {
 
   closeResult = '';
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
   @Input() announcementObj:AnnouncementModel;
-  constructor(private modalService: NgbModal) {}
+  @Input() isAnnouncementCard:boolean;
+  constructor(private modalService: NgbModal) {
+  }
 
   open(content) {
     this.modalService.open(content, {size:'xl',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

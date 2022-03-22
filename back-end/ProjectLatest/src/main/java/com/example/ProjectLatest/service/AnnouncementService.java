@@ -18,8 +18,8 @@ public class AnnouncementService {
     public AnnouncementResponse saveAnnouncement(AnnouncementTO announcement) {
         AnnouncementResponse announcementResponse = null;
         try {
-            Announcement tempAnnouncement = new Announcement(announcement.getAnnouncementDetail(), 76);
-            announcementResponse = new AnnouncementResponse(tempAnnouncement.getAnnouncementDetail(), tempAnnouncement.getannoucementId());
+            Announcement tempAnnouncement = new Announcement(announcement.getAnnouncementTitle(),announcement.getAnnouncementDetail(), 76);
+            announcementResponse = new AnnouncementResponse(tempAnnouncement.getAnnouncementTitle(),tempAnnouncement.getAnnouncementDetail(), tempAnnouncement.getannoucementId());
             repository.save(tempAnnouncement);
 
         } catch (Exception e) {
@@ -33,9 +33,9 @@ public class AnnouncementService {
         AnnouncementResponse announcementResponse = null;
         try {
             Announcement existingAnnouncement = repository.findById(id).orElse(null);
-
+            existingAnnouncement.setAnnouncementTitle(announcement.getAnnouncementTitle());
             existingAnnouncement.setAnnouncementDetail(announcement.getAnnouncementDetail());
-            announcementResponse = new AnnouncementResponse(existingAnnouncement.getAnnouncementDetail(), existingAnnouncement.getannoucementId());
+            announcementResponse = new AnnouncementResponse(existingAnnouncement.getAnnouncementTitle(),existingAnnouncement.getAnnouncementDetail(), existingAnnouncement.getannoucementId());
             repository.save(existingAnnouncement);
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class AnnouncementService {
             responseList = new ArrayList<>();
             List<Announcement> announcementList = repository.findAll();
             for (Announcement announcement : announcementList) {
-                responseList.add(new AnnouncementResponse(announcement.getAnnouncementDetail(), announcement.getannoucementId()));
+                responseList.add(new AnnouncementResponse(announcement.getAnnouncementTitle(),announcement.getAnnouncementDetail(), announcement.getannoucementId()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class AnnouncementService {
         AnnouncementResponse announcementResponse = null;
         try {
             Announcement existingAnnouncement = repository.findById(id).orElse(null);
-            announcementResponse = new AnnouncementResponse(existingAnnouncement.getAnnouncementDetail(), existingAnnouncement.getannoucementId());
+            announcementResponse = new AnnouncementResponse(existingAnnouncement.getAnnouncementTitle(),existingAnnouncement.getAnnouncementDetail(), existingAnnouncement.getannoucementId());
         } catch (Exception e) {
             e.printStackTrace();
         }

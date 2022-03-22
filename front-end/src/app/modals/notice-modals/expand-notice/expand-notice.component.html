@@ -27,4 +27,5 @@
   </div>
 </ng-template>
 
-<p class="btn-link"(click)="open(content)">Expand</p>
+<p *ngIf="!isNoticeCard" class="btn-link" (click)="open(content)">Expand</p>
+<p class="expand-link" *ngIf="isNoticeCard" (click)="open(content)">{{notice.noticeTitle}}</p>

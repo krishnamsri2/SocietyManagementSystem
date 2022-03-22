@@ -36,7 +36,7 @@ export class AddAnnouncementModalComponent implements OnInit {
     }
   }
   onSubmit(form:NgForm){
-    let announcement:AnnouncementModel = new AnnouncementModel(null,form.value.announcementDetail);
+    let announcement:AnnouncementModel = new AnnouncementModel(null,form.value.announcementTitle,form.value.announcementDetail);
     this.announcementService.addAnnouncement(announcement).subscribe(()=>{
       this.reloadPage.emit(true);
     });

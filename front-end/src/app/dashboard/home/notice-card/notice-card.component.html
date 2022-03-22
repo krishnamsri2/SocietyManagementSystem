@@ -1,0 +1,11 @@
+<div class="card" style="width:18rem;height:295px;overflow:auto">
+    <div class="card-header text-center p-0 d-flex justify-content-center">
+        <h3 style="margin-top:10px;font-weight:600">Notices</h3>
+    </div>
+    <div class="card-body">
+        <div class="notice p-2" *ngFor="let notice of notices;let i=index;">
+            <app-expand-notice [notice]="notice" [isNoticeCard]="true"></app-expand-notice>
+            <p>{{notice.updatedDate}}</p>
+        </div>
+    </div>
+</div>

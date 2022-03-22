@@ -37,7 +37,6 @@ export class MenuSecurityService {
         this.requestObject.getRequestObject()
       )
       .subscribe(() => {
-        alert('Mapped');
       });
   }
   deAssignRoles(mapObj:any){
@@ -45,7 +44,6 @@ export class MenuSecurityService {
     console.log(this.requestObject.getRequestObject());
     // this.requestObject.putRequestObject(mapObj);
     this.http.put(`http://localhost:9191/unassignMenu`,this.requestObject.getRequestObject()).subscribe(()=>{
-      alert('unassigned');
     })
   }
 }

@@ -40,6 +40,7 @@ export class EditAnnouncementModalComponent implements OnInit {
     }
   }
   onSubmit(form: NgForm) {
+    this.announcement.announcementTitle = form.value.announcementTitle;
     this.announcement.announcementDetail = form.value.announcementDetail;
     this.announcementService
       .updateAnnouncement(this.announcement.announcementId, this.announcement)

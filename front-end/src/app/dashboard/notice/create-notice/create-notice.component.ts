@@ -4,24 +4,34 @@ import { NoticeModel } from '../../../shared/notice.model';
 @Component({
   selector: 'app-create-notice',
   templateUrl: './create-notice.component.html',
-  styleUrls: ['./create-notice.component.css']
+  styleUrls: ['./create-notice.component.css'],
 })
 export class CreateNoticeComponent implements OnInit {
-
-  constructor(private noticeService:NoticeService) { }
-  currentUser:any;
+  constructor(private noticeService: NoticeService) {}
+  currentUser: any;
   ngOnInit(): void {
     this.currentUser = JSON.parse(atob(localStorage.getItem('user')));
     //console.log(this.currentUser);
   }
   noticeObj = {
-    noticeDetail:'',
-    userId:0
-  }
-  onClick(){
-    let newNotice = new NoticeModel(this.noticeObj.noticeDetail,this.currentUser.userId,null);
-    this.noticeService.addNotice(newNotice).subscribe(()=>{
-      alert('Added');
-    })
+    noticeTitle: '',
+    noticeDetail: '',
+    userId: 0,
+  };
+  onClick() {
+    let newNotice = new NoticeModel(
+      this.noticeObj.noticeTitle,
+      this.noticeObj.noticeDetail,
+      this.currentUser.userId,
+      null
+    );
+
+    this.noticeService.addNotice(newNotice).subscribe(() => {
+      this.noticeObj = {
+        noticeTitle: '',
+        noticeDetail: '',
+        userId: 0,
+      };
+    });
   }
 }

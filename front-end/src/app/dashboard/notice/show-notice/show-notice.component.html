@@ -1,8 +1,8 @@
 <ul class="list-group mt-2">
     <li class="list-group-item d-flex justify-content-between mt-1" *ngFor="let notice of notices">
-        <p>Notice {{+notice.serialNo+1}}</p>
+        <p>{{notice.noticeTitle}}</p>
         <div class="btns d-flex justify-content-between">
-            <app-expand-notice [notice]="notice"></app-expand-notice>
+            <app-expand-notice [notice]="notice" [isNoticeCard]="false"></app-expand-notice>
             <app-edit-notice [notice]="notice"></app-edit-notice>
         </div>
     </li>

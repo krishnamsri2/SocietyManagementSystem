@@ -21,3 +21,9 @@ p.body-text{
     font-family: 'Molengo', sans-serif;
 
 }
+p.expand-link{
+    font-size:16px;
+    cursor: pointer;
+    color:#555;
+    font-weight:500;
+}

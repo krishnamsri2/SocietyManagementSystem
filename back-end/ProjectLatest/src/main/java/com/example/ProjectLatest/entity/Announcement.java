@@ -12,6 +12,7 @@ public class Announcement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long annoucementId;
+	private String announcementTitle;
 	private String announcementDetail;
 	private long userId;
 	
@@ -38,8 +39,8 @@ public class Announcement {
 	public Announcement() {
 	}
 
-	public Announcement(String announcementDetail, long createdBy) {
-		
+	public Announcement(String announcementTitle,String announcementDetail, long createdBy) {
+		this.announcementTitle = announcementTitle;
 		this.announcementDetail = announcementDetail;
 		this.createdBy = createdBy;
 		this.modifyBy = createdBy;
@@ -60,6 +61,13 @@ public class Announcement {
 	
 	public long getUserId() {
 		return userId;
+	}
+	public String getAnnouncementTitle() {
+		return announcementTitle;
+	}
+
+	public void setAnnouncementTitle(String announcementTitle) {
+		this.announcementTitle = announcementTitle;
 	}
 	
 	public void setUserId(long userId) {

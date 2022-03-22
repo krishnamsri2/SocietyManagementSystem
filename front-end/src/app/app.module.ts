@@ -77,6 +77,8 @@ import { AssignedTaskComponent } from './dashboard/complaints/assigned-task/assi
 import { TaskComponent } from './dashboard/complaints/task/task.component';
 import { RegisteredComplaintsComponent } from './dashboard/complaints/registered-complaints/registered-complaints.component';
 import { CompletedTaskComponent } from './dashboard/complaints/completed-task/completed-task.component';
+import { AnnouncementCardComponent } from './dashboard/home/announcement-card/announcement-card.component';
+import { NoticeCardComponent } from './dashboard/home/notice-card/notice-card.component';
 
 
 
@@ -142,6 +144,8 @@ import { CompletedTaskComponent } from './dashboard/complaints/completed-task/co
     TaskComponent,
     RegisteredComplaintsComponent,
     CompletedTaskComponent,
+    AnnouncementCardComponent,
+    NoticeCardComponent,
   ],
   imports: [
     BrowserModule,

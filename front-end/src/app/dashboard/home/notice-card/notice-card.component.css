@@ -1,0 +1,11 @@
+
+.notice{
+    border-bottom:1px solid rgba(0,0,0,0.1);
+}
+.notice p{
+    margin:2px;
+    font-size:14px;
+}
+.notice:first-child{
+    font-size:16px;
+}

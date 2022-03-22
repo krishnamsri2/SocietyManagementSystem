@@ -11,6 +11,7 @@ export class ExpandNoticeComponent implements OnInit {
 
   closeResult = '';
   @Input() notice:NoticeModel;
+  @Input() isNoticeCard:boolean;
   currentUser:any;
   ngOnInit(): void {
     this.currentUser = JSON.parse(atob(localStorage.getItem('user')));

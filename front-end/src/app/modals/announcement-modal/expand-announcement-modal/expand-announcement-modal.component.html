@@ -14,7 +14,7 @@
         <p class="mt-1">Announcement!!</p>
       </div>
       <div class="card-body">
-        <h2 class="card-title">Some Heading</h2>
+        <h2 class="card-title">{{announcementObj.announcementTitle}}</h2>
         <p class="card-text">
           {{announcementObj.announcementDetail}}
         </p>
@@ -25,14 +25,8 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="modal.close('Save click')"
-    >
-      Close
-    </button>
   </div>
 </ng-template>
 
-<button class="btn btn-danger mt-1" (click)="open(content)">Expand</button>
+<button *ngIf="!isAnnouncementCard"class="btn btn-danger mt-1" (click)="open(content)">Expand</button>
+<p style="font-size:16px;color:#555;font-weight:500;cursor: pointer;" *ngIf="isAnnouncementCard"class="announcement-link" (click)="open(content)">{{announcementObj.announcementTitle}}</p>

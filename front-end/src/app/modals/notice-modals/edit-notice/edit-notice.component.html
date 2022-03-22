@@ -11,6 +11,16 @@
   <div class="modal-body">
     <form class="mx-auto p-3">
       <div class="form-group">
+        <label for="notice-title">Enter Title</label>
+        <input
+          type="text"
+          name="noticeTitle"
+          class="form-control"
+          id="notice-title"
+          [(ngModel)]="notice.noticeTitle"
+        />
+      </div>
+      <div class="form-group">
         <label for="notice-details">Enter Details</label>
         <textarea
           name="noticeDetail"
@@ -21,7 +31,7 @@
           [(ngModel)]="notice.noticeDetail"
         ></textarea>
       </div>
-      <button type="submit" class="mt-3 btn btn-danger" (click)="onClick()">
+      <button type="submit" class="mt-3 btn btn-danger" (click)="onClick(modal)">
         Save
       </button>
     </form>

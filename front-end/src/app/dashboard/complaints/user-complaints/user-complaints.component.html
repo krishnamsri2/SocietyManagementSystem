@@ -42,7 +42,7 @@
                 [complaintId]="complaint.complaintId"
               ></app-complaint-history>
             </td>
-            <td>
+            <td *ngIf="complaint.complaintStatus === 'COMPLETED'">
               <button
                 class="btn btn-sm btn-danger"
                 (click)="action('CLOSED', complaint.complaintId)"
@@ -51,7 +51,6 @@
                 Close
               </button>
             </td>
-            <td *ngIf="complaint.complaintStatus === 'COMPLETED'"></td>
           </tr>
         </tbody>
       </table>

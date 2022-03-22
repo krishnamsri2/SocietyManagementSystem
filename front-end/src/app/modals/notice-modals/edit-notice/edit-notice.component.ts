@@ -1,3 +1,4 @@
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Component, Input, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { NoticeService } from '../../../service/notice.service';
@@ -36,9 +37,9 @@ export class EditNoticeComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  onClick(){
+  onClick(modal){
     this.noticeService.updateNotice(this.notice.noticeId,this.notice).subscribe(()=>{
-      alert('Edited');
+      modal.close();
     });
   }
 }

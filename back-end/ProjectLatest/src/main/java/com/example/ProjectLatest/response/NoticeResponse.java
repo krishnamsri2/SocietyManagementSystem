@@ -4,14 +4,17 @@ import java.util.Date;
 
 public class NoticeResponse {
     private long noticeId;
+    private String noticeTitle;
+
     private String noticeDetail;
     private long createdBy;
     private Date createdDate;
     private Date updatedDate;
     private Boolean isDeleted;
 
-    public NoticeResponse(long noticeId, String noticeDetail, long createdBy, Date createdDate, Date updatedDate, Boolean isDeleted) {
+    public NoticeResponse(long noticeId,String noticeTitle, String noticeDetail, long createdBy, Date createdDate, Date updatedDate, Boolean isDeleted) {
         this.noticeId = noticeId;
+        this.noticeTitle = noticeTitle;
         this.noticeDetail = noticeDetail;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
@@ -27,12 +30,22 @@ public class NoticeResponse {
         isDeleted = deleted;
     }
 
+
+
     public long getNoticeId() {
         return noticeId;
     }
 
     public void setNoticeId(long noticeId) {
         this.noticeId = noticeId;
+    }
+
+    public String getNoticeTitle() {
+        return noticeTitle;
+    }
+
+    public void setNoticeTitle(String noticeTitle) {
+        this.noticeTitle = noticeTitle;
     }
 
     public String getNoticeDetail() {

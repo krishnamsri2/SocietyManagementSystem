@@ -20,7 +20,7 @@ public class NoticeService {
     //POST
     public void saveNotice(NoticeTO notice, Token token){
         try {
-            Notice tempNotice = new Notice(notice.getNoticeDetail(), token.getUserId());
+            Notice tempNotice = new Notice(notice.getNoticeTitle(), notice.getNoticeDetail(), token.getUserId());
             repository.save(tempNotice);
         }catch (Exception e){
             e.printStackTrace();
@@ -33,6 +33,7 @@ public class NoticeService {
             Notice existingNotice = repository.findById(id).orElse(null);
 
             if(existingNotice.isDeleted() == false && existingNotice != null) {
+                existingNotice.setNoticeTitle(notice.getNoticeTitle());
                 existingNotice.setNoticeDetail(notice.getNoticeDetail());
                 repository.save(existingNotice);
             }
@@ -50,6 +51,7 @@ public class NoticeService {
              copy = tempNotices.stream()
                     .map(Notice -> new NoticeResBuilder()
                             .setNoticeId(Notice.getNoticeId())
+                            .setNoticeTitle(Notice.getNoticeTitle())
                             .setNoticeDetail(Notice.getNoticeDetail())
                             .setCreatedBy(Notice.getCreatedBy())
                             .setCreatedDate(Notice.getCreatedDate())
@@ -72,6 +74,7 @@ public class NoticeService {
             copy = tempNotices.stream()
                     .map(Notice -> new NoticeResBuilder()
                             .setNoticeId(Notice.getNoticeId())
+                            .setNoticeTitle(Notice.getNoticeTitle())
                             .setNoticeDetail(Notice.getNoticeDetail())
                             .setCreatedBy(Notice.getCreatedBy())
                             .setCreatedDate(Notice.getCreatedDate())

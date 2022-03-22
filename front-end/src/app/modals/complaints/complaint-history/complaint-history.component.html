@@ -10,10 +10,10 @@
   </div>
   <div class="modal-body">
     <div class="container-fluid">
+      <div class="container mx-auto my-2 p-2 text-center" style="border:1px solid red;color:red;font-weight:600;" *ngIf="complaintHistory[0].complaintStatus==='CLOSED'">Complaint Closed</div>
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col">Serial No.</th>
             <th scope="col">Worker Assigned</th>
             <th scope="col">Phone Number</th>
             <th scope="col">Status</th>
@@ -21,12 +21,11 @@
         </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let history of complaintHistory;let i=index">
-            <th scope="row">{{i+1}}</th>
-            <td>{{history.workerAssigned}}</td>
-            <td>{{history.workerMobileNo}}</td>
-            <td>{{history.complaintStatus}}</td>
-            <td>{{history.modifiedStatus}}</td>
+         <tr *ngFor="let history of complaintHistory;let i=index">
+            <td *ngIf="history.complaintStatus!=='CLOSED'">{{history.workerAssigned}}</td>
+            <td *ngIf="history.complaintStatus!=='CLOSED'">{{history.workerMobileNo}}</td>
+            <td *ngIf="history.complaintStatus!=='CLOSED'">{{history.complaintStatus}}</td>
+            <td *ngIf="history.complaintStatus!=='CLOSED'">{{history.modifiedStatus}}</td>
           </tr>
         </tbody>
       </table>
