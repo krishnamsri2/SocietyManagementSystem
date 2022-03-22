@@ -57,6 +57,7 @@ export class NewFlatModalComponent implements OnInit {
       this.flatModel.isTenant=false;
     }
     
+    
 
     console.log(this.flatModel);
     

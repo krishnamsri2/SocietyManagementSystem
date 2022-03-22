@@ -47,6 +47,7 @@
         </div>
   
       </div>
+
       <div class="col-md-6 mb-4 pb-2">
   
         <div class="form-outline">
@@ -67,7 +68,21 @@
   
       </div>
 
-      
+      <div class="col-md-6 mb-4 pb-2" *ngIf="superAdmin">
+  
+        <div class="form-outline">
+          <label class="form-label" for="societyName">Society Name</label>
+          <input 
+          type="text" 
+          id="societyName" 
+          class="form-control" 
+          required
+          ngModel
+          name="societyName"
+          #societyName="ngModel"/>
+        </div>
+  
+      </div>
 
       <div class="mt-4 pt-2">
         <button type="submit" class="btn btn-danger" [disabled]="!f.valid">Register user</button>

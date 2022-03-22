@@ -43,8 +43,9 @@ export class ProfileComponent implements OnInit {
     this.setCurrentUser();
 
     this.setCurrentUserFlats();
-
-    this.currentUser=JSON.parse(atob(localStorage.getItem("user")));
+    console.log(this.currentUser);
+    //this.currentUser=JSON.parse(atob(localStorage.getItem("user")));
+    
   }
 
   onReload(reloadPage:boolean){

@@ -1,8 +1,10 @@
 <div class="navbar-header container-fluid">
   <div class="container mx-auto p-2 row">
-    <div class="col-8 d-flex links mt-4">
+    <div class="col-8 d-flex links mt-4" *ngIf="!superAdmin">
       <li *ngFor="let menu of menus"><a [routerLink]="[menu.menuUrl]" [routerLinkActive]="['active']">{{menu.menuName}}</a></li>
-      
+    </div>
+    <div class="col-8 d-flex links mt-4" *ngIf="superAdmin">
+      <li><a [routerLink]="['configuration']" [routerLinkActive]="['active']">Configuration</a></li>
     </div>
     <div class="col-4 d-flex justify-content-center">
       <div class="image">

@@ -29,13 +29,62 @@ public class UserService {
     private FlatResidentsRepository flatResidentsRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private SocietyRepository societyRepository;
 
 
     //POST
+//    public void saveUser(UserTO user, Token token){
+//        try{
+//            String pass= bCryptPasswordEncoder.encode("Default@123");
+//            Society tempSoc = societyRepository.findByName(user.getSocietyName()).orElse(null);
+//            User tempUser = new User(pass,user.getEmailId(),token.getUserId(),tempSoc.getSocietyid());
+//            repoUser.save(tempUser);
+//
+//            UserDetails tempUd = new UserDetailBuilder()
+//                    .setFirstName(user.getFirstName())
+//                    .setLastName(user.getLastName())
+//                    .setEmailId(user.getEmailId())
+//                    .setPhoneNumber(user.getPhoneNumber())
+//                    .setCreatedBy(token.getUserId())
+//                    .setUser(tempUser)
+//                    .getResponse();
+//            repository.save(tempUd);
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+    //POST
+    public void saveUserAdmin(UserTO user, Token token){
+        try{
+            String pass= bCryptPasswordEncoder.encode("Default@123");
+            Society tempSoc = societyRepository.findByName(user.getSocietyName()).orElse(null);
+            User tempUser = new User(pass,user.getEmailId(),token.getUserId(),tempSoc.getSocietyid());
+            repoUser.save(tempUser);
+
+            UserDetails tempUd = new UserDetailBuilder()
+                    .setFirstName(user.getFirstName())
+                    .setLastName(user.getLastName())
+                    .setEmailId(user.getEmailId())
+                    .setPhoneNumber(user.getPhoneNumber())
+                    .setCreatedBy(token.getUserId())
+                    .setUser(tempUser)
+                    .getResponse();
+            repository.save(tempUd);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
     public void saveUser(UserTO user, Token token){
         try{
             String pass= bCryptPasswordEncoder.encode("Default@123");
-            User tempUser = new User(pass,user.getEmailId(),token.getUserId(),token.getSocietyId());
+            User tempUser = new User(pass,user.getEmailId(),token.getUserId(), token.getSocietyId());
             repoUser.save(tempUser);
 
             UserDetails tempUd = new UserDetailBuilder()
@@ -100,20 +149,43 @@ public class UserService {
 
     }
 
-        public List<UserDetailsResponse> getAllUser(){
+//        public List<UserDetailsResponse> getAllUser(){
+//        List<UserDetailsResponse> copy = new ArrayList<>();
+//
+//        try {
+//            for(UserDetails x : repository.findAll()){
+//
+//                    copy.add(new UserDetailsResBuilder()
+//                            .setUserDetailId(x.getUserDetailsId())
+//                            .setFirstName(x.getFirstName())
+//                            .setLastName(x.getLastName())
+//                            .setPhoneNumber(x.getPhoneNumber())
+//                            .setEmailId(x.getEmailId())
+//                            .setIsDeleted(x.getIsDeleted())
+//                            .getResponse());
+//            }
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return copy;
+//    }
+
+    public List<UserDetailsResponse> getAllUser(long userId) {
         List<UserDetailsResponse> copy = new ArrayList<>();
 
         try {
-            for(UserDetails x : repository.findAll()){
+            for(UserDetails x : repository.findAllAdmin(userId)){
 
-                    copy.add(new UserDetailsResBuilder()
-                            .setUserDetailId(x.getUserDetailsId())
-                            .setFirstName(x.getFirstName())
-                            .setLastName(x.getLastName())
-                            .setPhoneNumber(x.getPhoneNumber())
-                            .setEmailId(x.getEmailId())
-                            .setIsDeleted(x.getIsDeleted())
-                            .getResponse());
+                copy.add(new UserDetailsResBuilder()
+                        .setUserDetailId(x.getUserDetailsId())
+                        .setFirstName(x.getFirstName())
+                        .setLastName(x.getLastName())
+                        .setPhoneNumber(x.getPhoneNumber())
+                        .setEmailId(x.getEmailId())
+                        .setIsDeleted(x.getIsDeleted())
+                        .getResponse());
             }
 
         }catch(Exception e){

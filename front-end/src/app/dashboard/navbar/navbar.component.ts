@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   menus: any[] = [];
   sizeOfComponents: number;
   startIndex = 0;
-
+  superAdmin:boolean = false;
   components: ComponentModel[] = [
     new ComponentModel('Configuration', 'configuration'),
   ];
@@ -34,7 +34,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(atob(localStorage.getItem('user')));
-
+    if(+atob(localStorage.getItem("societyId"))===0){
+      this.superAdmin = true;
+    }
     this.http
       .get<any>(`http://localhost:9191/menu/${this.currentUser.userDetailId}`)
       .subscribe((data) => {

@@ -49,7 +49,7 @@
               <a
                 class="link-danger"
                 [routerLink]="['flat_details', user.userDetailId]"
-                (click)="setUserId(user.userDetailId)"
+                (click)="setUserDetailId(user.userDetailId)"
                 >Flat Details</a
               >
             </td>
@@ -57,7 +57,7 @@
               <a
                 [routerLink]="['role', user.userDetailId]"
                 class="link-danger"
-                (click)="saveUserId(user.userDetailId)"
+                (click)="saveUserDetailId(user.userDetailId)"
                 >Role</a
               >
             </td>
