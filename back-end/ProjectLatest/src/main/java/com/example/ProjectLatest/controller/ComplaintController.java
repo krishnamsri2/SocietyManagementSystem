@@ -48,6 +48,11 @@ public class ComplaintController {
     {
         return service.assignedWorks(userId);
     }
+    @GetMapping("/completedWorks/{workerId}")
+    public List<ComplaintWorkerResponse> completedWorks(@PathVariable long workerId)
+    {
+        return service.getCompletedWorks(workerId);
+    }
 
     // GET all complaints created by flatId;
     @GetMapping("/myComplaints/{id}")

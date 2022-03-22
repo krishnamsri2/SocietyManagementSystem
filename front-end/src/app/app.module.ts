@@ -76,6 +76,7 @@ import { DatePipe } from '@angular/common';
 import { AssignedTaskComponent } from './dashboard/complaints/assigned-task/assigned-task.component';
 import { TaskComponent } from './dashboard/complaints/task/task.component';
 import { RegisteredComplaintsComponent } from './dashboard/complaints/registered-complaints/registered-complaints.component';
+import { CompletedTaskComponent } from './dashboard/complaints/completed-task/completed-task.component';
 
 
 
@@ -140,6 +141,7 @@ import { RegisteredComplaintsComponent } from './dashboard/complaints/registered
     AssignedTaskComponent,
     TaskComponent,
     RegisteredComplaintsComponent,
+    CompletedTaskComponent,
   ],
   imports: [
     BrowserModule,

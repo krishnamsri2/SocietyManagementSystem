@@ -79,6 +79,8 @@ public class ComplaintHistory {
 		this.userId = userId;
 	}
 
+
+
 	public Complaint getComplaint() {
 		return complaint;
 	}

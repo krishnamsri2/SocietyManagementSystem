@@ -26,6 +26,7 @@ export class ComplaintHistoryComponent implements OnInit {
       this.complaintHistory.forEach(element => {
         element.modifiedStatus=this.datePipe.transform(element.modifiedStatus,'long');
       });
+      console.log(this.complaintHistory);
     }, error => {
       console.log("Error in getting complaint History", error);
     });
@@ -33,7 +34,7 @@ export class ComplaintHistoryComponent implements OnInit {
   constructor(private modalService: NgbModal, private complaintService: ComplaintService,private datePipe:DatePipe) { }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {size:'lg', ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

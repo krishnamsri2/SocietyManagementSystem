@@ -36,7 +36,7 @@ export class UserComplaintsComponent implements OnInit {
   }
   action(status,complaintId){
     this.close=false;
-    this.complaintService.taskActions(this.userDetailId,complaintId,status).subscribe(()=>{
+    this.complaintService.closeActions(this.userDetailId,complaintId,status).subscribe(()=>{
       this.ngOnInit();
     })
   }

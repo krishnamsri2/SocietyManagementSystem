@@ -10,56 +10,26 @@
   </div>
   <div class="modal-body">
     <div class="container-fluid">
-      <div class="main-body">
-        <div class="row gutters-sm">
-          <div class="col-md-12">
-            <div class="card mb-3">
-              <div class="card-body" *ngFor="let complaint of complaintHistory">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h4 class="mb-0">Complaint Status</h4>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ complaint.complaintStatus }}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h4 class="mb-0">Date</h4>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ complaint.modifiedStatus }}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h4 class="mb-0">Worker Assigned</h4>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{ complaint.workerAssigned }}
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h4 class="mb-0">Worker Mobile Number</h4>
-                  </div>
-                  <div class="col-sm-9 text-secondary">
-                    {{
-                      complaint.workerMobileNo
-                        ? complaint.workerMobileNo
-                        : "Not Assigned"
-                    }}
-                  </div>
-                </div>
-                <hr>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Serial No.</th>
+            <th scope="col">Worker Assigned</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let history of complaintHistory;let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{history.workerAssigned}}</td>
+            <td>{{history.workerMobileNo}}</td>
+            <td>{{history.complaintStatus}}</td>
+            <td>{{history.modifiedStatus}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </ng-template>

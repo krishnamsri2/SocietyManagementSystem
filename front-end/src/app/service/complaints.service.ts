@@ -24,7 +24,7 @@ export class ComplaintService{
     raiseComplaint(complaint:RaiseComplaintModel){
         this.requestObj.putRequestObject(complaint);
         let complaintTO=this.requestObj.getRequestObject();
-
+        console.log(complaintTO);
         return this.http.post('http://localhost:9191/addComplaint',complaintTO);
     }
 
@@ -37,6 +37,16 @@ export class ComplaintService{
         return this.http.get<any[]>(`http://localhost:9191/complaintHistory/${complaintId}`);
     }
     taskActions(userDetailId:any,complaintId:any,status:string){
+        let obj = {
+            workerId:userDetailId,
+            complaintId:complaintId,
+            complaintStatus:status
+        }
+        this.requestObj.putRequestObject(obj);
+        console.log(this.requestObj.getRequestObject());
+        return this.http.put(`http://localhost:9191/assignAndUpdateWork`,this.requestObj.getRequestObject());
+    }
+    closeActions(userDetailId:any,complaintId:any,status:string){
         let obj = {
             userId:userDetailId,
             complaintId:complaintId,

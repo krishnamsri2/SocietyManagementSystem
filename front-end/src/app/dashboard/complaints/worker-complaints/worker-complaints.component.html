@@ -7,8 +7,6 @@
       <th scope="col">Complaint Type</th>
       <th scope="col">Complaint detail</th>
       <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -19,8 +17,6 @@
       <td>{{complaint.type}}</td>
       <td>{{complaint.complaintDetail}}</td>
       <td><button class="btn btn-sm btn-danger" [(disabled)]="disable" (click)="assign('ASSIGNED',complaint.complaintId)" >Assign</button></td>
-      <td><button class="btn btn-sm btn-primary" [(disabled)]="!disable" (click)="enableBtn()">Decline</button></td>
-      <td><button class="btn btn-sm btn-success" [(disabled)]="!disable" (click)="enableBtn()">Completed</button></td>
     </tr>
   </tbody>
 </table>

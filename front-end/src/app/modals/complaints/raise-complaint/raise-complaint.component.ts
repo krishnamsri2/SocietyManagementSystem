@@ -8,29 +8,36 @@ import { RaiseComplaintModel } from './raise-complaint.model';
 @Component({
   selector: 'app-raise-complaint',
   templateUrl: './raise-complaint.component.html',
-  styleUrls: ['./raise-complaint.component.css']
+  styleUrls: ['./raise-complaint.component.css'],
 })
 export class RaiseComplaintComponent implements OnInit {
-
   @Output() reloadPage = new EventEmitter<boolean>();
 
-  public complaintDetails:string='';
-  public complaintType:string='';
+  public complaintDetails: string = '';
+  public complaintType: string = '';
 
-  private flatId:number;
-
+  private flatId: number;
   closeResult = '';
   ngOnInit(): void {
-    this.flatId=this.route.snapshot.params['flatId'];
+    this.flatId = this.route.snapshot.params['flatId']; 
   }
-  constructor(private modalService: NgbModal,private complaintService:ComplaintService,private route : ActivatedRoute) {}
+  constructor(
+    private modalService: NgbModal,
+    private complaintService: ComplaintService,
+    private route: ActivatedRoute
+  ) {}
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -43,16 +50,24 @@ export class RaiseComplaintComponent implements OnInit {
     }
   }
 
-  addComplaint(){
-    
-    let raiseComplaint = new RaiseComplaintModel(this.flatId,this.complaintDetails,this.complaintType);
-
-    this.complaintService.raiseComplaint(raiseComplaint).subscribe(()=>{
-      this.reloadPage.emit(true);
-    },error=>{
-      console.log("error in raising a complaint",error);
-    });
-
+  addComplaint() {
+    let userId = JSON.parse(atob(localStorage.getItem('user'))).userDetailId;
+    //console.log(userId)
+    let raiseComplaint = new RaiseComplaintModel(
+      this.flatId,
+      userId,
+      this.complaintDetails,
+      this.complaintType,
+      JSON.parse(atob(localStorage.getItem('user'))).userDetailId
+    );
+    console.log(raiseComplaint);
+    this.complaintService.raiseComplaint(raiseComplaint).subscribe(
+      () => {
+        this.reloadPage.emit(true);
+      },
+      (error) => {
+        console.log('error in raising a complaint', error);
+      }
+    );
   }
-
 }

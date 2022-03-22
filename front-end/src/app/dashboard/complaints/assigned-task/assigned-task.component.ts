@@ -12,6 +12,7 @@ export class AssignedTaskComponent implements OnInit {
   constructor(private complaintService:ComplaintService,private http:HttpClient) { }
   myTasks:any;
   userDetailId:any;
+  show:boolean = false;
   ngOnInit(): void {
     this.userDetailId = JSON.parse(atob(localStorage.getItem('user'))).userDetailId;
     console.log(this.userDetailId);
@@ -23,6 +24,9 @@ export class AssignedTaskComponent implements OnInit {
     //console.log(status);
     this.complaintService.taskActions(this.userDetailId,complaintId,status).subscribe(()=>{
       this.ngOnInit();
+      if(status==='COMPLETED'){
+        this.show=true;
+      }
     });
   }
 }

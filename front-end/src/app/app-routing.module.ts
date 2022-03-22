@@ -28,6 +28,7 @@ import { ComplaintsComponent } from './dashboard/complaints/complaints.component
 import { WorkerComplaintsComponent } from './dashboard/complaints/worker-complaints/worker-complaints.component';
 import { AssignedTaskComponent } from './dashboard/complaints/assigned-task/assigned-task.component';
 import { RegisteredComplaintsComponent } from './dashboard/complaints/registered-complaints/registered-complaints.component';
+import { CompletedTaskComponent } from './dashboard/complaints/completed-task/completed-task.component';
 
 const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
@@ -44,7 +45,8 @@ const appRoutes: Route[] = [
           { path: 'user_complaints/:flatId', component:UserComplaintsComponent},
         ]},
         {path:'task',component:WorkerComplaintsComponent},
-        {path:'myTask',component:AssignedTaskComponent}
+        {path:'myTask',component:AssignedTaskComponent},
+        {path:'completedTask',component:CompletedTaskComponent}
       ]},
       {
         path: 'configuration',

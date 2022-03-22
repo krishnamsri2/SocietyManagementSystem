@@ -36,10 +36,13 @@ public class ComplaintService {
 
         try{
             long flatId = complaintTO.getFlatId();
+            long userId = complaintTO.getUserId();
             Flat flat = flatRepository.getById(flatId);
 
 
-            Complaint complaint = new Complaint(complaintTO.getType(), ComplaintStatus.CREATED, complaintTO.getComplaintDetails(), flat.getFlatNo());
+            Complaint complaint = new Complaint(complaintTO.getType(), ComplaintStatus.CREATED, complaintTO.getComplaintDetails(), flat.getFlatNo(),userId);
+
+
             complaint.setFlat(flat);
 
 
@@ -56,6 +59,23 @@ public class ComplaintService {
         }
 
         return;
+
+    }
+
+    public List<ComplaintWorkerResponse> getCompletedWorks(long workerId)
+    {
+        List<ComplaintWorkerResponse> complaintWorkerResponses = new ArrayList<ComplaintWorkerResponse>();
+
+        List<Complaint> complaints = complaintRepository.findByWorkerIdAndStatus(workerId);
+
+        for (Complaint complaint : complaints) {
+            String flatNo = complaint.getFlat().getFlatNo();
+            String towerName = complaint.getFlat().getTow2().getTowerName();
+            ComplaintWorkerResponse complaintWorkerResponse = new ComplaintWorkerResponse(complaint.getComplaintDetails(), complaint.getComplaintId(), complaint.getType(), flatNo, towerName);
+            complaintWorkerResponses.add(complaintWorkerResponse);
+        }
+
+        return complaintWorkerResponses;
 
     }
 
@@ -84,17 +104,25 @@ public class ComplaintService {
         try {
             Complaint complaint = complaintRepository.getById(workTO.getComplaintId());
 
-            long workerId = workTO.getUserId();
-            //System.out.println(workerId);
+
+            long workerId = workTO.getWorkerId();
+            long userId = workTO.getUserId();
+
             ComplaintStatus complaintStatus = workTO.getComplaintStatus();
 
-            // A worker can decline only if complaint status is assigned not after completion or after complaint is closed
-            if (complaintStatus.equals(ComplaintStatus.DECLINED) ) {
-                complaint.setUserId(0L);
+            if (complaintStatus.equals(ComplaintStatus.DECLINED)) {
+                complaint.setWorkerId(0L);// userId = 0 represents the work is assigned to no one.
                 complaint.setStatus(ComplaintStatus.CREATED);
-//                System.out.println("Works");
-            } else {
-                complaint.setUserId(workerId);
+            }
+            else if(complaintStatus.equals(ComplaintStatus.CLOSED))
+            {
+                complaint.setUserId(userId);
+                complaint.setStatus(workTO.getComplaintStatus());
+            }
+            else
+            {
+                complaint.setWorkerId(workerId);
+
                 complaint.setStatus(workTO.getComplaintStatus());
             }
 
@@ -110,12 +138,12 @@ public class ComplaintService {
         return;
     }
 
-    public List<ComplaintWorkerResponse> assignedWorks(long userId)
+    public List<ComplaintWorkerResponse> assignedWorks(long workerId)
     {
         List<ComplaintWorkerResponse> complaintWorkerResponses = new ArrayList<ComplaintWorkerResponse>();
 
         try {
-            List<Complaint> complaints = complaintRepository.findByUserId(userId);
+            List<Complaint> complaints = complaintRepository.findByWorkerIdAndAssignedStatus(workerId);
             for (Complaint complaint : complaints) {
                 ComplaintWorkerResponse complaintWorkerResponse = new ComplaintWorkerResponse(complaint.getComplaintDetails(), complaint.getComplaintId(), complaint.getType(), complaint.getFlat().getFlatNo(), complaint.getFlat().getTow2().getTowerName());
                 complaintWorkerResponses.add(complaintWorkerResponse);
@@ -147,11 +175,13 @@ public class ComplaintService {
         return complaintResponses;
     }
 
-    public List<ComplaintHistoryResponse> allComplaintHistory(long id)
+
+    public List<ComplaintHistoryResponse> allComplaintHistory(long complaintId)
     {
         List<ComplaintHistoryResponse> complaintHistoryResponses = new ArrayList<ComplaintHistoryResponse>();
         try {
-            List<ComplaintHistory> complaintHistories = complaintHistoryRepository.findByComplaintId(id);
+            List<ComplaintHistory> complaintHistories = complaintHistoryRepository.findByComplaintId(complaintId    );
+
             for (ComplaintHistory complaintHistory : complaintHistories)
             {
                 ComplaintHistoryResponse complaintHistoryResponse = new ComplaintHistoryResponse(complaintHistory.getStatus(), complaintHistory.getCreated());
