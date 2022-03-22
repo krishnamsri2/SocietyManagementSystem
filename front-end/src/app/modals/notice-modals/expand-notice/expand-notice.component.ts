@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { NoticeModel } from '../../../shared/notice.model';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-expand-notice',
   templateUrl: './expand-notice.component.html',
@@ -16,8 +16,9 @@ export class ExpandNoticeComponent implements OnInit {
     this.currentUser = JSON.parse(atob(localStorage.getItem('user')));
     console.log(this.currentUser);
     console.log(this.notice);
+    this.notice.updatedDate = this.datePipe.transform(this.notice.updatedDate,'short')
   }
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,private datePipe:DatePipe) {}
 
   open(content) {
     this.modalService.open(content, {size:'lg',ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

@@ -7,12 +7,16 @@ public class RoleWithStatusResponse
     private long roleId;
     private RoleType roleType;
     private String role;
+    private String roleDescription;
+
+
     private boolean status;
 
-    public RoleWithStatusResponse(long roleId, RoleType roleType, String role, boolean status) {
+    public RoleWithStatusResponse(long roleId, RoleType roleType, String role, String roleDescription,boolean status) {
         this.roleId = roleId;
         this.roleType = roleType;
         this.role = role;
+        this.roleDescription = roleDescription;
         this.status = status;
     }
 
@@ -40,6 +44,12 @@ public class RoleWithStatusResponse
         this.role = role;
     }
 
+    public String getRoleDescription() {
+        return roleDescription;
+    }
+    public void setRoleDescription(String roleDescription) {
+        this.roleDescription = roleDescription;
+    }
     public boolean isStatus() {
         return status;
     }

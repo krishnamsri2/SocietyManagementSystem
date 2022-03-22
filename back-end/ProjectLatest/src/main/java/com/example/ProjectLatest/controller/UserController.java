@@ -52,7 +52,10 @@ public class UserController {
           service.updateUser(user.getRequestObject(),user.getToken());
 
     }
-
+    @GetMapping("/users/userDetail/{userId}")
+    public UserDetailsResponse findUser(@PathVariable long userId){
+        return service.getUserById(userId);
+    }
 
     @DeleteMapping("/users/delete/{id}")
     public void deleteUser(@PathVariable long id){

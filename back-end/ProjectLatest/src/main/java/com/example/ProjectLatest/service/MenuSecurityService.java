@@ -51,12 +51,12 @@ public class MenuSecurityService {
             List<Long> assignedRoleIds = menuSecurityRepository.getAllAssigned(menuId);
             for (Long roleId : unassigendRoleIds) {
                 Role role = roleRepository.getById(roleId);
-                RoleWithStatusResponse response = new RoleWithStatusResponse(role.getRoleId(), role.getRoleType(), role.getRole(), false);
+                RoleWithStatusResponse response = new RoleWithStatusResponse(role.getRoleId(), role.getRoleType(), role.getRole(),role.getRoleDescription(), false);
                 responses.add(response);
             }
             for (Long roleId : assignedRoleIds) {
                 Role role = roleRepository.getById(roleId);
-                RoleWithStatusResponse response = new RoleWithStatusResponse(role.getRoleId(), role.getRoleType(), role.getRole(), true);
+                RoleWithStatusResponse response = new RoleWithStatusResponse(role.getRoleId(), role.getRoleType(), role.getRole(),role.getRoleDescription(), true);
                 responses.add(response);
             }
         }

@@ -18,6 +18,7 @@ export class AssignedTaskComponent implements OnInit {
     console.log(this.userDetailId);
     this.http.get<any>(`http://localhost:9191/assignedWorks/${this.userDetailId}`).subscribe((data)=>{
       this.myTasks = data;
+      console.log(this.myTasks);
     })
   }
   action(status:string,complaintId){

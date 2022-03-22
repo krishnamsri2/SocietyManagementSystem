@@ -31,9 +31,10 @@ export class EditUserModalComponent implements OnInit, OnDestroy {
   constructor(private modalService: NgbModal, private userService: UserPostServices, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    
+    console.log(this.userDetailId);
     this.defaultUserSubscription = this.userService.getUserById(this.userDetailId).subscribe((responseData) => {
       this.defaultUser = responseData;
+      console.log(this.defaultUser);
     }, error => {
       console.log("Error in user updation", error);
     });

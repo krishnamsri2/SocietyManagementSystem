@@ -53,6 +53,7 @@ public class ComplaintHistory {
         this.isDeleted = false;
 
 		this.complaint = complaint;
+		this.userId = 0L;
 
     }
 

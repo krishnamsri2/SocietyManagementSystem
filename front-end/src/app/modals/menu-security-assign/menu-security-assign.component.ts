@@ -23,6 +23,7 @@ export class MenuSecurityAssignComponent implements OnInit {
     this.menuSecurityService.fetchAllRoles(this.menuId).subscribe((data) => {
     this.roles = data;
     this.roleList = this.roles;
+    console.log(this.roles);
     });
   }
   ngOnInit(): void {

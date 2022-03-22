@@ -6,9 +6,9 @@
         <th scope="col">Flat</th>
         <th scope="col">Complaint Type</th>
         <th scope="col">Complaint detail</th>
-        <th scope="col" *ngIf="!show"></th>
-        <th scope="col" *ngIf="!show"></th>
-        <th scope="col" *ngIf="show"></th>
+        <th scope="col" ></th>
+        <th scope="col" ></th>
+        <th scope="col" ></th>
       </tr>
     </thead>
     <tbody>
@@ -18,9 +18,9 @@
         <td>{{myTask.flatNo}}</td>
         <td>{{myTask.type}}</td>
         <td>{{myTask.complaintDetail}}</td>
-        <td *ngIf="!show"><button class="btn btn-sm btn-danger"  (click)="action('DECLINED',myTask.complaintId)" [disable]="">Decline</button></td>
-        <td *ngIf="!show"><button class="btn btn-sm btn-success" (click)="action('COMPLETED',myTask.complaintId)" [disable]="" >Completed</button></td>
-        <td *ngIf="show"><button class="btn btn-sm btn-danger">Approval Pending...</button></td>
+        <td *ngIf="myTask.complaintStatus!=='COMPLETED'"><button class="btn btn-sm btn-danger"  (click)="action('DECLINED',myTask.complaintId)" [disable]="">Decline</button></td>
+        <td *ngIf="myTask.complaintStatus!=='COMPLETED'"><button class="btn btn-sm btn-success" (click)="action('COMPLETED',myTask.complaintId)" [disable]="" >Completed</button></td>
+        <td *ngIf="myTask.complaintStatus==='COMPLETED'"><button class="btn btn-sm btn-danger">Approval Pending...</button></td>
       </tr>
     </tbody>
   </table>

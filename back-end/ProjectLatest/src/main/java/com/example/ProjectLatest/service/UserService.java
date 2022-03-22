@@ -176,6 +176,16 @@ public class UserService {
         List<UserDetailsResponse> copy = new ArrayList<>();
 
         try {
+            UserDetails temp = repository.getByUserId(userId);
+
+            copy.add(new UserDetailsResBuilder()
+                    .setUserDetailId(temp.getUserDetailsId())
+                    .setFirstName(temp.getFirstName())
+                    .setLastName(temp.getLastName())
+                    .setPhoneNumber(temp.getPhoneNumber())
+                    .setEmailId(temp.getEmailId())
+                    .setIsDeleted(temp.getIsDeleted())
+                    .getResponse());
             for(UserDetails x : repository.findAllAdmin(userId)){
 
                 copy.add(new UserDetailsResBuilder()

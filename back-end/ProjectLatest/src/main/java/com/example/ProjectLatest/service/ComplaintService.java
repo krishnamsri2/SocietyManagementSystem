@@ -71,7 +71,7 @@ public class ComplaintService {
         for (Complaint complaint : complaints) {
             String flatNo = complaint.getFlat().getFlatNo();
             String towerName = complaint.getFlat().getTow2().getTowerName();
-            ComplaintWorkerResponse complaintWorkerResponse = new ComplaintWorkerResponse(complaint.getComplaintDetails(), complaint.getComplaintId(), complaint.getType(), flatNo, towerName);
+            ComplaintWorkerResponse complaintWorkerResponse = new ComplaintWorkerResponse(complaint.getComplaintDetails(), complaint.getComplaintId(),complaint.getComplaintStatus(), complaint.getType(), flatNo, towerName);
             complaintWorkerResponses.add(complaintWorkerResponse);
         }
 
@@ -88,7 +88,7 @@ public class ComplaintService {
             for (Complaint complaint : complaints) {
                 String flatNo = complaint.getFlat().getFlatNo();
                 String towerName = complaint.getFlat().getTow2().getTowerName();
-                ComplaintWorkerResponse complaintWorkerResponse = new ComplaintWorkerResponse(complaint.getComplaintDetails(), complaint.getComplaintId(), complaint.getType(), flatNo, towerName);
+                ComplaintWorkerResponse complaintWorkerResponse = new ComplaintWorkerResponse(complaint.getComplaintDetails(), complaint.getComplaintId(),complaint.getComplaintStatus(), complaint.getType(), flatNo, towerName);
                 complaintWorkerResponses.add(complaintWorkerResponse);
             }
         }
@@ -107,7 +107,6 @@ public class ComplaintService {
 
             long workerId = workTO.getWorkerId();
             long userId = workTO.getUserId();
-
             ComplaintStatus complaintStatus = workTO.getComplaintStatus();
 
             if (complaintStatus.equals(ComplaintStatus.DECLINED)) {
@@ -115,7 +114,7 @@ public class ComplaintService {
                 complaint.setStatus(ComplaintStatus.CREATED);
             }
             else if(complaintStatus.equals(ComplaintStatus.CLOSED))
-            {
+            {   System.out.println("This is userId "+userId);
                 complaint.setUserId(userId);
                 complaint.setStatus(workTO.getComplaintStatus());
             }
@@ -125,10 +124,18 @@ public class ComplaintService {
 
                 complaint.setStatus(workTO.getComplaintStatus());
             }
-
+            complaintRepository.save(complaint);
             ComplaintHistory complaintHistory = new ComplaintHistory(complaint.getType(), workTO.getComplaintStatus(), complaint.getCreatedBy(), complaint);
-            complaintHistory.setUserId(workerId);
+
+            if (!complaintStatus.equals(ComplaintStatus.CLOSED)){
+                complaintHistory.setUserId(workerId);}
+            else if(complaintStatus.equals(ComplaintStatus.CLOSED)){
+                complaintHistory.setUserId(userId);
+            }
+            System.out.println("This is userId "+complaint.getUserId());
+
             complaint.getComplaintHistories().add(complaintHistory);
+            System.out.println("This is userId "+complaintHistory.getComplaint().getUserId());
             complaintHistoryRepository.save(complaintHistory);
         }
         catch (Exception e)
@@ -145,7 +152,7 @@ public class ComplaintService {
         try {
             List<Complaint> complaints = complaintRepository.findByWorkerIdAndAssignedStatus(workerId);
             for (Complaint complaint : complaints) {
-                ComplaintWorkerResponse complaintWorkerResponse = new ComplaintWorkerResponse(complaint.getComplaintDetails(), complaint.getComplaintId(), complaint.getType(), complaint.getFlat().getFlatNo(), complaint.getFlat().getTow2().getTowerName());
+                ComplaintWorkerResponse complaintWorkerResponse = new ComplaintWorkerResponse(complaint.getComplaintDetails(), complaint.getComplaintId(),complaint.getComplaintStatus(), complaint.getType(), complaint.getFlat().getFlatNo(), complaint.getFlat().getTow2().getTowerName());
                 complaintWorkerResponses.add(complaintWorkerResponse);
             }
         }
@@ -184,15 +191,18 @@ public class ComplaintService {
 
             for (ComplaintHistory complaintHistory : complaintHistories)
             {
+                System.out.println("complaint history id: "+complaintHistory.getCmpHisId());
                 ComplaintHistoryResponse complaintHistoryResponse = new ComplaintHistoryResponse(complaintHistory.getStatus(), complaintHistory.getCreated());
                 if (complaintHistory.getStatus() != ComplaintStatus.CREATED)
                 {
-                    long userId = complaintHistory.getUserId();
-                    UserDetails userDetails = userDetailRepository.getById(userId);
+                    Long userId = complaintHistory.getUserId();
+                    System.out.println("This complaint History Id:"+userId);
+                    if(userId!=0 && userId!=null){
+                        UserDetails userDetails = userDetailRepository.getById(userId);
                     String workerName = userDetails.getFirstName() + " " + userDetails.getLastName();
                     long workerMobileNo = userDetails.getPhoneNumber();
                     complaintHistoryResponse.setWorkerAssigned(workerName);
-                    complaintHistoryResponse.setWorkerMobileNo(workerMobileNo);
+                    complaintHistoryResponse.setWorkerMobileNo(workerMobileNo);}
                 }
                 complaintHistoryResponses.add(complaintHistoryResponse);
             }
