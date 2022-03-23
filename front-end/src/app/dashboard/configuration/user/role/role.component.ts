@@ -20,7 +20,7 @@ export class RoleComponent implements OnInit,OnDestroy {
   private rolesOfAUserSubs : Subscription;
   private updateStatusSubs : Subscription;
 
-  constructor(private roleService : RoleService,private route : ActivatedRoute) { }
+  constructor(private roleService : RoleService,private route : ActivatedRoute,private router:Router) { }
 
   getRoles(){
     //this.userDetailId=this.roleService.getUserID();
@@ -54,10 +54,14 @@ export class RoleComponent implements OnInit,OnDestroy {
     //location.reload();
   }
 
+  routeOnClick(){
+    this.router.navigate(['../../'],{relativeTo:this.route});
+  }
+
   ngOnDestroy(){
     
-    this.rolesOfAUserSubs.unsubscribe();
-    this.updateStatusSubs.unsubscribe();
+    //this.rolesOfAUserSubs.unsubscribe();
+    //this.updateStatusSubs.unsubscribe();
   }
   
 }
