@@ -53,7 +53,7 @@ export class HomePageComponent implements OnInit {
           this.cookieService.set('user',btoa(JSON.stringify(response)),0.00347222222);
         }
 
-        this.router.navigate(['dashboard/home']);
+        this.router.navigate(['dashboard/home']); 
       }
 
       else {
