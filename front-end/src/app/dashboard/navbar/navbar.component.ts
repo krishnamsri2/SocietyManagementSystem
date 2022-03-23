@@ -7,6 +7,7 @@ import { UserPostServices } from '../configuration/user/user.posts.service';
 import { AuthService } from 'src/app/auth.service';
 import { relative } from '@angular/compiler-cli/private/localize';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,7 +30,8 @@ export class NavbarComponent implements OnInit {
     private userService: UserPostServices,
     private authService: AuthService,
     private activeRoute: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private cookies : CookieService
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +55,7 @@ export class NavbarComponent implements OnInit {
     this.authService.logout(this.currentUser).subscribe(
       (responseData) => {
         localStorage.clear();
+        this.cookies.delete('user');
         this.userService.deleteCurrentUser();
         this.route.navigate(['']);
       },

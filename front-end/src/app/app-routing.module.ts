@@ -32,7 +32,7 @@ import { CompletedTaskComponent } from './dashboard/complaints/completed-task/co
 
 const appRoutes: Route[] = [
   { path: '', component: HomePageComponent },
-  { path: 'reset_password/:email', component: ResetPasswordComponent },
+  { path: 'reset', component: ResetPasswordComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

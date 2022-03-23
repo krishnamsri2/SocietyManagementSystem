@@ -25,6 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
     @RequestMapping(method = RequestMethod.POST,value="/reset")
     public void setNewPassword(@RequestBody RestRequest<PasswordTO> restRequest, RedirectAttributes redirectAttributes)
     {
-        passwordService.setNewPassword(restRequest.getRequestObject(),redirectAttributes);
+        passwordService.setNewPassword(restRequest.getRequestObject(),redirectAttributes, restRequest.getToken());
     }
 }

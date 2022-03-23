@@ -60,12 +60,12 @@ import java.util.UUID;
     }
 
 
-    public void setNewPassword(PasswordTO requestObject, RedirectAttributes redirectAttributes) {
+    public void setNewPassword(PasswordTO requestObject, RedirectAttributes redirectAttributes, Token token) {
 
         PasswordResponse passwordResponse=new PasswordResponse("");
         User user=userRepository.findByResetToken(requestObject.getToken()).orElse(null);
         if(user!=null) {
-            user.setPassword(requestObject.getNewPassword(),user.getUserId());
+            user.setPassword(bCryptPasswordEncoder.encode(requestObject.getNewPassword()), token.getUserId());
             user.setResetToken(null);
             userRepository.save(user);
             passwordResponse.setAck("reset");
